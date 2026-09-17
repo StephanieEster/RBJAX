@@ -17,12 +17,23 @@ const toast = document.querySelector(".toast");
 
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
+let lockedScrollY = 0;
+
 function setMenu(open) {
   menu?.classList.toggle("open", open);
-  document.body.classList.toggle("menu-open", open);
   menuButton?.setAttribute("aria-expanded", String(open));
   menuButton?.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
   if (menuIcon) menuIcon.setAttribute("href", open ? "#i-close" : "#i-menu");
+
+  if (open) {
+    lockedScrollY = window.scrollY;
+    document.body.classList.add("menu-open");
+    document.body.style.top = `-${lockedScrollY}px`;
+  } else {
+    document.body.classList.remove("menu-open");
+    document.body.style.top = "";
+    window.scrollTo(0, lockedScrollY);
+  }
 }
 
 menuButton?.addEventListener("click", () => setMenu(!menu.classList.contains("open")));

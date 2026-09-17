@@ -19,7 +19,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: var(--sand); font-family: var(--sans); font-size: 16px; line-height: 1.72; overflow-x: hidden; }
-body.menu-open { overflow: hidden; }
+body.menu-open { position: fixed; overflow: hidden; left: 0; right: 0; width: 100%; }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
 button, a { -webkit-tap-highlight-color: transparent; }
