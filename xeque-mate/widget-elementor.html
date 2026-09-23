@@ -1,0 +1,1029 @@
+<!--
+  XEQUE-MATE · DR. CLÁUDIO SANCHES WATANABE
+  Widget HTML completo para Elementor (cole tudo dentro de um widget "HTML").
+
+  ANTES DE PUBLICAR:
+  1. Instale o snippet PHP "cmx-leads.php" (Code Snippets ou functions.php do tema filho).
+     Ele recebe o formulário, salva o lead no painel (menu "Leads Xeque-mate")
+     e envia um e-mail para admin@drclaudiowatanabe.com.br.
+  2. Confira CONFIG.CHECKOUT_URL no script ao final deste arquivo.
+  3. No Elementor, use o modelo "Elementor Canvas" ou "Largura total" e deixe
+     o contêiner do widget com largura total, sem espaçamento interno.
+
+  COMO A PÁGINA FUNCIONA COMO UM TABULEIRO:
+  - Cada seção é uma fileira do tabuleiro (8 → 1). O mini-tabuleiro fixo à direita
+    mostra em qual casa a leitora está e leva a cada seção.
+  - Os 10 dias ocupam 10 casas próprias, alternando casas claras e escuras.
+  - Os tópicos são peças: peões, cavalos, bispos, torres, dama e rei.
+  - A oferta final é a fileira 1: o rei tomba — xeque-mate.
+-->
+<div id="cmx-page" class="cmx" lang="pt-BR">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700&display=swap');
+
+    /* ============ TOKENS ============ */
+    :is(#cmx-page,#cmx-portal){
+      --black:#0b0503;
+      --espresso:#150905;
+      --walnut:#2b1108;
+      --mahogany:#3a1709;
+      --wood:#5a2a12;
+      --copper:#925420;
+      --maple:#e7cc9c;
+      --maple-light:#f2e2c3;
+      --gold:#d9a85f;
+      --gold-light:#f0cb8b;
+      --cream:#f6ecdc;
+      --paper:#fbf4e6;
+      --ink:#261710;
+      --muted:#756356;
+      --check:#b3412a;
+      --line:rgba(118,72,35,.25);
+      --grain:repeating-linear-gradient(94deg,rgba(255,255,255,.018) 0 2px,transparent 2px 7px,rgba(0,0,0,.035) 7px 8px,transparent 8px 13px);
+      --checker-dark:conic-gradient(from 90deg,rgba(217,168,95,.045) 25%,transparent 0 50%,rgba(217,168,95,.045) 0 75%,transparent 0);
+      --checker-light:conic-gradient(from 90deg,rgba(84,38,15,.045) 25%,transparent 0 50%,rgba(84,38,15,.045) 0 75%,transparent 0);
+      font-family:'Poppins',Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* Evita barra de rolagem horizontal causada pelo 100vw */
+    html:has(#cmx-page),body:has(#cmx-page){overflow-x:clip}
+
+    #cmx-page{
+      width:100vw;max-width:100vw;
+      margin-left:calc(50% - 50vw);margin-right:0;
+      overflow:hidden;
+      background:var(--paper);
+      color:var(--ink);
+      font-size:16px;line-height:1.7;
+      text-align:left;
+      isolation:isolate;
+    }
+
+    /* ============ RESET (blinda contra estilos do tema/Elementor) ============ */
+    :is(#cmx-page,#cmx-portal) *,:is(#cmx-page,#cmx-portal) *::before,:is(#cmx-page,#cmx-portal) *::after{box-sizing:border-box}
+    :is(#cmx-page,#cmx-portal) :is(h1,h2,h3,p,figure,blockquote,ul,ol,li){margin:0;padding:0;border:0;background:none;text-transform:none;letter-spacing:normal}
+    :is(#cmx-page,#cmx-portal) :is(h1,h2,h3){color:inherit;font-weight:600}
+    :is(#cmx-page,#cmx-portal) :is(ul,ol){list-style:none}
+    :is(#cmx-page,#cmx-portal) a{text-decoration:none;color:inherit;box-shadow:none}
+    :is(#cmx-page,#cmx-portal) :is(button,input){font:inherit;margin:0;border-radius:0;text-shadow:none;letter-spacing:normal}
+    :is(#cmx-page,#cmx-portal) img{max-width:100%;height:auto;border:0;border-radius:0;box-shadow:none}
+    :is(#cmx-page,#cmx-portal) svg{display:inline-block;overflow:visible}
+    :is(#cmx-page,#cmx-portal) :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+    /* ============ BASE ============ */
+    #cmx-page .cmx-wrap{width:min(1160px,calc(100% - 52px));margin-inline:auto;position:relative;z-index:1}
+    #cmx-page .cmx-reading{width:min(860px,calc(100% - 52px));margin-inline:auto;position:relative;z-index:1}
+    #cmx-page .cmx-label{display:inline-flex;align-items:center;gap:11px;color:var(--copper);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1.4}
+    #cmx-page .cmx-label::before{content:'';width:12px;height:12px;flex:none;background:conic-gradient(currentColor 25%,transparent 0 50%,currentColor 0 75%,transparent 0);background-size:12px 12px;border:1px solid currentColor}
+    #cmx-page .cmx-label-light{color:var(--gold-light)}
+    #cmx-page .cmx-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,4.2vw,58px);font-weight:600;line-height:1.1;letter-spacing:-.03em;text-wrap:balance}
+    #cmx-page .cmx-copy{font-size:16px;line-height:1.8}
+    #cmx-page .cmx-copy+.cmx-copy{margin-top:16px}
+    #cmx-page .cmx-lead{font-size:clamp(17px,1.6vw,20px);line-height:1.65}
+    #cmx-page strong{font-weight:700}
+
+    /* Cada seção é uma fileira do tabuleiro */
+    #cmx-page .cmx-rank{position:relative}
+    #cmx-page .cmx-rank-num{position:absolute;left:clamp(10px,2vw,28px);top:clamp(22px,3vw,40px);z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:15px;line-height:1;color:var(--copper);opacity:.75;pointer-events:none}
+    #cmx-page .cmx-rank-num::after{content:'';width:1px;height:70px;background:linear-gradient(currentColor,transparent)}
+    #cmx-page :is(.cmx-dark,.cmx-hero) .cmx-rank-num{color:var(--gold)}
+    #cmx-page .cmx-dark{background-color:var(--espresso);background-image:var(--checker-dark),var(--grain);background-size:120px 120px,auto;color:var(--cream)}
+    #cmx-page .cmx-light{background-color:var(--paper);background-image:var(--checker-light);background-size:120px 120px}
+    #cmx-page .cmx-maple{background-color:#efdcbc;background-image:var(--checker-light),repeating-linear-gradient(94deg,rgba(255,255,255,.15) 0 2px,transparent 2px 9px,rgba(84,38,15,.03) 9px 10px,transparent 10px 16px);background-size:120px 120px,auto}
+
+    /* Borda de tabuleiro entre seções, com coordenadas a–h */
+    #cmx-page .cmx-edge{position:relative;height:30px;background:linear-gradient(var(--walnut),#200c05);border-block:1px solid rgba(217,168,95,.3);display:flex;align-items:center;overflow:hidden}
+    #cmx-page .cmx-edge::before{content:'';position:absolute;inset:0;background:var(--grain)}
+    #cmx-page .cmx-edge-files{width:min(1160px,calc(100% - 52px));margin-inline:auto;display:grid;grid-template-columns:repeat(8,1fr);font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:13px;color:rgba(240,203,139,.7);text-align:center;position:relative}
+    #cmx-page .cmx-strip{height:18px;background-color:var(--walnut);background-image:linear-gradient(45deg,#8c511f 25%,transparent 25%,transparent 75%,#8c511f 75%),linear-gradient(45deg,#8c511f 25%,var(--walnut) 25%,var(--walnut) 75%,#8c511f 75%);background-position:0 0,9px 9px;background-size:18px 18px}
+
+    /* Ícones de peças */
+    #cmx-page .cmx-piece{width:42px;height:42px;color:var(--copper);display:block;flex:none}
+
+    /* ============ BOTÃO ============ */
+    :is(#cmx-page,#cmx-portal) .cmx-btn{
+      position:relative;min-height:58px;display:inline-flex;align-items:center;justify-content:center;gap:14px;
+      padding:15px 26px;border:1px solid var(--gold);border-radius:0;
+      background:linear-gradient(135deg,#d6a45b,#efc67d);color:#160b06;
+      font-family:'Poppins',Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;line-height:1.3;text-transform:uppercase;text-align:center;
+      cursor:pointer;box-shadow:0 0 0 4px rgba(217,168,95,.12);
+      transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+    }
+    :is(#cmx-page,#cmx-portal) .cmx-btn:hover,:is(#cmx-page,#cmx-portal) .cmx-btn:focus-visible{background:linear-gradient(135deg,#dcab62,#f4cf8c);color:#160b06;transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.28),0 0 0 4px rgba(217,168,95,.2);filter:brightness(1.04)}
+    :is(#cmx-page,#cmx-portal) .cmx-btn:disabled{cursor:progress;filter:saturate(.6);transform:none}
+    :is(#cmx-page,#cmx-portal) .cmx-btn svg{width:18px;height:18px;flex:none}
+    :is(#cmx-page,#cmx-portal) .cmx-btn .cmx-btn-piece{width:20px;height:20px}
+    #cmx-page .cmx-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:30px}
+    #cmx-page .cmx-action-note{font-size:13px;line-height:1.55;color:#bba994}
+
+    /* ============ HEADER ============ */
+    #cmx-page .cmx-header{background:var(--black);background-image:var(--grain);border-bottom:1px solid rgba(217,168,95,.28);color:#fff;position:relative;z-index:10}
+    #cmx-page .cmx-header-inner{min-height:112px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    #cmx-page .cmx-logo-crop{display:block;width:140px;height:106px;overflow:hidden;position:relative;flex:none}
+    #cmx-page .cmx-logo-crop img{display:block;width:140px;height:auto;transform:translateY(-1px)}
+    #cmx-page .cmx-header-meta{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:right;color:#d9c09b}
+    #cmx-page .cmx-header-meta .cmx-piece{width:26px;height:26px;color:var(--gold)}
+
+    /* ============ HERO · FILEIRA 8 ============ */
+    #cmx-page .cmx-hero{background:var(--black);color:var(--cream);position:relative;overflow:hidden}
+    #cmx-page .cmx-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 40%,rgba(146,84,32,.28),transparent 55%),linear-gradient(90deg,rgba(146,84,32,.08),transparent 45%);pointer-events:none}
+    #cmx-page .cmx-hero-board{position:absolute;left:-10%;right:-10%;bottom:-6%;height:62%;background-image:conic-gradient(from 90deg,#6c3516 25%,#1a0a05 0 50%,#6c3516 0 75%,#1a0a05 0);background-size:12.5% 25%;transform:perspective(900px) rotateX(64deg);transform-origin:50% 100%;opacity:.42;-webkit-mask-image:linear-gradient(to top,#000 10%,transparent 85%);mask-image:linear-gradient(to top,#000 10%,transparent 85%);pointer-events:none}
+    #cmx-page .cmx-hero-grid{min-height:760px;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:clamp(45px,6vw,92px);padding-block:70px 90px}
+    #cmx-page .cmx-hero-copy{max-width:620px}
+    #cmx-page .cmx-hero .cmx-label{margin-bottom:24px}
+    #cmx-page .cmx-hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(40px,4.3vw,62px);font-weight:600;line-height:1.05;letter-spacing:-.04em;text-wrap:balance;margin-bottom:25px;color:#fff5e4}
+    #cmx-page .cmx-hero h1 em{display:block;color:var(--gold-light);font-weight:500}
+    #cmx-page .cmx-hero .cmx-lead{max-width:590px;color:#f0dfc7;margin-bottom:22px}
+    #cmx-page .cmx-hero .cmx-copy{color:#c9bbae;max-width:570px}
+    #cmx-page .cmx-nots{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    #cmx-page .cmx-nots span{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(217,168,95,.28);background:rgba(217,168,95,.05);font-size:12.5px;color:#d8c4a8;line-height:1.3}
+    #cmx-page .cmx-nots span::before{content:'✕';color:var(--gold);font-size:11px}
+    #cmx-page .cmx-hero-note{margin-top:22px;padding:14px 0 14px 19px;border-left:2px solid var(--gold);font-family:'Playfair Display',Georgia,serif;font-size:19px;font-style:italic;color:#efd4a7}
+    #cmx-page .cmx-hero-visual{width:100%;max-width:505px;margin-inline:auto;position:relative}
+    #cmx-page .cmx-hero-frame{position:relative;padding:14px;background:linear-gradient(135deg,#6b3416,#2a0f07 60%,#4a200d);box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(240,203,139,.35)}
+    #cmx-page .cmx-hero-frame::before{content:'';position:absolute;inset:0;background:var(--grain);pointer-events:none}
+    #cmx-page .cmx-hero-frame img{display:block;width:100%;height:auto;aspect-ratio:1122/1402;object-fit:cover;position:relative;z-index:1}
+    #cmx-page .cmx-files{display:grid;grid-template-columns:repeat(8,1fr);margin-top:9px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:13px;color:rgba(240,203,139,.7);text-align:center}
+    #cmx-page .cmx-hero-caption{position:absolute;right:-12px;bottom:46px;z-index:2;padding:12px 16px;background:rgba(11,5,3,.94);border:1px solid rgba(217,168,95,.45);color:#ebd4af;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    #cmx-page .cmx-hero-caption .cmx-piece{width:20px;height:20px;color:var(--gold)}
+    #cmx-page .cmx-hero-corner{position:absolute;left:-26px;top:38px;width:92px;height:92px;background:conic-gradient(from 90deg,#8c511f 25%,#1b0a05 0 50%,#8c511f 0 75%,#1b0a05 0);background-size:46px 46px;border:1px solid rgba(217,168,95,.35);z-index:2;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+
+    /* ============ DOR · FILEIRA 7 ============ */
+    #cmx-page .cmx-pain{padding:115px 0}
+    #cmx-page .cmx-pain-grid{display:grid;grid-template-columns:.43fr .57fr;gap:80px;align-items:start}
+    #cmx-page .cmx-pain .cmx-title{margin-top:20px}
+    #cmx-page .cmx-pain .cmx-copy{color:#57483e}
+    #cmx-page .cmx-guesses{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+    #cmx-page .cmx-guess{display:inline-flex;align-items:center;gap:9px;padding:9px 14px 9px 10px;background:#f4e6d0;border:1px solid rgba(146,84,32,.25);font-family:'Playfair Display',Georgia,serif;font-size:17px;font-style:italic;color:var(--mahogany);line-height:1.2}
+    #cmx-page .cmx-guess .cmx-piece{width:20px;height:20px}
+    #cmx-page .cmx-statement{margin-top:28px;padding:24px 27px 24px 80px;position:relative;border:1px solid rgba(146,84,32,.28);background:linear-gradient(135deg,#fffaf0,#f2e1c8);font-family:'Playfair Display',Georgia,serif;font-size:22px;line-height:1.45;font-style:italic;color:var(--wood)}
+    #cmx-page .cmx-statement .cmx-piece{position:absolute;left:24px;top:26px;width:36px;height:36px}
+
+    /* ============ CONCEITO · FILEIRA 6 ============ */
+    #cmx-page .cmx-concept{padding:112px 0}
+    #cmx-page .cmx-concept-head{max-width:760px}
+    #cmx-page .cmx-concept .cmx-title{margin:20px 0}
+    #cmx-page .cmx-outcomes{display:grid;grid-template-columns:repeat(3,1fr);margin-top:42px;border:10px solid var(--wood);box-shadow:0 20px 50px rgba(58,23,9,.18),inset 0 0 0 1px rgba(240,203,139,.3)}
+    #cmx-page .cmx-outcome{position:relative;padding:34px 30px;min-height:270px}
+    #cmx-page .cmx-outcome:nth-child(odd){background:var(--maple-light);color:var(--ink)}
+    #cmx-page .cmx-outcome:nth-child(even){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+    #cmx-page .cmx-outcome:nth-child(even) .cmx-piece{color:var(--gold-light)}
+    #cmx-page .cmx-outcome:nth-child(even) p{color:#e3cfb6}
+    #cmx-page .cmx-outcome h3{font-family:'Playfair Display',Georgia,serif;font-size:23px;line-height:1.25;margin:18px 0 11px}
+    #cmx-page .cmx-outcome p{font-size:15.5px;color:#66554a}
+    #cmx-page .cmx-coord{position:absolute;right:12px;bottom:9px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:13px;opacity:.55}
+    #cmx-page .cmx-concept-foot{margin-top:28px;max-width:760px}
+
+    /* ============ 10 DIAS · FILEIRA 5 — O TABULEIRO ============ */
+    #cmx-page .cmx-days{padding:112px 0}
+    #cmx-page .cmx-days-head{max-width:800px}
+    #cmx-page .cmx-days .cmx-title{margin:20px 0 14px;color:#fff5e4}
+    #cmx-page .cmx-days-intro{color:#cdbbaa;max-width:760px}
+    #cmx-page .cmx-delivery{margin-top:26px;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 26px;padding:16px 20px;border:1px solid rgba(217,168,95,.34);background:rgba(217,168,95,.06);color:#f0dcc0;font-size:15px}
+    #cmx-page .cmx-delivery span{display:inline-flex;align-items:center;gap:9px}
+    #cmx-page .cmx-delivery .cmx-piece{width:20px;height:20px;color:var(--gold)}
+    #cmx-page .cmx-delivery p{grid-column:1/-1;color:#cdbbaa;font-size:14.5px}
+
+    #cmx-page .cmx-board{margin-top:48px;padding:clamp(10px,1.6vw,18px);background:linear-gradient(135deg,#6b3416,#2a0f07 55%,#4a200d);box-shadow:0 34px 80px rgba(0,0,0,.5),inset 0 0 0 1px rgba(240,203,139,.35);position:relative}
+    #cmx-page .cmx-board::before{content:'';position:absolute;inset:0;background:var(--grain);pointer-events:none}
+    #cmx-page .cmx-board-grid{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);position:relative;border:1px solid rgba(240,203,139,.4)}
+    #cmx-page .cmx-day{position:relative;display:flex;flex-direction:column;min-height:360px;padding:24px 20px 38px;transition:transform .3s ease,box-shadow .3s ease;z-index:0}
+    /* Casas claras e escuras (5 colunas: ímpar = clara) */
+    #cmx-page .cmx-day:nth-child(odd){background:var(--maple);background-image:repeating-linear-gradient(96deg,rgba(255,255,255,.14) 0 2px,transparent 2px 9px,rgba(90,42,18,.05) 9px 10px,transparent 10px 15px);color:var(--ink)}
+    #cmx-page .cmx-day:nth-child(even){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+    #cmx-page .cmx-day:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.45);z-index:2}
+    #cmx-page .cmx-day-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    #cmx-page .cmx-day-number{display:inline-flex;align-items:center;padding:5px 10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;white-space:nowrap}
+    #cmx-page .cmx-day:nth-child(odd) .cmx-day-number{background:var(--wood);color:var(--gold-light)}
+    #cmx-page .cmx-day:nth-child(even) .cmx-day-number{background:var(--maple);color:var(--wood)}
+    #cmx-page .cmx-day .cmx-piece{width:54px;height:54px;transition:transform .35s cubic-bezier(.2,.8,.2,1.2);filter:drop-shadow(0 4px 3px rgba(0,0,0,.25))}
+    #cmx-page .cmx-day:nth-child(odd) .cmx-piece{color:var(--walnut)}
+    #cmx-page .cmx-day:nth-child(even) .cmx-piece{color:var(--gold-light)}
+    #cmx-page .cmx-day:hover .cmx-piece{transform:translateY(-8px) rotate(-6deg)}
+    #cmx-page .cmx-day h3{font-family:'Playfair Display',Georgia,serif;font-size:22px;line-height:1.2;margin:20px 0 10px}
+    #cmx-page .cmx-day:nth-child(even) h3{color:#fff0da}
+    #cmx-page .cmx-day p{font-size:14.5px;line-height:1.68}
+    #cmx-page .cmx-day:nth-child(odd) p{color:#4d3a2c}
+    #cmx-page .cmx-day:nth-child(even) p{color:#e0cdb8}
+    #cmx-page .cmx-day .cmx-coord{right:12px;bottom:10px}
+    #cmx-page .cmx-day:last-child{box-shadow:inset 0 0 0 2px var(--gold)}
+    #cmx-page .cmx-day:last-child .cmx-day-number{background:var(--gold);color:var(--black)}
+    #cmx-page .cmx-education-note{margin-top:36px;padding-left:20px;border-left:2px solid var(--gold);color:#dcc5a6;font-family:'Playfair Display',Georgia,serif;font-size:19px;font-style:italic}
+
+    /* ============ MÉTODO · FILEIRA 4 ============ */
+    #cmx-page .cmx-method{padding:112px 0}
+    #cmx-page .cmx-method .cmx-title{margin:20px 0;max-width:760px}
+    #cmx-page .cmx-method .cmx-copy{max-width:760px}
+    #cmx-page .cmx-rise{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border:10px solid var(--wood);box-shadow:0 20px 50px rgba(58,23,9,.16)}
+    #cmx-page .cmx-rise-card{padding:28px 23px;min-height:290px;position:relative;overflow:hidden}
+    #cmx-page .cmx-rise-card:nth-child(odd){background:var(--maple-light)}
+    #cmx-page .cmx-rise-card:nth-child(even){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+    #cmx-page .cmx-rise-card::after{content:attr(data-letter);position:absolute;right:-4px;bottom:-48px;font-family:'Playfair Display',Georgia,serif;font-size:160px;line-height:1.3;color:rgba(146,84,32,.1)}
+    #cmx-page .cmx-rise-card:nth-child(even)::after{color:rgba(240,203,139,.08)}
+    #cmx-page .cmx-rise-top{display:flex;align-items:center;justify-content:space-between}
+    #cmx-page .cmx-rise-top span{font-family:'Playfair Display',Georgia,serif;font-size:40px;font-style:italic;line-height:1;color:var(--copper)}
+    #cmx-page .cmx-rise-card:nth-child(even) .cmx-rise-top span,#cmx-page .cmx-rise-card:nth-child(even) .cmx-piece{color:var(--gold-light)}
+    #cmx-page .cmx-rise-card .cmx-piece{width:34px;height:34px}
+    #cmx-page .cmx-rise-card h3{font-size:16px;font-weight:700;margin:16px 0 8px;position:relative;z-index:1}
+    #cmx-page .cmx-rise-card p{font-size:15px;color:#716056;position:relative;z-index:1}
+    #cmx-page .cmx-rise-card:nth-child(even) p{color:#e0cdb8}
+    #cmx-page .cmx-rise-card em{display:block;margin-top:14px;font-family:'Playfair Display',Georgia,serif;font-size:16.5px;line-height:1.45;color:var(--wood);position:relative;z-index:1}
+    #cmx-page .cmx-rise-card:nth-child(even) em{color:var(--gold-light)}
+
+    /* ============ INCLUÍDO · FILEIRA 3 ============ */
+    #cmx-page .cmx-included{padding:110px 0}
+    #cmx-page .cmx-included .cmx-title{margin:20px 0 30px;max-width:690px}
+    #cmx-page .cmx-included-list{border-top:1px solid rgba(84,38,15,.3)}
+    #cmx-page .cmx-included-row{display:grid;grid-template-columns:58px 220px 1fr;gap:22px;align-items:center;padding:18px 6px;border-bottom:1px solid rgba(84,38,15,.3)}
+    #cmx-page .cmx-included-row .cmx-sq{width:52px;height:52px;display:grid;place-items:center}
+    #cmx-page .cmx-included-row:nth-child(odd) .cmx-sq{background:var(--wood)}
+    #cmx-page .cmx-included-row:nth-child(odd) .cmx-piece{color:var(--gold-light)}
+    #cmx-page .cmx-included-row:nth-child(even) .cmx-sq{background:var(--maple-light);box-shadow:inset 0 0 0 1px rgba(84,38,15,.25)}
+    #cmx-page .cmx-included-row .cmx-piece{width:30px;height:30px}
+    #cmx-page .cmx-included-row strong{font-size:16px}
+    #cmx-page .cmx-included-row p{font-size:16px;color:#69584b}
+    #cmx-page .cmx-included .cmx-action-note{color:#6f5844}
+
+    /* ============ LIMITES · FILEIRA 2 ============ */
+    #cmx-page .cmx-safety{padding:110px 0}
+    #cmx-page .cmx-safety .cmx-title{margin:20px 0;max-width:720px}
+    #cmx-page .cmx-alerts{margin:30px 0;border:1px solid rgba(179,65,42,.35);background:#fffaf2}
+    #cmx-page .cmx-alerts-head{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--walnut);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    #cmx-page .cmx-alerts-head .cmx-piece{width:24px;height:24px;color:#f19a82}
+    #cmx-page .cmx-alert{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line);font-size:16px}
+    #cmx-page .cmx-alert:last-child{border-bottom:0}
+    #cmx-page .cmx-alert b{flex:none;display:grid;place-items:center;width:26px;height:26px;margin-top:1px;background:var(--check);color:#fff;font-size:12px;font-weight:700}
+
+    /* ============ PÚBLICO · FILEIRA 2 ============ */
+    #cmx-page .cmx-audience{padding:110px 0}
+    #cmx-page .cmx-audience .cmx-title{margin:20px 0 31px}
+    #cmx-page .cmx-audience-grid{display:grid;grid-template-columns:1fr 1fr;border:10px solid var(--wood)}
+    #cmx-page .cmx-audience-col{padding:35px 34px}
+    #cmx-page .cmx-audience-col:first-child{background:var(--maple-light)}
+    #cmx-page .cmx-audience-col+.cmx-audience-col{background:var(--wood);background-image:var(--grain);color:var(--cream)}
+    #cmx-page .cmx-audience-col h3{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',Georgia,serif;font-size:23px;line-height:1.25;margin-bottom:16px}
+    #cmx-page .cmx-audience-col h3 .cmx-piece{width:30px;height:30px}
+    #cmx-page .cmx-audience-col+.cmx-audience-col h3 .cmx-piece{color:var(--gold-light)}
+    #cmx-page .cmx-audience-col li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:13px 0;border-top:1px solid rgba(84,38,15,.18);font-size:15px;line-height:1.65}
+    #cmx-page .cmx-audience-col+.cmx-audience-col li{border-top-color:rgba(240,203,139,.18);color:#e8d6c0}
+    #cmx-page .cmx-audience-col li .cmx-piece{width:20px;height:20px;margin-top:2px}
+    #cmx-page .cmx-audience-col+.cmx-audience-col li .cmx-piece{color:rgba(240,203,139,.55);transform:rotate(90deg)}
+
+    /* ============ OFERTA · FILEIRA 1 — XEQUE-MATE ============ */
+    #cmx-page .cmx-offer{padding:105px 0 112px;text-align:center;overflow:hidden}
+    #cmx-page .cmx-offer::before,#cmx-page .cmx-offer::after{content:'';position:absolute;width:240px;height:240px;background:conic-gradient(from 90deg,rgba(146,84,32,.2) 25%,transparent 0 50%,rgba(146,84,32,.2) 0 75%,transparent 0);background-size:80px 80px;opacity:.7}
+    #cmx-page .cmx-offer::before{top:0;left:0}
+    #cmx-page .cmx-offer::after{right:0;bottom:0}
+    #cmx-page .cmx-offer .cmx-reading{display:flex;flex-direction:column;align-items:center}
+    #cmx-page .cmx-mate{position:relative;width:118px;height:118px;margin-bottom:26px;display:grid;place-items:center;background:conic-gradient(from 90deg,#8c511f 25%,#2a0f07 0 50%,#8c511f 0 75%,#2a0f07 0);background-size:59px 59px;border:1px solid rgba(240,203,139,.5);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+    #cmx-page .cmx-mate .cmx-piece{width:70px;height:70px;color:var(--gold-light);filter:drop-shadow(0 6px 4px rgba(0,0,0,.5));transform-origin:50% 92%;transition:transform 1.1s cubic-bezier(.5,-0.2,.3,1.4) .35s}
+    #cmx-page .cmx-offer .cmx-reading.is-visible .cmx-mate .cmx-piece{transform:rotate(78deg) translate(6px,-4px)}
+    #cmx-page .cmx-mate small{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);padding:3px 10px;background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+    #cmx-page .cmx-offer .cmx-title{max-width:800px;margin:20px auto 23px;color:#fff5e4}
+    #cmx-page .cmx-offer .cmx-copy{max-width:680px;margin-inline:auto;color:#cbbcaf}
+    #cmx-page .cmx-offer .cmx-copy+.cmx-copy{margin-top:15px}
+    #cmx-page .cmx-price-box{margin-top:34px;padding:26px 40px 24px;border:1px solid rgba(217,168,95,.45);background:rgba(217,168,95,.05);position:relative}
+    #cmx-page .cmx-price-box::before{content:'';position:absolute;inset:6px;border:1px solid rgba(217,168,95,.18);pointer-events:none}
+    #cmx-page .cmx-price{font-family:'Playfair Display',Georgia,serif;color:var(--gold-light);font-size:clamp(52px,6vw,76px);line-height:1}
+    #cmx-page .cmx-price span{display:block;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#bba994;margin-bottom:9px}
+    #cmx-page .cmx-price-note{font-size:14px;color:#bba994;margin-top:9px}
+    #cmx-page .cmx-offer .cmx-actions{justify-content:center}
+    #cmx-page .cmx-legal-small{max-width:590px;margin:20px auto 0;font-size:12px;line-height:1.65;color:#8f837b}
+
+    /* ============ RODAPÉ ============ */
+    #cmx-page .cmx-footer{padding:52px 0;background:#1a0b06;background-image:var(--grain);color:#d7c5b4}
+    #cmx-page .cmx-footer-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}
+    #cmx-page .cmx-footer-logo{width:210px;height:148px;overflow:hidden;margin-bottom:17px}
+    #cmx-page .cmx-footer-logo img{display:block;width:210px;height:auto}
+    #cmx-page .cmx-doctor{font-size:15px;line-height:1.75;color:#ead8c2}
+    #cmx-page .cmx-footer blockquote{margin-top:19px;padding-left:16px;border-left:2px solid var(--gold);font-family:'Playfair Display',Georgia,serif;font-size:17px;font-style:italic;color:#d8b77f}
+    #cmx-page .cmx-disclaimer{font-size:13px;line-height:1.8;color:#9f9187}
+
+    /* ============ ANIMAÇÃO DE ENTRADA ============ */
+    #cmx-page.cmx-js .cmx-reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    #cmx-page.cmx-js .cmx-reveal.is-visible{opacity:1;transform:none}
+    #cmx-page.cmx-js .cmx-board-grid .cmx-day{opacity:0;transform:scale(.94)}
+    #cmx-page.cmx-js .cmx-board-grid.is-visible .cmx-day{opacity:1;transform:none;transition:opacity .5s ease calc(var(--i) * 70ms),transform .5s ease calc(var(--i) * 70ms),box-shadow .3s ease}
+    #cmx-page.cmx-js .cmx-board-grid.is-visible .cmx-day:hover{transform:translateY(-6px);transition-delay:0s}
+
+    /* ============ CAMADA FIXA (movida para o <body> pelo script) ============ */
+    #cmx-portal .cmx-progress{position:fixed;top:0;left:0;width:100%;height:3px;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--copper),var(--gold-light));z-index:99998;pointer-events:none}
+
+    /* Mini-tabuleiro de navegação (desktop) */
+    #cmx-portal .cmx-minimap{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:9990;display:none;flex-direction:column;align-items:center;gap:0;padding:8px;background:linear-gradient(135deg,#5a2a12,#1f0b05);border:1px solid rgba(240,203,139,.4);box-shadow:0 12px 34px rgba(0,0,0,.35);transition:opacity .3s ease}
+    #cmx-portal .cmx-minimap.is-hidden{opacity:0;pointer-events:none}
+    #cmx-portal .cmx-minimap a{position:relative;display:grid;place-items:center;width:30px;height:30px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:11px;line-height:1;color:rgba(0,0,0,.45);cursor:pointer}
+    #cmx-portal .cmx-minimap a:nth-child(odd){background:var(--maple)}
+    #cmx-portal .cmx-minimap a:nth-child(even){background:var(--wood);color:rgba(240,203,139,.55)}
+    #cmx-portal .cmx-minimap a svg{position:absolute;inset:4px;width:22px;height:22px;opacity:0;transform:scale(.6);transition:opacity .25s ease,transform .25s ease}
+    #cmx-portal .cmx-minimap a:nth-child(odd) svg{color:var(--walnut)}
+    #cmx-portal .cmx-minimap a:nth-child(even) svg{color:var(--gold-light)}
+    #cmx-portal .cmx-minimap a.is-active{color:transparent}
+    #cmx-portal .cmx-minimap a.is-active svg{opacity:1;transform:none}
+    #cmx-portal .cmx-minimap a.is-done::after{content:'';position:absolute;inset:11px;border-radius:50%;background:rgba(146,84,32,.55)}
+    #cmx-portal .cmx-minimap a.is-done{color:transparent}
+    #cmx-portal .cmx-minimap a span{position:absolute;right:calc(100% + 12px);top:50%;transform:translate(6px,-50%);padding:6px 10px;background:#150905;border:1px solid rgba(217,168,95,.4);color:#f0dcc0;font-family:'Poppins',Arial,sans-serif;font-style:normal;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+    #cmx-portal .cmx-minimap a:hover span,#cmx-portal .cmx-minimap a:focus-visible span{opacity:1;transform:translate(0,-50%)}
+    #cmx-portal .cmx-minimap-label{margin-top:8px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);text-align:center;line-height:1.3}
+    @media(min-width:1240px){#cmx-portal .cmx-minimap{display:flex}}
+
+    /* Barra fixa de compra (mobile) */
+    #cmx-portal .cmx-sticky{position:fixed;left:0;right:0;bottom:0;z-index:9991;display:none;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,5,3,.96);border-top:1px solid rgba(217,168,95,.45);box-shadow:0 -10px 30px rgba(0,0,0,.35);transform:translateY(110%);transition:transform .35s ease}
+    #cmx-portal .cmx-sticky.is-visible{transform:none}
+    #cmx-portal .cmx-sticky-price{color:#f0dcc0;font-size:12px;line-height:1.35}
+    #cmx-portal .cmx-sticky-price strong{display:block;font-family:'Playfair Display',Georgia,serif;font-size:22px;color:var(--gold-light);font-weight:600}
+    #cmx-portal .cmx-sticky .cmx-btn{min-height:48px;padding:12px 16px;font-size:12px;gap:9px}
+    @media(max-width:720px){#cmx-portal .cmx-sticky{display:flex}}
+
+    /* ============ MODAL ============ */
+    #cmx-portal .cmx-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,2,.86);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);color:var(--ink);font-size:16px;line-height:1.6;text-align:left}
+    #cmx-portal .cmx-modal.is-open{display:flex;animation:cmxFade .25s ease}
+    @keyframes cmxFade{from{opacity:0}to{opacity:1}}
+    #cmx-portal .cmx-dialog{width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;background:var(--paper);border:1px solid rgba(217,168,95,.5);box-shadow:0 24px 80px rgba(0,0,0,.5);position:relative;animation:cmxRise .35s cubic-bezier(.2,.8,.2,1)}
+    @keyframes cmxRise{from{transform:translateY(18px)}to{transform:none}}
+    #cmx-portal .cmx-dialog-top{height:14px;background-color:var(--walnut);background-image:linear-gradient(45deg,#8c511f 25%,transparent 25%,transparent 75%,#8c511f 75%),linear-gradient(45deg,#8c511f 25%,var(--walnut) 25%,var(--walnut) 75%,#8c511f 75%);background-position:0 0,7px 7px;background-size:14px 14px}
+    #cmx-portal .cmx-dialog-body{padding:34px 38px 36px}
+    #cmx-portal .cmx-modal-close{position:absolute;top:26px;right:22px;width:40px;height:40px;padding:0;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;box-shadow:none}
+    #cmx-portal .cmx-modal-close:hover{background:#f2e1c8;color:var(--ink)}
+    #cmx-portal .cmx-modal-close svg{width:18px;height:18px}
+    #cmx-portal .cmx-label{display:inline-flex;align-items:center;gap:11px;color:var(--copper);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1.4}
+    #cmx-portal .cmx-label::before{content:'';width:12px;height:12px;flex:none;background:conic-gradient(currentColor 25%,transparent 0 50%,currentColor 0 75%,transparent 0);background-size:12px 12px;border:1px solid currentColor}
+    #cmx-portal .cmx-dialog h2{font-family:'Playfair Display',Georgia,serif;font-size:32px;line-height:1.15;padding-right:44px;margin-top:10px;color:var(--ink)}
+    #cmx-portal .cmx-dialog-sub{margin-top:10px;font-size:15px;color:var(--muted)}
+    #cmx-portal .cmx-steps{display:flex;gap:6px;margin-top:18px}
+    #cmx-portal .cmx-steps i{flex:1;height:6px;background:#ead9bd}
+    #cmx-portal .cmx-steps i.is-on{background:var(--copper)}
+    #cmx-portal .cmx-form{margin-top:18px}
+    #cmx-portal .cmx-field{margin-top:16px}
+    #cmx-portal .cmx-field label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px;color:var(--ink)}
+    #cmx-portal .cmx-field input{display:block;width:100%;height:52px;border:1px solid rgba(84,38,15,.3);border-radius:0;background:#fffdf8;color:var(--ink);padding:0 15px;outline:none;box-shadow:none;font-size:16px;line-height:1.2}
+    #cmx-portal .cmx-field input::placeholder{color:#a8988a;opacity:1}
+    #cmx-portal .cmx-field input:focus{border-color:var(--copper);box-shadow:0 0 0 3px rgba(146,84,32,.14)}
+    #cmx-portal .cmx-field.has-error input{border-color:var(--check);box-shadow:0 0 0 3px rgba(179,65,42,.12)}
+    #cmx-portal .cmx-error{display:none;margin-top:6px;font-size:13px;color:var(--check)}
+    #cmx-portal .cmx-field.has-error .cmx-error{display:block}
+    #cmx-portal .cmx-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    #cmx-portal .cmx-form .cmx-btn{width:100%;margin-top:22px}
+    #cmx-portal .cmx-spinner{display:none;width:18px;height:18px;border:2px solid rgba(22,11,6,.25);border-top-color:#160b06;border-radius:50%;animation:cmxSpin .8s linear infinite}
+    #cmx-portal .cmx-btn.is-loading .cmx-spinner{display:inline-block}
+    #cmx-portal .cmx-btn.is-loading .cmx-arrow{display:none}
+    @keyframes cmxSpin{to{transform:rotate(360deg)}}
+    #cmx-portal .cmx-form-note{margin-top:13px;font-size:12px;line-height:1.6;color:#7a6b60;text-align:center}
+    #cmx-portal .cmx-form-status{display:none;margin-top:13px;padding:11px 13px;background:#f2dfc4;color:#5a2b13;font-size:13px;text-align:center}
+    #cmx-portal .cmx-form-status.is-on{display:block}
+
+    /* ============ RESPONSIVO ============ */
+    @media(max-width:1100px){
+      #cmx-page .cmx-board-grid{grid-template-columns:repeat(2,1fr)}
+      /* 2 colunas: refaz o xadrez (claro/escuro alternando por linha) */
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(4n+1),#cmx-page .cmx-board-grid .cmx-day:nth-child(4n){background:var(--maple);background-image:repeating-linear-gradient(96deg,rgba(255,255,255,.14) 0 2px,transparent 2px 9px,rgba(90,42,18,.05) 9px 10px,transparent 10px 15px);color:var(--ink)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(4n+2),#cmx-page .cmx-board-grid .cmx-day:nth-child(4n+3){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+1),:nth-child(4n)) .cmx-piece{color:var(--walnut)}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+2),:nth-child(4n+3)) .cmx-piece{color:var(--gold-light)}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+1),:nth-child(4n)) h3{color:var(--ink)}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+2),:nth-child(4n+3)) h3{color:#fff0da}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+1),:nth-child(4n)) p{color:#4d3a2c}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+2),:nth-child(4n+3)) p{color:#e0cdb8}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+1),:nth-child(4n)) .cmx-day-number{background:var(--wood);color:var(--gold-light)}
+      #cmx-page .cmx-board-grid .cmx-day:is(:nth-child(4n+2),:nth-child(4n+3)) .cmx-day-number{background:var(--maple);color:var(--wood)}
+      #cmx-page .cmx-board-grid .cmx-day:last-child .cmx-day-number{background:var(--gold);color:var(--black)}
+      #cmx-page .cmx-day{min-height:280px}
+    }
+    @media(max-width:920px){
+      #cmx-page .cmx-hero-grid{grid-template-columns:1fr 1fr;gap:38px;min-height:auto}
+      #cmx-page .cmx-pain-grid{gap:45px}
+      #cmx-page .cmx-rise{grid-template-columns:repeat(2,1fr)}
+      #cmx-page .cmx-rise-card:nth-child(3){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+      #cmx-page .cmx-rise-card:nth-child(4){background:var(--maple-light);color:var(--ink)}
+      #cmx-page .cmx-rise-card:nth-child(3) :is(.cmx-rise-top span,.cmx-piece,em){color:var(--gold-light)}
+      #cmx-page .cmx-rise-card:nth-child(3) p{color:#e0cdb8}
+      #cmx-page .cmx-rise-card:nth-child(4) :is(.cmx-rise-top span,.cmx-piece){color:var(--copper)}
+      #cmx-page .cmx-rise-card:nth-child(4) p{color:#716056}
+      #cmx-page .cmx-rise-card:nth-child(4) em{color:var(--wood)}
+      #cmx-page .cmx-delivery{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      #cmx-page .cmx-wrap,#cmx-page .cmx-reading{width:min(100% - 36px,560px)}
+      #cmx-page .cmx-edge-files{width:calc(100% - 36px)}
+      #cmx-page .cmx-rank-num{display:none}
+      #cmx-page .cmx-header-inner{min-height:90px}
+      #cmx-page .cmx-logo-crop{width:108px;height:82px}
+      #cmx-page .cmx-logo-crop img{width:108px}
+      #cmx-page .cmx-header-meta{max-width:170px;font-size:9px;line-height:1.55}
+      #cmx-page .cmx-header-meta .cmx-piece{display:none}
+      #cmx-page .cmx-hero-grid{display:flex;flex-direction:column;align-items:stretch;padding:52px 0 70px;gap:48px}
+      #cmx-page .cmx-hero h1{font-size:clamp(36px,10.4vw,50px)}
+      #cmx-page .cmx-hero-visual{max-width:430px;width:calc(100% - 14px);margin-left:14px}
+      #cmx-page .cmx-hero-corner{left:-14px;top:24px;width:60px;height:60px;background-size:30px 30px}
+      #cmx-page .cmx-hero-caption{right:-6px;bottom:40px;font-size:10.5px}
+      #cmx-page :is(.cmx-pain,.cmx-concept,.cmx-days,.cmx-method,.cmx-included,.cmx-safety,.cmx-audience,.cmx-offer){padding:78px 0}
+      #cmx-page .cmx-pain-grid{display:block}
+      #cmx-page .cmx-pain-grid>div+div{margin-top:28px}
+      #cmx-page .cmx-statement{font-size:19px;padding:22px 20px 22px 66px}
+      #cmx-page .cmx-statement .cmx-piece{left:18px;width:30px;height:30px}
+      #cmx-page .cmx-outcomes{grid-template-columns:1fr;border-width:7px}
+      #cmx-page .cmx-outcome{min-height:auto}
+      /* 1 coluna: alterna claro/escuro em sequência */
+      #cmx-page .cmx-board{padding:8px}
+      #cmx-page .cmx-board-grid{grid-template-columns:1fr}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(odd){background:var(--maple);background-image:repeating-linear-gradient(96deg,rgba(255,255,255,.14) 0 2px,transparent 2px 9px,rgba(90,42,18,.05) 9px 10px,transparent 10px 15px);color:var(--ink)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(even){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(odd) .cmx-piece{color:var(--walnut)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(even) .cmx-piece{color:var(--gold-light)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(odd) h3{color:var(--ink)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(even) h3{color:#fff0da}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(odd) p{color:#4d3a2c}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(even) p{color:#e0cdb8}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(odd) .cmx-day-number{background:var(--wood);color:var(--gold-light)}
+      #cmx-page .cmx-board-grid .cmx-day:nth-child(even) .cmx-day-number{background:var(--maple);color:var(--wood)}
+      #cmx-page .cmx-board-grid .cmx-day:last-child .cmx-day-number{background:var(--gold);color:var(--black)}
+      #cmx-page .cmx-day{min-height:auto;display:grid;grid-template-columns:62px 1fr;column-gap:16px;padding:22px 18px 32px}
+      #cmx-page .cmx-day-top{grid-row:1/4;flex-direction:column-reverse;align-items:center;justify-content:flex-end;gap:12px}
+      #cmx-page .cmx-day .cmx-piece{width:46px;height:46px}
+      #cmx-page .cmx-day-number{font-size:10px;padding:4px 7px}
+      #cmx-page .cmx-day h3{margin:0 0 8px;font-size:21px}
+      #cmx-page .cmx-rise{border-width:7px}
+      #cmx-page .cmx-included-row{grid-template-columns:52px 1fr;gap:6px 14px}
+      #cmx-page .cmx-included-row .cmx-sq{grid-row:1/3;width:46px;height:46px}
+      #cmx-page .cmx-included-row p{grid-column:2}
+      #cmx-page .cmx-audience-grid{grid-template-columns:1fr;border-width:7px}
+      #cmx-page .cmx-audience-col{padding:30px 22px}
+      #cmx-page .cmx-price-box{padding:22px 26px}
+      #cmx-page .cmx-footer{padding-bottom:110px}
+      #cmx-page .cmx-footer-grid{grid-template-columns:1fr;gap:38px}
+      #cmx-portal .cmx-dialog-body{padding:30px 22px 28px}
+      #cmx-portal .cmx-dialog h2{font-size:27px}
+      #cmx-portal .cmx-modal-close{top:24px;right:14px}
+    }
+    @media(max-width:450px){
+      #cmx-page .cmx-title{font-size:32px}
+      #cmx-page .cmx-actions{display:block}
+      #cmx-page .cmx-actions .cmx-btn{width:100%}
+      #cmx-page .cmx-action-note{display:block;margin-top:11px;text-align:center}
+      #cmx-page .cmx-rise{grid-template-columns:1fr}
+      #cmx-page .cmx-rise-card{min-height:auto}
+      #cmx-page .cmx-rise-card:nth-child(odd){background:var(--maple-light);color:var(--ink)}
+      #cmx-page .cmx-rise-card:nth-child(even){background:var(--wood);background-image:var(--grain);color:var(--cream)}
+      #cmx-page .cmx-rise-card:nth-child(3) :is(.cmx-rise-top span,.cmx-piece){color:var(--copper)}
+      #cmx-page .cmx-rise-card:nth-child(3) p{color:#716056}
+      #cmx-page .cmx-rise-card:nth-child(3) em{color:var(--wood)}
+      #cmx-page .cmx-rise-card:nth-child(4) :is(.cmx-rise-top span,.cmx-piece,em){color:var(--gold-light)}
+      #cmx-page .cmx-rise-card:nth-child(4) p{color:#e0cdb8}
+      #cmx-portal .cmx-sticky-price{font-size:11px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      :is(#cmx-page,#cmx-portal) *,:is(#cmx-page,#cmx-portal) *::before,:is(#cmx-page,#cmx-portal) *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+      #cmx-page.cmx-js .cmx-reveal,#cmx-page.cmx-js .cmx-board-grid .cmx-day{opacity:1;transform:none}
+    }
+  </style>
+
+  <!-- Peças de xadrez (reutilizadas em toda a página) -->
+  <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="cmx-pawn" viewBox="0 0 48 48"><circle cx="24" cy="10" r="6" fill="currentColor"/><path d="M18 18h12c0 8 3 12 7 16H11c4-4 7-8 7-16Z" fill="currentColor"/><path d="M9 37h30v5H9z" fill="currentColor"/></symbol>
+      <symbol id="cmx-rook" viewBox="0 0 48 48"><path d="M11 6h7v6h5V6h7v6h5V6h5v13H8V6h3Zm2 16h22l3 15H10l3-15Zm-5 18h32v4H8z" fill="currentColor"/></symbol>
+      <symbol id="cmx-bishop" viewBox="0 0 48 48"><path d="M24 4c6 6 10 11 10 17 0 5-3 9-7 11l4 5h7v6H10v-6h7l4-5c-4-2-7-6-7-11 0-5 3-10 8-15l5 8-4 8 3 2 5-10-7-10Z" fill="currentColor"/></symbol>
+      <symbol id="cmx-knight" viewBox="0 0 48 48"><path d="M32 5c-7 1-12 4-16 9l-7 9 8 2-6 12h27c0-8-1-16-5-22l5-2-6-8Zm-5 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM8 40h32v4H8z" fill="currentColor"/></symbol>
+      <symbol id="cmx-king" viewBox="0 0 48 48"><path d="M22 3h4v6h6v4h-6v5c7 1 12 7 12 14H10c0-7 5-13 12-14v-5h-6V9h6V3Zm-9 32h22l3 8H10l3-8Z" fill="currentColor"/></symbol>
+      <symbol id="cmx-queen" viewBox="0 0 48 48"><circle cx="8" cy="9" r="3" fill="currentColor"/><circle cx="24" cy="6" r="3" fill="currentColor"/><circle cx="40" cy="9" r="3" fill="currentColor"/><path d="m10 13 8 9 6-12 6 12 8-9-4 21H14l-4-21Zm3 24h22l3 6H10l3-6Z" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="cmx-header">
+    <div class="cmx-wrap cmx-header-inner">
+      <div class="cmx-logo-crop" role="img" aria-label="Dr. Cláudio Watanabe">
+        <img src="https://drclaudiowatanabe.com.br/wp-content/uploads/2026/03/01.png" alt="" width="1584" height="1246" decoding="async">
+      </div>
+      <div class="cmx-header-meta"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg><span>Desafio gravado de 10 dias · Acesso imediato · R$ 67</span></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- FILEIRA 8 -->
+    <section class="cmx-hero cmx-rank" data-rank="8" data-title="Abertura" aria-labelledby="cmx-main-title">
+      <div class="cmx-hero-board" aria-hidden="true"></div>
+      <span class="cmx-rank-num" aria-hidden="true">8</span>
+      <div class="cmx-wrap cmx-hero-grid">
+        <div class="cmx-hero-copy">
+          <span class="cmx-label cmx-label-light">Xeque-mate · desafio de 10 dias</span>
+          <h1 id="cmx-main-title">Pare de tentar adivinhar por que a sua <em>enxaqueca voltou.</em></h1>
+          <p class="cmx-lead">Em 10 dias, você vai organizar os sinais da sua rotina, montar um plano para os primeiros minutos da crise e saber exatamente o que levar para a próxima consulta.</p>
+          <p class="cmx-copy"><strong>Xeque-mate</strong> é um desafio gravado para quem convive com enxaqueca, vive testando hipóteses e continua sem entender o próprio padrão.</p>
+          <div class="cmx-nots" aria-label="O que o desafio não é">
+            <span>Não é promessa de cura</span>
+            <span>Não é dieta de proibições</span>
+            <span>Não é lista de gatilhos genérica</span>
+          </div>
+          <p class="cmx-hero-note">É um percurso simples para você parar de viver cada crise como surpresa.</p>
+          <div class="cmx-actions">
+            <button class="cmx-btn cmx-open-form" type="button"><svg class="cmx-btn-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Começar meu xeque-mate</button>
+            <span class="cmx-action-note">R$ 67,00 · pagamento único<br>Acesso imediato</span>
+          </div>
+        </div>
+        <figure class="cmx-hero-visual">
+          <span class="cmx-hero-corner" aria-hidden="true"></span>
+          <div class="cmx-hero-frame">
+            <img src="https://drclaudiowatanabe.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-23-2026-01_31_49-PM.png" alt="Dr. Cláudio Watanabe diante de um tabuleiro de xadrez, segurando o rei" width="1122" height="1402" fetchpriority="high" decoding="async">
+          </div>
+          <div class="cmx-files" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+          <figcaption class="cmx-hero-caption"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Dr. Cláudio Sanches Watanabe</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="cmx-strip" aria-hidden="true"></div>
+
+    <!-- FILEIRA 7 -->
+    <section class="cmx-pain cmx-light cmx-rank" data-rank="7" data-title="O ponto de partida" aria-labelledby="cmx-pain-title">
+      <span class="cmx-rank-num" aria-hidden="true">7</span>
+      <div class="cmx-wrap cmx-pain-grid">
+        <div class="cmx-reveal">
+          <span class="cmx-label">O ponto de partida</span>
+          <h2 id="cmx-pain-title" class="cmx-title">Se uma nova crise sempre faz você voltar à estaca zero, este desafio foi feito para você.</h2>
+        </div>
+        <div class="cmx-reveal">
+          <p class="cmx-copy">Você acorda com dor e tenta descobrir o que aconteceu.</p>
+          <ul class="cmx-guesses" aria-label="Hipóteses comuns">
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>A noite mal dormida?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>O vinho?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>O café?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>A tela?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>O período sem comer?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>A semana inteira acumulada?</li>
+            <li class="cmx-guess"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>A mudança de rotina?</li>
+          </ul>
+          <p class="cmx-copy">Você escolhe uma hipótese, muda alguma coisa por alguns dias e, quando a crise volta, a sensação é a mesma: <strong>eu ainda não sei o que está acontecendo comigo.</strong></p>
+          <p class="cmx-copy"><strong>O problema não é falta de esforço.</strong></p>
+          <p class="cmx-copy">O problema é tentar encontrar uma resposta olhando para peças soltas. A enxaqueca pode não obedecer a uma causa única. Muitas vezes, ela aparece quando pequenas mudanças de sono, alimentação, estresse e ambiente se somam sem que você consiga enxergar o tabuleiro inteiro.</p>
+          <div class="cmx-statement"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-bishop"/></svg>Você não precisa vigiar a sua vida inteira. Precisa aprender a observar o que realmente importa.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cmx-edge" aria-hidden="true"><div class="cmx-edge-files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
+
+    <!-- FILEIRA 6 -->
+    <section class="cmx-concept cmx-maple cmx-rank" data-rank="6" data-title="O que é o Xeque-mate" aria-labelledby="cmx-concept-title">
+      <span class="cmx-rank-num" aria-hidden="true">6</span>
+      <div class="cmx-wrap">
+        <div class="cmx-concept-head cmx-reveal">
+          <span class="cmx-label">O que é o xeque-mate?</span>
+          <h2 id="cmx-concept-title" class="cmx-title">Um desafio de 10 dias para transformar crise em informação.</h2>
+          <p class="cmx-copy">A cada manhã, você recebe um novo movimento: um conteúdo curto, perguntas objetivas e uma ação para aplicar naquele dia. À noite, recebe um lembrete para manter o registro em andamento.</p>
+          <p class="cmx-copy">No final, você não sai apenas com mais conteúdo sobre enxaqueca. <strong>Você sai com três peças prontas:</strong></p>
+        </div>
+        <div class="cmx-outcomes cmx-reveal">
+          <article class="cmx-outcome"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg><h3>O mapa das suas crises</h3><p>Ver o que costuma se repetir antes, durante e depois de uma crise.</p><span class="cmx-coord" aria-hidden="true">c6</span></article>
+          <article class="cmx-outcome"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg><h3>O seu plano de crise pessoal</h3><p>Saber o que fazer nos primeiros minutos, o que reduzir, o que registrar e quando procurar ajuda.</p><span class="cmx-coord" aria-hidden="true">d6</span></article>
+          <article class="cmx-outcome"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-queen"/></svg><h3>As perguntas para a consulta</h3><p>Chegar ao médico sabendo o que precisa ser conversado, em vez de tentar lembrar de tudo no meio da consulta.</p><span class="cmx-coord" aria-hidden="true">e6</span></article>
+        </div>
+        <p class="cmx-copy cmx-concept-foot cmx-reveal">O Xeque-mate não faz o trabalho médico por você. Ele organiza a parte que fica nas suas mãos para que a próxima conversa com o seu médico seja melhor.</p>
+      </div>
+    </section>
+
+    <div class="cmx-strip" aria-hidden="true"></div>
+
+    <!-- FILEIRA 5 · O TABULEIRO DOS 10 DIAS -->
+    <section class="cmx-days cmx-dark cmx-rank" id="cmx-dias" data-rank="5" data-title="Os 10 dias" aria-labelledby="cmx-days-title">
+      <span class="cmx-rank-num" aria-hidden="true">5</span>
+      <div class="cmx-wrap">
+        <div class="cmx-days-head cmx-reveal">
+          <span class="cmx-label cmx-label-light">Seu tabuleiro de 10 dias</span>
+          <h2 id="cmx-days-title" class="cmx-title">Cada dia é um movimento. Cada movimento organiza uma parte da sua rotina.</h2>
+          <p class="cmx-days-intro">Você avança uma casa por vez, sem tentar mudar tudo ao mesmo tempo.</p>
+          <div class="cmx-delivery">
+            <span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg>1 tema por dia</span>
+            <span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg>Áudio de 6 a 10 min</span>
+            <span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg>1 página em PDF</span>
+            <p><strong>No CHECKMATE, cada dia tem um tema, um áudio de 6 a 10 minutos e uma página em PDF com a ação proposta.</strong> Você recebe o conteúdo pela manhã e um lembrete curto à noite.</p>
+          </div>
+        </div>
+
+        <div class="cmx-board">
+          <ol class="cmx-board-grid" aria-label="Os 10 dias do desafio">
+            <li class="cmx-day" style="--i:0"><div class="cmx-day-top"><span class="cmx-day-number">Dia 1</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg></div><h3>Olhar o tabuleiro inteiro</h3><p>Entenda a enxaqueca além da dor e conheça o papel da rotina, dos cuidados durante a crise e do acompanhamento médico.</p><span class="cmx-coord" aria-hidden="true">a2</span></li>
+            <li class="cmx-day" style="--i:1"><div class="cmx-day-top"><span class="cmx-day-number">Dia 2</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg></div><h3>Controle do centro</h3><p>O sono começa pela hora de acordar. Uma aula sobre regularidade, luz pela manhã e mudanças de horário no fim de semana.</p><span class="cmx-coord" aria-hidden="true">b2</span></li>
+            <li class="cmx-day" style="--i:2"><div class="cmx-day-top"><span class="cmx-day-number">Dia 3</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg></div><h3>Estrutura de peões</h3><p>Alimentação além das listas de proibições: observe os horários das refeições e encontre os intervalos longos que passam despercebidos na rotina.</p><span class="cmx-coord" aria-hidden="true">c2</span></li>
+            <li class="cmx-day" style="--i:3"><div class="cmx-day-top"><span class="cmx-day-number">Dia 4</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-bishop"/></svg></div><h3>A jogada silenciosa</h3><p>Água e cafeína no cotidiano: organize momentos de hidratação e entenda o que a pesquisa permite afirmar sobre esses cuidados.</p><span class="cmx-coord" aria-hidden="true">d2</span></li>
+            <li class="cmx-day" style="--i:4"><div class="cmx-day-top"><span class="cmx-day-number">Dia 5</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg></div><h3>Zugzwang</h3><p>Estresse e mudanças de ritmo: cuidados para a passagem do trabalho ao descanso, incluindo uma prática de respiração para a rotina.</p><span class="cmx-coord" aria-hidden="true">e2</span></li>
+            <li class="cmx-day" style="--i:5"><div class="cmx-day-top"><span class="cmx-day-number">Dia 6</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg></div><h3>Tempo</h3><p>Monte um plano escrito para o início da crise, com ações sem medicação e clareza sobre as decisões que exigem orientação médica.</p><span class="cmx-coord" aria-hidden="true">a1</span></li>
+            <li class="cmx-day" style="--i:6"><div class="cmx-day-top"><span class="cmx-day-number">Dia 7</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg></div><h3>Casas fracas</h3><p>Luz, telas, postura, sons e cheiros: escolha três ajustes possíveis no ambiente em que você passa o dia.</p><span class="cmx-coord" aria-hidden="true">b1</span></li>
+            <li class="cmx-day" style="--i:7"><div class="cmx-day-top"><span class="cmx-day-number">Dia 8</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-queen"/></svg></div><h3>O peão envenenado</h3><p>Uma conversa sem julgamento sobre o uso frequente de medicação para dor. Aprenda a contar os dias de uso e organizar essa informação para a consulta.</p><span class="cmx-coord" aria-hidden="true">c1</span></li>
+            <li class="cmx-day" style="--i:8"><div class="cmx-day-top"><span class="cmx-day-number">Dia 9</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg></div><h3>O lado do adversário</h3><p>Explore os sinais que podem aparecer antes da dor e o que os estudos mostram sobre chocolate e enxaqueca. Releia seu registro com essa perspectiva.</p><span class="cmx-coord" aria-hidden="true">d1</span></li>
+            <li class="cmx-day" style="--i:9"><div class="cmx-day-top"><span class="cmx-day-number">Dia 10</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg></div><h3>Xeque-mate</h3><p>Reúna seu registro, seu plano de crise e as perguntas para a consulta. Entenda onde entra a avaliação do tratamento preventivo.</p><span class="cmx-coord" aria-hidden="true">e1</span></li>
+          </ol>
+        </div>
+        <p class="cmx-education-note cmx-reveal">Conteúdo educativo, sem promessa de redução de crises. Não substitui consulta médica.</p>
+      </div>
+    </section>
+
+    <div class="cmx-strip" aria-hidden="true"></div>
+
+    <!-- FILEIRA 4 -->
+    <section class="cmx-method cmx-light cmx-rank" data-rank="4" data-title="Método RISE" aria-labelledby="cmx-method-title">
+      <span class="cmx-rank-num" aria-hidden="true">4</span>
+      <div class="cmx-wrap">
+        <div class="cmx-reveal"><span class="cmx-label">O método por trás dos movimentos</span><h2 id="cmx-method-title" class="cmx-title">Método RISE: quatro partes da rotina que vale a pena observar.</h2><p class="cmx-copy">O Método RISE é a estrutura usada para organizar o desafio. Ele não existe para dar a você uma rotina perfeita; existe para impedir que você procure uma única causa para algo que pode estar sendo alimentado por vários fatores.</p></div>
+        <div class="cmx-rise cmx-reveal">
+          <article class="cmx-rise-card" data-letter="R"><div class="cmx-rise-top"><span>R</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg></div><h3>Ritmo biológico</h3><p>Sono e regularidade.</p><em>O meu ritmo mudou antes das últimas crises?</em></article>
+          <article class="cmx-rise-card" data-letter="I"><div class="cmx-rise-top"><span>I</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-bishop"/></svg></div><h3>Inteligência metabólica</h3><p>Refeições, intervalos e hidratação.</p><em>O meu corpo passou tempo demais sem o básico?</em></article>
+          <article class="cmx-rise-card" data-letter="S"><div class="cmx-rise-top"><span>S</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg></div><h3>Saúde emocional</h3><p>Estresse e descompressão.</p><em>A crise vem quando a tensão termina?</em></article>
+          <article class="cmx-rise-card" data-letter="E"><div class="cmx-rise-top"><span>E</span><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-queen"/></svg></div><h3>Estrutura corporal e ambiental</h3><p>Tela, luz, ruído e postura.</p><em>O meu ambiente está cobrando mais do que eu percebo?</em></article>
+        </div>
+        <p class="cmx-copy cmx-reveal" style="margin-top:27px">Em cada aula, você recebe uma explicação simples, uma regra prática, um erro comum e uma ação para o dia. Não há excesso de tarefa. Não há tentativa de mudar tudo de uma vez.</p>
+      </div>
+    </section>
+
+    <div class="cmx-edge" aria-hidden="true"><div class="cmx-edge-files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
+
+    <!-- FILEIRA 3 -->
+    <section class="cmx-included cmx-maple cmx-rank" data-rank="3" data-title="O que está incluído" aria-labelledby="cmx-included-title">
+      <span class="cmx-rank-num" aria-hidden="true">3</span>
+      <div class="cmx-reading">
+        <div class="cmx-reveal"><span class="cmx-label">O que está incluído</span><h2 id="cmx-included-title" class="cmx-title">Tudo o que você precisa para completar os 10 dias.</h2></div>
+        <div class="cmx-included-list cmx-reveal">
+          <div class="cmx-included-row"><span class="cmx-sq"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg></span><strong>10 áudios diários</strong><p>Conteúdos objetivos, com duração de 6 a 10 minutos.</p></div>
+          <div class="cmx-included-row"><span class="cmx-sq"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg></span><strong>10 ações em PDF</strong><p>Uma página por dia para aplicar e registrar o movimento proposto.</p></div>
+          <div class="cmx-included-row"><span class="cmx-sq"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-bishop"/></svg></span><strong>Lembretes noturnos</strong><p>Mensagens curtas para manter o registro em andamento.</p></div>
+          <div class="cmx-included-row"><span class="cmx-sq"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-knight"/></svg></span><strong>Diário da enxaqueca</strong><p>Para reunir os seus registros e perceber padrões com mais clareza.</p></div>
+          <div class="cmx-included-row"><span class="cmx-sq"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-queen"/></svg></span><strong>Plano de crise pessoal</strong><p>Uma resposta inicial por escrito para consultar quando precisar.</p></div>
+        </div>
+        <p class="cmx-copy cmx-reveal" style="margin-top:23px">O percurso foi criado para caber na vida real: poucos minutos por dia, durante dez dias.</p>
+        <div class="cmx-actions cmx-reveal"><button class="cmx-btn cmx-open-form" type="button"><svg class="cmx-btn-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Começar meu xeque-mate</button><span class="cmx-action-note">R$ 67,00 · pagamento único<br>Acesso imediato</span></div>
+      </div>
+    </section>
+
+    <div class="cmx-strip" aria-hidden="true"></div>
+
+    <!-- FILEIRA 2 -->
+    <section class="cmx-safety cmx-light cmx-rank" data-rank="2" data-title="Os limites do desafio" aria-labelledby="cmx-safety-title">
+      <span class="cmx-rank-num" aria-hidden="true">2</span>
+      <div class="cmx-reading">
+        <div class="cmx-reveal"><span class="cmx-label">Os limites deste desafio</span><h2 id="cmx-safety-title" class="cmx-title">Uma parte do cuidado depende de você. Outra depende do médico.</h2><p class="cmx-copy">O Xeque-mate deixa essa fronteira clara. Há situações em que você não deve esperar o desafio terminar. Se qualquer um dos pontos abaixo aparecer, a orientação é procurar avaliação médica antes de seguir:</p></div>
+        <div class="cmx-alerts cmx-reveal">
+          <div class="cmx-alerts-head"><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Xeque: procure avaliação médica</div>
+          <div class="cmx-alert"><b aria-hidden="true">!</b><span>Identificar um sinal de alerta no Cartão de sinais de alerta.</span></div>
+          <div class="cmx-alert"><b aria-hidden="true">!</b><span>Usar analgésicos em 10 dias ou mais no mês.</span></div>
+          <div class="cmx-alert"><b aria-hidden="true">!</b><span>Ter quatro ou mais dias de crise dentro dos 10 dias do desafio.</span></div>
+        </div>
+        <p class="cmx-copy cmx-reveal">Este é um desafio educativo. Ele não prescreve medicamentos, não ajusta tratamento e não substitui consulta. Mas pode ajudar você a chegar à consulta com registro, contexto e perguntas mais claras.</p>
+      </div>
+    </section>
+
+    <section class="cmx-audience cmx-maple" aria-labelledby="cmx-audience-title">
+      <div class="cmx-reading">
+        <div class="cmx-reveal"><span class="cmx-label">Para quem é o Xeque-mate?</span><h2 id="cmx-audience-title" class="cmx-title">Veja se este desafio faz sentido para você.</h2></div>
+        <div class="cmx-audience-grid cmx-reveal">
+          <div class="cmx-audience-col"><h3><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Este desafio é para você se:</h3><ul>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>tem enxaqueca e ainda não entende o próprio padrão;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>já tentou identificar gatilhos, mas tudo parece confuso ou contraditório;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>quer saber o que pode observar sem ultrapassar o território do seu médico;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>prefere um plano claro a uma promessa rápida;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>consegue reservar alguns minutos por dia durante dez dias.</span></li>
+          </ul></div>
+          <div class="cmx-audience-col"><h3><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-rook"/></svg>Este desafio não é para você se:</h3><ul>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>procura algo que substitua neurologista, consulta ou tratamento individual;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>espera uma redução garantida de crises em dez dias;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>busca recomendação de medicamentos, dosagem ou ajuste de prescrição;</span></li>
+            <li><svg class="cmx-piece" aria-hidden="true"><use href="#cmx-pawn"/></svg><span>usa analgésicos em 10 dias ou mais no mês e ainda não procurou avaliação médica.</span></li>
+          </ul></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cmx-strip" aria-hidden="true"></div>
+
+    <!-- FILEIRA 1 · XEQUE-MATE -->
+    <section class="cmx-offer cmx-dark cmx-rank" id="cmx-oferta" data-rank="1" data-title="Xeque-mate" aria-labelledby="cmx-offer-title">
+      <span class="cmx-rank-num" aria-hidden="true">1</span>
+      <div class="cmx-reading cmx-reveal">
+        <div class="cmx-mate" aria-hidden="true"><svg class="cmx-piece"><use href="#cmx-king"/></svg><small>Xeque-mate</small></div>
+        <span class="cmx-label cmx-label-light">Seu movimento</span>
+        <h2 id="cmx-offer-title" class="cmx-title">Você não controla o dia em que a crise chega. Mas pode parar de ser pega sem mapa quando ela chegar.</h2>
+        <p class="cmx-copy">O Xeque-mate é para quem quer sair do ciclo de tentativa e erro. Em dez dias, você organiza o que a sua rotina vem mostrando, monta uma resposta inicial por escrito e entende o que precisa levar para a próxima consulta.</p>
+        <p class="cmx-copy">Sem prometer o que um desafio não pode prometer. Com um caminho claro para você não atravessar a próxima crise do mesmo jeito.</p>
+        <div class="cmx-price-box">
+          <div class="cmx-price"><span>Investimento</span>R$ 67,00</div>
+          <p class="cmx-price-note">Pagamento único · acesso imediato ao conteúdo</p>
+        </div>
+        <div class="cmx-actions"><button class="cmx-btn cmx-open-form" type="button"><svg class="cmx-btn-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Começar meu xeque-mate</button></div>
+        <p class="cmx-legal-small">Conteúdo educativo, sem promessa de redução de crises. Não substitui consulta, avaliação, diagnóstico ou tratamento médico individual.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cmx-footer">
+    <div class="cmx-wrap cmx-footer-grid">
+      <div>
+        <div class="cmx-footer-logo" role="img" aria-label="Dr. Cláudio Watanabe"><img src="https://drclaudiowatanabe.com.br/wp-content/uploads/2026/03/01.png" alt="" width="1584" height="1246" loading="lazy" decoding="async"></div>
+        <p class="cmx-doctor"><strong>Dr. Cláudio Sanches Watanabe · Médico Neurologista</strong><br>CRM/SP 151516 · RQE 76969<br>Elevor Neurologia — São José dos Campos/SP</p>
+        <blockquote>O cérebro não é um órgão que se conserta. É um sistema que se conduz.</blockquote>
+      </div>
+      <p class="cmx-disclaimer">Este material tem finalidade educativa e preventiva. Não promete cura, controle ou redução de crises de enxaqueca e não substitui consulta, avaliação, diagnóstico ou tratamento médico individual. As orientações não incluem prescrição, indicação ou ajuste de medicamentos. Em caso de sinais de alerta, piora importante, dúvida clínica ou necessidade de atendimento, procure avaliação médica.</p>
+    </div>
+  </footer>
+
+  <!-- CAMADA FIXA: o script move este bloco para o <body> (evita bugs de position:fixed dentro do Elementor) -->
+  <div id="cmx-portal" class="cmx" lang="pt-BR">
+    <div class="cmx-progress" aria-hidden="true"></div>
+
+    <nav class="cmx-minimap" aria-label="Navegação pelo tabuleiro"></nav>
+
+    <div class="cmx-sticky" aria-hidden="true">
+      <div class="cmx-sticky-price"><strong>R$ 67,00</strong>pagamento único</div>
+      <button class="cmx-btn cmx-open-form" type="button" tabindex="-1"><svg class="cmx-btn-piece" aria-hidden="true"><use href="#cmx-king"/></svg>Começar agora</button>
+    </div>
+
+    <div class="cmx-modal" role="dialog" aria-modal="true" aria-labelledby="cmx-form-title" aria-hidden="true">
+      <div class="cmx-dialog">
+        <div class="cmx-dialog-top" aria-hidden="true"></div>
+        <button class="cmx-modal-close" type="button" aria-label="Fechar formulário"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        <div class="cmx-dialog-body">
+          <span class="cmx-label">Seu primeiro movimento</span>
+          <h2 id="cmx-form-title">Preencha seus dados para continuar</h2>
+          <p class="cmx-dialog-sub">Depois do preenchimento, você será direcionada para a página de pagamento.</p>
+          <div class="cmx-steps" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
+          <form class="cmx-form" novalidate>
+            <div class="cmx-field"><label for="cmx-name">Nome completo</label><input id="cmx-name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Como você gostaria de ser chamada?" aria-describedby="cmx-name-error"><p class="cmx-error" id="cmx-name-error">Informe seu nome completo.</p></div>
+            <div class="cmx-field"><label for="cmx-email">E-mail</label><input id="cmx-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" required placeholder="seuemail@exemplo.com" aria-describedby="cmx-email-error"><p class="cmx-error" id="cmx-email-error">Informe um e-mail válido.</p></div>
+            <div class="cmx-field"><label for="cmx-phone">Telefone com DDD</label><input id="cmx-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="16" required placeholder="(00) 00000-0000" aria-describedby="cmx-phone-error"><p class="cmx-error" id="cmx-phone-error">Informe o telefone com DDD (10 ou 11 números).</p></div>
+            <div class="cmx-hp" aria-hidden="true"><label for="cmx-website">Não preencha</label><input id="cmx-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <button class="cmx-btn cmx-submit" type="submit"><span class="cmx-submit-text">Continuar para o pagamento</span><svg class="cmx-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M14 6l6 6-6 6"/></svg><i class="cmx-spinner" aria-hidden="true"></i></button>
+            <p class="cmx-form-note">Seus dados serão usados somente para dar continuidade à sua inscrição, conforme a LGPD.</p>
+            <p class="cmx-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      /* ================== CONFIGURAÇÃO ================== */
+      const CONFIG = {
+        // Link do checkout da Hotmart (ex.: https://pay.hotmart.com/XXXXXXXX).
+        CHECKOUT_URL: 'https://checkmate.hotmart.app',
+        // Endpoint criado pelo snippet PHP (cmx-leads.php). Não altere se o snippet estiver instalado.
+        LEAD_ENDPOINT: '/wp-json/cmx/v1/lead',
+        // Tempo máximo esperando o envio do e-mail antes de seguir para o checkout.
+        TIMEOUT_MS: 7000
+      };
+      /* ================================================== */
+
+      const root = document.getElementById('cmx-page');
+      if (!root || root.dataset.ready) return;
+      root.dataset.ready = '1';
+      root.classList.add('cmx-js');
+
+      // Move a camada fixa para o <body>: dentro do Elementor, contêineres com
+      // transform/animação quebram position:fixed (modal, barra, mini-tabuleiro).
+      const portal = root.querySelector('#cmx-portal');
+      document.querySelectorAll('body > #cmx-portal').forEach(old => { if (old !== portal) old.remove(); });
+      if (portal) document.body.appendChild(portal);
+      // O modal e a barra usam as peças definidas na página; se o portal saiu dela, continua funcionando porque <use href="#..."> é global no documento.
+
+      const $ = (sel, ctx = portal) => ctx.querySelector(sel);
+      const modal = $('.cmx-modal');
+      const form = $('.cmx-form');
+      const status = $('.cmx-form-status');
+      const submitBtn = $('.cmx-submit');
+      const submitText = $('.cmx-submit-text');
+      const steps = portal.querySelectorAll('.cmx-steps i');
+      const sticky = $('.cmx-sticky');
+      const stickyBtn = sticky.querySelector('button');
+      let lastFocus = null;
+      let openedAt = 0;
+      let sending = false;
+
+      /* ---------- Parâmetros de rastreamento (UTM / Hotmart src, sck) ---------- */
+      const TRACK_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck','fbclid','gclid'];
+      const tracking = {};
+      try {
+        const qs = new URLSearchParams(window.location.search);
+        const saved = JSON.parse(sessionStorage.getItem('cmxTracking') || '{}');
+        TRACK_KEYS.forEach(k => { const v = qs.get(k) || saved[k]; if (v) tracking[k] = String(v).slice(0,200); });
+        sessionStorage.setItem('cmxTracking', JSON.stringify(tracking));
+      } catch (e) {}
+
+      /* ---------- Modal ---------- */
+      const focusables = () => [...modal.querySelectorAll('button,input:not([tabindex="-1"]),a[href]')].filter(el => !el.disabled && el.offsetParent !== null);
+
+      const openModal = () => {
+        if (modal.classList.contains('is-open')) return;
+        lastFocus = document.activeElement;
+        openedAt = Date.now();
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden','false');
+        document.documentElement.style.overflow = 'hidden';
+        sticky.classList.remove('is-visible');
+        setTimeout(() => $('#cmx-name').focus({preventScroll:true}), 60);
+        track('InitiateCheckoutForm');
+      };
+      const closeModal = () => {
+        if (sending) return;
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden','true');
+        document.documentElement.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+        onScroll();
+      };
+
+      root.querySelectorAll('.cmx-open-form').forEach(b => b.addEventListener('click', openModal));
+      stickyBtn.addEventListener('click', openModal);
+      $('.cmx-modal-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => {
+        if (!modal.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeModal(); return; }
+        if (e.key === 'Tab') {
+          const items = focusables();
+          if (!items.length) return;
+          const first = items[0], last = items[items.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+      // Abre o formulário direto por link: .../pagina/#comecar
+      if (/^#(comecar|inscricao|checkout)$/i.test(window.location.hash)) setTimeout(openModal, 400);
+
+      /* ---------- Validação ---------- */
+      const fields = {
+        name: { el: $('#cmx-name'), ok: v => v.trim().replace(/\s+/g,' ').length >= 3 },
+        email: { el: $('#cmx-email'), ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) },
+        phone: { el: $('#cmx-phone'), ok: v => { const d = v.replace(/\D/g,''); return d.length === 10 || d.length === 11; } }
+      };
+      const setError = (key, bad) => {
+        const wrap = fields[key].el.closest('.cmx-field');
+        wrap.classList.toggle('has-error', bad);
+        fields[key].el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      };
+      const updateSteps = () => {
+        const done = Object.keys(fields).filter(k => fields[k].ok(fields[k].el.value)).length;
+        steps.forEach((s, i) => s.classList.toggle('is-on', i < Math.max(1, done)));
+      };
+      Object.keys(fields).forEach(key => {
+        const f = fields[key];
+        f.el.addEventListener('blur', () => { if (f.el.value) setError(key, !f.ok(f.el.value)); });
+        f.el.addEventListener('input', () => { if (f.el.closest('.cmx-field').classList.contains('has-error')) setError(key, !f.ok(f.el.value)); updateSteps(); });
+      });
+
+      const phone = fields.phone.el;
+      phone.addEventListener('input', () => {
+        let d = phone.value.replace(/\D/g,'');
+        if (d.length > 11 && d.startsWith('55')) d = d.slice(2);
+        d = d.slice(0,11);
+        let out = d;
+        if (d.length > 2) out = '(' + d.slice(0,2) + ') ' + d.slice(2);
+        if (d.length > 6) out = '(' + d.slice(0,2) + ') ' + (d.length === 11 ? d.slice(2,7) + '-' + d.slice(7) : d.slice(2,6) + '-' + d.slice(6));
+        phone.value = out;
+      });
+
+      /* ---------- Envio ---------- */
+      const setLoading = on => {
+        sending = on;
+        submitBtn.disabled = on;
+        submitBtn.classList.toggle('is-loading', on);
+        submitText.textContent = on ? 'Enviando…' : 'Continuar para o pagamento';
+      };
+      const showStatus = msg => { status.textContent = msg; status.classList.add('is-on'); };
+
+      const buildCheckoutUrl = data => {
+        const url = new URL(CONFIG.CHECKOUT_URL, window.location.href);
+        const digits = data.phone.replace(/\D/g,'');
+        url.searchParams.set('name', data.name);
+        url.searchParams.set('email', data.email);
+        url.searchParams.set('phoneac', digits.slice(0,2));
+        url.searchParams.set('phonenumber', digits.slice(2));
+        Object.keys(tracking).forEach(k => url.searchParams.set(k, tracking[k]));
+        return url.toString();
+      };
+
+      const sendLead = async payload => {
+        if (!CONFIG.LEAD_ENDPOINT) return false;
+        const ctrl = 'AbortController' in window ? new AbortController() : null;
+        const timer = ctrl ? setTimeout(() => ctrl.abort(), CONFIG.TIMEOUT_MS) : null;
+        try {
+          const res = await fetch(CONFIG.LEAD_ENDPOINT, { method:'POST', body:payload, credentials:'omit', keepalive:true, signal: ctrl ? ctrl.signal : undefined });
+          return res.ok;
+        } catch (e) { return false; }
+        finally { if (timer) clearTimeout(timer); }
+      };
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        if (sending) return;
+        status.classList.remove('is-on');
+
+        let firstBad = null;
+        Object.keys(fields).forEach(key => {
+          const bad = !fields[key].ok(fields[key].el.value);
+          setError(key, bad);
+          if (bad && !firstBad) firstBad = fields[key].el;
+        });
+        if (firstBad) { firstBad.focus(); return; }
+
+        const data = {
+          name: fields.name.el.value.trim().replace(/\s+/g,' '),
+          email: fields.email.el.value.trim().toLowerCase(),
+          phone: fields.phone.el.value.trim()
+        };
+        try { localStorage.setItem('checkmateLead', JSON.stringify(data)); } catch (err) {}
+
+        const payload = new FormData();
+        Object.keys(data).forEach(k => payload.append(k, data[k]));
+        payload.append('website', $('#cmx-website').value);
+        payload.append('elapsed', String(Date.now() - openedAt));
+        payload.append('page', window.location.href.split('#')[0]);
+        payload.append('referrer', document.referrer || '');
+        Object.keys(tracking).forEach(k => payload.append(k, tracking[k]));
+
+        setLoading(true);
+        await sendLead(payload);
+        track('Lead');
+
+        // Mesmo que o e-mail falhe, a compradora segue para o pagamento (não perdemos a venda).
+        if (!CONFIG.CHECKOUT_URL) {
+          setLoading(false);
+          showStatus('Cadastro recebido! O link de pagamento ainda está sendo configurado.');
+          return;
+        }
+        submitText.textContent = 'Abrindo o pagamento…';
+        window.location.href = buildCheckoutUrl(data);
+        setTimeout(() => setLoading(false), 4000); // se a pessoa voltar pelo botão "voltar"
+      });
+      window.addEventListener('pageshow', ev => { if (ev.persisted) setLoading(false); });
+
+      /* ---------- Pixel / GTM (opcional, só dispara se existir) ---------- */
+      function track(name) {
+        try { if (typeof window.fbq === 'function') window.fbq('track', name === 'Lead' ? 'Lead' : 'InitiateCheckout'); } catch (e) {}
+        try { (window.dataLayer = window.dataLayer || []).push({ event: 'cmx_' + name }); } catch (e) {}
+      }
+
+      /* ---------- Animações de entrada ---------- */
+      const revealItems = root.querySelectorAll('.cmx-reveal, .cmx-board-grid');
+      const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if ('IntersectionObserver' in window && !reduce) {
+        const io = new IntersectionObserver(entries => entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+        }), { threshold: .08, rootMargin: '0px 0px 40px' });
+        revealItems.forEach(el => io.observe(el));
+      } else revealItems.forEach(el => el.classList.add('is-visible'));
+      // Garantia: nada fica invisível se o observer falhar (ex.: editor do Elementor)
+      setTimeout(() => revealItems.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight) el.classList.add('is-visible'); }), 1500);
+
+      /* ---------- Mini-tabuleiro (fileiras 8 → 1) ---------- */
+      const ranks = [...root.querySelectorAll('.cmx-rank[data-rank]')];
+      const minimap = $('.cmx-minimap');
+      const links = ranks.map(sec => {
+        const a = document.createElement('a');
+        a.href = '#';
+        a.textContent = sec.dataset.rank;
+        a.setAttribute('aria-label', 'Casa ' + sec.dataset.rank + ': ' + sec.dataset.title);
+        a.innerHTML += '<svg aria-hidden="true"><use href="#cmx-king"/></svg><span>' + sec.dataset.rank + ' · ' + sec.dataset.title + '</span>';
+        a.addEventListener('click', ev => { ev.preventDefault(); sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+        minimap.appendChild(a);
+        return a;
+      });
+      const mmLabel = document.createElement('div');
+      mmLabel.className = 'cmx-minimap-label';
+      minimap.appendChild(mmLabel);
+
+      /* ---------- Rolagem: progresso, casa ativa, barra fixa ---------- */
+      const progress = $('.cmx-progress');
+      const hero = root.querySelector('.cmx-hero');
+      const offer = root.querySelector('#cmx-oferta');
+      let ticking = false;
+
+      function onScroll() {
+        const vh = window.innerHeight;
+        const rect = root.getBoundingClientRect();
+        const distance = Math.max(1, root.offsetHeight - vh);
+        const pct = Math.max(0, Math.min(1, -rect.top / distance));
+        progress.style.transform = 'scaleX(' + pct + ')';
+
+        let active = 0;
+        ranks.forEach((sec, i) => { if (sec.getBoundingClientRect().top < vh * .45) active = i; });
+        links.forEach((a, i) => { a.classList.toggle('is-active', i === active); a.classList.toggle('is-done', i < active); });
+        mmLabel.textContent = 'Lance ' + (active + 1) + '/' + ranks.length;
+
+        const pageVisible = rect.bottom > 0 && rect.top < vh;
+        minimap.classList.toggle('is-hidden', !pageVisible || rect.top > -80);
+
+        const pastHero = hero.getBoundingClientRect().bottom < 0;
+        const o = offer.getBoundingClientRect();
+        const offerVisible = o.top < vh && o.bottom > 0;
+        const show = pastHero && !offerVisible && pageVisible && !modal.classList.contains('is-open');
+        sticky.classList.toggle('is-visible', show);
+        sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+        stickyBtn.tabIndex = show ? 0 : -1;
+        ticking = false;
+      }
+      const requestTick = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
+      window.addEventListener('scroll', requestTick, { passive: true });
+      window.addEventListener('resize', requestTick, { passive: true });
+      onScroll();
+    })();
+  </script>
+  <noscript><style>#cmx-page .cmx-reveal,#cmx-page .cmx-board-grid .cmx-day{opacity:1!important;transform:none!important}</style></noscript>
+</div>
