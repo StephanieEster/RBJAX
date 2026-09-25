@@ -1,0 +1,86 @@
+# Guidine Pereira Construction - Apache / LiteSpeed (Hostinger)
+
+Options -Indexes
+DirectoryIndex index.php index.html
+ErrorDocument 404 /404.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Internal folders are never served
+  RewriteRule ^(includes|leads)(/|$) - [F,L]
+
+  # Force HTTPS: enable after the SSL certificate is active (hPanel > Security > SSL).
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Force www-less domain (optional): uncomment and set your domain.
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Dynamic sitemap and robots
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+  RewriteRule ^robots\.txt$ robots.php [L]
+
+  # /index.php -> /
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.php[\s?] [NC]
+  RewriteRule ^(.*/)?index\.php$ /$1 [L,R=301]
+
+  # /page.php -> /page (clean URLs), except the form handler
+  RewriteCond %{REQUEST_METHOD} GET
+  RewriteCond %{REQUEST_URI} !/(send|sitemap|robots)\.php$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.php[\s?] [NC]
+  RewriteRule ^ /%1 [L,R=301]
+
+  # Remove trailing slash on non-directories
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # /page -> page.php
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+  RewriteRule ^([a-z0-9\-]+)$ $1.php [L]
+</IfModule>
+
+# Block direct access to internal folders and files
+<FilesMatch "(^\.|\.(md|log|csv|ini|sh|bak)$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript application/json image/svg+xml application/manifest+json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+AddType font/woff2 .woff2
+AddType image/webp .webp
+AddType application/manifest+json .webmanifest
