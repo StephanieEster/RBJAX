@@ -10,6 +10,7 @@ $canonical = abs_url($page['slug']);
 $ogImage = site_url() . '/assets/img/og-image.jpg';
 $current = $page['slug'];
 $isService = isset($SERVICES[$current]);
+$estimateHref = !empty($page['hero_form']) ? '#quote' : url('contact') . '#estimate';
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -109,7 +110,7 @@ include __DIR__ . '/tracking-head.php';
         <li><a href="<?= e(url('contact')) ?>"<?= $current === 'contact' ? ' aria-current="page"' : '' ?>>Contact</a></li>
       </ul>
       <div class="nav__cta">
-        <a class="btn btn--primary btn--block" href="<?= e(url('contact')) ?>#estimate">Get a Free Estimate</a>
+        <a class="btn btn--primary btn--block" href="<?= e($estimateHref) ?>">Get a Free Estimate</a>
         <div class="nav__contact">
           <a class="btn btn--ghost-light" href="<?= e(tel_link()) ?>" data-track="call"><?= icon('phone') ?>Call</a>
           <a class="btn btn--ghost-light" href="<?= e(sms_link()) ?>" data-track="sms"><?= icon('sms') ?>Text</a>
@@ -123,7 +124,7 @@ include __DIR__ . '/tracking-head.php';
         <?= icon('phone') ?>
         <span><small>Call or text</small><?= e(PHONE_DISPLAY) ?></span>
       </a>
-      <a class="btn btn--primary header__cta" href="<?= e(url('contact')) ?>#estimate">Free Estimate</a>
+      <a class="btn btn--primary header__cta" href="<?= e($estimateHref) ?>">Free Estimate</a>
       <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav" data-nav-open>
         <span></span><span></span><span></span>
       </button>

@@ -30,6 +30,9 @@ Em inglês (público americano), otimizado para SEO local em Myrtle Beach, SC.
 
 ## Formulário de orçamento
 
+- Na home e nas 4 páginas de serviço o formulário fica **na hero** (versão curta: nome, telefone, e-mail, cidade, serviço e detalhes opcionais).
+  Nas páginas de serviço o serviço já vem selecionado. Os botões "Free Estimate" do topo e da barra do celular levam direto a ele.
+- A versão completa continua no fim das páginas e em `/contact`.
 - Envio via AJAX, sem recarregar a página; depois redireciona para `/thank-you`.
 - Validação no navegador e no servidor, máscara de telefone americano.
 - Antispam: campo invisível (honeypot), tempo mínimo de preenchimento e limite de 5 envios a cada 10 min por IP.

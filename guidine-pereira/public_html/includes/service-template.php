@@ -26,7 +26,7 @@ $photos = array_values(array_filter(gallery(), function ($p) use ($s) {
     return in_array($p[1], $s['cats'], true);
 }));
 $photos = array_slice($photos, 0, 12);
-$heroSide = $photos[1][0] ?? $s['image'];
+$thumbs = array_slice(array_values(array_unique(array_merge([$s['image']], array_column($photos, 0), ['white-subway-tile-shower-mosaic-feature', 'star-pattern-decorative-floor-tile']))), 0, 3);
 
 $faqs = array_merge($s['faq'], [$FAQ_GENERAL[3], $FAQ_GENERAL[4], $FAQ_GENERAL[5]]);
 
@@ -34,7 +34,7 @@ $page = [
     'slug' => $slug,
     'title' => $s['title'] . ' | Guidine Pereira',
     'description' => $s['meta'],
-    'preload' => $s['image'],
+    'hero_form' => true,
     'schema' => [
         breadcrumb_schema([['Home', ''], [$s['name'], $slug]]),
         [
@@ -55,22 +55,33 @@ $page = [
 include __DIR__ . '/header.php';
 ?>
 
-<section class="page-hero page-hero--media">
+<section class="hero hero--form hero--inner">
   <div class="hero__pattern" aria-hidden="true"></div>
-  <div class="container page-hero__grid">
-    <div class="page-hero__copy">
+  <div class="container hero__grid">
+    <div class="hero__copy">
       <?php breadcrumbs([['Home', ''], [$s['name'], $slug]]); ?>
       <p class="eyebrow eyebrow--light">Myrtle Beach, SC &amp; surrounding areas</p>
       <h1 class="page-hero__title"><?= e($s['h1']) ?></h1>
       <p class="hero__lead"><?= e($s['lead']) ?></p>
+    </div>
+
+    <?php $preselect = $slug; include __DIR__ . '/hero-form.php'; ?>
+
+    <div class="hero__extra">
       <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="#estimate">Get a Free Estimate <?= icon('arrow') ?></a>
+        <a class="btn btn--outline-light btn--lg" href="<?= e(tel_link()) ?>" data-track="call"><?= icon('phone') ?>Call <?= e(PHONE_DISPLAY) ?></a>
         <a class="btn btn--outline-light btn--lg" href="<?= e(sms_link()) ?>" data-track="sms"><?= icon('sms') ?>Text us</a>
       </div>
-    </div>
-    <div class="page-hero__media">
-      <figure class="page-hero__img"><?= picture($s['image'], '(max-width: 900px) 60vw, 28vw', false) ?></figure>
-      <figure class="page-hero__img page-hero__img--offset"><?= picture($heroSide, '(max-width: 900px) 40vw, 18vw') ?></figure>
+      <ul class="hero__trust">
+        <li><?= icon('shield') ?>Licensed &amp; insured</li>
+        <li><?= icon('home') ?>Family-owned</li>
+        <li><?= icon('ruler') ?>Price at the estimate</li>
+      </ul>
+      <div class="hero__thumbs">
+        <?php foreach ($thumbs as $i => $thumb): ?>
+        <figure><?= picture($thumb, '(max-width: 700px) 30vw, 180px', $i > 0) ?></figure>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
@@ -83,7 +94,7 @@ include __DIR__ . '/header.php';
       <?php foreach ($ABOUT[$slug] as $para): ?>
       <p class="reveal"><?= e($para) ?></p>
       <?php endforeach; ?>
-      <a class="btn btn--dark reveal" href="#estimate">Schedule my free estimate <?= icon('arrow') ?></a>
+      <a class="btn btn--dark reveal" href="#quote">Schedule my free estimate <?= icon('arrow') ?></a>
     </div>
     <div class="included">
       <?php foreach ($s['includes'] as $item): ?>

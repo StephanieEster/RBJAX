@@ -5,7 +5,7 @@ $page = [
     'slug' => '',
     'title' => 'Tile & Bathroom Remodeling in Myrtle Beach, SC | Guidine Pereira',
     'description' => 'Family-owned tile contractor in Myrtle Beach, SC. Shower and bathroom remodeling, tile flooring, wall tile and backsplash installation. Licensed and insured. Free estimate: (843) 492-8374.',
-    'preload' => 'wood-look-tile-walk-in-shower-bench-window',
+    'hero_form' => true,
     'schema' => [faq_schema($FAQ_GENERAL)],
     'body' => 'page-home',
 ];
@@ -27,36 +27,32 @@ $featured = [
 ];
 ?>
 
-<section class="hero">
+<section class="hero hero--form">
   <div class="hero__pattern" aria-hidden="true"></div>
   <div class="container hero__grid">
     <div class="hero__copy">
       <p class="eyebrow eyebrow--light">Tile &amp; remodeling contractor in Myrtle Beach, SC</p>
       <h1 class="hero__title">Showers, floors and walls finished with <em>precision</em></h1>
       <p class="hero__lead">Guidine Pereira Construction is a family-owned team that remodels bathrooms and installs tile for homeowners across the Grand Strand. Straight lines, level floors and a clean job from the first day to the final walkthrough.</p>
+    </div>
+
+    <?php include __DIR__ . '/includes/hero-form.php'; ?>
+
+    <div class="hero__extra">
       <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="#estimate">Get a Free Estimate <?= icon('arrow') ?></a>
-        <a class="btn btn--outline-light btn--lg" href="<?= e(tel_link()) ?>" data-track="call"><?= icon('phone') ?><?= e(PHONE_DISPLAY) ?></a>
+        <a class="btn btn--outline-light btn--lg" href="<?= e(tel_link()) ?>" data-track="call"><?= icon('phone') ?>Call <?= e(PHONE_DISPLAY) ?></a>
+        <a class="btn btn--outline-light btn--lg" href="<?= e(sms_link()) ?>" data-track="sms"><?= icon('sms') ?>Text us</a>
       </div>
       <ul class="hero__trust">
         <li><?= icon('shield') ?>Licensed &amp; insured</li>
         <li><?= icon('home') ?>Family-owned</li>
         <li><?= icon('ruler') ?>Price at the estimate</li>
       </ul>
-    </div>
-    <div class="hero__media">
-      <figure class="hero__img hero__img--main">
-        <?= picture('wood-look-tile-walk-in-shower-bench-window', '(max-width: 900px) 62vw, 30vw', false) ?>
-      </figure>
-      <figure class="hero__img hero__img--top">
-        <?= picture('white-subway-tile-shower-mosaic-feature', '(max-width: 900px) 36vw, 18vw') ?>
-      </figure>
-      <figure class="hero__img hero__img--bottom">
-        <?= picture('star-pattern-decorative-floor-tile', '(max-width: 900px) 36vw, 18vw') ?>
-      </figure>
-      <div class="hero__badge">
-        <strong><span data-count="800">800</span>+</strong>
-        <span>projects completed</span>
+      <div class="hero__thumbs">
+        <figure><?= picture('wood-look-tile-walk-in-shower-bench-window', '(max-width: 700px) 30vw, 180px', false) ?></figure>
+        <figure><?= picture('white-subway-tile-shower-mosaic-feature', '(max-width: 700px) 30vw, 180px') ?></figure>
+        <figure><?= picture('star-pattern-decorative-floor-tile', '(max-width: 700px) 30vw, 180px') ?></figure>
+        <div class="hero__thumbs-badge"><strong><span data-count="800">800</span>+</strong><span>projects completed</span></div>
       </div>
     </div>
   </div>
@@ -173,7 +169,7 @@ $featured = [
       <h2 id="guarantee-title">Our workmanship guarantee</h2>
       <p>Any adjustment needed within 30 days after completion is covered at no cost. After that, if an issue related to our work shows up, we come back and make it right. You only cover a trip fee.</p>
     </div>
-    <a class="btn btn--light btn--lg" href="#estimate">Start my project</a>
+    <a class="btn btn--light btn--lg" href="#quote">Start my project</a>
   </div>
 </section>
 

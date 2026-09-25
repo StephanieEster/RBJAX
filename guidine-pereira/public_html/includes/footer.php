@@ -53,7 +53,7 @@
 <div class="mobile-bar" aria-label="Quick contact">
   <a href="<?= e(tel_link()) ?>" data-track="call"><?= icon('phone') ?><span>Call</span></a>
   <a href="<?= e(sms_link()) ?>" data-track="sms"><?= icon('sms') ?><span>Text</span></a>
-  <a href="<?= e(url('contact')) ?>#estimate" class="mobile-bar__primary"><?= icon('ruler') ?><span>Free Estimate</span></a>
+  <a href="<?= e($estimateHref) ?>" class="mobile-bar__primary"><?= icon('ruler') ?><span>Free Estimate</span></a>
 </div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo" hidden>

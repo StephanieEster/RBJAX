@@ -1,10 +1,11 @@
 <?php
-/* Estimate request form. Optional: $formId, $formTitle, $preselect (service slug). */
+/* Estimate request form. Optional: $formId, $preselect (service slug), $compact (short hero version). */
 $formId = $formId ?? 'estimate-form';
+$compact = $compact ?? false;
 $preselect = $preselect ?? '';
 $status = $_GET['form'] ?? '';
 ?>
-<form class="form" id="<?= e($formId) ?>" action="<?= e(url('send.php')) ?>" method="post" novalidate data-estimate-form>
+<form class="form<?= $compact ? ' form--compact' : '' ?>" id="<?= e($formId) ?>" action="<?= e(url('send.php')) ?>" method="post" novalidate data-estimate-form>
   <div class="form__grid">
     <div class="field">
       <label for="<?= e($formId) ?>-name">Full name <span aria-hidden="true">*</span></label>
@@ -23,10 +24,10 @@ $status = $_GET['form'] ?? '';
     </div>
     <div class="field">
       <label for="<?= e($formId) ?>-city">City or ZIP code <span aria-hidden="true">*</span></label>
-      <input id="<?= e($formId) ?>-city" name="city" type="text" autocomplete="address-level2" required maxlength="60" placeholder="Myrtle Beach, 29577">
+      <input id="<?= e($formId) ?>-city" name="city" type="text" autocomplete="address-level2" required maxlength="60" placeholder="Myrtle Beach">
       <p class="field__error" data-for="city">Tell us where the project is.</p>
     </div>
-    <div class="field">
+    <div class="field<?= $compact ? ' field--full' : '' ?>">
       <label for="<?= e($formId) ?>-service">Service needed <span aria-hidden="true">*</span></label>
       <div class="select">
         <select id="<?= e($formId) ?>-service" name="service" required>
@@ -39,6 +40,7 @@ $status = $_GET['form'] ?? '';
       </div>
       <p class="field__error" data-for="service">Please choose a service.</p>
     </div>
+    <?php if (!$compact): ?>
     <div class="field">
       <label for="<?= e($formId) ?>-timeline">When would you like to start?</label>
       <div class="select">
@@ -58,9 +60,10 @@ $status = $_GET['form'] ?? '';
         <label class="choice"><input type="radio" name="contact_pref" value="Email"><span>Email</span></label>
       </div>
     </fieldset>
+    <?php endif; ?>
     <div class="field field--full">
-      <label for="<?= e($formId) ?>-message">Project details</label>
-      <textarea id="<?= e($formId) ?>-message" name="message" rows="4" maxlength="2000" placeholder="Room, approximate size, tile you have in mind, anything we should know."></textarea>
+      <label for="<?= e($formId) ?>-message">Project details<?= $compact ? ' <small>(optional)</small>' : '' ?></label>
+      <textarea id="<?= e($formId) ?>-message" name="message" rows="<?= $compact ? 2 : 4 ?>" maxlength="2000" placeholder="Room, approximate size, tile you have in mind, anything we should know."></textarea>
     </div>
   </div>
 
@@ -86,3 +89,4 @@ $status = $_GET['form'] ?? '';
   </div>
   <div class="form__status<?= $status === 'error' ? ' is-error' : '' ?>" role="status" aria-live="polite"><?php if ($status === 'error'): ?>Something went wrong. Please call or text us at <a href="<?= e(tel_link()) ?>"><?= e(PHONE_DISPLAY) ?></a>.<?php endif; ?></div>
 </form>
+<?php unset($formId, $compact); ?>
