@@ -306,4 +306,4 @@ Checklist técnico aplicado em qualquer site criado aqui (HTML estático na Verc
 - **Links internos**: toda página comercial recebe link da home/hub e de pelo menos uma página informacional; âncoras descritivas e variadas.
 - **Contato real**: WhatsApp `https://wa.me/55DDDNUMERO` testado, `tel:` com DDD, e-mail real. Nenhum `href="#"` publicado.
 
-Referências de sites feitos por especialista: ver [`REFERENCIAS.md`](./REFERENCIAS.md).
+Referências de sites feitos por especialista: ver [`sites-referencia.md`](./sites-referencia.md).

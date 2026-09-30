@@ -14,7 +14,7 @@ Ao ter acesso aos sites, registrar aqui:
 
 - `<title>`, meta description, canonical, Open Graph
 - H1 e a sequência de H2/H3 da home e de uma página de serviço
-- Ordem dos blocos (comparar com os 17 blocos do [GUIA-SEO-TECNICO.md](./GUIA-SEO-TECNICO.md))
+- Ordem dos blocos (comparar com os 17 blocos do [guia-seo-tecnico.md](./guia-seo-tecnico.md))
 - Sentença definicional após o hero
 - Estrutura de URLs e breadcrumbs
 - JSON-LD (tipos, `@id`, `sameAs`, FAQPage)
