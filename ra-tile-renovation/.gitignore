@@ -1,0 +1,3 @@
+# runtime data (never commit leads)
+public_html/data/*
+!public_html/data/.htaccess

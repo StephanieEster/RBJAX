@@ -1,0 +1,90 @@
+# R.A Tile Renovation — Apache / Hostinger (LiteSpeed) configuration
+
+Options -Indexes
+DirectoryIndex index.php
+ErrorDocument 404 /404.php
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # --- Force HTTPS (enable SSL in hPanel first) ---
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # --- Force non-www (canonical host). Swap the rule if you prefer www ---
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # --- Block internal folders ---
+  RewriteRule ^(includes|data)(/|$) - [F,L]
+
+  # --- Dynamic sitemap & robots ---
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+  RewriteRule ^robots\.txt$ robots.php [L]
+
+  # --- Remove /index.php and .php extensions (301 to clean URLs) ---
+  RewriteCond %{THE_REQUEST} \s/+index(\.php)?[\s?] [NC]
+  RewriteRule ^ / [R=301,L]
+  RewriteCond %{REQUEST_METHOD} GET
+  RewriteCond %{REQUEST_URI} !^/(send|sitemap|robots)\.php [NC]
+  RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.php[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # --- Remove trailing slash (except real directories) ---
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # --- Serve clean URLs from .php files ---
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^([a-z0-9\-]+)$ $1.php [L]
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml application/manifest+json
+</IfModule>
+
+# --- Browser caching (assets are versioned with ?v=) ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+  AddType image/webp .webp
+</IfModule>
+
+# --- Security headers ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  <FilesMatch "\.(css|js|woff2|webp|png|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# --- Protect sensitive files ---
+<FilesMatch "(^\.|\.(csv|json|log|md|ini|sh|sql)$)">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^site\.webmanifest$">
+  Require all granted
+</FilesMatch>
