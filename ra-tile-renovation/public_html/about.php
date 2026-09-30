@@ -33,7 +33,7 @@ require __DIR__ . '/includes/header.php';
       <p>We transform spaces through tile work executed with care, precision and attention to detail. Each project combines quality workmanship, functionality and a finish that adds value to your home — from the preparation to the very last grout line.</p>
     </div>
     <aside class="split__media sticky-aside">
-      <?= figure('install', '4:5', '(min-width: 900px) 40vw, 100vw', ['widths' => [480, 800, 1200], 'base' => 800]) ?>
+      <?= figure('about-story', '4:5', '(min-width: 900px) 40vw, 100vw', ['base' => 800]) ?>
       <div class="stats">
         <div class="stat"><strong><?= e(YEARS_EXPERIENCE) ?></strong><span>Years of tile experience</span></div>
         <div class="stat"><strong><?= e(FOUNDED_YEAR) ?></strong><span>Company founded</span></div>

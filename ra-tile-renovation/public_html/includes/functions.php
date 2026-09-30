@@ -55,7 +55,25 @@ function image_src(array $img, int $w, int $h): string
         $id = (int) $img['pexels'];
         return "https://images.pexels.com/photos/{$id}/pexels-photo-{$id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w={$w}&h={$h}";
     }
+    if (!empty($img['local'])) {
+        // smallest local file that is at least $w wide (or the largest available)
+        $files = $img['local'];
+        ksort($files);
+        foreach ($files as $fw => $file) {
+            if ($fw >= $w) {
+                return '/' . ltrim($file, '/');
+            }
+        }
+        return '/' . ltrim(end($files), '/');
+    }
     return '/' . ltrim($img['src'], '/');
+}
+
+/** Absolute image URL (sitemap, schema). */
+function image_url(array $img, int $w, int $h): string
+{
+    $src = image_src($img, $w, $h);
+    return $src[0] === '/' ? rtrim(SITE_URL, '/') . $src : $src;
 }
 
 /**
@@ -92,6 +110,13 @@ function img(string $key, string $ratio = '4:3', string $sizes = '100vw', array 
     ];
     if (!empty($img['pexels'])) {
         $attrs['srcset'] = implode(', ', $srcset);
+        $attrs['sizes'] = $sizes;
+    } elseif (!empty($img['local']) && count($img['local']) > 1) {
+        $set = [];
+        foreach ($img['local'] as $fw => $file) {
+            $set[] = '/' . ltrim($file, '/') . " {$fw}w";
+        }
+        $attrs['srcset'] = implode(', ', $set);
         $attrs['sizes'] = $sizes;
     }
     if ($eager) {

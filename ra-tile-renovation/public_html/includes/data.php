@@ -30,6 +30,11 @@ $IMAGES = [
     'floor-1'     => ['pexels' => 9690090,  'alt' => 'Tile installers laying floor tile'],
     'floor-2'     => ['pexels' => 17181934, 'alt' => 'Bright living room with large porcelain floor tile'],
     'install'     => ['pexels' => 29181495, 'alt' => 'Wall tile installation in progress'],
+    // Local photos: 'local' maps width => file (used to build a responsive srcset)
+    'about-story' => ['local' => [480 => 'assets/img/projects/kitchen-backsplash-remodel-480.webp', 667 => 'assets/img/projects/kitchen-backsplash-remodel-667.webp'],
+                      'alt' => 'Kitchen remodel with marble-look backsplash and wood-look plank flooring'],
+    'home-story'  => ['local' => [480 => 'assets/img/projects/floor-installation-480.webp', 1000 => 'assets/img/projects/floor-installation-1000.webp'],
+                      'alt' => 'Installer laying wood-look plank flooring'],
     'fireplace-1' => ['pexels' => 6035369,  'alt' => 'Living room with a tiled fireplace surround'],
     'fireplace-2' => ['pexels' => 24827078, 'alt' => 'Fireplace with modern tile surround in a living room'],
     'fireplace-3' => ['pexels' => 28345539, 'alt' => 'Stone-look fireplace wall in a living room'],

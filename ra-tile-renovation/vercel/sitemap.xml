@@ -10,6 +10,7 @@
     <image:image><image:loc>https://images.pexels.com/photos/8031909/pexels-photo-8031909.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=1200&amp;h=900</image:loc></image:image>
     <image:image><image:loc>https://images.pexels.com/photos/6035369/pexels-photo-6035369.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=1200&amp;h=900</image:loc></image:image>
     <image:image><image:loc>https://images.pexels.com/photos/17181934/pexels-photo-17181934.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=1200&amp;h=900</image:loc></image:image>
+    <image:image><image:loc>https://ra-tile-renovation.vercel.app/assets/img/projects/floor-installation-1000.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://ra-tile-renovation.vercel.app/about</loc>
@@ -17,7 +18,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image><image:loc>https://images.pexels.com/photos/18246436/pexels-photo-18246436.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=1200&amp;h=900</image:loc></image:image>
-    <image:image><image:loc>https://images.pexels.com/photos/29181495/pexels-photo-29181495.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=1200&amp;h=900</image:loc></image:image>
+    <image:image><image:loc>https://ra-tile-renovation.vercel.app/assets/img/projects/kitchen-backsplash-remodel-667.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://ra-tile-renovation.vercel.app/service-areas</loc>

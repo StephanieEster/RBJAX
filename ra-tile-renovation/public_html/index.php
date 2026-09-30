@@ -204,7 +204,7 @@ require __DIR__ . '/includes/header.php';
       <a class="btn btn--navy" href="/about">Meet the Team <?= icon('arrow') ?></a>
     </div>
     <div class="split__media">
-      <?= figure('install', '4:3', '(min-width: 900px) 45vw, 100vw', ['widths' => [480, 800, 1200], 'base' => 800]) ?>
+      <?= figure('home-story', '4:3', '(min-width: 900px) 45vw, 100vw', ['base' => 800]) ?>
     </div>
   </div>
 </section>

@@ -24,7 +24,7 @@ $page = [
             'serviceType' => $s['nav'],
             'description' => $s['meta'],
             'url'         => url($slug),
-            'image'       => image_src($IMAGES[$s['image']], 1200, 900),
+            'image'       => image_url($IMAGES[$s['image']], 1200, 900),
             'provider'    => ['@id' => url() . '#business'],
             'areaServed'  => ['@type' => 'State', 'name' => 'New Hampshire'],
             'offers'      => ['@type' => 'Offer', 'description' => 'Free estimate', 'price' => '0', 'priceCurrency' => 'USD'],
