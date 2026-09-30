@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anatomia da página comercial por intenção de busca | Anderson Melo SEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F6F8; --paper:#FFFFFF; --navy:#171331; --navy-2:#221C47; --ink:#14202E; --ink-2:#3E4A5B; --muted:#75808F; --line:#DCE1E7;
+    --brand:#A78BFA;
+    --ok:#0F8C78; --ok-soft:#DFF3EE; --rec:#2F6FB5; --rec-soft:#E2EDF8; --opt:#8B95A3; --opt-soft:#EDF0F3; --lim:#D2831E; --lim-soft:#FBEBD3;
+    --r:8px; --max:1200px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;letter-spacing:-.015em;line-height:1.12;margin:0}
+  h1{font-size:clamp(38px,5.2vw,64px);font-variation-settings:"opsz" 144}
+  h2{font-size:clamp(26px,3.2vw,36px);font-variation-settings:"opsz" 72}
+  h3{font-size:21px}
+  p{margin:0 0 1em;max-width:68ch}
+  a{color:var(--ok)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+  /* header */
+  header.top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+  header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;gap:16px}
+  .mark{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .mark .mono{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#7C3AED,#A78BFA);color:#fff;display:grid;place-items:center;font-family:"Fraunces",serif;font-weight:600;font-size:17px;letter-spacing:-.02em}
+  .mark b{font-weight:700;font-size:15px;letter-spacing:.01em}
+  .mark small{display:block;font-weight:400;font-size:12px;opacity:.7}
+  nav.jump{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}
+  nav.jump a{color:rgba(255,255,255,.78);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+  nav.jump a:hover,nav.jump a:focus-visible{color:#fff;border-color:var(--brand)}
+
+  /* hero */
+  .hero{background:var(--navy);color:#fff;padding:72px 0 80px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(closest-side,rgba(139,92,246,.35),rgba(139,92,246,0));pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:end}
+  .hero .kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--brand);margin-bottom:22px}
+  .hero .kicker::before{content:"";width:28px;height:2px;background:var(--brand)}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--brand)}
+  .hero .lead{font-size:18px;color:rgba(255,255,255,.78);max-width:58ch;margin-top:22px}
+  .hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:26px 28px;backdrop-filter:blur(4px)}
+  .hero-card dt{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:4px}
+  .hero-card dd{margin:0 0 16px;font-size:15px}
+  .hero-card dd:last-child{margin:0}
+  .hero-card .sig{font-family:"Fraunces",serif;font-size:22px;font-style:italic;color:var(--brand)}
+
+  section{padding:64px 0;scroll-margin-top:72px}
+  section+section{border-top:1px solid var(--line)}
+  .sec-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;margin-bottom:8px}
+  .sec-head .num{font-family:"Fraunces",serif;font-size:15px;color:var(--brand);background:var(--navy);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-top:4px}
+  section .intro{color:var(--ink-2);margin-top:12px;max-width:66ch;font-size:17px}
+
+  .principle{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:32px}
+  .principle div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;border-top:4px solid var(--navy)}
+  .principle h3{font-size:19px;margin-bottom:8px}
+  .principle p{font-size:14.5px;color:var(--ink-2);margin:0}
+  .principle p q{font-style:italic;color:var(--ink)}
+
+  /* intents */
+  .intents{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+  .intents button{font:inherit;font-size:14px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;color:var(--ink-2);transition:background .15s,color .15s}
+  .intents button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+  .intents button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  .intent-head{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:24px}
+  .intent-head dt{font-size:12px;color:var(--muted);margin-bottom:5px;font-weight:600}
+  .intent-head dd{margin:0;font-size:15px;color:var(--ink-2)}
+  .intent-head dd.q{font-family:"Fraunces",serif;font-size:22px;color:var(--ink);font-style:italic}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--ink-2);font-weight:500}
+  .legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+  .legend .ok::before{background:var(--ok)} .legend .rec::before{background:var(--rec)} .legend .opt::before{background:var(--opt)} .legend .lim::before{background:repeating-linear-gradient(45deg,var(--lim) 0 3px,#fff 3px 5px)}
+
+  /* skeleton (browser mockup) */
+  .anatomy{display:grid;grid-template-columns:400px 1fr;gap:36px;margin-top:26px;align-items:start}
+  .browser{position:sticky;top:84px;background:#E9EDF1;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 50px -30px rgba(15,30,51,.45)}
+  .browser .bar{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .browser .bar i{width:10px;height:10px;border-radius:50%;background:#C9D0D8;display:inline-block}
+  .browser .bar .url{flex:1;background:#fff;border-radius:6px;font-size:11.5px;color:var(--muted);padding:5px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+  .browser .bar .url b{color:var(--ink);font-weight:600}
+  .canvas{background:#fff;border-radius:0 0 12px 12px;padding:10px;max-height:calc(100vh - 150px);overflow:auto}
+  .sk{--c:var(--opt);--s:var(--opt-soft);position:relative;border-radius:6px;background:var(--s);border-left:4px solid var(--c);margin-bottom:6px;padding:8px 10px 10px 12px;cursor:pointer;color:var(--c);transition:transform .12s,box-shadow .12s}
+  .sk.ok{--c:var(--ok);--s:var(--ok-soft)} .sk.rec{--c:var(--rec);--s:var(--rec-soft)} .sk.opt{--c:var(--opt);--s:var(--opt-soft)}
+  .sk.lim{--c:var(--lim);--s:var(--lim-soft);background-image:repeating-linear-gradient(45deg,rgba(210,131,30,.10) 0 4px,transparent 4px 10px)}
+  .sk:hover,.sk.hl{box-shadow:0 0 0 2px var(--c) inset;transform:translateX(2px)}
+  .sk:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+  .sk .cap{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:.01em}
+  .sk .cap span{color:var(--c);font-weight:600}
+  .sk .cap em{font-style:normal;color:var(--muted);font-weight:600;margin-right:6px}
+  /* wireframe primitives */
+  .wl{height:5px;border-radius:3px;background:currentColor;opacity:.35;margin:4px 0}
+  .wl.t{height:9px;opacity:.7}
+  .wl.b{opacity:.8}
+  .wbtn{display:inline-block;height:14px;border-radius:3px;background:currentColor;opacity:.85;vertical-align:middle}
+  .wbtn.g{opacity:.3}
+  .wbox{background:repeating-linear-gradient(135deg,currentColor 0 1px,transparent 1px 7px);opacity:.35;border-radius:4px;border:1px solid currentColor}
+  .row{display:flex;gap:8px;align-items:center}
+  .col{flex:1}
+  .wgrid{display:grid;gap:2px;border:1px solid currentColor;border-radius:3px;overflow:hidden;opacity:.55}
+  .wgrid i{display:block;height:9px;background:currentColor;opacity:.18}
+  .wgrid i.h{opacity:.55}
+  .wchip{display:inline-block;height:11px;width:36px;border-radius:999px;background:currentColor;opacity:.3;margin:2px 3px 0 0}
+  .wcirc{width:16px;height:16px;border-radius:50%;background:currentColor;opacity:.7;flex:none}
+  .wacc{border-top:1px solid currentColor;opacity:.6;padding:4px 0;display:flex;justify-content:space-between;align-items:center}
+  .wacc::after{content:"+";font-size:10px;font-weight:700}
+  .wacc .wl{margin:0;width:70%}
+  .wfield{height:13px;border:1px solid currentColor;border-radius:3px;opacity:.55;margin:4px 0}
+  .wcode{font:600 10px/1.3 ui-monospace,Menlo,monospace;opacity:.7}
+  .wnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;opacity:.7}
+  .wnav b{width:34px;height:8px;background:currentColor;border-radius:2px;display:block}
+  .wnav span{display:flex;gap:6px}
+  .wnav span i{width:16px;height:5px;background:currentColor;border-radius:2px;display:block}
+
+  /* blocks list */
+  .blocks{display:flex;flex-direction:column;gap:10px}
+  details.block{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);border-left:6px solid var(--opt);transition:box-shadow .15s}
+  details.block.ok{border-left-color:var(--ok)} details.block.rec{border-left-color:var(--rec)} details.block.lim{border-left-color:var(--lim)}
+  details.block.hl,details.block[open]{box-shadow:0 12px 30px -22px rgba(15,30,51,.5)}
+  details.block summary{list-style:none;cursor:pointer;padding:16px 20px;display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center}
+  details.block summary::-webkit-details-marker{display:none}
+  details.block summary .n{font-family:"Fraunces",serif;font-size:22px;color:var(--muted);font-variation-settings:"opsz" 144}
+  details.block summary .name{font-weight:700;font-size:16px}
+  details.block summary .fn{font-size:14px;color:var(--ink-2);font-weight:400}
+  .chip{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+  .chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.rec{background:var(--rec-soft);color:var(--rec)} .chip.opt{background:var(--opt-soft);color:var(--ink-2)} .chip.lim{background:var(--lim-soft);color:var(--lim)}
+  details.block .body{padding:0 20px 20px 74px;font-size:15px;color:var(--ink-2)}
+  details.block .body p{margin:0 0 10px}
+  details.block .body .ex{background:var(--bg);border-radius:6px;padding:14px 16px;margin-top:6px;border-left:3px solid var(--brand)}
+  details.block .body .ex b{color:var(--ink)}
+  details.block .body .note{margin-top:10px;font-size:14.5px;background:var(--navy);color:#fff;padding:12px 14px;border-radius:6px}
+  details.block .body .note b{color:var(--brand)}
+  .warn{margin-top:26px;background:var(--lim-soft);border-left:6px solid var(--lim);border-radius:var(--r);padding:18px 22px;font-size:15.5px}
+  .warn b{color:var(--lim)}
+
+  /* tables */
+  .table-wrap{overflow-x:auto;margin-top:22px}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:15px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:13.5px}
+  tr:last-child td{border-bottom:0}
+  td:first-child{font-weight:600;color:var(--ink)}
+  h3.sub{margin-top:36px}
+
+  /* checklist */
+  .check{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-top:26px;align-items:start}
+  .check-list{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .check-list label{display:grid;grid-template-columns:22px 1fr auto;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line);cursor:pointer;font-size:15px}
+  .check-list label:last-child{border-bottom:0}
+  .check-list label:hover{background:var(--bg)}
+  .check-list input{width:18px;height:18px;accent-color:var(--ok)}
+  .score{position:sticky;top:84px;background:var(--navy);color:#fff;border-radius:14px;padding:26px}
+  .gauge{display:flex;align-items:center;gap:18px}
+  .gauge svg{width:96px;height:96px;flex:none}
+  .gauge .big{font-family:"Fraunces",serif;font-size:44px;line-height:1;font-variation-settings:"opsz" 144}
+  .gauge .lbl{font-size:12.5px;opacity:.65;margin-top:4px;max-width:14ch}
+  .score ul{margin:8px 0 0;padding-left:18px;font-size:14px}
+  .score ul li{margin-bottom:4px}
+  .score .miss-title{font-size:12px;opacity:.65;margin-top:18px;font-weight:600}
+  .score .verdict{font-size:14px;margin-top:18px;line-height:1.5;padding-top:16px;border-top:1px solid rgba(255,255,255,.14)}
+  .score .sig{margin-top:18px;font-size:12px;opacity:.6}
+  .score .sig b{color:var(--brand);font-weight:600}
+  .field{margin-top:18px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600}
+  .field input,.field textarea{width:100%;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:6px;padding:11px 13px;background:var(--paper);color:var(--ink)}
+  .field input:focus,.field textarea:focus{outline:2px solid var(--brand);border-color:transparent}
+  .field textarea{min-height:100px;resize:vertical}
+  .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .btn{font:inherit;font-size:14px;font-weight:700;padding:11px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+  .quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px}
+  .quick div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+  .quick div span{font-family:"Fraunces",serif;font-size:28px;color:var(--navy);display:block;margin-bottom:8px;font-style:italic}
+  .quick div p{margin:0;font-size:15px;color:var(--ink-2)}
+
+  footer{background:var(--navy);color:#fff;padding:48px 0}
+  footer .wrap{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+  footer .sig{font-family:"Fraunces",serif;font-size:30px;font-style:italic;color:var(--brand);line-height:1.1}
+  footer p{font-size:14px;color:rgba(255,255,255,.65);margin:8px 0 0;max-width:60ch}
+  footer a{color:#fff}
+  footer .links{display:flex;flex-direction:column;gap:6px;font-size:14px;text-align:right}
+
+
+  /* templates and previews */
+  .tpl-head{display:flex;justify-content:space-between;align-items:center;margin:14px 0 6px}
+  .tpl-head b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .copy{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;cursor:pointer;color:var(--ink-2)}
+  .copy:hover{border-color:var(--brand);color:var(--navy)}
+  .tpl{white-space:pre-wrap;font:500 13.5px/1.55 ui-monospace,Menlo,Consolas,monospace;background:var(--navy);color:#E9E5FF;border-radius:6px;padding:14px 16px;margin:0}
+  .tpl i{font-style:normal;color:var(--brand)}
+  .pv{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin-top:6px;color:var(--ink)}
+  .pv *{max-width:none}
+  .pv .eyebrow{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.06em;text-transform:uppercase}
+  .pv h4{font-family:"Fraunces",serif;font-size:22px;line-height:1.15;margin:6px 0 8px;font-weight:600}
+  .pv p{font-size:14.5px;margin:0 0 8px;color:var(--ink-2)}
+  .pv .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .pv .chips span{font-size:12.5px;font-weight:600;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+  .pv .btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .pv .b1,.pv .b2{font-size:13px;font-weight:700;padding:9px 14px;border-radius:6px}
+  .pv .b1{background:var(--navy);color:#fff} .pv .b2{border:1px solid var(--navy);color:var(--navy)}
+  .pv table{margin:0;font-size:13.5px;border-radius:6px}
+  .pv th{background:var(--bg);color:var(--ink);font-size:12.5px}
+  .pv th,.pv td{padding:8px 10px}
+  .pv td:first-child{font-weight:600}
+  .pv .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pv ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)}
+  .pv ul li{margin-bottom:4px}
+  .pv .yes li::marker{color:var(--ok)} .pv .no li::marker{color:var(--lim)}
+  .pv ol{margin:0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+  .pv ol li{margin-bottom:6px} .pv ol li b{color:var(--ink)}
+  .pv .big{font-family:"Fraunces",serif;font-size:30px;color:var(--navy);line-height:1;margin:4px 0 2px}
+  .pv .small{font-size:12.5px;color:var(--muted)}
+  .pv .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+  .pv .stats div{background:var(--bg);border-radius:6px;padding:10px 12px}
+  .pv .stats b{display:block;font-family:"Fraunces",serif;font-size:22px;color:var(--navy)}
+  .pv .stats span{font-size:12.5px;color:var(--ink-2)}
+  .pv blockquote{margin:0;border-left:3px solid var(--brand);padding:6px 12px;font-size:14px;color:var(--ink-2);font-style:italic}
+  .pv blockquote cite{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:4px}
+  .pv .qa{border-top:1px solid var(--line);padding:8px 0}
+  .pv .qa:first-child{border-top:0;padding-top:0}
+  .pv .qa b{display:block;font-size:14px;color:var(--ink)}
+  .pv .qa p{margin:4px 0 0}
+  .pv .author{display:flex;gap:12px;align-items:center}
+  .pv .author .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);flex:none}
+  .pv .author b{display:block;font-size:14px}
+  .pv .author span{font-size:13px;color:var(--ink-2)}
+  .pv .link{color:var(--rec);text-decoration:underline;font-weight:600}
+  .pv .form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pv .form label{font-size:12px;color:var(--muted);font-weight:600;display:block}
+  .pv .form div{border:1px solid var(--line);border-radius:5px;padding:6px 9px;font-size:13px;color:var(--muted);background:#fff}
+  .pv .form .full{grid-column:1/-1}
+  .pv .foot{font-size:13px;color:var(--ink-2);line-height:1.6}
+  .pv .foot b{color:var(--ink)}
+  .pv pre{margin:0;font:500 12.5px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;color:var(--ink-2)}
+  .ih-model{grid-column:1/-1;border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .ih-model .h1m{font-family:"Fraunces",serif;font-size:19px;color:var(--ink);line-height:1.2}
+  .ih-model .defm{font-size:14.5px;color:var(--ink-2)}
+  .ih-model .defm b{color:var(--ink)}
+  @media (max-width:700px){.pv .cols,.pv .stats,.pv .form,.ih-model{grid-template-columns:1fr}}
+
+
+  /* wizard */
+  .wiz{display:grid;grid-template-columns:280px 1fr;gap:28px;margin-top:26px;align-items:start}
+  .rail{position:sticky;top:84px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px;max-height:calc(100vh - 110px);overflow:auto}
+  .rail button{display:grid;grid-template-columns:14px 24px 1fr;gap:8px;align-items:center;width:100%;text-align:left;font:inherit;font-size:13.5px;padding:8px 10px;border:0;background:transparent;border-radius:6px;cursor:pointer;color:var(--ink-2)}
+  .rail button:hover{background:var(--bg)}
+  .rail button[aria-current="step"]{background:var(--navy);color:#fff}
+  .rail button .dot{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+  .rail button .dot.ok{background:var(--ok)} .rail button .dot.part{background:var(--lim)} .rail button .dot.fail{background:#C43D3D} .rail button .dot.na{background:var(--opt)}
+  .rail button .num{font-family:"Fraunces",serif;font-size:14px;opacity:.6}
+  .rail button.report{margin-top:6px;border-top:1px solid var(--line);border-radius:0 0 6px 6px;padding-top:12px;font-weight:700}
+  .progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:16px}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);width:0;transition:width .25s}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px}
+  .step .kick{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .step h3{font-size:24px;margin:8px 0 4px}
+  .step .fn{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+  .step .why{background:var(--navy);color:#fff;border-radius:6px;padding:12px 14px;font-size:14px;margin-bottom:16px}
+  .step .why b{color:var(--brand)}
+  .q{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:10px}
+  .q.sim{border-color:var(--ok);background:#F3FBF8} .q.nao{border-color:#C43D3D;background:#FDF4F4} .q.na{border-color:var(--line);background:var(--bg)}
+  .q .qt{font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:6px}
+  .q .qt small{font-weight:600;color:var(--muted);margin-right:6px}
+  .q .hint{font-size:14px;color:var(--ink-2);margin-bottom:12px}
+  .q .hint b{color:var(--ink)}
+  .q .ans{display:flex;gap:6px;flex-wrap:wrap}
+  .q .ans button{font:inherit;font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink-2)}
+  .q .ans button[aria-pressed="true"].s{background:var(--ok);border-color:var(--ok);color:#fff}
+  .q .ans button[aria-pressed="true"].n{background:#C43D3D;border-color:#C43D3D;color:#fff}
+  .q .ans button[aria-pressed="true"].x{background:var(--opt);border-color:var(--opt);color:#fff}
+  .stepnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .stepnav .hintnav{font-size:13px;color:var(--muted);align-self:center}
+  /* report */
+  .rep-head{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;background:var(--navy);color:#fff;border-radius:10px;padding:22px 26px;margin-bottom:18px}
+  .rep-head .gauge .big{font-size:40px}
+  .rep-head .verdict{font-size:15px;line-height:1.5}
+  .rep-head .verdict b{color:var(--brand)}
+  .rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .rep-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+  .rep-card h4{margin:0 0 10px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .rep-card ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)}
+  .rep-card ul li{margin-bottom:6px}
+  .rep-card ul li b{color:var(--ink)}
+  .rep-card ul li.crit::marker{color:#C43D3D}
+  .rep-table{margin-top:16px}
+  .rep-table td .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:-1px;background:var(--line)}
+  .rep-table td .dot.ok{background:var(--ok)} .rep-table td .dot.part{background:var(--lim)} .rep-table td .dot.fail{background:#C43D3D} .rep-table td .dot.na{background:var(--opt)}
+  @media (max-width:960px){.wiz{grid-template-columns:1fr}.rail{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:4px}.rail button{width:auto;grid-template-columns:10px auto;font-size:12.5px}.rail button span:last-child{display:none}.rail button.report{border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:0}.rep-grid{grid-template-columns:1fr}.rep-head{grid-template-columns:1fr}}
+  @media print{.rail,.stepnav,.progress{display:none}.wiz{grid-template-columns:1fr}}
+
+  @media (max-width:960px){
+    .hero .wrap{grid-template-columns:1fr}
+    .anatomy{grid-template-columns:1fr}
+    .browser{position:static}
+    .canvas{max-height:none}
+    .check{grid-template-columns:1fr}
+    .score{position:static}
+    .intent-head{grid-template-columns:1fr}
+    details.block .body{padding-left:20px}
+    footer .wrap{grid-template-columns:1fr}
+    footer .links{text-align:left}
+    nav.jump{display:none}
+  }
+  @media print{
+    header.top{position:static}
+    nav.jump,.actions,.intents{display:none}
+    body{background:#fff}
+    section{page-break-inside:avoid;padding:28px 0}
+    details.block[open] .body{display:block}
+    .browser{position:static;box-shadow:none}
+    .canvas{max-height:none;overflow:visible}
+    .anatomy{grid-template-columns:1fr}
+    .score{position:static}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="https://andersonmeloseo.com.br/"><span class="mono">AM</span><span><b>Anderson Melo SEO</b><small>Anatomia da página comercial</small></span></a>
+    <nav class="jump" aria-label="Seções">
+      <a href="#principio">Princípio</a>
+      <a href="#anatomia">Anatomia por intenção</a>
+      <a href="#prova">Prova e preço</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#teste">Teste final</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker">Framework de estrutura de páginas comerciais</div>
+      <h1>O que uma página comercial precisa ter, <em>segundo a intenção</em> de quem busca</h1>
+      <p class="lead">A página não é definida pelo que a empresa quer dizer. É definida pelo que a pessoa que digitou a busca precisa encontrar para decidir. Aqui estão os 17 blocos de uma página comercial, cada um com modelo pronto para preencher e exemplo já preenchido, o peso de cada bloco em cada intenção e o que não pode dominar a página.</p>
+    </div>
+    <dl class="hero-card">
+      <dt>Exemplo usado ao longo do documento</dt><dd>Instalação de energia solar residencial (empresa fictícia Solaris)</dd>
+      <dt>Aplicação</dt><dd>Páginas de serviço, preço, comparativo, local, marca e conteúdo de apoio</dd>
+      <dt>Como usar</dt><dd>Escolha a intenção, copie o modelo de cada bloco, preencha com os dados do seu negócio e audite com o checklist</dd>
+      <dt>Elaborado por</dt><dd class="sig">Anderson Melo SEO</dd>
+    </dl>
+  </div>
+</div>
+
+<section id="principio">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">1</span><div><h2>A intenção decide a página</h2>
+    <p class="intro">Antes de escrever, classifique a busca principal em uma das sete intenções. A mesma empresa precisa de sete páginas diferentes para sete buscas diferentes, e cada uma tem blocos obrigatórios, blocos recomendados e um bloco que, se dominar, estraga a página.</p></div></div>
+    <div class="principle">
+      <div><h3>Transacional</h3><p>Já decidiu e quer agir. <q>orçamento energia solar residencial</q></p></div>
+      <div><h3>Comercial</h3><p>Está escolhendo e quer critérios. <q>energia solar para casa</q></p></div>
+      <div><h3>Preço</h3><p>Quer um número ou uma faixa. <q>quanto custa energia solar residencial</q></p></div>
+      <div><h3>Comparativa</h3><p>Está entre duas opções. <q>energia solar on-grid ou off-grid</q></p></div>
+      <div><h3>Local</h3><p>Quer quem atende perto. <q>energia solar em Campinas</q></p></div>
+      <div><h3>Marca</h3><p>Quer confirmar quem é a empresa. <q>Solaris energia é confiável</q></p></div>
+      <div><h3>Informacional</h3><p>Quer aprender. Não é comercial, mas alimenta as outras. <q>como funciona energia solar</q></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="anatomia">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">2</span><div><h2>Anatomia por intenção</h2>
+    <p class="intro">Selecione a intenção. O esqueleto à esquerda mostra a página como ela deve ficar: a ordem dos blocos muda, o peso de cada um muda de cor e o bloco que precisa ser contido aparece hachurado. Clique em qualquer bloco do esqueleto para abrir o modelo pronto para preencher e o exemplo já preenchido.</p></div></div>
+    <div class="intents" role="group" aria-label="Intenção de busca" id="intentButtons"></div>
+    <dl class="intent-head" id="intentHead"></dl>
+    <div class="legend">
+      <span class="ok">Obrigatório</span><span class="rec">Recomendado</span><span class="opt">Opcional</span><span class="lim">Limitar: não pode dominar</span>
+    </div>
+    <div class="anatomy">
+      <div class="browser" aria-label="Esqueleto da página">
+        <div class="bar"><i></i><i></i><i></i><div class="url" id="skUrl"></div></div>
+        <div class="canvas" id="skeleton"></div>
+      </div>
+      <div class="blocks" id="blocks"></div>
+    </div>
+    <div class="warn" id="warn"></div>
+  </div>
+</section>
+
+<section id="prova">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">3</span><div><h2>Prova e preço: os dois blocos que mais faltam</h2>
+    <p class="intro">Quase toda página comercial tem hero, texto e formulário. O que separa uma página que converte de uma página que só descreve são estes dois blocos, e os dois costumam ser cortados com a mesma desculpa: "não dá para mostrar".</p></div></div>
+
+    <h3 class="sub">Como fazer antes e depois em cada tipo de serviço</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tipo de serviço</th><th>Formato da prova</th><th>Exemplo aplicado</th></tr></thead>
+      <tbody>
+        <tr><td>Serviço físico visível</td><td>Foto pareada, mesma casa, mesmo ângulo, com data e cidade</td><td>Telhado antes e depois da instalação de 12 painéis, Sorocaba, maio de 2026</td></tr>
+        <tr><td>Serviço com resultado numérico</td><td>Número pareado: métrica antes, métrica depois, prazo</td><td>Conta de luz de R$ 620 para R$ 74 em três meses, sistema de 4,4 kWp</td></tr>
+        <tr><td>Serviço intangível</td><td>Marco pareado: situação antes, situação depois, tempo</td><td>Projeto aprovado na distribuidora em 18 dias, contra média de 45 no mercado</td></tr>
+        <tr><td>Serviço recorrente</td><td>Volume e continuidade: quantos clientes, há quanto tempo, retenção</td><td>380 residências instaladas desde 2019, 94% com monitoramento ativo</td></tr>
+        <tr><td>Qualquer serviço</td><td>Depoimento com nome, cidade, contexto e resultado. Sem nome não é prova</td><td>"Marcos R., Indaiatuba: economia de 88% na primeira fatura completa"</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub">Como mostrar preço quando o preço varia</h3>
+    <p class="intro">"Não existe preço único" é verdade em quase todo serviço e mesmo assim não é uma resposta. Quem busca preço vai encontrar um número em algum lugar. A escolha é se encontra na sua página ou na do concorrente.</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Formato</th><th>O que publicar</th><th>Exemplo aplicado</th></tr></thead>
+      <tbody>
+        <tr><td>Faixa por variável</td><td>Tabela com as variáveis que alteram o preço e o efeito de cada uma, em faixa ou percentual</td><td>Potência do sistema, tipo de telhado, distância do quadro, marca do inversor: cada linha com o impacto estimado</td></tr>
+        <tr><td>Exemplo datado</td><td>Um caso fechado, com perfil, cidade, mês e faixa, marcado como referência e não como oferta</td><td>Casa com consumo de 450 kWh/mês, telhado cerâmico, Campinas, setembro de 2026: entre R$ 18 mil e R$ 22 mil</td></tr>
+        <tr><td>Faixa regional</td><td>Nas páginas locais, a faixa praticada naquela região, revisada por trimestre</td><td>Sistema de 4 kWp na região metropolitana: faixa de referência com data</td></tr>
+        <tr><td>Simulador</td><td>Ferramenta que gera faixa a partir de 2 ou 3 dados do usuário, com mínimo e máximo exibidos na página</td><td>Consumo médio da conta e cidade geram a faixa de investimento e o payback estimado</td></tr>
+        <tr><td>O que evitar</td><td>Valor fixo sem data, sem região e sem variáveis. Envelhece, gera reclamação e contradiz a proposta real</td><td>"A partir de R$ 9.990" sem contexto</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">4</span><div><h2>Checklist passo a passo</h2>
+    <p class="intro">Escolha a tipologia da página que vai conferir, abra a página em outra aba e responda bloco a bloco. Cada pergunta diz o que procurar e como seria a resposta certa. No fim, o relatório mostra a pontuação, o que é crítico e a ordem de correção.</p></div></div>
+    <div class="intents" role="group" aria-label="Tipologia da página auditada" id="checkIntentButtons"></div>
+    <div style="display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap">
+      <div class="field" style="flex:1 1 420px;max-width:640px"><label for="pageUrl">URL da página que está conferindo</label><input id="pageUrl" type="text" placeholder="https://exemplo.com.br/energia-solar-residencial/"></div>
+      <div class="actions" style="margin-top:0"><button class="btn ghost" type="button" id="exportBtn">Exportar auditoria (JSON)</button><button class="btn ghost" type="button" id="importBtn">Retomar auditoria</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+    </div>
+    <p class="small" style="font-size:13px;color:var(--muted);margin-top:8px">As respostas ficam só nesta aba. Exporte o JSON para retomar depois ou para arquivar a auditoria.</p>
+    <div class="wiz">
+      <aside class="rail" id="rail" aria-label="Blocos"></aside>
+      <div>
+        <div class="progress"><i id="wizProg"></i></div>
+        <div id="stepBox"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teste">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">5</span><div><h2>Teste final antes de publicar</h2>
+    <p class="intro">Leia apenas quatro elementos da página. Se com eles alguém consegue responder "o que é, para quem, quanto custa e por que aqui", a página está pronta. Se for preciso ler o corpo inteiro, os blocos estão na ordem errada.</p></div></div>
+    <div class="quick">
+      <div><span>H1</span><p>Nomeia a entidade e o contexto. "Energia solar residencial em Campinas", não "Soluções em energia".</p></div>
+      <div><span>Sentença definicional</span><p>Primeira frase após o hero, em negrito: "Energia solar residencial é o sistema que gera a energia da casa e reduz a conta em até 95%".</p></div>
+      <div><span>Tabela principal</span><p>Critérios, variáveis de preço ou comparação lado a lado. É o que buscadores e assistentes de IA extraem.</p></div>
+      <div><span>Primeira pergunta da FAQ</span><p>Responde a dúvida que mais trava a decisão, em 40 a 80 palavras, com dado concreto.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="sig">Anderson Melo SEO</div>
+      <p>Framework de estrutura de páginas comerciais por intenção de busca. Os exemplos de energia solar são ilustrativos e servem para qualquer serviço.</p>
+    </div>
+    <div class="links">
+      <a href="https://andersonmeloseo.com.br/">andersonmeloseo.com.br</a>
+      <a href="https://andersonmeloseo.com.br/servicos-de-seo/consultoria-seo/">Consultoria SEO</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const S = { ok:'Obrigatório', rec:'Recomendado', opt:'Opcional', lim:'Limitar' };
+
+  // wireframe drawings per block
+  const WF = {
+    1: `<div class="wnav"><b></b><span><i></i><i></i><i></i><i></i></span></div><div class="row"><div class="col"><div class="wl t" style="width:92%"></div><div class="wl t" style="width:70%"></div><div class="wl" style="width:85%"></div><div class="wl" style="width:60%"></div><div style="margin-top:6px"><span class="wbtn" style="width:64px"></span> <span class="wbtn g" style="width:52px"></span></div></div><div class="wbox" style="width:96px;height:64px"></div></div>`,
+    2: `<div class="wl b" style="width:96%"></div><div class="wl b" style="width:58%"></div>`,
+    3: `<div class="row" style="gap:5px"><span class="wchip" style="width:22px"></span><span style="font-size:9px;opacity:.6">›</span><span class="wchip" style="width:34px"></span><span style="font-size:9px;opacity:.6">›</span><span class="wchip" style="width:44px;opacity:.6"></span></div>`,
+    4: `<div class="row"><div class="col"><div class="row"><span class="wcirc" style="width:9px;height:9px"></span><div class="wl col"></div></div><div class="row"><span class="wcirc" style="width:9px;height:9px"></span><div class="wl col"></div></div><div class="row"><span class="wcirc" style="width:9px;height:9px"></span><div class="wl col"></div></div></div><div class="col"><div class="row"><span class="wcirc" style="width:9px;height:9px;opacity:.3"></span><div class="wl col"></div></div><div class="row"><span class="wcirc" style="width:9px;height:9px;opacity:.3"></span><div class="wl col"></div></div></div></div>`,
+    5: `<div class="row" style="justify-content:space-between"><div class="col" style="text-align:center"><div class="wcirc" style="margin:0 auto 4px"></div><div class="wl" style="width:80%;margin:0 auto"></div></div><div class="col" style="text-align:center"><div class="wcirc" style="margin:0 auto 4px"></div><div class="wl" style="width:80%;margin:0 auto"></div></div><div class="col" style="text-align:center"><div class="wcirc" style="margin:0 auto 4px"></div><div class="wl" style="width:80%;margin:0 auto"></div></div><div class="col" style="text-align:center"><div class="wcirc" style="margin:0 auto 4px"></div><div class="wl" style="width:80%;margin:0 auto"></div></div></div>`,
+    6: `<div class="wgrid" style="grid-template-columns:1.4fr 1fr 1fr"><i class="h"></i><i class="h"></i><i class="h"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>`,
+    7: `<div class="row"><div style="font:600 22px/1 'Fraunces',serif;opacity:.8">R$ __</div><div class="col"><div class="wl" style="width:90%"></div><div class="wl" style="width:60%"></div></div></div><div class="wgrid" style="grid-template-columns:1fr 1fr;margin-top:6px"><i class="h"></i><i class="h"></i><i></i><i></i><i></i><i></i></div>`,
+    8: `<div class="row"><div class="wbox col" style="height:44px"></div><div class="wbox col" style="height:44px"></div></div><div class="row" style="margin-top:6px"><div style="font:600 16px/1 'Fraunces',serif;opacity:.8">380</div><div class="wl col"></div><div style="font:600 16px/1 'Fraunces',serif;opacity:.8">94%</div><div class="wl col"></div></div>`,
+    9: `<div class="row"><div class="col"><div class="wl t" style="width:60%"></div><div class="wl"></div><div class="wl" style="width:80%"></div></div><div style="width:1px;align-self:stretch;background:currentColor;opacity:.4"></div><div class="col"><div class="wl t" style="width:60%"></div><div class="wl"></div><div class="wl" style="width:70%"></div></div></div>`,
+    10: `<div class="wacc"><div class="wl"></div></div><div class="wacc"><div class="wl"></div></div><div class="wacc"><div class="wl" style="width:55%"></div></div>`,
+    11: `<div class="row"><div class="wcirc" style="width:24px;height:24px"></div><div class="col"><div class="wl b" style="width:55%"></div><div class="wl" style="width:80%"></div></div></div>`,
+    12: `<div class="wacc"><div class="wl"></div></div><div class="wacc"><div class="wl" style="width:62%"></div></div><div class="wacc"><div class="wl" style="width:75%"></div></div><div class="wacc"><div class="wl" style="width:58%"></div></div>`,
+    13: `<div class="row" style="gap:4px;flex-wrap:wrap"><div class="wl" style="width:30%"></div><div class="wl b" style="width:22%;height:6px;border-bottom:1px solid currentColor"></div><div class="wl" style="width:38%"></div><div class="wl" style="width:20%"></div><div class="wl b" style="width:28%;height:6px"></div><div class="wl" style="width:40%"></div></div>`,
+    14: `<div><span class="wchip"></span><span class="wchip" style="width:48px"></span><span class="wchip" style="width:30px"></span><span class="wchip" style="width:54px"></span><span class="wchip" style="width:40px"></span><span class="wchip" style="width:34px"></span></div>`,
+    15: `<div class="wl t" style="width:70%"></div><div class="row"><div class="wfield col"></div><div class="wfield col"></div></div><div class="row"><div class="wfield col"></div><div class="wfield col"></div></div><span class="wbtn" style="width:100%;height:16px;margin-top:4px"></span>`,
+    16: `<div class="row" style="align-items:flex-start"><div class="col"><div class="wl b" style="width:50%"></div><div class="wl"></div><div class="wl" style="width:70%"></div></div><div class="col"><div class="wl" style="width:60%"></div><div class="wl" style="width:60%"></div><div class="wl" style="width:60%"></div></div><div class="col"><div class="wl" style="width:50%"></div><div class="wl" style="width:50%"></div></div></div>`,
+    17: `<div class="wcode">{ "@type": "Service", "provider": {…}, "hasOfferCatalog": […] }</div>`
+  };
+
+  const BLOCKS = [
+    {id:1, name:'Hero', fn:'H1, promessa, prova e CTA',
+     what:'H1 com a entidade da página, subtítulo com promessa concreta, três ou quatro provas curtas, CTA primário e um secundário, selo de confiança.',
+     tpl:`H1: <i>[serviço]</i> <i>[qualificador]</i> para <i>[público ou cidade]</i>
+Sub: <i>[resultado com número]</i> com <i>[mecanismo que entrega o resultado]</i>
+Provas: <i>[volume atendido]</i> · <i>[garantia]</i> · <i>[o que vem incluso]</i>
+CTA 1: <i>[verbo + o que a pessoa recebe]</i>   CTA 2: Falar no WhatsApp
+Selo: <i>[registro, certificação ou avaliação externa]</i>`,
+     pv:`<div class="eyebrow">Solaris Energia · Campinas e região</div><h4>Energia solar residencial com projeto, instalação e homologação</h4><p>Reduza a conta de luz em até 95% com um sistema dimensionado para o consumo da sua casa, homologado na distribuidora em até 30 dias.</p><div class="chips"><span>380 casas instaladas</span><span>25 anos de garantia nos painéis</span><span>Homologação inclusa</span><span>4,9 no Google (212 avaliações)</span></div><div class="btns"><span class="b1">Receber orçamento gratuito</span><span class="b2">Falar no WhatsApp</span></div>`},
+    {id:2, name:'Sentença definicional', fn:'Uma frase que define a página',
+     what:'Logo após o hero, em negrito, uma frase que diz o que é, para quem e o resultado. É o trecho que aparece em snippet e que assistentes de IA citam.',
+     tpl:`<i>[Entidade]</i> é <i>[categoria]</i> que <i>[função principal]</i> para <i>[público]</i>, <i>[resultado mensurável ou prazo]</i>.
+Regra: 20 a 35 palavras, sem adjetivo, sem marca.`,
+     pv:`<p style="color:var(--ink);font-weight:700;font-size:15.5px"><b>Energia solar residencial</b> é o sistema fotovoltaico instalado no telhado da casa que gera a própria energia e compensa o consumo na conta da distribuidora, reduzindo a fatura em até 95%.</p>`},
+    {id:3, name:'Breadcrumb', fn:'Posição da página no site',
+     what:'Trilha visível e marcada em schema. Diz ao buscador de qual cluster a página faz parte.',
+     tpl:`Início › <i>[hub de serviço]</i> › <i>[página atual]</i>
+Local: Início › <i>[hub]</i> › <i>[serviço]</i> › <i>[cidade]</i>`,
+     pv:`<p style="margin:0"><span class="link">Início</span> › <span class="link">Energia solar</span> › Residencial</p>`},
+    {id:4, name:'Para quem é e para quem não é', fn:'Qualificação do visitante',
+     what:'Dois ou três perfis que se beneficiam e um ou dois que não. Reduz lead desqualificado e aumenta a confiança de quem se encaixa.',
+     tpl:`É para você se:
+- <i>[condição mensurável 1]</i>
+- <i>[condição mensurável 2]</i>
+- <i>[situação típica do cliente ideal]</i>
+Não é para você se:
+- <i>[condição que inviabiliza]</i>
+- <i>[caso em que outro serviço resolve melhor + link]</i>`,
+     pv:`<div class="cols"><div><p style="font-weight:700;color:var(--ink)">É para você se</p><ul class="yes"><li>Sua conta de luz passa de R$ 300 por mês</li><li>O telhado recebe sol direto por pelo menos 4 horas</li><li>Você é dono do imóvel ou tem autorização por escrito</li></ul></div><div><p style="font-weight:700;color:var(--ink)">Não é para você se</p><ul class="no"><li>O consumo é menor que 150 kWh/mês: o retorno passa de 8 anos</li><li>Você precisa de energia sem rede elétrica: veja <span class="link">sistema off-grid</span></li></ul></div></div>`},
+    {id:5, name:'Como funciona', fn:'Passos do serviço',
+     what:'Três a cinco passos numerados do primeiro contato à entrega. Responde "o que eu recebo e em que ordem".',
+     tpl:`1. <i>[Diagnóstico]</i>: <i>[o que a empresa analisa]</i> (<i>[prazo]</i>)
+2. <i>[Proposta]</i>: <i>[o que o cliente recebe por escrito]</i>
+3. <i>[Execução]</i>: <i>[quem faz, quanto tempo leva]</i>
+4. <i>[Entrega ou aprovação]</i>: <i>[marco verificável]</i>
+5. <i>[Acompanhamento]</i>: <i>[o que continua depois]</i>`,
+     pv:`<ol><li><b>Análise da conta e do telhado</b>: você envia a fatura e fotos do telhado; em 24 horas dizemos se compensa.</li><li><b>Projeto e proposta</b>: dimensionamento, simulação de economia mês a mês e valor fechado por escrito.</li><li><b>Instalação</b>: equipe própria, um a dois dias, sem interromper o fornecimento.</li><li><b>Homologação</b>: protocolo na distribuidora e troca do medidor em até 30 dias.</li><li><b>Monitoramento</b>: aplicativo com geração em tempo real e alerta de falha.</li></ol>`},
+    {id:6, name:'Critérios de escolha', fn:'Tabela do que verificar',
+     what:'Tabela com os critérios que o cliente deveria conferir em qualquer fornecedor. Ensina a comparar e posiciona a empresa como quem passa no próprio teste.',
+     tpl:`| Critério | O que verificar | Como fazemos |
+| <i>[critério 1]</i> | <i>[pergunta que o cliente deve fazer]</i> | <i>[resposta objetiva]</i> |
+Regra: 5 a 8 linhas, cada uma com a pergunta que o cliente faria a um concorrente.`,
+     pv:`<table><thead><tr><th>Critério</th><th>O que verificar</th><th>Como fazemos</th></tr></thead><tbody><tr><td>Garantia dos painéis</td><td>Anos de garantia de produto e de geração</td><td>12 anos de produto, 25 de geração</td></tr><tr><td>Inversor</td><td>Marca, eficiência e assistência no Brasil</td><td>Eficiência acima de 97%, assistência nacional</td></tr><tr><td>Responsável técnico</td><td>Engenheiro com CREA assinando o projeto</td><td>Eng. Paula Lima, CREA-SP</td></tr><tr><td>Homologação</td><td>Inclusa ou cobrada à parte</td><td>Inclusa no contrato</td></tr><tr><td>Prazo de instalação</td><td>Dias no telhado e data de conclusão por escrito</td><td>1 a 2 dias, data em contrato</td></tr><tr><td>Monitoramento</td><td>Aplicativo e alerta de falha</td><td>Incluso, sem mensalidade</td></tr></tbody></table>`},
+    {id:7, name:'Preço ou lógica de preço', fn:'Faixa, exemplo e variáveis',
+     what:'Faixa de valores, exemplo datado ou tabela de variáveis que alteram o preço, com link para simulador quando existir. Sem isso a página não concorre em buscas de custo.',
+     tpl:`Faixa de referência (<i>[mês/ano]</i>): <i>[perfil típico]</i> em <i>[cidade ou região]</i>: de R$ <i>[mín]</i> a R$ <i>[máx]</i>.
+O que altera o valor:
+| Variável | Efeito no preço |
+| <i>[variável 1]</i> | <i>[+/- % ou faixa]</i> |
+Aviso: valores de referência; a proposta é feita por <i>[o que define o valor final]</i>. Link: <i>[simulador]</i>`,
+     pv:`<div class="small">Faixa de referência · setembro de 2026 · Campinas e região</div><div class="big">R$ 18 mil a R$ 22 mil</div><p>Casa com consumo de 450 kWh/mês, telhado cerâmico, sistema de 4 kWp.</p><table><thead><tr><th>Variável</th><th>Efeito no preço</th></tr></thead><tbody><tr><td>Potência do sistema</td><td>Cada 1 kWp adicional: R$ 3,5 mil a R$ 4,5 mil</td></tr><tr><td>Tipo de telhado</td><td>Metálico até 8% mais barato; laje com estrutura até 12% mais caro</td></tr><tr><td>Distância até o quadro</td><td>Acima de 30 m: cabeamento adicional</td></tr><tr><td>Marca do inversor</td><td>Linha premium: 10% a 15% a mais</td></tr></tbody></table><p class="small" style="margin-top:8px">Valores de referência. A proposta é feita a partir da fatura e das fotos do telhado. <span class="link">Simular com a minha conta</span></p>`},
+    {id:8, name:'Prova', fn:'Antes e depois, números, depoimentos',
+     what:'Resultados reais em formato pareado (antes e depois), volume atendido, depoimentos com nome e cidade, certificações.',
+     tpl:`Antes: <i>[métrica]</i> → Depois: <i>[métrica]</i> em <i>[prazo]</i> (<i>[cidade, mês/ano]</i>)
+<i>[N]</i> clientes desde <i>[ano]</i> · <i>[% ou métrica de continuidade]</i>
+Foto antes e depois: mesma casa, mesmo ângulo, legenda com cidade e data
+Depoimento: "<i>[resultado em números]</i>" – <i>[Nome, Cidade]</i>`,
+     pv:`<div class="stats"><div><b>R$ 620 → R$ 74</b><span>Conta de luz em 3 meses, sistema de 4,4 kWp, Sorocaba</span></div><div><b>380</b><span>Residências instaladas desde 2019</span></div><div><b>18 dias</b><span>Média de homologação, contra 45 do mercado</span></div></div><blockquote>"Primeira fatura completa veio com 88% de economia. A equipe deixou o telhado limpo e o app já estava funcionando no mesmo dia."<cite>Marcos R., Indaiatuba, julho de 2026</cite></blockquote>`},
+    {id:9, name:'Diferencial contra a alternativa', fn:'Por que aqui e não outra opção',
+     what:'Compara com as alternativas reais que o cliente considera: outro fornecedor, fazer por conta própria, não fazer nada. Fecha a comparação que já está acontecendo na cabeça dele.',
+     tpl:`| | <i>[Alternativa 1: fazer sozinho]</i> | <i>[Alternativa 2: concorrente típico]</i> | Aqui |
+| <i>[critério que mais pesa]</i> | <i>[o que ganha e o que perde]</i> | ... | ... |
+Fechamento: uma frase dizendo para quem cada alternativa faz sentido.`,
+     pv:`<table><thead><tr><th></th><th>Kit avulso + eletricista</th><th>Instaladora média</th><th>Solaris</th></tr></thead><tbody><tr><td>Custo inicial</td><td>Até 15% menor</td><td>Igual</td><td>Igual</td></tr><tr><td>Projeto e homologação</td><td>Por sua conta</td><td>Cobrado à parte</td><td>Incluso</td></tr><tr><td>Garantia de instalação</td><td>Nenhuma</td><td>1 ano</td><td>5 anos</td></tr><tr><td>Monitoramento</td><td>Não</td><td>Opcional pago</td><td>Incluso</td></tr></tbody></table><p style="margin-top:8px">Se você tem eletricista de confiança e tempo para a burocracia, o kit avulso compensa. Se quer o sistema gerando em 30 dias sem lidar com a distribuidora, não.</p>`},
+    {id:10, name:'Objeções e garantia', fn:'Risco, prazo e o que acontece se falhar',
+     what:'As três ou quatro perguntas que travam a assinatura, respondidas com garantia, prazo e responsabilidade.',
+     tpl:`"<i>[objeção 1 na voz do cliente]</i>" → <i>[o que acontece de fato]</i> + <i>[garantia por escrito]</i>
+"<i>[objeção 2]</i>" → ...
+Garantia central: se <i>[condição]</i>, então <i>[o que a empresa faz, em quanto tempo, sem custo]</i>.`,
+     pv:`<div class="qa"><b>"E se a distribuidora recusar o projeto?"</b><p>Refazemos e reapresentamos sem custo. Em 380 projetos, nenhum foi recusado em definitivo.</p></div><div class="qa"><b>"E se a economia não vier?"</b><p>Garantia de geração por escrito: se o sistema gerar menos de 90% do projetado em 12 meses, corrigimos ou ampliamos por nossa conta.</p></div><div class="qa"><b>"E se o telhado precisar de reforço?"</b><p>A vistoria prévia é gratuita e o laudo diz antes da proposta. Nada é descoberto no dia da instalação.</p></div>`},
+    {id:11, name:'Autoria e responsabilidade', fn:'Quem responde pela página',
+     what:'Nome do responsável técnico ou especialista, registro profissional, data de revisão. Em setores regulados ou de saúde e dinheiro, é obrigatório.',
+     tpl:`Conteúdo revisado por <i>[Nome]</i>, <i>[registro profissional]</i>, <i>[função na empresa]</i>. Atualizado em <i>[mês/ano]</i>.
+Link para a página do autor com foto, formação e perfis oficiais.`,
+     pv:`<div class="author"><div class="av"></div><div><b>Revisado por Eng. Paula Lima</b><span>Engenheira eletricista, CREA-SP 5060000000, responsável técnica pelos projetos da Solaris desde 2019. Atualizado em setembro de 2026.</span></div></div>`},
+    {id:12, name:'FAQ', fn:'Mínimo de 10 perguntas',
+     what:'Dez ou mais perguntas reais do cliente, respostas de 40 a 80 palavras com dado concreto. O schema FAQPage precisa ter exatamente as mesmas perguntas visíveis.',
+     tpl:`As 10 perguntas que toda página comercial precisa cobrir:
+1. Prazo: quanto tempo leva <i>[etapa crítica]</i>?
+2. Preço: quanto custa <i>[serviço]</i> para <i>[perfil]</i>?
+3. Pagamento: dá para parcelar ou financiar?
+4. Garantia: o que acontece se <i>[falha provável]</i>?
+5. Cobertura: funciona em <i>[condição limite]</i>?
+6. Manutenção: o que precisa fazer depois?
+7. Requisito: preciso de <i>[pré-requisito]</i>?
+8. Comparação: <i>[opção A]</i> ou <i>[opção B]</i>?
+9. Cancelamento: e se eu desistir?
+10. Prova: quantos <i>[clientes]</i> já atenderam?`,
+     pv:`<div class="qa"><b>Quanto tempo leva a homologação?</b><p>Entre 15 e 30 dias após o protocolo. A distribuidora tem prazo regulatório de 34 dias para a vistoria; nossa média em 2026 é de 18 dias.</p></div><div class="qa"><b>Energia solar funciona em dia nublado?</b><p>Sim, com geração reduzida, entre 10% e 25% da capacidade. O dimensionamento já considera a média anual de irradiação da região, então dias nublados entram na conta.</p></div><div class="qa"><b>O que acontece com a energia que sobra?</b><p>Vira crédito na distribuidora, válido por 60 meses, e abate o consumo noturno ou de meses com menos sol.</p></div><p class="small" style="margin-top:8px">+ 7 perguntas: financiamento, manutenção, troca do padrão de entrada, vida útil do inversor, mudança de casa, seguro, tempo de retorno.</p>`},
+    {id:13, name:'Links contextuais', fn:'Ligação com as páginas irmãs',
+     what:'Links dentro do texto para as páginas relacionadas, com a diferença explícita entre elas. Evita que duas páginas concorram pela mesma busca.',
+     tpl:`Aqui tratamos de <i>[escopo desta página]</i>. Para <i>[escopo da página irmã]</i>, veja <i>[âncora descritiva]</i>.
+Se você <i>[situação]</i>, o caminho é <i>[âncora para outra página]</i>.
+Regra: 3 a 6 links no corpo, âncoras diferentes do H1 da página de destino.`,
+     pv:`<p>Aqui tratamos de casas e sobrados. Para lojas, galpões e indústria, veja <span class="link">energia solar para empresas</span>, onde a lógica de tarifa é outra. Se o imóvel não tem rede elétrica, o caminho é o <span class="link">sistema off-grid com baterias</span>. Quem prefere não investir à vista pode ver as <span class="link">linhas de financiamento solar</span> com carência de até 90 dias.</p>`},
+    {id:14, name:'Cobertura geográfica', fn:'Cidades e regiões atendidas',
+     what:'Bloco com as cidades ou estados atendidos, cada um linkando para a página local, com âncoras variadas.',
+     tpl:`Atendemos <i>[região]</i>: <i>[serviço em Cidade A]</i> · <i>[instalação em Cidade B]</i> · <i>[o que muda em Cidade C]</i> · <i>[Cidade D]</i>
+Regra: cada cidade linka para a própria página; nunca a mesma âncora duas vezes.`,
+     pv:`<p style="margin-bottom:6px">Atendemos a região metropolitana de Campinas:</p><div class="chips"><span class="link">Energia solar em Campinas</span><span class="link">Instalação em Sorocaba</span><span class="link">O que muda em Ribeirão Preto</span><span class="link">Jundiaí</span><span class="link">Indaiatuba e Salto</span><span class="link">Piracicaba</span></div>`},
+    {id:15, name:'CTA final e formulário', fn:'Captura qualificada',
+     what:'Chamada final e formulário curto, de três a seis campos, com pelo menos um campo que segmenta o lead. Um botão de WhatsApp real ao lado.',
+     tpl:`Título: <i>[resultado]</i> em <i>[prazo]</i>. <i>[O que a pessoa recebe ao enviar]</i>.
+Campos: Nome · WhatsApp · <i>[campo que segmenta: cidade, faixa de consumo, tipo]</i> · <i>[campo que qualifica]</i>
+Botão: <i>[verbo + o que recebe]</i>   Abaixo: "Resposta em <i>[prazo]</i>. Sem compromisso."`,
+     pv:`<h4 style="font-size:19px">Receba a simulação de economia em até 24 horas</h4><p>Envie a conta de luz e receba o dimensionamento e a faixa de investimento, sem compromisso.</p><div class="form"><div><label>Nome</label>Seu nome</div><div><label>WhatsApp</label>(19) 9</div><div><label>Cidade</label>Campinas</div><div><label>Valor médio da conta</label>R$ 300 a 500</div><div class="full"><label>Tipo de telhado</label>Cerâmico · Metálico · Laje · Fibrocimento</div></div><div class="btns"><span class="b1">Receber simulação gratuita</span><span class="b2">Prefiro pelo WhatsApp</span></div><p class="small" style="margin-top:8px">Resposta em até 24 horas úteis. Seus dados não são compartilhados.</p>`},
+    {id:16, name:'Institucional', fn:'Quem é a empresa',
+     what:'CNPJ, razão social, endereço, telefone real, horário de atendimento, avisos legais. Sem isso a empresa não é uma entidade verificável.',
+     tpl:`<i>[Razão social]</i> · CNPJ <i>[00.000.000/0001-00]</i>
+<i>[Endereço completo com CEP]</i> · <i>[telefone com DDD]</i> · <i>[e-mail]</i>
+Atendimento: <i>[dias e horário]</i> · <i>[registro no conselho ou órgão]</i>
+Links: Política de privacidade · Termos · <i>[perfis oficiais]</i>`,
+     pv:`<div class="foot"><b>Solaris Energia Ltda.</b> · CNPJ 12.345.678/0001-90<br>Rua das Palmeiras, 120, Cambuí, Campinas, SP, 13025-000 · (19) 3200-0000 · contato@solaris.com.br<br>Atendimento de segunda a sexta, das 8h às 18h · Empresa registrada no CREA-SP<br><span class="link">Política de privacidade</span> · <span class="link">Termos de uso</span> · <span class="link">Instagram</span> · <span class="link">Google Perfil da Empresa</span></div>`},
+    {id:17, name:'Dados estruturados', fn:'Schema que traduz a página',
+     what:'Marcação JSON-LD coerente com o tipo da página e com o que está visível. Organization com identificador único e perfis oficiais em toda página.',
+     tpl:`{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "<i>[nome do serviço]</i>",
+  "serviceType": "<i>[categoria]</i>",
+  "areaServed": { "@type": "City", "name": "<i>[cidade]</i>" },
+  "provider": { "@id": "<i>[url]</i>#organization" },
+  "offers": { "@type": "AggregateOffer", "lowPrice": "<i>[mín]</i>", "highPrice": "<i>[máx]</i>", "priceCurrency": "BRL", "validThrough": "<i>[AAAA-MM-DD]</i>" }
+}
++ FAQPage com as mesmas perguntas visíveis + BreadcrumbList + Organization com sameAs`,
+     pv:`<pre>{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Energia solar residencial",
+  "serviceType": "Instalação de sistema fotovoltaico",
+  "areaServed": { "@type": "City", "name": "Campinas" },
+  "provider": { "@id": "https://solaris.com.br/#organization" },
+  "offers": { "@type": "AggregateOffer", "lowPrice": "18000",
+              "highPrice": "22000", "priceCurrency": "BRL",
+              "validThrough": "2026-12-31" }
+}</pre>`}
+  ];
+
+  const INTENTS = [
+    {id:'transacional', h1:'Orçamento de energia solar residencial em até 24 horas', def:'<b>Peça o orçamento</b> e receba em 24 horas a análise da sua conta, o dimensionamento do sistema e a simulação de economia, sem custo e sem compromisso.', label:'Transacional', url:'solaris.com.br/<b>orcamento-energia-solar</b>/', query:'orçamento energia solar residencial', want:'Agir agora. Já decidiu, quer o próximo passo.', length:'600 a 900 palavras fora da FAQ. Formulário visível na primeira dobra ou a um clique.', schema:'Service + Offer, FAQPage, BreadcrumbList',
+     limit:'Texto educativo longo. Quem chegou aqui não quer aprender, quer preencher. Cada parágrafo entre o hero e o formulário reduz a conversão.',
+     order:[1,2,3,15,7,5,8,10,4,9,12,11,13,14,16,17],
+     st:{1:'ok',2:'rec',3:'rec',4:'rec',5:'ok',6:'lim',7:'ok',8:'ok',9:'rec',10:'ok',11:'rec',12:'rec',13:'rec',14:'opt',15:'ok',16:'ok',17:'ok'},
+     notes:{6:'Tabela longa de critérios aqui é o texto educativo que atrasa a conversão. Se entrar, entra depois do formulário e curta.',7:'O preço precisa aparecer antes ou ao lado do formulário, mesmo que em faixa.',10:'É o bloco que mais move conversão nesta intenção. Garantia por escrito acima do formulário.',12:'Seis a dez perguntas bastam, todas sobre contratação: prazo, pagamento, garantia, cancelamento.',15:'Sobe para a primeira dobra. A página inteira existe para este bloco.'}},
+    {id:'comercial', h1:'Energia solar residencial: projeto, instalação e homologação', def:'<b>Energia solar residencial</b> é o sistema fotovoltaico instalado no telhado da casa que gera a própria energia e compensa o consumo na conta da distribuidora, reduzindo a fatura em até 95%.', label:'Comercial', url:'solaris.com.br/<b>energia-solar-residencial</b>/', query:'energia solar para casa', want:'Entender as opções e escolher com critério. É a página mais completa do site.', length:'1.200 a 2.000 palavras. A tabela de critérios vale mais que o CTA.', schema:'Service, FAQPage, BreadcrumbList',
+     limit:'Vender sem ensinar. Se a página só repete "somos os melhores" sem dar critério, quem está comparando sai para o concorrente que ensinou a comparar.',
+     order:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+     st:{1:'ok',2:'ok',3:'ok',4:'ok',5:'ok',6:'ok',7:'ok',8:'rec',9:'rec',10:'rec',11:'ok',12:'ok',13:'ok',14:'rec',15:'ok',16:'ok',17:'ok'},
+     notes:{6:'Bloco central desta intenção. Uma tabela de "o que verificar antes de contratar" com cinco a oito linhas.',12:'Dez ou mais perguntas, cobrindo escolha, uso, custo e manutenção.',13:'Obrigatório porque esta página costuma ter irmãs (empresarial, off-grid, por cidade). A diferença entre elas precisa estar escrita.'}},
+    {id:'preco', h1:'Quanto custa energia solar residencial em 2026', def:'<b>Um sistema residencial de 4 kWp</b> custa entre R$ 18 mil e R$ 22 mil na região de Campinas em setembro de 2026, variando com potência, tipo de telhado e marca do inversor.', label:'Preço', url:'solaris.com.br/<b>quanto-custa-energia-solar</b>/', query:'quanto custa energia solar residencial', want:'Um número ou uma faixa, no topo, antes de qualquer explicação.', length:'800 a 1.400 palavras. A faixa aparece na primeira dobra.', schema:'Service + AggregateOffer com lowPrice, highPrice, priceCurrency e validThrough',
+     limit:'"Não existe preço único" como resposta final. É verdade e mesmo assim zera a página: quem busca preço vai achar um número no concorrente.',
+     order:[1,7,2,3,6,5,11,8,12,13,14,15,4,9,10,16,17],
+     st:{1:'ok',2:'rec',3:'rec',4:'opt',5:'rec',6:'rec',7:'ok',8:'rec',9:'opt',10:'opt',11:'ok',12:'ok',13:'rec',14:'rec',15:'ok',16:'ok',17:'ok'},
+     notes:{7:'Vai para o topo, logo após o hero: faixa, exemplo datado, tabela de variáveis e link para o simulador. Tudo com data de referência.',11:'Obrigatório porque preço sem responsável é chute. Quem assina a faixa e quando revisou.',12:'Perguntas de custo: financiamento, payback, manutenção, custo por kWp, o que encarece.'}},
+    {id:'comparativa', h1:'Energia solar on-grid ou off-grid: qual escolher para sua casa', def:'<b>On-grid</b> é o sistema conectado à rede que gera créditos na distribuidora; <b>off-grid</b> armazena em baterias e funciona sem rede. Para casa na cidade, on-grid custa até 40% menos.', label:'Comparativa', url:'solaris.com.br/<b>on-grid-ou-off-grid</b>/', query:'energia solar on-grid ou off-grid', want:'Decidir entre duas opções com um veredito claro por perfil.', length:'900 a 1.500 palavras. A tabela lado a lado aparece na primeira dobra.', schema:'Article com about listando as duas entidades comparadas, FAQPage',
+     limit:'Neutralidade vazia. Página comparativa sem veredito não converte e não é citada. "Depende do seu caso" precisa vir acompanhado de "para o caso X, escolha Y".',
+     order:[1,2,3,6,9,4,7,8,11,12,13,15,5,10,14,16,17],
+     st:{1:'ok',2:'rec',3:'ok',4:'rec',5:'opt',6:'ok',7:'rec',8:'ok',9:'ok',10:'opt',11:'ok',12:'ok',13:'ok',14:'opt',15:'ok',16:'ok',17:'ok'},
+     notes:{6:'Aqui a tabela é a comparação lado a lado, mesmos critérios nas mesmas linhas para as duas opções.',9:'Vira o veredito: "para casa conectada à rede, on-grid; para sítio sem rede, off-grid". Um parágrafo por perfil.',15:'CTA que oferece orçamento para as duas opções, sem obrigar a escolher antes.'}},
+    {id:'local', h1:'Energia solar residencial em Campinas', def:'<b>Energia solar em Campinas</b> é o sistema fotovoltaico projetado para a irradiação da região e homologado na distribuidora local, com 140 instalações concluídas na cidade desde 2019.', label:'Local', url:'solaris.com.br/energia-solar/<b>campinas</b>/', query:'energia solar em Campinas', want:'Alguém que atende perto, com prova de que já atendeu ali.', length:'700 a 1.200 palavras com dado único da cidade.', schema:'LocalBusiness ou Service com areaServed, BreadcrumbList, FAQPage',
+     limit:'Template nacional com o nome da cidade trocado. Sem dado local único (obras na cidade, distribuidora local, irradiação da região, preço regional), a página é conteúdo escalado sem valor e o buscador trata assim.',
+     order:[1,2,3,8,7,5,6,12,14,13,15,11,4,9,10,16,17],
+     st:{1:'ok',2:'rec',3:'ok',4:'opt',5:'rec',6:'rec',7:'ok',8:'ok',9:'opt',10:'opt',11:'rec',12:'ok',13:'ok',14:'rec',15:'ok',16:'ok',17:'ok'},
+     notes:{1:'A cidade entra no H1 e na sentença definicional.',7:'Faixa regional com data. É o dado local mais forte que existe.',8:'Prova local sobe para logo abaixo do hero: obras naquela cidade, com bairro e data. Depoimento de cliente da cidade.',14:'Cidades vizinhas atendidas, cada uma com a própria página.',16:'Endereço físico ou área de atendimento explícita, telefone com DDD local.'}},
+    {id:'marca', h1:'Solaris Energia: quem somos e o que entregamos', def:'<b>A Solaris</b> é a empresa de energia solar de Campinas que, desde 2019, projetou, instalou e homologou 380 sistemas residenciais com equipe própria e engenheira responsável.', label:'Marca', url:'solaris.com.br/<b>sobre</b>/', query:'Solaris energia é confiável', want:'Confirmar quem é a empresa, se existe, se entrega. Vale para a home e a página Sobre.', length:'Home: curta, distribui para os hubs. Sobre: 600 a 1.000 palavras de fatos verificáveis.', schema:'Organization com identificador único, sameAs para perfis oficiais, founder, foundingDate, address; WebSite na home',
+     limit:'Conteúdo informacional na home. A home distribui autoridade para as páginas de serviço; não é lugar de artigo. Na página Sobre, evitar história emocional sem fato: datas, números, nomes e registros valem mais.',
+     order:[1,2,8,11,5,4,9,13,16,12,15,3,6,7,10,14,17],
+     st:{1:'ok',2:'ok',3:'opt',4:'rec',5:'rec',6:'lim',7:'opt',8:'ok',9:'rec',10:'opt',11:'ok',12:'rec',13:'ok',14:'opt',15:'rec',16:'ok',17:'ok'},
+     notes:{2:'Na página Sobre, a definição é da empresa: o que faz, desde quando, onde, com quem.',6:'Tabela de critérios técnicos é conteúdo de serviço. Na home e na Sobre, vira artigo dentro da página de marca.',8:'Volume, tempo de mercado, certificações, avaliações externas com link. É o bloco que responde "é confiável".',11:'Fundadores e responsáveis técnicos com nome, foto e registro.',13:'Da home para cada hub de serviço e para as páginas locais principais.'}},
+    {id:'informacional', h1:'Como funciona a energia solar residencial', def:'<b>Energia solar residencial funciona</b> com painéis que convertem luz em corrente contínua, um inversor que a transforma em corrente alternada e a rede da distribuidora, que registra como crédito o que sobra.', label:'Informacional', url:'solaris.com.br/guia/<b>como-funciona-energia-solar</b>/', query:'como funciona energia solar residencial', want:'Aprender. Não é página comercial, mas é a que traz a pessoa até a página comercial.', length:'1.200 a 2.500 palavras, com definição no primeiro parágrafo e profundidade real.', schema:'Article com author, datePublished, dateModified e about apontando para a entidade tratada',
+     limit:'CTA agressivo. Quem quer aprender e encontra um formulário a cada parágrafo sai. Um CTA contextual no meio e um no fim bastam; o resto é link para a página de serviço.',
+     order:[3,1,2,11,5,6,13,12,7,8,15,4,9,10,14,16,17],
+     st:{1:'rec',2:'ok',3:'ok',4:'opt',5:'rec',6:'rec',7:'opt',8:'opt',9:'opt',10:'opt',11:'ok',12:'ok',13:'ok',14:'opt',15:'lim',16:'ok',17:'ok'},
+     notes:{1:'O H1 costuma ser a própria pergunta ou o conceito. Sem promessa comercial.',2:'Definição direta na primeira frase, 20 a 35 palavras. É o trecho que assistentes de IA extraem.',13:'Toda página informacional linka para a página comercial correspondente, com a transição escrita: "se quiser dimensionar para a sua casa, veja energia solar residencial".',15:'Um CTA contextual no meio e um no fim. Formulário completo só na página de serviço.'}}
+  ];
+
+  const $ = (s)=>document.querySelector(s);
+  const byId = Object.fromEntries(BLOCKS.map(b=>[b.id,b]));
+  let current = INTENTS[1];
+  let checkIntent = INTENTS[1];
+
+  function renderIntentButtons(container, active, onPick){
+    container.innerHTML='';
+    INTENTS.forEach(it=>{
+      const b=document.createElement('button');
+      b.type='button'; b.textContent=it.label; b.setAttribute('aria-pressed', it.id===active.id ? 'true':'false');
+      b.addEventListener('click',()=>onPick(it));
+      container.appendChild(b);
+    });
+  }
+
+  function setHL(id,on){
+    document.querySelectorAll('[data-blk="'+id+'"]').forEach(el=>el.classList.toggle('hl',on));
+  }
+
+  function renderAnatomy(){
+    renderIntentButtons($('#intentButtons'), current, (it)=>{current=it; renderAnatomy();});
+    $('#intentHead').innerHTML = `
+      <div><dt>Busca de exemplo</dt><dd class="q">"${current.query}"</dd><dd style="margin-top:8px">${current.want}</dd></div>
+      <div><dt>Extensão e ordem</dt><dd>${current.length}</dd></div>
+      <div><dt>Dados estruturados</dt><dd>${current.schema}</dd></div>
+      <div class="ih-model"><div><dt>Modelo de H1 nesta intenção</dt><dd class="h1m">${current.h1}</dd></div><div><dt>Sentença definicional modelo</dt><dd class="defm">${current.def}</dd></div></div>`;
+    $('#skUrl').innerHTML = current.url;
+    const sk=$('#skeleton'); sk.innerHTML='';
+    const bl=$('#blocks'); bl.innerHTML='';
+    current.order.forEach(id=>{
+      const b=byId[id]; const st=current.st[id];
+      const el=document.createElement('div');
+      el.className='sk '+st; el.tabIndex=0; el.setAttribute('role','button'); el.dataset.blk=id;
+      el.setAttribute('aria-label', b.name+', '+S[st]);
+      el.innerHTML=`<div class="cap"><div><em>${id}</em>${b.name}</div><span>${S[st]}</span></div>${WF[id]}`;
+      const open=()=>{const d=document.getElementById('blk-'+id); d.open=true; d.scrollIntoView({block:'center'});};
+      el.addEventListener('click',open);
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+      el.addEventListener('mouseenter',()=>setHL(id,true));
+      el.addEventListener('mouseleave',()=>setHL(id,false));
+      sk.appendChild(el);
+
+      const d=document.createElement('details');
+      d.className='block '+st; d.id='blk-'+id; d.dataset.blk=id;
+      const note = current.notes && current.notes[id] ? `<p class="note"><b>Nesta intenção:</b> ${current.notes[id]}</p>` : '';
+      d.innerHTML=`<summary><span class="n">${id}</span><span><span class="name">${b.name}</span><br><span class="fn">${b.fn}</span></span><span class="chip ${st}">${S[st]}</span></summary>
+        <div class="body"><p>${b.what}</p>
+          <div class="tpl-head"><b>Modelo para preencher</b><button type="button" class="copy" data-copy="${id}">Copiar modelo</button></div><pre class="tpl">${b.tpl}</pre>
+          <div class="tpl-head"><b>Exemplo preenchido</b></div><div class="pv">${b.pv}</div>${note}</div>`;
+      d.querySelector('.copy').addEventListener('click',e=>{
+        e.preventDefault(); e.stopPropagation();
+        const txt=d.querySelector('.tpl').innerText;
+        const btn=e.currentTarget;
+        const done=()=>{btn.textContent='Copiado';setTimeout(()=>btn.textContent='Copiar modelo',1500);};
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,done);}else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();done();}
+      });
+      d.addEventListener('mouseenter',()=>setHL(id,true));
+      d.addEventListener('mouseleave',()=>setHL(id,false));
+      bl.appendChild(d);
+    });
+    $('#warn').innerHTML=`<b>O que não pode dominar nesta intenção:</b> ${current.limit}`;
+  }
+
+  const W={ok:3,rec:2,opt:1,lim:0};
+
+  const Q = {
+    1:[
+      {q:'O H1 nomeia o serviço e o público ou a cidade, sem slogan?', h:'<b>Certo:</b> "Energia solar residencial em Campinas". <b>Errado:</b> "Soluções inteligentes em energia".'},
+      {q:'O subtítulo promete um resultado com número ou prazo?', h:'Procure um número logo abaixo do H1. <b>Ex.:</b> "reduza a conta em até 95%", "homologado em 30 dias".'},
+      {q:'Há pelo menos três provas curtas visíveis antes de rolar?', h:'Volume atendido, garantia, avaliação externa, algo incluso. <b>Ex.:</b> "380 casas instaladas", "4,9 no Google".'},
+      {q:'Existe um CTA principal e um secundário (WhatsApp real) na primeira dobra?', h:'Clique nos dois. O WhatsApp abre uma conversa com número real? O botão diz o que a pessoa recebe?'}
+    ],
+    2:[
+      {q:'A primeira frase após o hero define o que é, para quem e o resultado?', h:'Deve caber em 20 a 35 palavras. <b>Ex.:</b> "Energia solar residencial é o sistema fotovoltaico que gera a própria energia e compensa o consumo na conta".'},
+      {q:'Essa frase está destacada (negrito) e sem adjetivo de marketing?', h:'Se tem "melhor", "líder", "incrível", não é definição, é slogan.'}
+    ],
+    3:[
+      {q:'A trilha de navegação aparece na página e mostra o hub correto?', h:'<b>Ex.:</b> Início › Energia solar › Residencial. Se a página é local: › Campinas no fim.'},
+      {q:'A trilha está marcada em BreadcrumbList no código?', h:'Abra o código-fonte e procure "BreadcrumbList". Ou valide no teste de resultados enriquecidos do Google.'}
+    ],
+    4:[
+      {q:'A página diz para quem é com uma condição mensurável?', h:'<b>Ex.:</b> "conta acima de R$ 300", "telhado com 4 horas de sol". Sem número, é genérico.'},
+      {q:'A página diz para quem não é e aponta a página certa?', h:'<b>Ex.:</b> "Sem rede elétrica? Veja sistema off-grid" com link.'}
+    ],
+    5:[
+      {q:'Há de três a cinco passos numerados do contato até a entrega?', h:'Conte os passos. Menos de três é vago; mais de cinco cansa.'},
+      {q:'Cada passo tem prazo ou entregável concreto?', h:'<b>Ex.:</b> "análise em 24 horas", "proposta por escrito", "homologação em até 30 dias".'}
+    ],
+    6:[
+      {q:'Existe uma tabela (não lista) com critérios para comparar fornecedores?', h:'Procure colunas do tipo Critério | O que verificar | Como fazemos.'},
+      {q:'Cada linha traz a pergunta que o cliente faria e a resposta da empresa?', h:'<b>Ex.:</b> Garantia dos painéis | Anos de produto e de geração | 12 e 25 anos.'},
+      {q:'A tabela tem entre cinco e oito linhas?', h:'Menos de cinco não ensina a comparar; mais de oito vira ficha técnica.'}
+    ],
+    7:[
+      {q:'A página mostra faixa de valor, exemplo datado ou tabela de variáveis de preço?', h:'Qualquer um dos três serve. Se a única resposta é "depende, peça orçamento", marque Não.'},
+      {q:'A referência de preço tem data, região e perfil?', h:'<b>Ex.:</b> "4 kWp, telhado cerâmico, Campinas, setembro de 2026: R$ 18 a 22 mil".'},
+      {q:'Há link para simulador ou orçamento logo ao lado do preço?', h:'O preço abre a dúvida; o link fecha. Os dois precisam estar juntos.'}
+    ],
+    8:[
+      {q:'Há pelo menos um antes e depois pareado, com data e cidade?', h:'Foto ou número. <b>Ex.:</b> "conta de R$ 620 para R$ 74 em 3 meses, Sorocaba".'},
+      {q:'Há volume atendido com número e ano?', h:'<b>Ex.:</b> "380 residências desde 2019". "Centenas de clientes" não conta.'},
+      {q:'Os depoimentos têm nome, cidade e resultado?', h:'"Ótimo atendimento – cliente satisfeito" não é prova. "Marcos R., Indaiatuba: 88% de economia" é.'}
+    ],
+    9:[
+      {q:'A página compara com as alternativas reais que o cliente considera?', h:'Fazer sozinho, o concorrente típico, não fazer nada. Tabela ou parágrafo.'},
+      {q:'Diz para quem cada alternativa faz sentido?', h:'<b>Ex.:</b> "Se tem eletricista de confiança e tempo, o kit avulso compensa."'}
+    ],
+    10:[
+      {q:'As três principais objeções aparecem na voz do cliente?', h:'<b>Ex.:</b> "E se a distribuidora recusar?", "E se a economia não vier?"'},
+      {q:'Cada resposta traz garantia, prazo ou responsabilidade por escrito?', h:'<b>Ex.:</b> "se gerar menos de 90% do projetado em 12 meses, corrigimos sem custo".'}
+    ],
+    11:[
+      {q:'Há nome de um responsável com registro profissional?', h:'<b>Ex.:</b> "Revisado por Eng. Paula Lima, CREA-SP". A marca como autora não vale.'},
+      {q:'Há data de atualização visível?', h:'Mês e ano no mínimo. Procure "atualizado em".'},
+      {q:'O responsável tem página própria linkada, com foto e formação?', h:'Clique no nome. Deve abrir uma página de autor, não a home.'}
+    ],
+    12:[
+      {q:'Há dez ou mais perguntas?', h:'Conte. Nove não é dez.'},
+      {q:'As respostas têm de 40 a 80 palavras com dado concreto?', h:'Respostas de uma linha não são citadas. Respostas de 200 palavras viram artigo.'},
+      {q:'O FAQPage no código tem exatamente as mesmas perguntas visíveis?', h:'Abra o código, conte as perguntas no JSON-LD e compare. 10 visíveis = 10 no schema.'}
+    ],
+    13:[
+      {q:'Há de três a seis links no corpo do texto para páginas irmãs?', h:'Links no menu e no rodapé não contam. Só os que estão dentro dos parágrafos.'},
+      {q:'A diferença entre esta página e a irmã está escrita?', h:'<b>Ex.:</b> "Aqui tratamos de casas. Para empresas, veja energia solar empresarial."'},
+      {q:'As âncoras são diferentes do H1 da página de destino?', h:'Se três páginas linkam "energia solar empresarial" com a mesma âncora, marque Não.'}
+    ],
+    14:[
+      {q:'As cidades ou estados atendidos aparecem com link para página própria?', h:'Cada cidade deve abrir a própria página local, não a mesma página com o nome trocado.'},
+      {q:'As âncoras variam entre as cidades?', h:'<b>Ex.:</b> "energia solar em Campinas", "instalação em Sorocaba", "o que muda em Ribeirão".'}
+    ],
+    15:[
+      {q:'O formulário tem de três a seis campos e um deles segmenta o lead?', h:'<b>Ex.:</b> cidade, faixa da conta, tipo de telhado. Só nome e telefone não qualifica.'},
+      {q:'O botão diz o que a pessoa recebe?', h:'"Enviar" não. "Receber simulação gratuita" sim.'},
+      {q:'WhatsApp e telefone são reais e foram testados hoje?', h:'Clique. Números com 0000 ou links "#" são o erro mais comum e o mais caro.'}
+    ],
+    16:[
+      {q:'CNPJ, razão social e endereço completo estão no rodapé?', h:'Os três. Só o nome fantasia não torna a empresa verificável.'},
+      {q:'Telefone com DDD e horário de atendimento aparecem?', h:'<b>Ex.:</b> "(19) 3200-0000, segunda a sexta, 8h às 18h".'},
+      {q:'Há política de privacidade e termos linkados?', h:'Obrigatório por lei e sinal de confiança para o buscador.'}
+    ],
+    17:[
+      {q:'Há JSON-LD do tipo correto para esta página?', h:'Service ou Product para serviço, LocalBusiness para local, Article para conteúdo. Procure "@type" no código.'},
+      {q:'O Organization tem @id e sameAs com os perfis oficiais?', h:'Procure "sameAs" e um "@id" terminando em #organization.'},
+      {q:'A marcação passa sem erro no teste de resultados enriquecidos?', h:'Cole a URL em search.google.com/test/rich-results. Avisos podem ficar; erros não.'}
+    ]
+  };
+  const EXTRA = {
+    transacional:{
+      15:[{q:'O formulário aparece na primeira dobra ou a um clique do topo?', h:'Nesta tipologia a página existe para o formulário. Se é preciso rolar três telas, marque Não.'}],
+      7:[{q:'O preço ou a faixa aparece antes ou ao lado do formulário?', h:'Quem vai preencher quer saber a ordem de grandeza antes.'}],
+      6:[{q:'O texto entre o hero e o formulário tem menos de 300 palavras?', h:'Texto educativo longo aqui atrasa a conversão. Conte.'}]
+    },
+    comercial:{
+      6:[{q:'A tabela de critérios aparece antes do CTA final?', h:'É o bloco central desta tipologia; precisa vir antes da captura.'}],
+      13:[{q:'A página diz o que a diferencia das irmãs (empresarial, off-grid, cidade)?', h:'Se existe outra página parecida no site, a diferença precisa estar escrita aqui.'}]
+    },
+    preco:{
+      7:[{q:'A faixa de preço aparece na primeira dobra, antes de qualquer explicação?', h:'Quem buscou "quanto custa" quer o número primeiro e a explicação depois.'},
+          {q:'O código tem AggregateOffer com lowPrice, highPrice e validThrough?', h:'Procure "AggregateOffer" no JSON-LD.'}],
+      11:[{q:'Quem assina a faixa de preço e a data de revisão estão visíveis?', h:'Preço sem responsável e sem data é chute.'}]
+    },
+    comparativa:{
+      6:[{q:'A tabela traz as duas opções lado a lado com os mesmos critérios?', h:'Mesmas linhas para as duas colunas. Se cada opção tem critérios diferentes, não é comparação.'}],
+      9:[{q:'Há veredito por perfil ("para X, escolha Y")?', h:'"Depende do seu caso" sem completar a frase é marcar Não.'}],
+      15:[{q:'O CTA aceita orçamento para as duas opções sem obrigar a escolher?', h:'<b>Ex.:</b> "Quero simular on-grid e off-grid".'}]
+    },
+    local:{
+      1:[{q:'A cidade está no H1?', h:'<b>Ex.:</b> "Energia solar residencial em Campinas".'}],
+      2:[{q:'A página tem pelo menos um dado único da cidade?', h:'Distribuidora local, irradiação da região, obras em bairros, prazo real de homologação ali. Sem isso é template com a cidade trocada.'}],
+      8:[{q:'Há prova daquela cidade, com bairro e data?', h:'<b>Ex.:</b> "12 painéis no Cambuí, maio de 2026". Prova genérica não serve aqui.'}],
+      7:[{q:'A faixa de preço é regional e datada?', h:'<b>Ex.:</b> "4 kWp em Campinas, setembro de 2026".'}],
+      16:[{q:'Há endereço físico ou área de atendimento explícita, com DDD local?', h:'Telefone 0800 sem endereço enfraquece a página local.'}]
+    },
+    marca:{
+      8:[{q:'Volume, tempo de mercado e avaliações externas aparecem com link?', h:'Google, Reclame Aqui, associação do setor. O link é o que torna verificável.'}],
+      11:[{q:'Fundadores e responsáveis técnicos aparecem com nome, foto e registro?', h:'A página Sobre responde "quem são essas pessoas".'}],
+      17:[{q:'O Organization tem founder, foundingDate, address e sameAs?', h:'Os quatro campos. Procure no JSON-LD.'}]
+    },
+    informacional:{
+      2:[{q:'A definição está na primeira frase do texto, em 20 a 35 palavras?', h:'Sem introdução. A primeira frase já responde.'}],
+      15:[{q:'Há no máximo um CTA no meio e um no fim?', h:'Se aparece formulário a cada dois parágrafos, marque Não.'}],
+      13:[{q:'A página linka para a página de serviço correspondente com transição escrita?', h:'<b>Ex.:</b> "Se quiser dimensionar para a sua casa, veja energia solar residencial."'}],
+      17:[{q:'O Article tem author, datePublished e dateModified?', h:'Os três campos, e o author apontando para a página do autor.'}]
+    }
+  };
+  const answers = {};
+  let stepIdx = 0;
+  function qsFor(intent, id){ const base=Q[id]||[]; const ex=(EXTRA[intent.id]&&EXTRA[intent.id][id])||[]; return ex.concat(base); }
+  function ansKey(intent,id,qi){ return intent.id+'|'+id+'|'+qi; }
+  function blockResult(intent,id){
+    const qs=qsFor(intent,id); let sim=0,nao=0,na=0,pend=0;
+    qs.forEach((q,i)=>{const a=answers[ansKey(intent,id,i)]; if(a==='sim')sim++; else if(a==='nao')nao++; else if(a==='na')na++; else pend++;});
+    const appl=sim+nao; let st='pend';
+    if(pend===0){ st = appl===0?'na' : nao===0?'ok' : sim===0?'fail':'part'; }
+    return {sim,nao,na,pend,appl,st,ratio: appl? sim/appl : 1};
+  }
+  function renderCheck(){
+    renderIntentButtons($('#checkIntentButtons'), checkIntent, (it)=>{checkIntent=it; stepIdx=0; renderCheck();});
+    const order=checkIntent.order; const rail=$('#rail'); rail.innerHTML='';
+    order.forEach((id,i)=>{
+      const b=byId[id]; const r=blockResult(checkIntent,id);
+      const btn=document.createElement('button'); btn.type='button';
+      btn.innerHTML=`<span class="dot ${r.st}"></span><span class="num">${id}</span><span>${b.name}</span>`;
+      if(i===stepIdx) btn.setAttribute('aria-current','step');
+      btn.addEventListener('click',()=>{stepIdx=i; renderCheck();});
+      rail.appendChild(btn);
+    });
+    const rb=document.createElement('button'); rb.type='button'; rb.className='report';
+    rb.innerHTML=`<span class="dot"></span><span class="num">R</span><span>Relatório final</span>`;
+    if(stepIdx===order.length) rb.setAttribute('aria-current','step');
+    rb.addEventListener('click',()=>{stepIdx=order.length; renderCheck();});
+    rail.appendChild(rb);
+    const done=order.filter(id=>blockResult(checkIntent,id).pend===0).length;
+    $('#wizProg').style.width=Math.round(done/order.length*100)+'%';
+    if(stepIdx>=order.length){ renderReport(); return; }
+    const id=order[stepIdx]; const b=byId[id]; const st=checkIntent.st[id]; const qs=qsFor(checkIntent,id);
+    const note = checkIntent.notes && checkIntent.notes[id] ? `<div class="why"><b>Nesta tipologia:</b> ${checkIntent.notes[id]}</div>` : '';
+    let html=`<div class="step"><div class="kick"><span>Bloco ${stepIdx+1} de ${order.length} · ${checkIntent.label}</span><span class="chip ${st}">${S[st]}</span></div><h3>${b.name}</h3><div class="fn">${b.fn}. ${b.what}</div>${note}`;
+    qs.forEach((q,i)=>{
+      const a=answers[ansKey(checkIntent,id,i)]||'';
+      html+=`<div class="q ${a}"><div class="qt"><small>${i+1}.</small>Na sua página, ${q.q.charAt(0).toLowerCase()+q.q.slice(1)}</div><div class="hint">${q.h}</div>
+        <div class="ans" data-q="${i}"><button type="button" class="s" aria-pressed="${a==='sim'}">Sim</button><button type="button" class="n" aria-pressed="${a==='nao'}">Não</button><button type="button" class="x" aria-pressed="${a==='na'}">Não se aplica</button></div></div>`;
+    });
+    html+=`<div class="stepnav"><button class="btn ghost" type="button" id="prevBtn" ${stepIdx===0?'disabled':''}>Anterior</button><span class="hintnav">Responda tudo para o bloco contar na pontuação</span><button class="btn" type="button" id="nextBtn">${stepIdx===order.length-1?'Ver relatório':'Próximo bloco'}</button></div></div>`;
+    $('#stepBox').innerHTML=html;
+    $('#stepBox').querySelectorAll('.ans').forEach(g=>{
+      const qi=+g.dataset.q;
+      g.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+        const v=btn.classList.contains('s')?'sim':btn.classList.contains('n')?'nao':'na';
+        answers[ansKey(checkIntent,id,qi)]=v; renderCheck();
+      }));
+    });
+    $('#prevBtn').addEventListener('click',()=>{stepIdx=Math.max(0,stepIdx-1); renderCheck(); $('#stepBox').scrollIntoView({block:'start'});});
+    $('#nextBtn').addEventListener('click',()=>{stepIdx=Math.min(order.length,stepIdx+1); renderCheck(); $('#stepBox').scrollIntoView({block:'start'});});
+  }
+  function renderReport(){
+    const order=checkIntent.order; let tot=0,got=0; const crit=[], fixes=[], rows=[];
+    order.forEach(id=>{
+      const b=byId[id]; const st=checkIntent.st[id]; const w=W[st]; const r=blockResult(checkIntent,id);
+      if(r.st!=='na'){ tot+=w; got+= w*(r.pend? 0 : r.ratio); }
+      const qs=qsFor(checkIntent,id);
+      qs.forEach((q,i)=>{ if(answers[ansKey(checkIntent,id,i)]==='nao'){ const item={id,name:b.name,q:q.q,st}; (st==='ok'?crit:fixes).push(item);} });
+      rows.push({id,name:b.name,st,r});
+    });
+    const pct=tot?Math.round(got/tot*100):0;
+    const pend=rows.filter(x=>x.r.pend>0).length;
+    let v;
+    if(pend>0) v=`Faltam ${pend} bloco(s) sem resposta completa. A pontuação considera só o que foi respondido.`;
+    else if(crit.length===0 && pct>=85) v='Estrutura completa para esta tipologia. O trabalho agora é qualidade de cada bloco, não presença.';
+    else if(crit.length<=3) v='Faltam poucos itens obrigatórios. Resolva os críticos antes de qualquer otimização de texto.';
+    else if(crit.length<=8) v='A página existe, mas não cumpre a intenção. Trate os obrigatórios como reconstrução, não como ajuste.';
+    else v='A página está no tipo errado ou foi escrita sem definir a intenção. Recomeçar pelo blueprint sai mais barato do que corrigir.';
+    const url=$('#pageUrl').value.trim();
+    const dash=(263.9*(1-pct/100)).toFixed(1);
+    const li=(x,c)=>`<li class="${c||''}"><b>${x.id}. ${x.name}:</b> ${x.q}</li>`;
+    let html=`<div class="rep-head"><div class="gauge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="10"/><circle cx="50" cy="50" r="42" fill="none" stroke="#A78BFA" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="${dash}" transform="rotate(-90 50 50)"/></svg><div><div class="big">${pct}%</div><div class="lbl">da estrutura esperada</div></div></div>
+      <div><div style="font-size:12px;opacity:.65;margin-bottom:4px">${checkIntent.label}${url?' · '+url:''}</div><div class="verdict">${v}</div><div class="sig" style="margin-top:10px;font-size:12px;opacity:.6">Metodologia <b style="color:#A78BFA">Anderson Melo SEO</b></div></div></div>
+      <div class="rep-grid"><div class="rep-card"><h4>Corrigir agora (obrigatórios)</h4><ul>${crit.length?crit.map(x=>li(x,'crit')).join(''):'<li>Nenhum item crítico ausente</li>'}</ul></div>
+      <div class="rep-card"><h4>Corrigir depois (recomendados e opcionais)</h4><ul>${fixes.length?fixes.map(x=>li(x)).join(''):'<li>Nada pendente</li>'}</ul></div></div>
+      <div class="table-wrap rep-table"><table><thead><tr><th>Bloco</th><th>Peso</th><th>Resultado</th></tr></thead><tbody>`;
+    rows.forEach(x=>{
+      const lbl = x.r.pend? 'Sem resposta' : x.r.st==='na'?'Não se aplica': `${x.r.sim} de ${x.r.appl} itens`;
+      html+=`<tr><td>${x.id}. ${x.name}</td><td><span class="chip ${x.st}">${S[x.st]}</span></td><td><span class="dot ${x.r.pend?'':x.r.st}"></span>${lbl}</td></tr>`;
+    });
+    html+=`</tbody></table></div>
+      <div class="field"><label for="notes">Observações da auditoria</label><textarea id="notes" placeholder="O que falta, o que está fora de ordem, o que precisa de prova.">${escapeHtml(notesText)}</textarea></div>
+      <div class="actions"><button class="btn" type="button" id="copyRepBtn">Copiar relatório para o ClickUp</button><button class="btn ghost" type="button" onclick="window.print()">Imprimir ou salvar em PDF</button><button class="btn ghost" type="button" id="backBtn">Voltar aos blocos</button><button class="btn ghost" type="button" id="resetBtn">Limpar respostas</button></div>`;
+    $('#stepBox').innerHTML=html;
+    lastReport={pct,v,crit,fixes,rows,url};
+    $('#notes').addEventListener('input',e=>{notesText=e.target.value;});
+    $('#copyRepBtn').addEventListener('click',e=>{
+      const txt=reportText(); const btn=e.currentTarget;
+      const done=()=>{btn.textContent='Relatório copiado';setTimeout(()=>btn.textContent='Copiar relatório para o ClickUp',1800);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,done);}else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();done();}
+    });
+    $('#backBtn').addEventListener('click',()=>{stepIdx=0; renderCheck();});
+    $('#resetBtn').addEventListener('click',()=>{Object.keys(answers).forEach(k=>{if(k.startsWith(checkIntent.id+'|'))delete answers[k];}); stepIdx=0; renderCheck();});
+  }
+
+  let notesText='';
+  let lastReport=null;
+  function escapeHtml(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+  function todayBR(){const d=new Date();return d.toLocaleDateString('pt-BR');}
+  function reportText(){
+    if(!lastReport) return '';
+    const R=lastReport; const L=[];
+    L.push('AUDITORIA DE PÁGINA COMERCIAL');
+    L.push('Metodologia Anderson Melo SEO');
+    L.push('');
+    L.push('URL: '+(R.url||'(não informada)'));
+    L.push('Tipologia: '+checkIntent.label+' ("'+checkIntent.query+'")');
+    L.push('Data: '+todayBR());
+    L.push('Pontuação: '+R.pct+'% da estrutura esperada');
+    L.push('Veredito: '+R.v);
+    L.push('');
+    L.push('## CORRIGIR AGORA (obrigatórios)');
+    if(R.crit.length) R.crit.forEach(x=>L.push('- [ ] '+x.id+'. '+x.name+': '+x.q)); else L.push('- Nenhum item crítico ausente');
+    L.push('');
+    L.push('## CORRIGIR DEPOIS (recomendados e opcionais)');
+    if(R.fixes.length) R.fixes.forEach(x=>L.push('- [ ] '+x.id+'. '+x.name+': '+x.q)); else L.push('- Nada pendente');
+    L.push('');
+    L.push('## RESULTADO POR BLOCO');
+    R.rows.forEach(x=>{const lbl=x.r.pend?'sem resposta':x.r.st==='na'?'não se aplica':x.r.sim+' de '+x.r.appl+' itens'; L.push('- '+x.id+'. '+x.name+' ('+S[x.st]+'): '+lbl);});
+    if(notesText.trim()){L.push('');L.push('## OBSERVAÇÕES');L.push(notesText.trim());}
+    return L.join('\n');
+  }
+  function exportAudit(){
+    const data={format:'anatomia-pagina-comercial',version:1,exportedAt:new Date().toISOString(),intent:checkIntent.id,url:$('#pageUrl').value.trim(),notes:notesText,step:stepIdx,answers:Object.fromEntries(Object.entries(answers).filter(([k])=>k.startsWith(checkIntent.id+'|')))};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    const slug=(data.url||'pagina').replace(/^https?:\/\//,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').slice(0,60);
+    a.download='auditoria-'+checkIntent.id+'-'+slug+'-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }
+  function importAudit(file){
+    const rd=new FileReader();
+    rd.onload=()=>{
+      try{
+        const d=JSON.parse(rd.result);
+        if(d.format!=='anatomia-pagina-comercial'||!d.answers) throw new Error('formato');
+        const it=INTENTS.find(x=>x.id===d.intent); if(!it) throw new Error('intent');
+        checkIntent=it; Object.assign(answers,d.answers); notesText=d.notes||''; $('#pageUrl').value=d.url||'';
+        stepIdx=typeof d.step==='number'?Math.min(d.step,it.order.length):0;
+        renderCheck(); $('#checklist').scrollIntoView({block:'start'});
+      }catch(e){ alert('Não foi possível ler este arquivo. Use um JSON exportado por este checklist.'); }
+    };
+    rd.readAsText(file);
+  }
+  $('#exportBtn').addEventListener('click',exportAudit);
+  $('#importBtn').addEventListener('click',()=>$('#importFile').click());
+  $('#importFile').addEventListener('change',e=>{ if(e.target.files[0]) importAudit(e.target.files[0]); e.target.value=''; });
+
+  renderAnatomy();
+  renderCheck();
+})();
+</script>
+</body>
+</html>
