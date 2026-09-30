@@ -32,6 +32,22 @@ As 4 páginas de serviço usam o mesmo template (`includes/service-template.php`
 
 > PHP 7.4+ (recomendado 8.1+). Nenhum banco de dados é necessário.
 
+## Prévia no Vercel (enquanto não há Hostinger)
+
+O Vercel **não executa PHP** — se você subir a pasta `public_html`, ele entrega o `index.php` como arquivo e o navegador faz download. Por isso existe uma **versão estática** pronta na pasta **`vercel/`** (e no arquivo `ra-tile-renovation-vercel.zip`):
+
+1. Descompacte `ra-tile-renovation-vercel.zip` (ou use a pasta `vercel/`).
+2. No Vercel, arraste a **pasta** para o projeto (Vercel Drop / "drop your project"), ou rode `vercel --prod` dentro dela.
+3. O formulário, nessa versão, envia pelo **FormSubmit** (grátis, sem servidor). No **primeiro envio**, o FormSubmit manda um e-mail de ativação para `tilerenovationpro@gmail.com` — clique em **Activate Form** uma única vez; depois os leads chegam direto no Gmail.
+
+Para regenerar a versão estática depois de editar textos/imagens (precisa de PHP instalado):
+
+```bash
+php tools/build-static.php https://ra-tile-renovation.vercel.app vercel
+```
+
+Troque a URL se o domínio do Vercel for outro (ela vira o canonical e o sitemap). Quando migrar para a Hostinger, use a pasta `public_html` normalmente — lá o formulário volta a usar o `send.php` (SMTP + backup CSV).
+
 ## Configuração — `includes/config.php`
 
 Tudo o que muda fica nesse arquivo:

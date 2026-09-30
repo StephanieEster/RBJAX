@@ -12,7 +12,13 @@ if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === 'config.php') {
 // ---------------------------------------------------------------------------
 // Site / business
 // ---------------------------------------------------------------------------
-define('SITE_URL', 'https://ratilerenovation.com');   // no trailing slash — change to the real domain
+define('SITE_URL', getenv('SITE_URL') ?: 'https://ratilerenovation.com');   // no trailing slash — change to the real domain
+
+// Static export (Vercel / any host without PHP): set by tools/build-static.php
+define('STATIC_BUILD', getenv('STATIC_BUILD') === '1');
+// Form endpoint used ONLY in the static export (no PHP available). FormSubmit is free:
+// the first submission sends an activation e-mail to this address — click "Activate" once.
+define('STATIC_FORM_ENDPOINT', 'https://formsubmit.co/tilerenovationpro@gmail.com');
 define('SITE_NAME', 'R.A Tile Renovation');
 define('SITE_LEGAL_NAME', 'RA Tile Renovation');
 define('SITE_TAGLINE', 'Tile Installation & Bathroom Remodeling in New Hampshire');

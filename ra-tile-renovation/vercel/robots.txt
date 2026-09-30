@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /includes/
+Disallow: /data/
+Disallow: /send.php
+Disallow: /thank-you
+
+Sitemap: https://ra-tile-renovation.vercel.app/sitemap.xml

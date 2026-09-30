@@ -13,7 +13,7 @@ $formCompact = $formCompact ?? false;
 $formService = $formService ?? '';
 $err         = $_GET['form_error'] ?? '';
 ?>
-<form class="lead-form<?= $formCompact ? ' lead-form--compact' : '' ?>" id="<?= e($formId) ?>" action="/send.php" method="post" novalidate data-lead-form>
+<form class="lead-form<?= $formCompact ? ' lead-form--compact' : '' ?>" id="<?= e($formId) ?>" action="<?= e(STATIC_BUILD ? STATIC_FORM_ENDPOINT : '/send.php') ?>" method="post" novalidate data-lead-form>
   <div class="lead-form__head">
     <p class="lead-form__title"><?= e($formTitle) ?></p>
     <p class="lead-form__sub"><?= icon('check') ?> 100% free · No obligation · Fast reply</p>
@@ -75,10 +75,17 @@ $err         = $_GET['form_error'] ?? '';
 
   <!-- anti-spam -->
   <div class="hp" aria-hidden="true">
-    <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <label>Leave this field empty <input type="text" name="<?= STATIC_BUILD ? '_honey' : 'website' ?>" tabindex="-1" autocomplete="off"></label>
   </div>
+  <?php if (STATIC_BUILD): ?>
+  <input type="hidden" name="_subject" value="New estimate request — <?= e(SITE_NAME) ?> website">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="<?= e(url('thank-you')) ?>">
+  <?php else: ?>
   <input type="hidden" name="token" value="<?= e(form_token()) ?>">
   <input type="hidden" name="form_id" value="<?= e($formId) ?>">
+  <?php endif; ?>
   <input type="hidden" name="page_url" value="">
   <input type="hidden" name="utm" value="">
 
