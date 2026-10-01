@@ -25,3 +25,14 @@ Files: assets/images/project-attic-before.webp and project-attic-after.webp. The
 "Photographs" section now distinguishes real FG project photos from illustrative ones.
 To add another pair, copy a .project-showcase section and swap both image paths;
 crop the two photos to the same framing so the comparison lines up.
+
+OUR WORK PAGE (UPDATE 2): 22 real project photos from Fernando are now on the site, in
+assets/images/work/. New page our-work.html (linked in the menu and footer, added to
+sitemap.xml) shows two before-and-after sliders (attic bedroom; commercial orange wall),
+three step-by-step project stories (attic renovation, deck restoration, auto shop), and a
+photo gallery with a tap-to-enlarge viewer. Service pages and service cards now use real
+photos, and each service page has its own small gallery or project story. The home page
+links to the Our Work page and shows four recent projects.
+Left out on purpose: IMG_2435 (blue sports court; not confirmed as FG work) and IMG_0510
+(a finger covers part of the photo). Illustrative images remain only in the home hero,
+the home intro and "preparation" sections, the About page, and the service page banners.

@@ -46,7 +46,7 @@
 // Reveal sections as they enter the viewport. Reduced-motion visitors see all content.
 (() => {
   if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const elements = document.querySelectorAll('.section-head, .intro-copy, .intro-image, .service-card, .feature-content, .feature-visual, .process-step, .detail-section, .area-panel, .service-note-inner, .ba-slider, .project-copy');
+  const elements = document.querySelectorAll('.section-head, .intro-copy, .intro-image, .service-card, .feature-content, .feature-visual, .process-step, .detail-section, .area-panel, .service-note-inner, .ba-slider, .project-copy, .work-item, .sequence');
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
@@ -115,4 +115,39 @@
     ['pointerup', 'pointercancel'].forEach(type => slider.addEventListener(type, () => slider.classList.remove('is-dragging')));
     range.addEventListener('input', () => set(Number(range.value)));
   });
+})();
+
+// Photo lightbox for project galleries. Links point at the full image, so it still works without JavaScript.
+(() => {
+  const links = [...document.querySelectorAll('[data-lightbox]')];
+  if (!links.length || typeof HTMLDialogElement !== 'function') return;
+  const box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.setAttribute('aria-label', 'Project photo');
+  box.innerHTML = '<figure><img alt=""><figcaption></figcaption></figure><button type="button" class="lightbox-close" aria-label="Close">×</button><button type="button" class="lightbox-prev" aria-label="Previous photo">‹</button><button type="button" class="lightbox-next" aria-label="Next photo">›</button>';
+  document.body.append(box);
+  const image = box.querySelector('img'), caption = box.querySelector('figcaption');
+  let index = 0;
+  const show = i => {
+    index = (i + links.length) % links.length;
+    const link = links[index];
+    image.src = link.href;
+    image.alt = link.querySelector('img')?.alt || '';
+    caption.textContent = link.dataset.caption || '';
+  };
+  links.forEach((link, i) => link.addEventListener('click', event => {
+    event.preventDefault();
+    show(i);
+    box.showModal();
+    document.body.classList.add('modal-open');
+  }));
+  box.querySelector('.lightbox-close').addEventListener('click', () => box.close());
+  box.querySelector('.lightbox-prev').addEventListener('click', () => show(index - 1));
+  box.querySelector('.lightbox-next').addEventListener('click', () => show(index + 1));
+  box.addEventListener('click', event => { if (event.target === box) box.close(); });
+  box.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') show(index - 1);
+    if (event.key === 'ArrowRight') show(index + 1);
+  });
+  box.addEventListener('close', () => document.body.classList.remove('modal-open'));
 })();

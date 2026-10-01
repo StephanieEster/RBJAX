@@ -79,7 +79,7 @@ body{background:#f9f8f4;color:#172333}
 /* Real project photos and before/after comparison */
 .service-card img.real-project{object-position:50% 58%}.visual-stack img.real-project{object-position:50% 60%}
 .project-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;gap:clamp(45px,7vw,110px)}
-.ba-slider{--pos:50%;position:relative;aspect-ratio:1100/1384;max-height:720px;width:100%;margin-inline:auto;overflow:hidden;background:#d9d6cd;box-shadow:-24px 24px 0 #ded9cb;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.ba-slider{--pos:50%;position:relative;aspect-ratio:var(--ratio,1100/1384);max-height:720px;width:100%;margin-inline:auto;overflow:hidden;background:#d9d6cd;box-shadow:-24px 24px 0 #ded9cb;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .bg-cream .ba-slider{box-shadow:-24px 24px 0 #d8d0bd}
 .ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .ba-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
@@ -95,3 +95,28 @@ body{background:#f9f8f4;color:#172333}
 .project-copy .actions{align-items:center;gap:22px}
 @media(max-width:820px){.project-grid{grid-template-columns:1fr;gap:56px}.ba-slider{max-width:560px;max-height:none;box-shadow:-14px 14px 0 #ded9cb}.project-copy{max-width:680px}}
 @media(max-width:620px){.ba-slider{box-shadow:-9px 9px 0 #ded9cb;margin-left:9px;width:calc(100% - 9px)}.ba-label{top:12px;padding:7px 10px;font-size:.58rem}.ba-label-before{left:12px}.ba-label-after{right:12px}.ba-handle span{width:44px;height:44px;margin:-22px 0 0 -22px;font-size:.95rem}.project-copy .actions{flex-direction:column;align-items:flex-start}}
+/* Our Work: galleries, project sequences, lightbox */
+.page-our-work .page-hero{background:#1a2b42 url('../images/work/bedroom-blue.webp') center 55%/cover}
+.project-grid+.project-grid{margin-top:clamp(80px,9vw,130px)}.project-grid-reverse{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}.project-grid-reverse .ba-slider{order:2;box-shadow:24px 24px 0 #ded9cb}
+.visual-stack img.real-project{object-position:50% 55%}
+.work-section .section-head{align-items:end}.work-section .section-head>.text-link{flex:0 0 auto;margin-bottom:6px}
+.work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.work-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.work-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.work-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.work-item{margin:0;background:#fff;box-shadow:0 12px 30px #1d2d4112;transition:transform .35s,box-shadow .35s}.work-item:hover{transform:translateY(-5px);box-shadow:0 22px 40px #1d2d4124}
+.work-item a{display:block;overflow:hidden;cursor:zoom-in}.work-item img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .6s}.work-item:hover img{transform:scale(1.04)}
+.work-item figcaption{padding:16px 18px 18px;font-size:.93rem;line-height:1.45;color:#3c4652}.work-item figcaption span{display:block;margin-bottom:6px;font:700 .64rem/1 Manrope,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#907342}
+.work-teaser{margin-top:clamp(80px,9vw,120px)}
+.sequence{display:grid;grid-template-columns:minmax(220px,.75fr) 2.25fr;gap:clamp(28px,4vw,60px);align-items:start;padding:clamp(34px,4vw,52px) 0;border-top:1px solid #cdcac1}.sequence:last-child{padding-bottom:0}
+.sequence-head h3{font-size:clamp(1.6rem,2.4vw,2.3rem);margin:10px 0 14px}.sequence-head p:not(.eyebrow){color:#5d6168;margin:0}
+.sequence-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:step}
+.sequence-steps figure{margin:0;position:relative}.sequence-steps a{display:block;overflow:hidden;cursor:zoom-in;background:#ddd}.sequence-steps img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;transition:transform .6s}.sequence-steps a:hover img{transform:scale(1.04)}
+.sequence-steps figcaption{display:flex;gap:10px;align-items:baseline;padding:13px 2px 0;font-size:.9rem;line-height:1.4;color:#3c4652}.sequence-steps figcaption b{font:700 .8rem Manrope,sans-serif;color:#af8a49}
+.sequence-steps figure:not(:last-child):after{content:'→';position:absolute;top:calc(50% - 40px);right:-15px;z-index:2;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#cda95f;color:#172333;font:700 .9rem/1 Manrope,sans-serif;box-shadow:0 6px 14px #0003}
+.lightbox{width:min(96vw,1200px);max-height:94dvh;padding:0;border:0;background:transparent;overflow:visible}.lightbox::backdrop{background:#0a1320e8;backdrop-filter:blur(3px)}
+.lightbox figure{margin:0;display:flex;flex-direction:column;align-items:center}.lightbox img{max-width:100%;max-height:calc(94dvh - 70px);width:auto;height:auto;object-fit:contain;box-shadow:0 25px 60px #0008}
+.lightbox figcaption{color:#eef1f4;padding:14px 60px 0;text-align:center;font-size:.95rem}
+.lightbox button{position:fixed;z-index:2;display:grid;place-items:center;width:50px;height:50px;border:0;border-radius:50%;background:#ffffffe8;color:#17283d;font:400 1.6rem/1 Arial,sans-serif;box-shadow:0 8px 20px #0005}.lightbox button:hover{background:#cda95f}
+.lightbox-close{top:16px;right:16px}.lightbox-prev{left:16px;top:50%;margin-top:-25px}.lightbox-next{right:16px;top:50%;margin-top:-25px}
+@media(max-width:1050px){.work-grid-4,.work-grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}.sequence{grid-template-columns:1fr;gap:24px}.sequence-head{max-width:640px}}
+@media(max-width:820px){.project-grid-reverse{grid-template-columns:1fr}.project-grid-reverse .ba-slider{order:0;box-shadow:-14px 14px 0 #ded9cb}.work-section .section-head{flex-direction:column;align-items:flex-start}}
+@media(max-width:620px){.work-grid,.work-grid-4,.work-grid-3,.work-grid-2{grid-template-columns:1fr 1fr;gap:12px}.work-item figcaption{padding:11px 11px 13px;font-size:.8rem}.work-item figcaption span{font-size:.55rem}.sequence-steps{gap:9px}.sequence-steps figcaption{flex-direction:column;gap:2px;font-size:.76rem}.sequence-steps figure:not(:last-child):after{width:22px;height:22px;right:-15px;font-size:.7rem;top:calc(50% - 30px)}.project-grid-reverse .ba-slider{box-shadow:-9px 9px 0 #ded9cb}.lightbox button{width:42px;height:42px}.lightbox-prev,.lightbox-next{top:auto;bottom:14px;margin:0}.lightbox figcaption{padding:12px 10px 60px}}
