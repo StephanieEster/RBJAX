@@ -16,3 +16,12 @@ Create this project in Hostinger as a Custom PHP/HTML website, not WordPress.
 After publishing, send a real test inquiry. Check the inbox and spam folder and
 confirm that every form field arrives. If mail() delivery fails, configure
 PHPMailer with SMTP server-side, keeping credentials outside public files.
+
+REAL PROJECT PHOTOS (UPDATE): Fernando's attic bedroom project is now on the site as a
+before-and-after comparison slider (drag, tap, or arrow keys) on the home page and the
+Interior Painting page. The "after" photo also replaces the illustrative image on the
+Interior Painting cards (home and services) and on the Interior Painting page.
+Files: assets/images/project-attic-before.webp and project-attic-after.webp. The Terms
+"Photographs" section now distinguishes real FG project photos from illustrative ones.
+To add another pair, copy a .project-showcase section and swap both image paths;
+crop the two photos to the same framing so the comparison lines up.

@@ -46,7 +46,7 @@
 // Reveal sections as they enter the viewport. Reduced-motion visitors see all content.
 (() => {
   if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const elements = document.querySelectorAll('.section-head, .intro-copy, .intro-image, .service-card, .feature-content, .feature-visual, .process-step, .detail-section, .area-panel, .service-note-inner');
+  const elements = document.querySelectorAll('.section-head, .intro-copy, .intro-image, .service-card, .feature-content, .feature-visual, .process-step, .detail-section, .area-panel, .service-note-inner, .ba-slider, .project-copy');
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
@@ -90,5 +90,29 @@
         button.innerHTML = original;
       }
     });
+  });
+})();
+
+// Before/after comparison: drag or tap the photo, or use the arrow keys on the focused slider.
+(() => {
+  document.querySelectorAll('[data-ba-slider]').forEach(slider => {
+    const range = slider.querySelector('.ba-range');
+    const set = value => {
+      const position = Math.min(100, Math.max(0, value));
+      slider.style.setProperty('--pos', position + '%');
+      range.value = position;
+    };
+    const fromPointer = event => {
+      const box = slider.getBoundingClientRect();
+      set((event.clientX - box.left) / box.width * 100);
+    };
+    slider.addEventListener('pointerdown', event => {
+      slider.classList.add('is-dragging');
+      slider.setPointerCapture(event.pointerId);
+      fromPointer(event);
+    });
+    slider.addEventListener('pointermove', event => { if (slider.classList.contains('is-dragging')) fromPointer(event); });
+    ['pointerup', 'pointercancel'].forEach(type => slider.addEventListener(type, () => slider.classList.remove('is-dragging')));
+    range.addEventListener('input', () => set(Number(range.value)));
   });
 })();
