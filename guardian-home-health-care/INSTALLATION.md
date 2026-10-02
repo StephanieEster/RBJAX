@@ -8,7 +8,7 @@
 4. O site já está configurado para **guardianshomehelphllc.com** (sem www; o www redireciona). Por segurança, o formulário só aceita envios vindos desse domínio: se quiser testar no domínio temporário da Hostinger, deixe `SITE_DOMAIN = ''` no topo de `send-form.php` e volte depois.
 5. Teste os 3 formulários (topo da home, página de contato e popup) e confira a caixa de entrada **e o spam** de `guardianshomehealthllc@gmail.com`. Espere 1 minuto entre testes (anti-spam).
 6. Abra `/robots.txt` e `/sitemap.xml` e envie o sitemap no Google Search Console.
-7. Se editar `assets/styles.css` ou `assets/site.js`, troque `?v=20261002` nas páginas HTML por um novo valor (ex.: a data), senão os visitantes continuam com a versão em cache.
+7. Se editar `assets/styles.css` ou `assets/site.js`, troque `?v=20261002b` nas páginas HTML por um novo valor (ex.: a data), senão os visitantes continuam com a versão em cache.
 
 ---
 
@@ -36,6 +36,8 @@
 - Pages: Home, care services, four care-interest pages, founder story, service areas, contact, privacy, terms and 404.
 
 ## Hardening included in this package
+
+- **Visual refresh** (CSS "Design layer" in `assets/styles.css`): pill buttons and eyebrows, arch-framed portraits echoing the logo roof, card-based stats, services, steps, FAQ and contact blocks with soft shadows, overlapping highlights strip under the hero, decorative leaf motifs, a navy closing call-to-action card and a brand-gradient footer accent. Brand colors and fonts unchanged.
 
 - **Self-hosted fonts** (Lora and Poppins, SIL Open Font License, in `assets/fonts/`): no Google Fonts request, no render-blocking `@import`, works under the strict Content-Security-Policy.
 - **Images** recompressed (about 45% lighter) with 800px variants served through `srcset` on phones. The hidden photo lightbox no longer downloads a 1600px image on every page.
