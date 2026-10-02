@@ -1,0 +1,11 @@
+{
+  "name": "Guardian Home Health Care",
+  "short_name": "Guardian",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fffcf9",
+  "theme_color": "#19334c",
+  "icons": [
+    { "src": "/assets/images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
