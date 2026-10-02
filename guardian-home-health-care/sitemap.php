@@ -3,9 +3,8 @@ declare(strict_types=1);
 header('Content-Type: application/xml; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: public, max-age=3600');
-$host = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
-if (!preg_match('/\A[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?(?::[0-9]{1,5})?\z/D', $host)) { http_response_code(400); exit; }
-$base = 'https://' . $host . rtrim(str_replace('\\', '/', dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/sitemap.php'))), '/');
+/* Canonical site URL — must match the canonical links in the HTML pages. */
+$base = 'https://guardianshomehelphllc.com';
 /* file => [canonical path, priority] — the home page canonical is "/". */
 $pages = [
     'index.html' => ['/', '1.0'],

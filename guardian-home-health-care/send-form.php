@@ -16,8 +16,8 @@ const MAX_BODY_BYTES = 32768;
 const MIN_INTERVAL_SECONDS = 60;
 const MIN_FILL_SECONDS = 2;
 const CONSENT_VERSION = '2026-10-02';
-/* Optional: set to the real published hostname, without https://, www or a path. */
-const SITE_DOMAIN = '';
+/* Published hostname, without https://, www or a path. Set to '' to accept any host (e.g. a temporary preview domain). */
+const SITE_DOMAIN = 'guardianshomehelphllc.com';
 
 ini_set('display_errors', '0');
 header('Cache-Control: no-store');
