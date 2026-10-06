@@ -1,0 +1,49 @@
+NEAT CLEANING — WEBSITE PARA HOSTINGER
+
+1. Crie o website na opção Custom PHP/HTML website da Hostinger.
+2. Faça upload deste ZIP em public_html e extraia diretamente ali.
+   index.html, send-form.php e .htaccess devem ficar na raiz de public_html.
+   Não extraia dentro de uma pasta intermediária. Ative a visualização de arquivos
+   ocultos para conferir a presença do .htaccess.
+3. Ative o SSL do domínio e abra o site pelo endereço HTTPS.
+4. O destinatário fixo dos formulários é Neatcleaningservicesusa@gmail.com.
+   O endpoint ignora o campo _to enviado pelo navegador.
+5. Faça um envio real pela home e pela página Contact. Aguarde ao menos
+   um minuto entre envios. Verifique caixa de entrada e spam. Confirme que o
+   email contém nome, telefone, email, serviço, local e registro de consentimento.
+   A página Thank You aparece somente após o servidor aceitar o envio.
+6. mail() é o envio inicial. Aceitação pelo servidor não confirma entrega na
+   caixa de entrada. Se não chegar, configure PHPMailer com SMTP no servidor.
+   Credenciais SMTP devem ficar fora de public_html ou em variáveis de ambiente;
+   nunca em HTML, JavaScript ou neste ZIP público.
+7. O remetente usa website@DOMINIO-DO-SITE. Configure esse remetente e os
+   registros de autenticação de email do domínio na hospedagem para melhorar
+   a entrega. O email do visitante é usado somente no Reply-To.
+8. Canonical, OG, robots.txt e sitemap.xml usam o domínio da instalação
+   automaticamente, via PHP/.htaccess. Ao definir o domínio definitivo, é
+   recomendável preencher NEAT_SITE_URL em site-settings.php com o endereço
+   HTTPS final, sem barra no fim, e redirecionar os domínios alternativos para
+   esse endereço pelo hPanel. Envie https://DOMINIO/sitemap.xml ao Search Console.
+   Se o mod_rewrite não estiver ativo, sitemap.php e robots.php podem ser
+   acessados diretamente; peça à hospedagem para habilitar as regras do .htaccess.
+9. Não há preços fixos, depoimentos, classificações, seguros ou licenças
+   inventados. Não foram incluídas redes sociais porque as URLs não foram
+   fornecidas. Os pagamentos apresentados são Zelle, cash e check.
+10. As 15 imagens são geradas e ilustrativas. Cada uma tem versões 640, 1024 e
+    1536 px (WebP) e uma imagem de compartilhamento og-*.jpg de 1200x630.
+    Não são apresentadas como fotos reais da equipe ou de trabalhos da empresa.
+    Os arquivos WebP estão em assets/images, com proporções preservadas.
+11. O formulário envia pedidos por EMAIL. Ele não dispara SMS, não integra
+    CRM e não processa comandos STOP/HELP automaticamente. Os botões SMS abrem
+    o app de mensagens do visitante. A empresa deve respeitar opt-outs recebidos
+    e manter os registros de consentimento. O formulário só autoriza contato
+    sobre o pedido; mensagens promocionais exigem consentimento separado.
+
+PÁGINAS
+Home / Services / Regular Cleaning / Deep Cleaning / Airbnb Cleaning /
+Move-In & Move-Out / Commercial Cleaning / About / Service Area / Contact /
+FAQ / Privacy Policy / Terms of Use / Thank You / 404.
+
+FONTES
+Cinzel e Montserrat, seguindo o brandbook, hospedadas em assets/fonts
+(licença SIL Open Font License). Nenhuma requisição ao Google Fonts.
