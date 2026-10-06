@@ -1,0 +1,1612 @@
+<!--
+  PÁGINA DE SUPERVISÃO — GISÉLIA BATISTA
+  Widget HTML completo para Elementor (versão 2).
+
+  Como usar:
+  1. Crie/edite a página no Elementor com o layout "Elementor Canvas"
+     (Configurações da página > Layout). Assim o cabeçalho e o rodapé do tema não aparecem duplicados.
+  2. Adicione UM container com "Largura do conteúdo: Largura total", padding 0 e gap 0.
+  3. Arraste um widget "HTML" para dentro e cole todo este código.
+
+  Todo o CSS está isolado dentro de .gs-page e protegido contra a tipografia global
+  do Elementor/tema (tamanhos, caixa alta/Title Case, espaçamentos e cores).
+
+  SEO:
+  Título: Supervisão Pedagógica e Psicopedagógica | Gisélia Batista
+  Descrição: Supervisão para escolas, equipes e psicopedagogas que desejam refletir
+  sobre a prática e construir estratégias possíveis para os desafios da inclusão
+  e da aprendizagem.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+  /* =========================================================
+     BASE E PROTEÇÃO CONTRA ESTILOS GLOBAIS DO TEMA/ELEMENTOR
+     ========================================================= */
+  .gs-page,
+  .gs-page *,
+  .gs-page *::before,
+  .gs-page *::after {
+    box-sizing: border-box;
+  }
+
+  .gs-page {
+    --gs-blue-950: #164a61;
+    --gs-blue-900: #286f8d;
+    --gs-blue-800: #347f9f;
+    --gs-blue-300: #b9e3ed;
+    --gs-blue-100: #e3f4f8;
+    --gs-blue-50: #f1f9fb;
+    --gs-pink: #f2a9bf;
+    --gs-pink-dark: #c55f80;
+    --gs-pink-light: #ffd3df;
+    --gs-pink-soft: #fce6ed;
+    --gs-lilac: #ece8f5;
+    --gs-sage: #e6f0e7;
+    --gs-yellow: #fff2c6;
+    --gs-sand: #f5ece5;
+    --gs-white: #ffffff;
+    --gs-offwhite: #fbfdfe;
+    --gs-heading: #164a61;
+    --gs-text: #44687a;
+    --gs-muted: #6a8794;
+    --gs-line: rgba(52, 127, 159, .16);
+    --gs-shadow-sm: 0 6px 20px rgba(22, 74, 97, .06);
+    --gs-shadow: 0 22px 60px rgba(22, 74, 97, .12);
+    --gs-radius: 22px;
+    --gs-radius-sm: 14px;
+    --gs-serif: "Playfair Display", Georgia, serif;
+    --gs-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    width: 100%;
+    overflow: clip;
+    background: var(--gs-offwhite);
+    color: var(--gs-text);
+    font-family: var(--gs-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Neutraliza tipografia global (o tema estava aplicando Title Case e tamanhos enormes) */
+  /* :where() mantém a especificidade baixa, para que as classes abaixo possam definir espaçamentos */
+  .gs-page :where(h1, h2, h3, h4, p, blockquote, figure, ul, ol, li) {
+    margin: 0 !important;
+    padding: 0;
+    text-transform: none !important;
+  }
+
+  .gs-page h1,
+  .gs-page h2,
+  .gs-page h3,
+  .gs-page h4 {
+    color: var(--gs-heading) !important;
+    font-family: var(--gs-serif) !important;
+    font-weight: 500 !important;
+    font-style: normal;
+    letter-spacing: -.015em !important;
+    word-spacing: normal !important;
+  }
+
+  .gs-page p,
+  .gs-page li,
+  .gs-page a,
+  .gs-page span,
+  .gs-page small,
+  .gs-page strong,
+  .gs-page button {
+    font-family: var(--gs-sans);
+    text-transform: none;
+  }
+
+  .gs-page ul,
+  .gs-page ol { list-style: none; }
+
+  .gs-page a {
+    color: inherit;
+    text-decoration: none !important;
+    box-shadow: none;
+  }
+
+  .gs-page img {
+    display: block;
+    max-width: 100%;
+    border: 0 !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .gs-page svg {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .gs-page button {
+    font: inherit;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .gs-page :focus-visible {
+    outline: 2px solid var(--gs-pink-dark);
+    outline-offset: 3px;
+  }
+
+  /* =========================================================
+     COMPONENTES
+     ========================================================= */
+  .gs-container {
+    width: min(1160px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .gs-section {
+    position: relative;
+    padding: clamp(72px, 8vw, 104px) 0;
+    overflow: hidden;
+    scroll-margin-top: 80px;
+  }
+
+  .gs-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    color: var(--gs-pink-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    line-height: 1.3;
+    text-transform: uppercase !important;
+  }
+
+  .gs-kicker::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .gs-kicker--light { color: var(--gs-pink-light); }
+
+  /* Escala tipográfica única para toda a página */
+  .gs-page .gs-h1 {
+    max-width: 15ch;
+    color: var(--gs-white) !important;
+    font-size: clamp(2.15rem, 1.4rem + 2.3vw, 3.25rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .gs-page .gs-h2 {
+    max-width: 22ch;
+    font-size: clamp(1.75rem, 1.35rem + 1.3vw, 2.45rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  .gs-page .gs-h3 {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+    letter-spacing: -.005em !important;
+  }
+
+  .gs-page .gs-accent {
+    color: var(--gs-pink-dark) !important;
+    font-family: var(--gs-serif) !important;
+    font-style: italic;
+  }
+
+  .gs-on-dark .gs-h2,
+  .gs-on-dark .gs-h3 { color: var(--gs-white) !important; }
+  .gs-on-dark .gs-accent,
+  .gs-hero .gs-accent { color: var(--gs-pink) !important; }
+
+  .gs-lead {
+    max-width: 60ch;
+    margin-top: 18px !important;
+    color: var(--gs-muted);
+    font-size: 1.03rem;
+    line-height: 1.75;
+  }
+
+  .gs-on-dark .gs-lead { color: rgba(255, 255, 255, .8); }
+
+  .gs-copy p {
+    color: var(--gs-text);
+    line-height: 1.8;
+  }
+
+  .gs-copy p + p { margin-top: 16px !important; }
+
+  .gs-head { margin-bottom: clamp(36px, 5vw, 52px); }
+
+  .gs-head--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+    gap: 48px;
+    align-items: end;
+  }
+
+  .gs-head--split .gs-lead { margin-top: 0 !important; }
+
+  /* Botões */
+  .gs-page .gs-btn {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border: 1.5px solid transparent;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .25s ease, background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+
+  .gs-page .gs-btn:hover { transform: translateY(-2px); }
+  .gs-page .gs-btn svg { width: 17px; height: 17px; transition: transform .25s ease; }
+  .gs-page .gs-btn:hover svg { transform: translateX(3px); }
+
+  .gs-page .gs-btn--pink {
+    border-color: var(--gs-pink-dark);
+    background: var(--gs-pink-dark);
+    color: var(--gs-white) !important;
+  }
+
+  .gs-page .gs-btn--pink:hover {
+    border-color: var(--gs-blue-950);
+    background: var(--gs-blue-950);
+  }
+
+  .gs-page .gs-btn--light {
+    border-color: var(--gs-white);
+    background: var(--gs-white);
+    color: var(--gs-blue-950) !important;
+    box-shadow: 0 10px 30px rgba(22, 74, 97, .18);
+  }
+
+  .gs-page .gs-btn--light:hover {
+    border-color: var(--gs-pink-soft);
+    background: var(--gs-pink-soft);
+  }
+
+  .gs-page .gs-btn--ghost {
+    border-color: rgba(255, 255, 255, .5);
+    background: transparent;
+    color: var(--gs-white) !important;
+  }
+
+  .gs-page .gs-btn--ghost:hover {
+    border-color: var(--gs-white);
+    background: rgba(255, 255, 255, .1);
+  }
+
+  .gs-page .gs-btn--ghost:hover svg { transform: translateY(3px); }
+
+  /* Ícones em bolha */
+  .gs-icon {
+    display: grid;
+    width: 50px;
+    height: 50px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--gs-blue-100);
+    color: var(--gs-blue-950);
+  }
+
+  .gs-icon svg { width: 24px; height: 24px; }
+
+  /* =========================================================
+     CABEÇALHO
+     ========================================================= */
+  .gs-header {
+    position: sticky;
+    z-index: 1000;
+    top: var(--wp-admin--admin-bar--height, 0px);
+    border-bottom: 1px solid var(--gs-line);
+    background: rgba(255, 255, 255, .94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .gs-header-inner {
+    position: relative;
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .gs-logo { display: inline-flex; flex: 0 0 auto; }
+
+  .gs-page .gs-logo img {
+    width: auto;
+    height: 46px;
+  }
+
+  .gs-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 26px);
+  }
+
+  .gs-nav > a:not(.gs-btn) {
+    position: relative;
+    padding: 6px 0;
+    color: var(--gs-blue-900) !important;
+    font-size: .84rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .gs-nav > a:not(.gs-btn)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gs-pink);
+    transform: scaleX(0);
+    transition: transform .25s ease;
+  }
+
+  .gs-nav > a:not(.gs-btn):hover::after,
+  .gs-nav > a.gs-current::after { transform: scaleX(1); }
+
+  .gs-nav > a.gs-current { color: var(--gs-blue-950) !important; font-weight: 600; }
+
+  .gs-page .gs-nav .gs-btn {
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: .84rem;
+  }
+
+  .gs-page .gs-menu-toggle {
+    display: none;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--gs-line);
+    border-radius: 12px;
+    background: var(--gs-white);
+    color: var(--gs-blue-950);
+    cursor: pointer;
+  }
+
+  .gs-menu-toggle span,
+  .gs-menu-toggle span::before,
+  .gs-menu-toggle span::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform .25s ease, background-color .25s ease;
+  }
+
+  .gs-menu-toggle span { position: relative; }
+
+  .gs-menu-toggle span::before,
+  .gs-menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .gs-menu-toggle span::before { top: -6px; }
+  .gs-menu-toggle span::after { top: 6px; }
+  .gs-menu-open .gs-menu-toggle span { background: transparent; }
+  .gs-menu-open .gs-menu-toggle span::before { top: 0; transform: rotate(45deg); }
+  .gs-menu-open .gs-menu-toggle span::after { top: 0; transform: rotate(-45deg); }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .gs-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(64px, 7vw, 96px) 0 clamp(72px, 8vw, 104px);
+    background:
+      radial-gradient(circle at 88% 12%, rgba(255, 255, 255, .12), transparent 34%),
+      radial-gradient(circle at 8% 100%, rgba(242, 169, 191, .16), transparent 38%),
+      linear-gradient(135deg, var(--gs-blue-800) 0%, var(--gs-blue-900) 100%);
+    color: var(--gs-white);
+  }
+
+  .gs-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .gs-hero-content { max-width: 600px; }
+
+  .gs-hero-text { margin-top: 24px; }
+
+  .gs-hero-text p {
+    color: rgba(255, 255, 255, .86);
+    font-size: 1.02rem;
+    line-height: 1.78;
+  }
+
+  .gs-hero-text p + p { margin-top: 14px !important; }
+
+  .gs-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .gs-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 30px !important;
+    padding-top: 24px !important;
+    border-top: 1px solid rgba(255, 255, 255, .16);
+  }
+
+  .gs-hero-tags li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, .82);
+    font-size: .84rem;
+    line-height: 1.4;
+  }
+
+  .gs-hero-tags svg {
+    width: 16px;
+    height: 16px;
+    color: var(--gs-pink-light);
+  }
+
+  /* Foto: moldura em arco com a mesma proporção da foto original (2:3) — nada é cortado */
+  .gs-hero-figure {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    justify-self: end;
+    padding: 0 0 22px 22px !important;
+  }
+
+  .gs-hero-figure::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    right: -22px;
+    bottom: 0;
+    left: 0;
+    border: 1.5px solid rgba(255, 255, 255, .28);
+    border-radius: 220px 220px 28px 28px;
+  }
+
+  .gs-hero-frame {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    border-radius: 220px 220px 28px 28px;
+    background: var(--gs-blue-300);
+    box-shadow: 0 30px 70px rgba(10, 45, 60, .3);
+  }
+
+  .gs-page .gs-hero-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .gs-hero-badge {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    max-width: 290px;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px 16px 16px;
+    border-radius: 18px;
+    background: var(--gs-white);
+    box-shadow: var(--gs-shadow);
+  }
+
+  .gs-hero-badge .gs-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gs-pink-soft);
+    color: var(--gs-pink-dark);
+  }
+
+  .gs-hero-badge .gs-icon svg { width: 21px; height: 21px; }
+
+  .gs-hero-badge strong {
+    display: block;
+    color: var(--gs-heading);
+    font-family: var(--gs-serif);
+    font-size: 1.12rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .gs-hero-badge span {
+    display: block;
+    margin-top: 2px;
+    color: var(--gs-muted);
+    font-size: .78rem;
+    line-height: 1.45;
+  }
+
+  /* =========================================================
+     1. UM ESPAÇO PARA PENSAR
+     ========================================================= */
+  .gs-thinking { background: var(--gs-white); }
+
+  .gs-thinking-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(36px, 6vw, 88px);
+    align-items: start;
+  }
+
+  .gs-principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: clamp(40px, 5vw, 56px) !important;
+  }
+
+  .gs-principle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border: 1px solid var(--gs-line);
+    border-radius: var(--gs-radius-sm);
+    background: var(--gs-blue-50);
+  }
+
+  .gs-principle-num {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--gs-white);
+    color: var(--gs-pink-dark);
+    font-size: .78rem;
+    font-weight: 700;
+    box-shadow: var(--gs-shadow-sm);
+  }
+
+  .gs-principle strong {
+    color: var(--gs-heading);
+    font-size: .98rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  /* =========================================================
+     2. TEMAS
+     ========================================================= */
+  .gs-topics { background: var(--gs-blue-50); }
+
+  .gs-topic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .gs-card {
+    position: relative;
+    padding: 28px;
+    border: 1px solid var(--gs-line);
+    border-radius: var(--gs-radius);
+    background: var(--gs-white);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+
+  .gs-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(197, 95, 128, .28);
+    box-shadow: var(--gs-shadow);
+  }
+
+  .gs-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 26px;
+  }
+
+  .gs-card-num {
+    color: var(--gs-blue-300);
+    font-family: var(--gs-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .gs-card p {
+    margin-top: 8px !important;
+    color: var(--gs-muted);
+    font-size: .93rem;
+    line-height: 1.65;
+  }
+
+  .gs-topic-card:nth-child(1) .gs-icon { background: var(--gs-sage); }
+  .gs-topic-card:nth-child(2) .gs-icon { background: var(--gs-pink-soft); color: var(--gs-pink-dark); }
+  .gs-topic-card:nth-child(3) .gs-icon { background: var(--gs-lilac); }
+  .gs-topic-card:nth-child(4) .gs-icon { background: var(--gs-yellow); }
+  .gs-topic-card:nth-child(5) .gs-icon { background: var(--gs-blue-100); }
+  .gs-topic-card:nth-child(6) .gs-icon { background: var(--gs-sand); }
+
+  .gs-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid rgba(197, 95, 128, .2);
+    border-radius: var(--gs-radius-sm);
+    background: var(--gs-white);
+    color: var(--gs-text);
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+
+  .gs-notice svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: var(--gs-pink-dark);
+  }
+
+  /* =========================================================
+     3. PARA QUEM É
+     ========================================================= */
+  .gs-audience { background: var(--gs-white); }
+
+  .gs-audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .gs-audience .gs-card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 30px;
+    background: var(--gs-offwhite);
+  }
+
+  .gs-audience .gs-icon {
+    margin-bottom: 26px;
+    border-radius: 50%;
+    background: var(--gs-pink-soft);
+    color: var(--gs-pink-dark);
+  }
+
+  /* =========================================================
+     4. COMO FUNCIONA
+     ========================================================= */
+  .gs-method {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(255, 255, 255, .07), transparent 40%),
+      var(--gs-blue-900);
+  }
+
+  .gs-method-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: center;
+  }
+
+  .gs-steps { position: relative; }
+
+  .gs-steps::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    left: 23px;
+    width: 1px;
+    background: rgba(255, 255, 255, .22);
+  }
+
+  .gs-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .gs-step + .gs-step { margin-top: 14px !important; }
+
+  .gs-step-num {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    background: var(--gs-blue-900);
+    color: var(--gs-pink-light);
+    font-size: .8rem;
+    font-weight: 700;
+  }
+
+  .gs-step-body {
+    padding: 20px 24px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: var(--gs-radius-sm);
+    background: rgba(255, 255, 255, .07);
+  }
+
+  .gs-step-body p {
+    margin-top: 6px !important;
+    color: rgba(255, 255, 255, .76);
+    font-size: .92rem;
+    line-height: 1.65;
+  }
+
+  /* =========================================================
+     5. FORMATOS
+     ========================================================= */
+  .gs-formats { background: var(--gs-offwhite); }
+
+  .gs-formats-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: center;
+  }
+
+  .gs-format-figure {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    padding: 0 22px 22px 0 !important;
+  }
+
+  .gs-format-figure::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    right: 0;
+    bottom: 0;
+    left: 22px;
+    border-radius: var(--gs-radius);
+    background: var(--gs-pink-soft);
+  }
+
+  .gs-format-frame {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    border-radius: var(--gs-radius);
+    background: var(--gs-blue-100);
+    box-shadow: var(--gs-shadow);
+  }
+
+  .gs-page .gs-format-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  .gs-format-caption {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 44px;
+    max-width: 210px;
+    padding: 14px 18px;
+    border-radius: var(--gs-radius-sm);
+    background: var(--gs-blue-900);
+    color: var(--gs-white);
+    font-family: var(--gs-serif);
+    font-size: 1rem;
+    line-height: 1.3;
+    box-shadow: var(--gs-shadow);
+  }
+
+  .gs-format-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 30px !important;
+  }
+
+  .gs-format-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px 14px 14px;
+    border: 1px solid var(--gs-line);
+    border-radius: var(--gs-radius-sm);
+    background: var(--gs-white);
+    box-shadow: var(--gs-shadow-sm);
+  }
+
+  .gs-format-item .gs-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .gs-format-item .gs-icon svg { width: 21px; height: 21px; }
+
+  .gs-page .gs-format-item h3 { font-size: 1.06rem !important; }
+
+  /* =========================================================
+     6. TRABALHO CONJUNTO
+     ========================================================= */
+  .gs-together { background: var(--gs-white); }
+
+  .gs-together-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: center;
+  }
+
+  .gs-quote {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(32px, 4vw, 48px);
+    border-radius: var(--gs-radius);
+    background: var(--gs-pink-soft);
+  }
+
+  .gs-quote::after {
+    content: "";
+    position: absolute;
+    right: -70px;
+    bottom: -90px;
+    width: 220px;
+    height: 220px;
+    border: 1px solid rgba(197, 95, 128, .2);
+    border-radius: 50%;
+  }
+
+  .gs-quote-mark {
+    display: block;
+    height: 36px;
+    color: var(--gs-pink-dark);
+    font-family: var(--gs-serif);
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .gs-page .gs-quote blockquote {
+    position: relative;
+    z-index: 1;
+    margin-top: 14px !important;
+    border: 0;
+    color: var(--gs-heading);
+    font-family: var(--gs-serif);
+    font-size: clamp(1.3rem, 1.05rem + .8vw, 1.7rem);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.38;
+  }
+
+  .gs-quote small {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 22px;
+    color: var(--gs-pink-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  /* =========================================================
+     7. CTA FINAL
+     ========================================================= */
+  .gs-final {
+    background:
+      radial-gradient(circle at 0% 100%, rgba(242, 169, 191, .16), transparent 40%),
+      var(--gs-blue-800);
+  }
+
+  .gs-final-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .gs-final-card {
+    padding: clamp(28px, 3.5vw, 40px);
+    border-radius: var(--gs-radius);
+    background: var(--gs-white);
+    box-shadow: 0 30px 70px rgba(10, 45, 60, .25);
+  }
+
+  .gs-final-card small {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--gs-pink-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .gs-page .gs-final-card h3 { color: var(--gs-heading) !important; font-size: 1.55rem !important; line-height: 1.2 !important; }
+
+  .gs-final-card p {
+    margin-top: 10px !important;
+    color: var(--gs-muted);
+    font-size: .95rem;
+    line-height: 1.65;
+  }
+
+  .gs-page .gs-final-card .gs-btn {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .gs-final-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    color: var(--gs-muted);
+    font-size: .84rem;
+  }
+
+  .gs-final-note svg { width: 16px; height: 16px; color: var(--gs-pink-dark); }
+
+  /* =========================================================
+     RODAPÉ
+     ========================================================= */
+  .gs-footer {
+    padding: 64px 0 28px;
+    background: var(--gs-blue-950);
+    color: rgba(255, 255, 255, .72);
+  }
+
+  .gs-footer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr) minmax(0, 1fr);
+    gap: 56px;
+    padding-bottom: 44px;
+  }
+
+  .gs-page .gs-footer-logo img {
+    width: auto;
+    height: 54px;
+    filter: brightness(0) invert(1);
+  }
+
+  .gs-footer-about {
+    max-width: 340px;
+    margin-top: 20px !important;
+    font-size: .88rem;
+    line-height: 1.7;
+  }
+
+  .gs-page .gs-footer h4 {
+    margin-bottom: 18px !important;
+    color: var(--gs-white) !important;
+    font-family: var(--gs-sans) !important;
+    font-size: .74rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .14em !important;
+    line-height: 1.3;
+    text-transform: uppercase !important;
+  }
+
+  .gs-footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 20px;
+  }
+
+  .gs-footer-links a {
+    color: rgba(255, 255, 255, .72) !important;
+    font-size: .88rem;
+    transition: color .2s ease;
+  }
+
+  .gs-footer-links a:hover { color: var(--gs-pink) !important; }
+
+  .gs-footer-note {
+    font-size: .86rem;
+    line-height: 1.7;
+  }
+
+  .gs-footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    color: rgba(255, 255, 255, .55);
+    font-size: .8rem;
+  }
+
+  /* =========================================================
+     ANIMAÇÕES
+     ========================================================= */
+  .gs-js .gs-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .gs-js .gs-reveal.gs-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gs-page *,
+    .gs-page *::before,
+    .gs-page *::after {
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+    }
+    .gs-js .gs-reveal { opacity: 1; transform: none; }
+  }
+
+  /* =========================================================
+     RESPONSIVO
+     ========================================================= */
+  @media (max-width: 1180px) {
+    .gs-page .gs-menu-toggle { display: grid; }
+
+    .gs-nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      left: 0;
+      display: none;
+      max-height: calc(100vh - 120px);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      overflow-y: auto;
+      padding: 12px 18px 18px;
+      border: 1px solid var(--gs-line);
+      border-radius: var(--gs-radius-sm);
+      background: var(--gs-white);
+      box-shadow: var(--gs-shadow);
+    }
+
+    .gs-menu-open .gs-nav { display: flex; }
+
+    .gs-nav > a:not(.gs-btn) {
+      padding: 13px 4px;
+      border-bottom: 1px solid var(--gs-line);
+      font-size: .95rem;
+    }
+
+    .gs-nav > a:not(.gs-btn)::after { display: none; }
+    .gs-page .gs-nav .gs-btn { margin-top: 16px; min-height: 50px; }
+  }
+
+  @media (max-width: 1024px) {
+    .gs-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); }
+    .gs-topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gs-audience-grid { grid-template-columns: 1fr; }
+    .gs-audience .gs-card { flex-direction: row; gap: 22px; align-items: flex-start; }
+    .gs-audience .gs-icon { margin-bottom: 0; }
+    .gs-principles { grid-template-columns: 1fr; }
+    .gs-footer-top { grid-template-columns: 1fr 1fr; }
+    .gs-footer-top > :first-child { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 860px) {
+    .gs-hero-grid,
+    .gs-thinking-grid,
+    .gs-method-grid,
+    .gs-formats-grid,
+    .gs-together-grid,
+    .gs-final-grid,
+    .gs-head--split {
+      grid-template-columns: 1fr;
+    }
+
+    .gs-head--split { gap: 0; }
+    .gs-head--split .gs-lead { margin-top: 18px !important; }
+
+    .gs-hero-content { max-width: none; }
+    .gs-page .gs-h1 { max-width: 18ch; }
+
+    .gs-hero-figure {
+      max-width: 400px;
+      justify-self: center;
+    }
+
+    .gs-format-figure {
+      max-width: 340px;
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gs-container { width: calc(100% - 32px); }
+    .gs-header-inner { min-height: 68px; }
+    .gs-page .gs-logo img { height: 40px; }
+
+    .gs-hero-actions { flex-direction: column; }
+    .gs-page .gs-hero-actions .gs-btn { width: 100%; }
+
+    .gs-hero-figure { max-width: 340px; padding: 0 0 20px 14px !important; }
+    .gs-hero-figure::before { right: -12px; top: 18px; }
+    .gs-hero-badge { left: 0; right: 24px; max-width: none; padding: 14px 16px 14px 14px; }
+
+    .gs-topic-grid { grid-template-columns: 1fr; }
+    .gs-card { padding: 24px 22px; }
+    .gs-card-top { margin-bottom: 18px; }
+    .gs-audience .gs-card { flex-direction: column; gap: 0; padding: 26px 22px; }
+    .gs-audience .gs-icon { margin-bottom: 20px; }
+
+    .gs-step { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
+    .gs-step-num { width: 40px; height: 40px; font-size: .74rem; }
+    .gs-steps::before { left: 19px; }
+    .gs-step-body { padding: 18px; }
+
+    .gs-format-figure { max-width: 300px; }
+    .gs-format-caption { bottom: 36px; max-width: 180px; font-size: .92rem; }
+
+    .gs-footer-top { grid-template-columns: 1fr; gap: 36px; }
+    .gs-footer-top > :first-child { grid-column: auto; }
+  }
+</style>
+
+<div class="gs-page" id="gs-topo">
+  <header class="gs-header" data-gs-header>
+    <div class="gs-container gs-header-inner">
+      <a class="gs-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial">
+        <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional" width="121" height="46">
+      </a>
+
+      <button class="gs-menu-toggle" type="button" aria-expanded="false" aria-controls="gs-nav" aria-label="Abrir menu" data-gs-menu>
+        <span></span>
+      </button>
+
+      <nav class="gs-nav" id="gs-nav" aria-label="Navegação principal">
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/">Início</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a>
+        <a class="gs-current" href="https://giseliabatista.com.br/supervisao/" aria-current="page">Supervisão</a>
+        <a href="https://giseliabatista.com.br/estimulacao-cognitiva/">Estimulação cognitiva</a>
+        <a class="gs-btn gs-btn--pink" href="https://wa.me/5555999814934?text=Ol%C3%A1%2C%20Gis%C3%A9lia%21%20Vim%20pela%20p%C3%A1gina%20de%20Supervis%C3%A3o%20do%20seu%20site.%20Sou%20%5Bprofissional%2Fequipe%2Fescola%5D%20de%20%5Bcidade%5D.%20Gostaria%20de%20conversar%20sobre%20supervis%C3%A3o.%20Nosso%20principal%20desafio%20neste%20momento%20%C3%A9%20%5Bconte%20brevemente%5D." target="_blank" rel="noopener noreferrer">Falar com Gisélia</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="gs-hero" aria-labelledby="gs-hero-title">
+      <div class="gs-container gs-hero-grid">
+        <div class="gs-hero-content gs-reveal">
+          <span class="gs-kicker gs-kicker--light">Supervisão pedagógica e psicopedagógica</span>
+          <h1 class="gs-h1" id="gs-hero-title">Supervisão para fortalecer a prática de <span class="gs-accent">quem educa e acompanha.</span></h1>
+
+          <div class="gs-hero-text">
+            <p>A rotina de inclusão traz perguntas importantes: o que observar, como organizar os apoios e como alinhar a comunicação entre escola, família e profissionais?</p>
+            <p>A supervisão é um espaço de troca e reflexão sobre situações reais do cotidiano. A partir das necessidades da equipe e do contexto de cada estudante, Gisélia Batista contribui para organizar estratégias que façam sentido na rotina.</p>
+          </div>
+
+          <div class="gs-hero-actions">
+            <a class="gs-btn gs-btn--light" href="https://wa.me/5555999814934?text=Ol%C3%A1%2C%20Gis%C3%A9lia%21%20Vim%20pela%20p%C3%A1gina%20de%20Supervis%C3%A3o%20do%20seu%20site.%20Sou%20%5Bprofissional%2Fequipe%2Fescola%5D%20de%20%5Bcidade%5D.%20Gostaria%20de%20conversar%20sobre%20supervis%C3%A3o.%20Nosso%20principal%20desafio%20neste%20momento%20%C3%A9%20%5Bconte%20brevemente%5D." target="_blank" rel="noopener noreferrer">Conversar sobre supervisão <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="gs-btn gs-btn--ghost" href="#gs-pratica">Conhecer a proposta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+          </div>
+
+          <ul class="gs-hero-tags" aria-label="Pilares da supervisão">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Escuta</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Olhar técnico</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Construção conjunta</li>
+          </ul>
+        </div>
+
+        <figure class="gs-hero-figure gs-reveal">
+          <div class="gs-hero-frame">
+            <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/IMG_5948-scaled.jpg" alt="Gisélia Batista, psicopedagoga e coordenadora clínica, sentada em frente a uma estante de brinquedos pedagógicos" width="1707" height="2560" loading="eager" fetchpriority="high">
+          </div>
+          <figcaption class="gs-hero-badge">
+            <span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/></svg></span>
+            <span>
+              <strong>Gisélia Batista</strong>
+              <span>Psicopedagoga e coordenadora clínica</span>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 1. UM ESPAÇO PARA PENSAR -->
+    <section class="gs-section gs-thinking" id="gs-pratica">
+      <div class="gs-container">
+        <div class="gs-thinking-grid">
+          <div class="gs-reveal">
+            <span class="gs-kicker">Reflexão e prática</span>
+            <h2 class="gs-h2">Um espaço para pensar a <span class="gs-accent">prática.</span></h2>
+          </div>
+
+          <div class="gs-copy gs-reveal">
+            <p>No dia a dia, professores, monitores e equipes de apoio podem se deparar com dúvidas sobre aprendizagem, participação, comunicação e organização dos apoios.</p>
+            <p>A supervisão permite olhar para essas situações com mais cuidado, compartilhar perspectivas e planejar caminhos possíveis para o contexto de cada estudante. O objetivo é apoiar a equipe na reflexão e na construção de estratégias — sem oferecer fórmulas prontas ou soluções iguais para todos.</p>
+            <p>Psicopedagoga e coordenadora clínica, Gisélia conduz os encontros com escuta, olhar técnico e construção conjunta, respeitando as atribuições de cada profissional.</p>
+          </div>
+        </div>
+
+        <div class="gs-principles" aria-label="Princípios da supervisão">
+          <div class="gs-principle gs-reveal"><span class="gs-principle-num">01</span><strong>Observar com cuidado</strong></div>
+          <div class="gs-principle gs-reveal"><span class="gs-principle-num">02</span><strong>Compartilhar perspectivas</strong></div>
+          <div class="gs-principle gs-reveal"><span class="gs-principle-num">03</span><strong>Planejar caminhos possíveis</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TEMAS -->
+    <section class="gs-section gs-topics" id="gs-temas">
+      <div class="gs-container">
+        <div class="gs-head gs-head--split gs-reveal">
+          <div>
+            <span class="gs-kicker">Possibilidades de trabalho</span>
+            <h2 class="gs-h2">O que pode ser trabalhado nos <span class="gs-accent">encontros?</span></h2>
+          </div>
+          <p class="gs-lead">Os temas são definidos conforme as necessidades da equipe ou do profissional.</p>
+        </div>
+
+        <div class="gs-topic-grid">
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M8.5 12.5 11 15l4.8-6"/></svg></span><span class="gs-card-num">01</span></div>
+            <h3 class="gs-h3">Inclusão e participação</h3>
+            <p>Inclusão e participação no ambiente escolar.</p>
+          </article>
+
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="15" r="3"/></svg></span><span class="gs-card-num">02</span></div>
+            <h3 class="gs-h3">Estratégias e apoios</h3>
+            <p>Organização de estratégias e apoios.</p>
+          </article>
+
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span><span class="gs-card-num">03</span></div>
+            <h3 class="gs-h3">Situações desafiadoras</h3>
+            <p>Manejo de situações desafiadoras no cotidiano.</p>
+          </article>
+
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span><span class="gs-card-num">04</span></div>
+            <h3 class="gs-h3">Planejamento e casos</h3>
+            <p>Planejamento pedagógico e discussão de casos.</p>
+          </article>
+
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h10v8H8l-4 3V5Z"/><path d="M11 10h9v8l-4-3h-5"/></svg></span><span class="gs-card-num">05</span></div>
+            <h3 class="gs-h3">Comunicação integrada</h3>
+            <p>Comunicação entre escola, família e profissionais.</p>
+          </article>
+
+          <article class="gs-card gs-topic-card gs-reveal">
+            <div class="gs-card-top"><span class="gs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></svg></span><span class="gs-card-num">06</span></div>
+            <h3 class="gs-h3">Práticas psicopedagógicas</h3>
+            <p>Reflexão sobre práticas psicopedagógicas.</p>
+          </article>
+        </div>
+
+        <div class="gs-notice gs-reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg>
+          <span>A supervisão não substitui o atendimento ao estudante, a avaliação profissional nem a responsabilidade técnica de cada integrante da equipe.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PARA QUEM É -->
+    <section class="gs-section gs-audience" id="gs-para-quem">
+      <div class="gs-container">
+        <div class="gs-head gs-reveal">
+          <span class="gs-kicker">Para quem é</span>
+          <h2 class="gs-h2">Apoio para quem educa, coordena e <span class="gs-accent">acompanha.</span></h2>
+        </div>
+
+        <div class="gs-audience-grid">
+          <article class="gs-card gs-reveal">
+            <span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-6 9 6"/><path d="M5 10v9h14v-9M10 19v-5h4v5"/></svg></span>
+            <div>
+              <h3 class="gs-h3">Escolas e equipes educacionais</h3>
+              <p>Para profissionais que desejam refletir sobre os desafios da inclusão e organizar estratégias para o cotidiano escolar.</p>
+            </div>
+          </article>
+
+          <article class="gs-card gs-reveal">
+            <span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 14c2.8 0 5 1.8 5 5"/></svg></span>
+            <div>
+              <h3 class="gs-h3">Coordenações e equipes gestoras</h3>
+              <p>Para quem busca espaço de diálogo e apoio na organização de fluxos, estudos de caso e ações da equipe.</p>
+            </div>
+          </article>
+
+          <article class="gs-card gs-reveal">
+            <span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V6a2 2 0 0 1 2-2h12v16H6a2 2 0 0 1-2-2"/><path d="M8 8h6M8 12h4"/></svg></span>
+            <div>
+              <h3 class="gs-h3">Psicopedagogas e profissionais da área</h3>
+              <p>Para quem deseja discutir desafios da prática, ampliar a reflexão sobre os casos e pensar possibilidades de atuação, respeitando os próprios limites profissionais e éticos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. COMO FUNCIONA -->
+    <section class="gs-section gs-method gs-on-dark" id="gs-como-funciona">
+      <div class="gs-container gs-method-grid">
+        <div class="gs-reveal">
+          <span class="gs-kicker gs-kicker--light">Como funciona</span>
+          <h2 class="gs-h2">Do contexto às estratégias, em um processo <span class="gs-accent">construído em conjunto.</span></h2>
+          <p class="gs-lead">A supervisão começa com uma conversa para compreender o contexto, as necessidades e os objetivos do acompanhamento.</p>
+        </div>
+
+        <ol class="gs-steps">
+          <li class="gs-step gs-reveal">
+            <span class="gs-step-num">01</span>
+            <div class="gs-step-body"><h3 class="gs-h3">Compreensão do contexto</h3><p>A conversa inicial permite compreender as necessidades, os desafios e os objetivos do acompanhamento.</p></div>
+          </li>
+          <li class="gs-step gs-reveal">
+            <span class="gs-step-num">02</span>
+            <div class="gs-step-body"><h3 class="gs-h3">Definição dos encontros</h3><p>Gisélia e os participantes definem os temas, o formato e a frequência dos encontros.</p></div>
+          </li>
+          <li class="gs-step gs-reveal">
+            <span class="gs-step-num">03</span>
+            <div class="gs-step-body"><h3 class="gs-h3">Construção das estratégias</h3><p>As estratégias são pensadas em conjunto, considerando a realidade de cada equipe, profissional ou estudante.</p></div>
+          </li>
+          <li class="gs-step gs-reveal">
+            <span class="gs-step-num">04</span>
+            <div class="gs-step-body"><h3 class="gs-h3">Retomada e ajustes</h3><p>As possibilidades construídas podem ser retomadas e ajustadas ao longo do processo, conforme a demanda.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. FORMATOS -->
+    <section class="gs-section gs-formats" id="gs-formatos">
+      <div class="gs-container gs-formats-grid">
+        <figure class="gs-format-figure gs-reveal">
+          <div class="gs-format-frame">
+            <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/unnamed-2.webp" alt="Fachada da Clínica Multiprofissional Gisélia Batista" width="340" height="510" loading="lazy">
+          </div>
+          <figcaption class="gs-format-caption">Formatos combinados conforme cada demanda.</figcaption>
+        </figure>
+
+        <div class="gs-reveal">
+          <span class="gs-kicker">Formatos possíveis</span>
+          <h2 class="gs-h2">Uma proposta adaptada ao contexto de <span class="gs-accent">quem participa.</span></h2>
+          <p class="gs-lead">O formato é combinado conforme a demanda, respeitando as necessidades e os objetivos definidos na conversa inicial.</p>
+
+          <ul class="gs-format-list">
+            <li class="gs-format-item"><span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 14c2.8 0 5 1.8 5 5"/></svg></span><h3 class="gs-h3">Encontros com equipes escolares</h3></li>
+            <li class="gs-format-item"><span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span><h3 class="gs-h3">Formação de profissionais</h3></li>
+            <li class="gs-format-item"><span class="gs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><circle cx="12" cy="9" r="2"/><path d="M8.5 13.5c.7-1.2 2-2 3.5-2s2.8.8 3.5 2"/></svg></span><h3 class="gs-h3">Supervisão individual online para psicopedagogas</h3></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TRABALHO CONJUNTO -->
+    <section class="gs-section gs-together">
+      <div class="gs-container gs-together-grid">
+        <div class="gs-reveal">
+          <span class="gs-kicker">Construção conjunta</span>
+          <h2 class="gs-h2">Um trabalho construído em <span class="gs-accent">conjunto.</span></h2>
+          <p class="gs-lead">Cada estudante, equipe e contexto tem suas particularidades. Por isso, a supervisão não parte de respostas prontas: ela oferece um espaço para observar, refletir e construir estratégias coerentes com a realidade de quem participa.</p>
+        </div>
+
+        <aside class="gs-quote gs-reveal">
+          <span class="gs-quote-mark" aria-hidden="true">“</span>
+          <blockquote>Não se trata de oferecer fórmulas prontas, mas de construir caminhos possíveis para cada realidade.</blockquote>
+          <small>Supervisão com escuta e olhar técnico</small>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 7. CTA FINAL -->
+    <section class="gs-section gs-final gs-on-dark" id="gs-contato">
+      <div class="gs-container gs-final-grid">
+        <div class="gs-reveal">
+          <span class="gs-kicker gs-kicker--light">Vamos conversar?</span>
+          <h2 class="gs-h2">Um espaço de reflexão e apoio para os desafios da sua <span class="gs-accent">prática.</span></h2>
+          <p class="gs-lead">Se você procura um espaço de reflexão e apoio para os desafios da sua equipe ou da sua prática profissional, entre em contato com Gisélia para conhecer a proposta de supervisão.</p>
+        </div>
+
+        <aside class="gs-final-card gs-reveal">
+          <small>Próximo passo</small>
+          <h3 class="gs-h3">Converse diretamente com Gisélia.</h3>
+          <p>Conte brevemente quem você é e qual é o principal desafio da sua equipe ou prática neste momento.</p>
+          <a class="gs-btn gs-btn--pink" href="https://wa.me/5555999814934?text=Ol%C3%A1%2C%20Gis%C3%A9lia%21%20Vim%20pela%20p%C3%A1gina%20de%20Supervis%C3%A3o%20do%20seu%20site.%20Sou%20%5Bprofissional%2Fequipe%2Fescola%5D%20de%20%5Bcidade%5D.%20Gostaria%20de%20conversar%20sobre%20supervis%C3%A3o.%20Nosso%20principal%20desafio%20neste%20momento%20%C3%A9%20%5Bconte%20brevemente%5D." target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <span class="gs-final-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+55 (55) 99981-4934</span>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gs-footer">
+    <div class="gs-container">
+      <div class="gs-footer-top">
+        <div>
+          <a class="gs-footer-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial">
+            <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional" width="142" height="54" loading="lazy">
+          </a>
+          <p class="gs-footer-about">Cuidado especializado, atuação multiprofissional e espaços de reflexão para quem educa e acompanha processos de aprendizagem e inclusão.</p>
+        </div>
+
+        <div>
+          <h4>Navegação</h4>
+          <nav class="gs-footer-links" aria-label="Navegação do rodapé">
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/">Início</a>
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a>
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a>
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a>
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a>
+            <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a>
+            <a href="https://giseliabatista.com.br/supervisao/">Supervisão</a>
+            <a href="https://giseliabatista.com.br/estimulacao-cognitiva/">Estimulação cognitiva</a>
+            <a href="https://www.instagram.com/clinicagiseliabatista/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </nav>
+        </div>
+
+        <div>
+          <h4>Aviso institucional</h4>
+          <p class="gs-footer-note">A supervisão não substitui o atendimento ao estudante, a avaliação profissional nem a responsabilidade técnica de cada integrante da equipe. As estratégias são construídas conforme o contexto e as atribuições dos participantes.</p>
+        </div>
+      </div>
+
+      <div class="gs-footer-bottom">
+        <span>© <span data-gs-year>2026</span> Clínica Multiprofissional | Gisélia Batista.</span>
+        <span>Informação, cuidado e responsabilidade.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Supervisão Pedagógica e Psicopedagógica",
+  "description": "Supervisão para escolas, equipes e psicopedagogas que desejam refletir sobre a prática e construir estratégias possíveis para os desafios da inclusão e da aprendizagem.",
+  "url": "https://giseliabatista.com.br/supervisao/",
+  "serviceType": "Supervisão pedagógica e psicopedagógica",
+  "provider": {
+    "@type": "Person",
+    "name": "Gisélia Batista",
+    "jobTitle": "Psicopedagoga e coordenadora clínica",
+    "url": "https://giseliabatista.com.br/clinica-multiprofissional/"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Escolas, equipes educacionais, coordenações, psicopedagogas e profissionais da área"
+  }
+}
+</script>
+
+<script>
+  (function () {
+    var root = document.querySelector('.gs-page');
+    if (!root || root.dataset.gsReady === 'true') return;
+    root.dataset.gsReady = 'true';
+
+    /* No editor do Elementor as animações ficam desligadas para facilitar a edição. */
+    var inEditor = document.body.classList.contains('elementor-editor-active');
+    if (!inEditor) root.classList.add('gs-js');
+
+    /* SEO básico para páginas em que o Elementor não recebeu título e descrição próprios. */
+    if (!inEditor) {
+      document.title = 'Supervisão Pedagógica e Psicopedagógica | Gisélia Batista';
+      var descriptionText = 'Supervisão para escolas, equipes e psicopedagogas que desejam refletir sobre a prática e construir estratégias possíveis para os desafios da inclusão e da aprendizagem.';
+      var metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', descriptionText);
+    }
+
+    var header = root.querySelector('[data-gs-header]');
+    var menuButton = root.querySelector('[data-gs-menu]');
+
+    function setMenu(open) {
+      if (!header || !menuButton) return;
+      header.classList.toggle('gs-menu-open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    }
+
+    if (header && menuButton) {
+      menuButton.addEventListener('click', function () {
+        setMenu(!header.classList.contains('gs-menu-open'));
+      });
+
+      root.querySelectorAll('.gs-nav a').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') setMenu(false);
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1180) setMenu(false);
+      });
+    }
+
+    root.querySelectorAll('a[href^="#gs-"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (event) {
+        var target = root.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        event.preventDefault();
+        var offset = (header ? header.offsetHeight : 0) + (document.body.classList.contains('admin-bar') ? 32 : 0);
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - offset,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    var year = root.querySelector('[data-gs-year]');
+    if (year) year.textContent = new Date().getFullYear();
+
+    var reveals = root.querySelectorAll('.gs-reveal');
+    if (!inEditor && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gs-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(function (element) { observer.observe(element); });
+    } else {
+      reveals.forEach(function (element) { element.classList.add('gs-visible'); });
+    }
+  })();
+</script>
