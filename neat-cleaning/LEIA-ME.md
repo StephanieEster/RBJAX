@@ -8,11 +8,12 @@ de busca e todas as páginas geradas a partir de um único template.
 
 ```
 neat-cleaning/
-├── build/build.py   ← conteúdo + templates de todas as páginas (edite aqui)
+├── build/content.py ← textos, serviços, FAQs, cidades e textos legais (edite aqui)
+├── build/build.py   ← componentes e templates das páginas
 └── site/            ← pasta pronta para public_html da Hostinger
 ```
 
-Para alterar texto, FAQ, serviços ou cidades, edite `build/build.py` e rode:
+Para alterar texto, FAQ, serviços ou cidades, edite `build/content.py` e rode:
 
 ```bash
 cd neat-cleaning && python3 build/build.py
@@ -38,14 +39,13 @@ CSS e JS ficam em `site/assets/css/style.css` e `site/assets/js/main.js`.
 ## O que mudou
 
 **Visual**
-- Identidade do brandbook aplicada: preto profundo + dourado em fios finos e
-  detalhes, marfim nas seções claras; Cinzel nos títulos, Montserrat no texto.
-- Layout editorial: hero dividido com foto emoldurada, índice de serviços com
-  pré-visualização da foto, tabelas de critérios, numeração romana nas seções,
-  formulário com campos sublinhados, menu mobile em tela cheia, barra fixa
-  "Text for a quote / Call" no celular.
-- Fontes hospedadas no próprio site (mais rápido e sem requisição ao Google).
-- Imagens responsivas (640/1024/1536 px) e imagens de compartilhamento 1200×630.
+- Logo original no cabeçalho (e no rodapé), sobre fundo preto como no brandbook.
+- Heros compactos com foto de fundo e um cartão de diferenciais sobreposto.
+- Serviços em bento grid de cards com foto, ícone e tag "Core service".
+- Ícones de linha em todo o site (nenhuma numeração ou algarismo romano).
+- Dourado metálico do brandbook nos botões e destaques; cards arredondados,
+  tabela comparativa, formulário em card, FAQ em cards, barra fixa no celular.
+- Fontes hospedadas no próprio site e imagens responsivas (640/1024/1536 px).
 
 **SEO**
 - Um H1 por página com serviço + cidade ("Regular house cleaning in Natick, MA").

@@ -9,16 +9,18 @@
   const menuButton = document.querySelector('.menu-toggle');
   const dropdown = document.querySelector('.dd');
   const dropdownButton = document.querySelector('.dd-toggle');
-  const menuIcon = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>';
-  const closeIcon = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>';
+  const menuIcon = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
+  const closeIcon = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>';
 
   const setDropdown = (open) => {
     if (!dropdown || !dropdownButton) return;
     dropdown.classList.toggle('is-open', open);
     dropdownButton.setAttribute('aria-expanded', String(open));
   };
+  const header = document.querySelector('.site-header');
   const setMenu = (open, returnFocus = false) => {
     if (!nav || !menuButton) return;
+    if (open && header) nav.style.setProperty('--nav-top', Math.max(0, Math.round(header.getBoundingClientRect().bottom)) + 'px');
     nav.classList.toggle('is-open', open);
     document.body.classList.toggle('menu-open', open && mobileQuery.matches);
     menuButton.setAttribute('aria-expanded', String(open));
@@ -54,20 +56,11 @@
   });
   mobileQuery.addEventListener('change', () => setMenu(false));
 
-  /* Service index: swap preview image on hover/focus */
-  const preview = document.querySelector('.svc-preview');
-  if (preview) {
-    const images = [...preview.querySelectorAll('img')];
-    const caption = preview.querySelector('figcaption');
-    document.querySelectorAll('.svc-row[data-index]').forEach((row) => {
-      const show = () => {
-        const index = Number(row.dataset.index);
-        images.forEach((img, i) => img.classList.toggle('is-active', i === index));
-        if (caption) caption.textContent = row.dataset.caption || '';
-      };
-      row.addEventListener('mouseenter', show);
-      row.addEventListener('focus', show);
-    });
+  /* Header shrinks once the page scrolls */
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   /* Reveal on scroll */
@@ -85,7 +78,7 @@
 
   /* Mobile text bar appears after the hero */
   const bar = document.querySelector('.mobile-bar');
-  const hero = document.querySelector('.hero, .center-hero');
+  const hero = document.querySelector('.hero, .center-hero, .page-top');
   if (bar && hero && 'IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => bar.classList.toggle('is-visible', !entry.isIntersecting))
       .observe(hero);
