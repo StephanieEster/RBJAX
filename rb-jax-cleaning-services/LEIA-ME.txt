@@ -1,0 +1,45 @@
+RB JAX CLEANING SERVICES LLC - SITE CUSTOM PHP/HTML
+
+PUBLICAÇÃO NA HOSTINGER
+1. Na Hostinger, crie o projeto pela opção Custom PHP/HTML website. Não instale WordPress.
+2. Abra o Gerenciador de Arquivos e acesse a pasta public_html.
+3. Envie o arquivo ZIP e extraia o conteúdo diretamente dentro da public_html.
+4. Confirme que index.html, send-form.php, .htaccess e a pasta assets estão diretamente na raiz da public_html, sem uma pasta intermediária.
+5. Depois de conectar o domínio final, ative o SSL/HTTPS na Hostinger.
+
+FORMULÁRIO
+- Destinatário fixado no servidor: rbcleaningfl@gmail.com
+- Endpoint: /send-form.php
+- O formulário usa mail() do PHP e não depende de WordPress ou serviços externos.
+- Após a publicação, faça um envio real pela home e outro pela página Contact.
+- Faça também um envio pelo popup que aparece após a rolagem da página.
+- Verifique caixa de entrada, spam e se todos os campos chegaram corretamente.
+- Se o mail() não entregar, configure PHPMailer com SMTP usando uma conta do domínio. Nunca coloque senha SMTP no HTML ou JavaScript.
+
+SEO
+- Os títulos, descrições, headings, dados estruturados, textos alternativos e páginas de serviço já foram preparados.
+- Quando o domínio definitivo estiver conectado, gere o sitemap com as URLs absolutas do domínio e cadastre o site no Google Search Console.
+
+CONTATOS CONFIGURADOS
+- Telefone e SMS: +1 (727) 877-3413
+- E-mail público e destinatário dos formulários: rbcleaningfl@gmail.com
+- Instagram: https://www.instagram.com/rbcleaningfl/
+- Facebook: https://www.facebook.com/profile.php?id=61593977273683
+
+ARQUIVOS PRINCIPAIS
+- index.html: página inicial
+- services.html: visão geral dos serviços
+- residential-cleaning.html: limpeza residencial e recorrente
+- deep-cleaning.html: deep cleaning
+- commercial-cleaning.html: limpeza comercial
+- about.html: história e valores
+- gallery.html: galeria completa com visualização ampliada
+- contact.html: contato e formulário
+- privacy.html: política de privacidade e SMS
+- terms.html: termos de uso e SMS
+- send-form.php: processamento seguro do formulário
+
+POPUP
+- O popup abre automaticamente uma vez por sessão após aproximadamente 28% de rolagem.
+- Ele fecha pelo botão, pelo fundo ou pela tecla Esc.
+- O botão flutuante "Free estimate" permite reabrir o formulário.
