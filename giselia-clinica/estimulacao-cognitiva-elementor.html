@@ -1,0 +1,1778 @@
+<!--
+  PÁGINA - ESTIMULAÇÃO COGNITIVA
+  Clínica Multiprofissional | Gisélia Batista
+  Cole todo este arquivo em um único widget HTML do Elementor.
+  Use o layout de página "Elementor Canvas" ou "Elementor largura total".
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+  .gc-page,
+  .gc-page * {
+    box-sizing: border-box;
+  }
+
+  .gc-page {
+    --gc-blue-950: #174e66;
+    --gc-blue-900: #286f8d;
+    --gc-blue-800: #347f9f;
+    --gc-blue-700: #73b9d1;
+    --gc-blue-200: #cbeef5;
+    --gc-blue-100: #e3f6fa;
+    --gc-pink: #ee9db5;
+    --gc-pink-dark: #cb6686;
+    --gc-pink-soft: #fbe1e9;
+    --gc-yellow: #fff0a0;
+    --gc-white: #ffffff;
+    --gc-offwhite: #fbfdfe;
+    --gc-light: #eef8fb;
+    --gc-text: #347f9f;
+    --gc-muted: #648796;
+    --gc-line: rgba(79, 152, 186, .18);
+    --gc-shadow: 0 24px 70px rgba(33, 95, 121, .13);
+    width: 100%;
+    overflow: clip;
+    background: var(--gc-offwhite);
+    color: var(--gc-text);
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .gc-page a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gc-page img,
+  .gc-page svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  .gc-page button {
+    font: inherit;
+  }
+
+  /* Proteção contra estilos globais do Elementor e do tema */
+  .gc-page h1,
+  .gc-page h2,
+  .gc-page h3,
+  .gc-page h4,
+  .gc-page h5,
+  .gc-page h6 {
+    color: var(--gc-text) !important;
+    font-family: "Playfair Display", serif !important;
+  }
+
+  .gc-page .gc-hero h1,
+  .gc-page .gc-hero h2,
+  .gc-page .gc-final h2,
+  .gc-page .gc-footer h4 {
+    color: var(--gc-white) !important;
+  }
+
+  .gc-page .gc-accent {
+    color: var(--gc-pink) !important;
+    font-style: italic;
+  }
+
+  .gc-container {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .gc-section {
+    position: relative;
+    padding: 110px 0;
+    scroll-margin-top: 92px;
+  }
+
+  .gc-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    color: var(--gc-pink-dark);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .gc-kicker::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .gc-kicker--light {
+    color: #ffd0dc;
+  }
+
+  .gc-title,
+  .gc-display,
+  .gc-feature-title,
+  .gc-faq summary {
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    letter-spacing: -.04em;
+    line-height: 1;
+  }
+
+  .gc-display {
+    max-width: 720px;
+    font-size: clamp(3.2rem, 6.2vw, 6.2rem);
+  }
+
+  .gc-title {
+    max-width: 780px;
+    font-size: clamp(2.55rem, 4.3vw, 4.7rem);
+  }
+
+  .gc-copy {
+    color: var(--gc-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .gc-copy p {
+    margin: 0 0 18px;
+  }
+
+  .gc-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gc-btn {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border: 1px solid transparent;
+    background: var(--gc-blue-900);
+    color: var(--gc-white) !important;
+    font-size: .82rem;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+
+  .gc-btn:hover {
+    background: var(--gc-blue-950);
+    transform: translateY(-2px);
+  }
+
+  .gc-btn svg {
+    width: 17px;
+    height: 17px;
+    transition: transform .25s ease;
+  }
+
+  .gc-btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .gc-btn--light {
+    background: var(--gc-white);
+    color: var(--gc-blue-950) !important;
+  }
+
+  .gc-btn--light:hover {
+    background: var(--gc-yellow);
+  }
+
+  .gc-btn--outline {
+    border-color: rgba(255, 255, 255, .42);
+    background: transparent;
+  }
+
+  .gc-btn--outline:hover {
+    border-color: var(--gc-white);
+    background: rgba(255, 255, 255, .08);
+  }
+
+  /* Header */
+  .gc-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid var(--gc-line);
+    background: rgba(251, 253, 254, .96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .gc-header-inner {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .gc-logo {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+
+  .gc-logo img {
+    width: 206px;
+    height: 58px;
+    object-fit: contain;
+  }
+
+  .gc-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.5vw, 28px);
+  }
+
+  .gc-nav > a:not(.gc-btn) {
+    position: relative;
+    color: var(--gc-blue-800);
+    font-size: .79rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .gc-nav .gc-btn {
+    white-space: nowrap;
+  }
+
+  .gc-nav .gc-btn svg {
+    flex: 0 0 auto;
+  }
+
+  .gc-nav > a:not(.gc-btn)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+    height: 1px;
+    background: var(--gc-pink-dark);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .25s ease;
+  }
+
+  .gc-nav > a:not(.gc-btn):hover::after,
+  .gc-nav > a.gc-current::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .gc-menu-toggle {
+    display: none;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--gc-line);
+    background: transparent;
+    color: var(--gc-blue-900);
+    cursor: pointer;
+  }
+
+  .gc-menu-toggle span,
+  .gc-menu-toggle span::before,
+  .gc-menu-toggle span::after {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: currentColor;
+    transition: .25s ease;
+  }
+
+  .gc-menu-toggle span {
+    position: relative;
+  }
+
+  .gc-menu-toggle span::before,
+  .gc-menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .gc-menu-toggle span::before { top: -6px; }
+  .gc-menu-toggle span::after { top: 6px; }
+  .gc-header.gc-menu-open .gc-menu-toggle span { background: transparent; }
+  .gc-header.gc-menu-open .gc-menu-toggle span::before { top: 0; transform: rotate(45deg); }
+  .gc-header.gc-menu-open .gc-menu-toggle span::after { top: 0; transform: rotate(-45deg); }
+
+  /* Navegação compacta antes que o menu completo perca espaço */
+  @media (max-width: 1200px) {
+    .gc-menu-toggle { display: grid; }
+
+    .gc-nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0;
+      padding: 18px 24px 25px;
+      border-top: 1px solid var(--gc-line);
+      border-bottom: 1px solid var(--gc-line);
+      background: var(--gc-offwhite);
+      box-shadow: 0 24px 40px rgba(33, 95, 121, .14);
+    }
+
+    .gc-header.gc-menu-open .gc-nav { display: flex; }
+
+    .gc-nav > a:not(.gc-btn) {
+      padding: 14px 5px;
+      border-bottom: 1px solid var(--gc-line);
+      font-size: .9rem;
+    }
+
+    .gc-nav > a:not(.gc-btn)::after { display: none; }
+    .gc-nav .gc-btn { margin-top: 16px; }
+  }
+
+  /* Hero */
+  .gc-hero {
+    position: relative;
+    min-height: min(760px, calc(100vh - 86px));
+    overflow: hidden;
+    background: var(--gc-blue-800);
+    color: var(--gc-white);
+    isolation: isolate;
+  }
+
+  .gc-hero::before,
+  .gc-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: 50%;
+  }
+
+  .gc-hero::before {
+    top: -270px;
+    left: -240px;
+    width: 600px;
+    height: 600px;
+    box-shadow: 0 0 0 75px rgba(255, 255, 255, .025);
+  }
+
+  .gc-hero::after {
+    right: -190px;
+    bottom: -320px;
+    width: 650px;
+    height: 650px;
+    box-shadow: 0 0 0 75px rgba(255, 255, 255, .025);
+  }
+
+  .gc-hero-grid {
+    display: grid;
+    min-height: inherit;
+    grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
+    gap: 65px;
+    align-items: center;
+  }
+
+  .gc-hero-content {
+    padding: 90px 0 80px;
+  }
+
+  .gc-hero-copy {
+    max-width: 650px;
+    margin: 30px 0 0;
+    color: rgba(255, 255, 255, .9);
+    font-size: 1.02rem;
+    line-height: 1.78;
+  }
+
+  .gc-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .gc-hero-note {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    margin-top: 31px;
+    color: rgba(255, 255, 255, .78);
+    font-size: .76rem;
+  }
+
+  .gc-hero-note svg {
+    width: 18px;
+    flex: 0 0 18px;
+    margin-top: 2px;
+    color: #ffd0dc;
+  }
+
+  .gc-hero-visual {
+    position: relative;
+    display: grid;
+    min-height: 550px;
+    place-items: center;
+  }
+
+  .gc-orbit {
+    position: relative;
+    display: grid;
+    width: min(430px, 100%);
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .34);
+    border-radius: 50%;
+  }
+
+  .gc-orbit::before,
+  .gc-orbit::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 50%;
+  }
+
+  .gc-orbit::before { inset: 38px; }
+  .gc-orbit::after { inset: 78px; }
+
+  .gc-brain {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 152px;
+    height: 152px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--gc-pink);
+    box-shadow: 0 22px 55px rgba(23, 78, 102, .24);
+    color: var(--gc-blue-950);
+  }
+
+  .gc-brain svg {
+    width: 78px;
+    height: 78px;
+  }
+
+  .gc-orbit-label {
+    position: absolute;
+    z-index: 3;
+    padding: 9px 14px;
+    border: 1px solid rgba(255, 255, 255, .22);
+    background: rgba(23, 78, 102, .76);
+    color: var(--gc-white);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+
+  .gc-orbit-label--one { top: 34px; left: 38px; }
+  .gc-orbit-label--two { top: 82px; right: -3px; }
+  .gc-orbit-label--three { right: 13px; bottom: 72px; }
+  .gc-orbit-label--four { bottom: 25px; left: 52px; }
+  .gc-orbit-label--five { top: 48%; left: -24px; }
+
+  .gc-status-chip {
+    position: absolute;
+    right: 10px;
+    bottom: 25px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 17px;
+    border: 1px solid rgba(255, 255, 255, .24);
+    background: var(--gc-white);
+    color: var(--gc-blue-900);
+    font-size: .72rem;
+    font-weight: 700;
+    box-shadow: var(--gc-shadow);
+  }
+
+  .gc-status-chip span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gc-pink-dark);
+  }
+
+  /* Intro */
+  .gc-intro {
+    background: var(--gc-white);
+  }
+
+  .gc-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    gap: 90px;
+    align-items: center;
+  }
+
+  .gc-intro .gc-copy {
+    max-width: 575px;
+  }
+
+  .gc-definition {
+    margin-top: 31px;
+    padding: 22px 24px;
+    border-left: 3px solid var(--gc-pink);
+    background: var(--gc-light);
+    color: var(--gc-blue-900);
+    font-family: "Playfair Display", serif;
+    font-size: 1.08rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .gc-intro-art {
+    position: relative;
+    min-height: 470px;
+    overflow: hidden;
+    border: 1px solid var(--gc-line);
+    background: var(--gc-pink-soft);
+  }
+
+  .gc-intro-art::before,
+  .gc-intro-art::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .gc-intro-art::before {
+    top: -85px;
+    right: -65px;
+    width: 300px;
+    height: 300px;
+    background: var(--gc-blue-200);
+  }
+
+  .gc-intro-art::after {
+    bottom: -110px;
+    left: -70px;
+    width: 320px;
+    height: 320px;
+    background: var(--gc-yellow);
+  }
+
+  .gc-art-card {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    min-height: 92px;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    border: 1px solid rgba(79, 152, 186, .18);
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 14px 35px rgba(33, 95, 121, .1);
+    backdrop-filter: blur(8px);
+  }
+
+  .gc-art-card span:first-child {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--gc-blue-100);
+    color: var(--gc-blue-900);
+    font-size: .72rem;
+    font-weight: 700;
+  }
+
+  .gc-art-card strong {
+    display: block;
+    color: var(--gc-blue-900);
+    font-size: .83rem;
+  }
+
+  .gc-art-card small {
+    display: block;
+    color: var(--gc-muted);
+    font-size: .68rem;
+  }
+
+  .gc-art-card--one { top: 52px; left: 42px; width: 235px; }
+  .gc-art-card--two { top: 185px; right: 35px; width: 245px; }
+  .gc-art-card--three { bottom: 45px; left: 68px; width: 250px; }
+
+  /* Cognitive abilities */
+  .gc-abilities {
+    background: var(--gc-light);
+  }
+
+  .gc-section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+    gap: 70px;
+    align-items: end;
+    margin-bottom: 54px;
+  }
+
+  .gc-section-head .gc-copy {
+    padding-bottom: 6px;
+  }
+
+  .gc-ability-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 14px;
+  }
+
+  .gc-ability {
+    display: flex;
+    min-height: 270px;
+    flex-direction: column;
+    grid-column: span 2;
+    justify-content: space-between;
+    padding: 26px 24px;
+    border: 1px solid rgba(79, 152, 186, .1);
+    background: var(--gc-white);
+    transition: transform .28s ease, box-shadow .28s ease;
+  }
+
+  .gc-ability:nth-child(2) { background: var(--gc-pink-soft); }
+  .gc-ability:nth-child(3) { background: var(--gc-yellow); }
+  .gc-ability:nth-child(4) { background: var(--gc-blue-100); }
+  .gc-ability:nth-child(5) { background: #f7eef4; }
+
+  .gc-ability:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--gc-shadow);
+  }
+
+  .gc-ability-number {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--gc-line);
+    border-radius: 50%;
+    color: var(--gc-pink-dark);
+    font-size: .7rem;
+    font-weight: 700;
+  }
+
+  .gc-ability h3 {
+    margin: 40px 0 12px;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1.06;
+  }
+
+  .gc-ability p {
+    margin: 0;
+    color: var(--gc-muted);
+    font-size: .78rem;
+    line-height: 1.58;
+  }
+
+  /* Principles */
+  .gc-principles {
+    background: var(--gc-white);
+  }
+
+  .gc-principles-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+    gap: 88px;
+    align-items: start;
+  }
+
+  .gc-principles-intro {
+    position: sticky;
+    top: 130px;
+  }
+
+  .gc-principles-intro .gc-copy {
+    margin-top: 25px;
+  }
+
+  .gc-principle-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .gc-principle {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 22px;
+    align-items: start;
+    padding: 30px;
+    border: 1px solid var(--gc-line);
+    background: var(--gc-offwhite);
+  }
+
+  .gc-principle:nth-child(2) { background: var(--gc-pink-soft); }
+  .gc-principle:nth-child(3) { background: var(--gc-blue-100); }
+
+  .gc-principle-icon {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--gc-white);
+    color: var(--gc-blue-900);
+    box-shadow: 0 9px 25px rgba(33, 95, 121, .09);
+  }
+
+  .gc-principle-icon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .gc-feature-title {
+    margin-bottom: 10px;
+    font-size: 1.65rem;
+    line-height: 1.08;
+  }
+
+  .gc-principle p {
+    margin: 0;
+    color: var(--gc-muted);
+    font-size: .86rem;
+  }
+
+  /* Status */
+  .gc-status {
+    background: var(--gc-light);
+  }
+
+  .gc-status-panel {
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    overflow: hidden;
+    border: 1px solid var(--gc-line);
+    background: var(--gc-white);
+    box-shadow: var(--gc-shadow);
+  }
+
+  .gc-status-main {
+    padding: 58px;
+    border-right: 1px solid var(--gc-line);
+  }
+
+  .gc-status-main .gc-title {
+    max-width: 630px;
+    font-size: clamp(2.5rem, 4vw, 4.2rem);
+  }
+
+  .gc-status-main .gc-copy {
+    max-width: 620px;
+    margin-top: 24px;
+  }
+
+  .gc-status-side {
+    display: grid;
+    align-content: center;
+    gap: 12px;
+    padding: 42px;
+    background: var(--gc-pink-soft);
+  }
+
+  .gc-status-item {
+    padding: 19px 20px;
+    border: 1px solid rgba(203, 102, 134, .2);
+    background: rgba(255, 255, 255, .78);
+  }
+
+  .gc-status-item strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--gc-blue-900);
+    font-size: .82rem;
+  }
+
+  .gc-status-item span {
+    color: var(--gc-muted);
+    font-size: .73rem;
+  }
+
+  /* FAQ */
+  .gc-faq-section {
+    background: var(--gc-offwhite);
+  }
+
+  .gc-faq-grid {
+    display: grid;
+    grid-template-columns: minmax(290px, .7fr) minmax(0, 1.3fr);
+    gap: 96px;
+    align-items: start;
+  }
+
+  .gc-faq-intro .gc-copy {
+    margin: 25px 0 30px;
+  }
+
+  .gc-faq-list {
+    border-top: 1px solid var(--gc-line);
+  }
+
+  .gc-faq {
+    border-bottom: 1px solid var(--gc-line);
+  }
+
+  .gc-faq summary {
+    position: relative;
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 46px 18px 0;
+    color: var(--gc-blue-900) !important;
+    font-size: 1.24rem;
+    line-height: 1.22;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gc-faq summary::-webkit-details-marker { display: none; }
+
+  .gc-faq summary::before,
+  .gc-faq summary::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    width: 15px;
+    height: 1px;
+    background: var(--gc-pink-dark);
+    transition: transform .25s ease;
+  }
+
+  .gc-faq summary::after { transform: rotate(90deg); }
+  .gc-faq[open] summary::after { transform: rotate(0); }
+
+  .gc-faq-answer {
+    max-width: 730px;
+    padding: 0 45px 25px 0;
+    color: var(--gc-muted);
+    font-size: .9rem;
+  }
+
+  .gc-faq-answer p { margin: 0; }
+
+  /* Final CTA */
+  .gc-final {
+    overflow: hidden;
+    background: var(--gc-blue-800);
+    color: var(--gc-white);
+  }
+
+  .gc-final::before,
+  .gc-final::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 50%;
+  }
+
+  .gc-final::before {
+    top: -180px;
+    left: -120px;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 0 0 60px rgba(255, 255, 255, .025);
+  }
+
+  .gc-final::after {
+    right: -115px;
+    bottom: -210px;
+    width: 460px;
+    height: 460px;
+  }
+
+  .gc-final-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, .72fr);
+    gap: 90px;
+    align-items: center;
+  }
+
+  .gc-final-copy {
+    max-width: 650px;
+    margin: 26px 0 0;
+    color: rgba(255, 255, 255, .86);
+  }
+
+  .gc-contact-card {
+    padding: 38px;
+    background: var(--gc-white);
+    color: var(--gc-blue-900);
+  }
+
+  .gc-contact-card small {
+    display: block;
+    color: var(--gc-pink-dark);
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .gc-contact-card h3 {
+    margin: 18px 0 14px;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.06;
+  }
+
+  .gc-contact-card p {
+    margin: 0 0 25px;
+    color: var(--gc-muted);
+    font-size: .82rem;
+  }
+
+  .gc-contact-card .gc-btn {
+    width: 100%;
+  }
+
+  .gc-contact-footnote {
+    display: block;
+    margin-top: 13px;
+    color: var(--gc-muted);
+    font-size: .67rem;
+    text-align: center;
+  }
+
+  /* Footer */
+  .gc-footer {
+    padding: 54px 0 25px;
+    background: var(--gc-blue-950);
+    color: rgba(255, 255, 255, .7);
+  }
+
+  .gc-footer-top {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr 1fr;
+    gap: 55px;
+    align-items: start;
+    padding-bottom: 40px;
+  }
+
+  .gc-footer-logo img {
+    width: 218px;
+    height: 68px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: .9;
+  }
+
+  .gc-footer-about {
+    margin: 16px 0 0;
+    font-size: .76rem;
+    line-height: 1.65;
+  }
+
+  .gc-footer h4 {
+    margin: 0 0 16px;
+    font-size: .71rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .gc-footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px 22px;
+  }
+
+  .gc-footer-links a {
+    font-size: .76rem;
+  }
+
+  .gc-footer-links a:hover {
+    color: #ffd0dc;
+  }
+
+  .gc-footer-note {
+    margin: 0;
+    font-size: .73rem;
+    line-height: 1.65;
+  }
+
+  .gc-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    font-size: .66rem;
+  }
+
+  /* Entrance motion */
+  .gc-js .gc-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+
+  .gc-js .gc-reveal.gc-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gc-page *,
+    .gc-page *::before,
+    .gc-page *::after {
+      scroll-behavior: auto !important;
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+
+    .gc-js .gc-reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Tablet */
+  @media (max-width: 1080px) {
+    .gc-container { width: min(100% - 38px, 980px); }
+    .gc-section { padding: 88px 0; }
+    .gc-menu-toggle { display: grid; }
+
+    .gc-nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0;
+      padding: 18px 19px 25px;
+      border-top: 1px solid var(--gc-line);
+      border-bottom: 1px solid var(--gc-line);
+      background: var(--gc-offwhite);
+      box-shadow: 0 24px 40px rgba(33, 95, 121, .14);
+    }
+
+    .gc-header.gc-menu-open .gc-nav { display: flex; }
+
+    .gc-nav > a:not(.gc-btn) {
+      padding: 14px 5px;
+      border-bottom: 1px solid var(--gc-line);
+      font-size: .9rem;
+    }
+
+    .gc-nav > a:not(.gc-btn)::after { display: none; }
+    .gc-nav .gc-btn { margin-top: 16px; }
+    .gc-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(320px, .78fr); gap: 34px; }
+    .gc-display { font-size: clamp(3.6rem, 7vw, 5.5rem); }
+    .gc-orbit { width: min(360px, 100%); }
+    .gc-orbit-label--five { left: -8px; }
+    .gc-intro-grid { gap: 50px; }
+    .gc-section-head { gap: 42px; }
+    .gc-ability-grid { grid-template-columns: repeat(6, 1fr); }
+    .gc-ability { grid-column: span 2; }
+    .gc-ability:nth-child(4),
+    .gc-ability:nth-child(5) { grid-column: span 3; }
+    .gc-principles-grid { gap: 50px; }
+    .gc-faq-grid { gap: 55px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .gc-container { width: min(100% - 30px, 640px); }
+    .gc-section { padding: 74px 0; }
+    .gc-header-inner { min-height: 74px; }
+    .gc-logo img { width: 172px; height: 49px; }
+
+    .gc-hero { min-height: 0; }
+    .gc-hero-grid,
+    .gc-intro-grid,
+    .gc-section-head,
+    .gc-principles-grid,
+    .gc-status-panel,
+    .gc-faq-grid,
+    .gc-final-grid,
+    .gc-footer-top {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .gc-hero-content { padding: 68px 0 30px; }
+    .gc-display { font-size: clamp(3rem, 15vw, 4.6rem); }
+    .gc-hero-copy { font-size: .94rem; }
+    .gc-hero-actions { display: grid; grid-template-columns: 1fr; }
+    .gc-hero-actions .gc-btn { width: 100%; }
+    .gc-hero-visual { min-height: 430px; padding-bottom: 45px; }
+    .gc-orbit { width: min(335px, calc(100% - 12px)); }
+    .gc-brain { width: 125px; height: 125px; }
+    .gc-brain svg { width: 66px; height: 66px; }
+    .gc-orbit-label { padding: 8px 11px; font-size: .58rem; }
+    .gc-orbit-label--one { top: 25px; left: 29px; }
+    .gc-orbit-label--two { top: 69px; right: -4px; }
+    .gc-orbit-label--three { right: 0; bottom: 58px; }
+    .gc-orbit-label--four { bottom: 20px; left: 38px; }
+    .gc-orbit-label--five { top: 48%; left: -8px; }
+    .gc-status-chip { right: 5px; bottom: 10px; }
+
+    .gc-title { font-size: clamp(2.5rem, 12vw, 3.65rem); }
+    .gc-intro-art { min-height: 430px; }
+    .gc-art-card--one { top: 42px; left: 20px; }
+    .gc-art-card--two { top: 170px; right: 18px; }
+    .gc-art-card--three { bottom: 35px; left: 30px; }
+
+    .gc-ability-grid { grid-template-columns: 1fr; }
+    .gc-ability,
+    .gc-ability:nth-child(4),
+    .gc-ability:nth-child(5) {
+      min-height: 0;
+      grid-column: auto;
+    }
+
+    .gc-ability { padding: 25px; }
+    .gc-ability h3 { margin-top: 30px; }
+    .gc-principles-intro { position: static; }
+    .gc-principle { grid-template-columns: 54px 1fr; gap: 16px; padding: 24px 20px; }
+    .gc-principle-icon { width: 50px; height: 50px; }
+    .gc-status-main { padding: 37px 26px; border-right: 0; border-bottom: 1px solid var(--gc-line); }
+    .gc-status-side { padding: 26px; }
+    .gc-faq summary { min-height: 72px; font-size: 1.12rem; }
+    .gc-contact-card { padding: 30px 24px; }
+    .gc-footer-links { grid-template-columns: 1fr; }
+    .gc-footer-bottom { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (max-width: 430px) {
+    .gc-kicker { font-size: .63rem; letter-spacing: .14em; }
+    .gc-display { font-size: 3rem; }
+    .gc-title { font-size: 2.55rem; }
+    .gc-art-card { width: calc(100% - 40px); }
+    .gc-art-card--one,
+    .gc-art-card--two,
+    .gc-art-card--three { right: auto; left: 20px; }
+  }
+
+  /* Formulário de prioridade */
+  .gc-modal-lock {
+    overflow: hidden !important;
+  }
+
+  .gc-priority-modal[hidden] {
+    display: none !important;
+  }
+
+  .gc-priority-modal {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+
+  .gc-priority-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(23, 78, 102, .72) !important;
+    cursor: pointer;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+
+  .gc-priority-panel {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 560px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 44px;
+    border: 1px solid rgba(79, 152, 186, .22);
+    background: var(--gc-white);
+    box-shadow: 0 32px 90px rgba(23, 78, 102, .28);
+  }
+
+  .gc-priority-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--gc-line) !important;
+    border-radius: 50%;
+    background: var(--gc-offwhite) !important;
+    color: var(--gc-blue-950) !important;
+    cursor: pointer;
+  }
+
+  .gc-priority-close svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .gc-priority-eyebrow {
+    display: block;
+    margin: 0 48px 12px 0;
+    color: var(--gc-pink-dark);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+  }
+
+  .gc-page .gc-priority-title {
+    max-width: 430px;
+    margin: 0 0 12px;
+    color: var(--gc-blue-900) !important;
+    font-family: "Playfair Display", serif !important;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+  }
+
+  .gc-priority-intro {
+    margin: 0 0 28px;
+    color: var(--gc-muted);
+    font-size: .94rem;
+    line-height: 1.65;
+  }
+
+  .gc-priority-form {
+    display: grid;
+    gap: 17px;
+  }
+
+  .gc-priority-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .gc-priority-field label {
+    color: var(--gc-blue-950);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .035em;
+  }
+
+  .gc-priority-field input {
+    width: 100% !important;
+    min-height: 52px;
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    border: 1px solid rgba(79, 152, 186, .3) !important;
+    border-radius: 0 !important;
+    outline: 0;
+    background: var(--gc-offwhite) !important;
+    color: var(--gc-blue-950) !important;
+    font: 500 .94rem/1.35 "DM Sans", sans-serif !important;
+    box-shadow: none !important;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .gc-priority-field input::placeholder {
+    color: #89a4af;
+    opacity: 1;
+  }
+
+  .gc-priority-field input:focus {
+    border-color: var(--gc-blue-700) !important;
+    box-shadow: 0 0 0 3px rgba(115, 185, 209, .18) !important;
+  }
+
+  .gc-priority-submit {
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid var(--gc-pink-dark) !important;
+    background: var(--gc-pink-dark) !important;
+    color: var(--gc-white) !important;
+    cursor: pointer;
+  }
+
+  .gc-priority-submit:hover,
+  .gc-priority-submit:focus-visible {
+    border-color: var(--gc-blue-900) !important;
+    background: var(--gc-blue-900) !important;
+    color: var(--gc-white) !important;
+  }
+
+  .gc-priority-submit[disabled] {
+    cursor: wait;
+    opacity: .7;
+  }
+
+  .gc-priority-privacy {
+    margin: -2px 0 0;
+    color: var(--gc-muted);
+    font-size: .73rem;
+    line-height: 1.5;
+  }
+
+  .gc-priority-status {
+    min-height: 22px;
+    margin: 0;
+    color: var(--gc-blue-950);
+    font-size: .82rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .gc-priority-status[data-state="error"] {
+    color: #a33d5d;
+  }
+
+  .gc-priority-honeypot {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  @media (max-width: 600px) {
+    .gc-priority-modal { padding: 12px; }
+    .gc-priority-panel {
+      max-height: calc(100vh - 24px);
+      padding: 38px 22px 26px;
+    }
+    .gc-priority-close { top: 12px; right: 12px; }
+  }
+</style>
+
+<div class="gc-page" id="gc-topo">
+  <header class="gc-header" data-gc-header>
+    <div class="gc-container gc-header-inner">
+      <a class="gc-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial">
+        <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional">
+      </a>
+
+      <button class="gc-menu-toggle" type="button" aria-expanded="false" aria-controls="gc-nav" aria-label="Abrir menu" data-gc-menu>
+        <span></span>
+      </button>
+
+      <nav class="gc-nav" id="gc-nav" aria-label="Navegação principal">
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/">Início</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a>
+        <a href="https://giseliabatista.com.br/supervisao/">Supervisão</a>
+        <a class="gc-current" href="https://giseliabatista.com.br/estimulacao-cognitiva/" aria-current="page">Estimulação cognitiva</a>
+        <a class="gc-btn" href="#formulario-prioridade" data-gc-priority-open>
+          Falar com a equipe
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="gc-hero" aria-labelledby="gc-hero-title">
+      <div class="gc-container gc-hero-grid">
+        <div class="gc-hero-content gc-reveal">
+          <span class="gc-kicker gc-kicker--light">Atendimento disponível · público adulto</span>
+          <h1 class="gc-display" id="gc-hero-title">Estimulação cognitiva para <span class="gc-accent">adultos.</span></h1>
+          <p class="gc-hero-copy">A Clínica Multiprofissional | Gisélia Batista oferece atendimento específico de estimulação cognitiva voltado ao público adulto.</p>
+          <div class="gc-hero-actions">
+            <a class="gc-btn gc-btn--light" href="#formulario-prioridade" data-gc-priority-open>Quero saber mais sobre a Estimulação Cognitiva <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="gc-btn gc-btn--outline" href="#gc-entenda">Entenda a proposta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+          </div>
+          <div class="gc-hero-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.7 8.4 7 10 4.3-1.6 7-5.6 7-10V6l-7-3Z"/><path d="m9.3 12 1.7 1.7 3.8-4"/></svg>
+            <span>Um acompanhamento individualizado, orientado às necessidades e aos objetivos de cada pessoa.</span>
+          </div>
+        </div>
+
+        <div class="gc-hero-visual gc-reveal" aria-hidden="true">
+          <div class="gc-orbit">
+            <span class="gc-orbit-label gc-orbit-label--one">Atenção</span>
+            <span class="gc-orbit-label gc-orbit-label--two">Memória</span>
+            <span class="gc-orbit-label gc-orbit-label--three">Raciocínio</span>
+            <span class="gc-orbit-label gc-orbit-label--four">Linguagem</span>
+            <span class="gc-orbit-label gc-orbit-label--five">Funções executivas</span>
+            <div class="gc-brain">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 12c-7-5-15 1-14 8-7 2-8 12-2 16-4 7 3 15 10 13 3 7 13 6 16 0V18c0-5-5-9-10-6Z"/><path d="M37 12c7-5 15 1 14 8 7 2 8 12 2 16 4 7-3 15-10 13-3 7-13 6-16 0"/><path d="M17 22c5-1 8 2 8 6M47 22c-5-1-8 2-8 6M15 39c5-2 9 1 10 5M49 39c-5-2-9 1-10 5M27 18c-4 2-5 6-3 10M37 18c4 2 5 6 3 10"/></svg>
+            </div>
+          </div>
+          <div class="gc-status-chip"><span></span> Atendimento disponível</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-intro" id="gc-entenda">
+      <div class="gc-container gc-intro-grid">
+        <div class="gc-reveal">
+          <span class="gc-kicker">O que é</span>
+          <h2 class="gc-title">Um acompanhamento para atenção, memória e <span class="gc-accent">funções executivas.</span></h2>
+          <div class="gc-copy" style="margin-top: 27px;">
+            <p>A estimulação cognitiva é um acompanhamento direcionado ao desenvolvimento e à manutenção de habilidades como atenção, memória, raciocínio, linguagem e funções executivas, respeitando as características e os objetivos de cada pessoa.</p>
+            <p>O atendimento é direcionado ao público adulto e considera as necessidades identificadas ao longo do acompanhamento.</p>
+          </div>
+          <div class="gc-definition">Cada acompanhamento é conduzido de forma individualizada, de acordo com os objetivos de cada pessoa.</div>
+        </div>
+
+        <div class="gc-intro-art gc-reveal" aria-label="Habilidades relacionadas à estimulação cognitiva">
+          <div class="gc-art-card gc-art-card--one"><span>01</span><div><strong>Perceber necessidades</strong><small>Compreensão individual do momento atual.</small></div></div>
+          <div class="gc-art-card gc-art-card--two"><span>02</span><div><strong>Definir objetivos</strong><small>Prioridades alinhadas a cada pessoa.</small></div></div>
+          <div class="gc-art-card gc-art-card--three"><span>03</span><div><strong>Acompanhar o percurso</strong><small>Observação responsável da evolução.</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-abilities">
+      <div class="gc-container">
+        <div class="gc-section-head gc-reveal">
+          <div>
+            <span class="gc-kicker">Habilidades cognitivas</span>
+            <h2 class="gc-title">Diferentes habilidades participam da vida <span class="gc-accent">cotidiana.</span></h2>
+          </div>
+          <div class="gc-copy"><p>A estimulação cognitiva pode envolver atividades relacionadas a diferentes habilidades, sempre conforme a necessidade identificada e a orientação do profissional responsável.</p></div>
+        </div>
+
+        <div class="gc-ability-grid">
+          <article class="gc-ability gc-reveal"><span class="gc-ability-number">01</span><div><h3>Atenção</h3><p>Capacidade de direcionar e sustentar o foco diante de tarefas e informações.</p></div></article>
+          <article class="gc-ability gc-reveal"><span class="gc-ability-number">02</span><div><h3>Memória</h3><p>Processos relacionados ao registro, à organização e à recuperação de informações.</p></div></article>
+          <article class="gc-ability gc-reveal"><span class="gc-ability-number">03</span><div><h3>Raciocínio</h3><p>Organização de informações, identificação de relações e resolução de situações.</p></div></article>
+          <article class="gc-ability gc-reveal"><span class="gc-ability-number">04</span><div><h3>Linguagem</h3><p>Habilidades envolvidas na compreensão, na expressão e no acesso às informações.</p></div></article>
+          <article class="gc-ability gc-reveal"><span class="gc-ability-number">05</span><div><h3>Funções executivas</h3><p>Planejamento, organização, flexibilidade e acompanhamento das próprias ações.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-principles">
+      <div class="gc-container gc-principles-grid">
+        <div class="gc-principles-intro gc-reveal">
+          <span class="gc-kicker">Acompanhamento</span>
+          <h2 class="gc-title">Cuidado com <span class="gc-accent">responsabilidade.</span></h2>
+          <div class="gc-copy"><p>O atendimento considera as características, as necessidades e os objetivos de cada pessoa, com orientação profissional e acompanhamento individualizado.</p></div>
+        </div>
+
+        <div class="gc-principle-list">
+          <article class="gc-principle gc-reveal">
+            <span class="gc-principle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.7-4.2 3.2-6.5 7.5-6.5s6.8 2.3 7.5 6.5"/></svg></span>
+            <div><h3 class="gc-feature-title">Acompanhamento individualizado</h3><p>As características, os objetivos e o momento de cada pessoa são considerados na orientação do acompanhamento.</p></div>
+          </article>
+
+          <article class="gc-principle gc-reveal">
+            <span class="gc-principle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+            <div><h3 class="gc-feature-title">Informação clara</h3><p>Modalidades, profissional responsável e disponibilidade podem ser confirmados diretamente com a equipe da clínica.</p></div>
+          </article>
+
+          <article class="gc-principle gc-reveal">
+            <span class="gc-principle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.7 8.4 7 10 4.3-1.6 7-5.6 7-10V6l-7-3Z"/><path d="m9.3 12 1.7 1.7 3.8-4"/></svg></span>
+            <div><h3 class="gc-feature-title">Atuação responsável</h3><p>A condução do atendimento respeita a formação, a responsabilidade técnica e os limites de atuação do profissional responsável.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-status" id="gc-status">
+      <div class="gc-container">
+        <div class="gc-status-panel gc-reveal">
+          <div class="gc-status-main">
+            <span class="gc-kicker">Atendimento disponível</span>
+            <h2 class="gc-title">Uma proposta voltada ao <span class="gc-accent">público adulto.</span></h2>
+            <div class="gc-copy"><p>A Clínica Multiprofissional | Gisélia Batista oferece atendimento específico de estimulação cognitiva para adultos.</p><p>Para conhecer o profissional responsável, as modalidades e a disponibilidade de atendimento, fale diretamente com a equipe.</p></div>
+          </div>
+          <div class="gc-status-side">
+            <div class="gc-status-item"><strong>Público adulto</strong><span>Atendimento específico direcionado às necessidades e aos objetivos de pessoas adultas.</span></div>
+            <div class="gc-status-item"><strong>Objetivos individualizados</strong><span>O acompanhamento considera as características e o momento de cada pessoa.</span></div>
+            <div class="gc-status-item"><strong>Informações com a equipe</strong><span>Consulte modalidades, profissional responsável e disponibilidade pelo canal oficial da clínica.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-faq-section">
+      <div class="gc-container gc-faq-grid">
+        <div class="gc-faq-intro gc-reveal">
+          <span class="gc-kicker">Perguntas frequentes</span>
+          <h2 class="gc-title">Informação para o <span class="gc-accent">primeiro contato.</span></h2>
+          <div class="gc-copy"><p>A equipe pode explicar como funciona o atendimento e orientar sobre as modalidades e a disponibilidade atual.</p></div>
+          <a class="gc-btn" href="#formulario-prioridade" data-gc-priority-open>Falar com a equipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+
+        <div class="gc-faq-list gc-reveal">
+          <details class="gc-faq" open><summary>O que é estimulação cognitiva?</summary><div class="gc-faq-answer"><p>É um acompanhamento direcionado ao desenvolvimento e à manutenção de habilidades como atenção, memória, raciocínio, linguagem e funções executivas.</p></div></details>
+          <details class="gc-faq"><summary>O atendimento já está disponível?</summary><div class="gc-faq-answer"><p>Sim. A clínica oferece atendimento específico de estimulação cognitiva para o público adulto.</p></div></details>
+          <details class="gc-faq"><summary>Quem é o profissional responsável?</summary><div class="gc-faq-answer"><p>As informações sobre o profissional responsável podem ser confirmadas diretamente com a equipe da clínica.</p></div></details>
+          <details class="gc-faq"><summary>Qual é a modalidade de atendimento?</summary><div class="gc-faq-answer"><p>Entre em contato com a clínica para conhecer as modalidades, a frequência e o formato disponíveis.</p></div></details>
+          <details class="gc-faq"><summary>Como posso saber mais?</summary><div class="gc-faq-answer"><p>Entre em contato pelo WhatsApp para receber informações sobre o atendimento e orientação inicial.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="gc-section gc-final">
+      <div class="gc-container gc-final-grid">
+        <div class="gc-reveal">
+          <span class="gc-kicker gc-kicker--light">Próximo passo</span>
+          <h2 class="gc-title">Conheça o atendimento de <span class="gc-accent">estimulação cognitiva.</span></h2>
+          <p class="gc-final-copy">Se você deseja saber mais sobre essa possibilidade de acompanhamento para adultos, fale com a equipe da Clínica Multiprofissional | Gisélia Batista.</p>
+        </div>
+
+        <aside class="gc-contact-card gc-reveal">
+          <small>Canal de contato</small>
+          <h3>Fale com a equipe.</h3>
+          <p>Converse com a Clínica Multiprofissional | Gisélia Batista pelo WhatsApp.</p>
+          <a class="gc-btn" href="#formulario-prioridade" data-gc-priority-open>Preencher dados e conversar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <span class="gc-contact-footnote">Consulte modalidades e disponibilidade diretamente com a equipe.</span>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gc-footer">
+    <div class="gc-container">
+      <div class="gc-footer-top">
+        <div>
+          <a class="gc-footer-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional"></a>
+          <p class="gc-footer-about">Cuidado especializado para crianças e adolescentes, com atuação multiprofissional e atendimento específico de estimulação cognitiva para adultos.</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <nav class="gc-footer-links" aria-label="Navegação do rodapé"><a href="https://giseliabatista.com.br/clinica-multiprofissional/">Início</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a><a href="https://giseliabatista.com.br/supervisao/">Supervisão</a><a href="https://giseliabatista.com.br/estimulacao-cognitiva/">Estimulação cognitiva</a><a href="https://www.instagram.com/clinicagiseliabatista/" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+        </div>
+        <div>
+          <h4>Aviso institucional</h4>
+          <p class="gc-footer-note">As informações apresentadas têm caráter informativo. A indicação de avaliação ou acompanhamento deve considerar as necessidades individuais e ser orientada pelo profissional responsável.</p>
+        </div>
+      </div>
+      <div class="gc-footer-bottom"><span>© <span data-gc-year>2026</span> Clínica Multiprofissional | Gisélia Batista.</span><span>Informação, cuidado e responsabilidade.</span></div>
+    </div>
+  </footer>
+
+  <div class="gc-priority-modal" id="formulario-prioridade" role="dialog" aria-modal="true" aria-labelledby="gc-priority-title" aria-describedby="gc-priority-description" data-gc-priority-modal hidden>
+    <button class="gc-priority-backdrop" type="button" aria-label="Fechar formulário" data-gc-priority-close></button>
+    <div class="gc-priority-panel" tabindex="-1" data-gc-priority-panel>
+      <button class="gc-priority-close" type="button" aria-label="Fechar formulário" data-gc-priority-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+      <span class="gc-priority-eyebrow">Atendimento prioritário</span>
+      <h2 class="gc-priority-title" id="gc-priority-title">Antes de falar com a equipe</h2>
+      <p class="gc-priority-intro" id="gc-priority-description">Preencha seus dados. Após o cadastro, você será direcionado ao WhatsApp da clínica com a mensagem pronta.</p>
+
+      <form class="gc-priority-form" action="/wp-admin/admin-ajax.php" method="post" data-gc-priority-form novalidate>
+        <input type="hidden" name="action" value="gb_priority_lead">
+        <input type="hidden" name="source_page" value="Página de Estimulação Cognitiva">
+
+        <div class="gc-priority-field">
+          <label for="gc-priority-name">Nome completo</label>
+          <input id="gc-priority-name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Como podemos chamar você?" required>
+        </div>
+
+        <div class="gc-priority-field">
+          <label for="gc-priority-phone">Telefone</label>
+          <input id="gc-priority-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="gc-priority-field">
+          <label for="gc-priority-email">E-mail</label>
+          <input id="gc-priority-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="voce@exemplo.com" required>
+        </div>
+
+        <div class="gc-priority-honeypot" aria-hidden="true">
+          <label for="gc-priority-company">Não preencha este campo</label>
+          <input id="gc-priority-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="gc-btn gc-priority-submit" type="submit">Cadastrar e ir para o WhatsApp</button>
+        <p class="gc-priority-privacy">Ao continuar, você autoriza o uso dos dados informados para que a clínica entre em contato sobre o atendimento solicitado.</p>
+        <p class="gc-priority-status" role="status" aria-live="polite" data-gc-priority-status></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('.gc-page');
+    if (!root || root.dataset.gcReady === 'true') return;
+    root.dataset.gcReady = 'true';
+    root.classList.add('gc-js');
+
+    var header = root.querySelector('[data-gc-header]');
+    var menuButton = root.querySelector('[data-gc-menu]');
+    var menuLinks = root.querySelectorAll('.gc-nav a');
+
+    function closeMenu() {
+      if (!header || !menuButton) return;
+      header.classList.remove('gc-menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Abrir menu');
+    }
+
+    if (header && menuButton) {
+      menuButton.addEventListener('click', function () {
+        var isOpen = header.classList.toggle('gc-menu-open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1200) closeMenu();
+      });
+    }
+
+    root.querySelectorAll('a[href^="#gc-"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (event) {
+        var selector = anchor.getAttribute('href');
+        var target = root.querySelector(selector);
+        if (!target) return;
+        event.preventDefault();
+        var offset = header ? header.offsetHeight : 0;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset + 1, behavior: 'smooth' });
+      });
+    });
+
+    var year = root.querySelector('[data-gc-year]');
+    if (year) year.textContent = new Date().getFullYear();
+
+    var priorityModal = root.querySelector('[data-gc-priority-modal]');
+    var priorityPanel = root.querySelector('[data-gc-priority-panel]');
+    var priorityForm = root.querySelector('[data-gc-priority-form]');
+    var priorityStatus = root.querySelector('[data-gc-priority-status]');
+    var priorityTriggers = root.querySelectorAll('[data-gc-priority-open], a[href="https://tr.ee/RCJ6c9N2lI"]');
+    var lastFocusedElement = null;
+    var whatsappNumber = '5555999574934';
+    var whatsappMessage = 'Olá. Gostaria de prioridade no meu atendimento. Acabei de cadastrar os meus dados no site. Fico no aguardo';
+
+    function openPriorityModal(event) {
+      if (!priorityModal) return;
+      if (event) event.preventDefault();
+      closeMenu();
+      lastFocusedElement = document.activeElement;
+      priorityModal.hidden = false;
+      document.documentElement.classList.add('gc-modal-lock');
+      window.requestAnimationFrame(function () {
+        var firstInput = priorityModal.querySelector('input[name="name"]');
+        if (firstInput) firstInput.focus();
+        else if (priorityPanel) priorityPanel.focus();
+      });
+    }
+
+    function closePriorityModal() {
+      if (!priorityModal || priorityModal.hidden) return;
+      priorityModal.hidden = true;
+      document.documentElement.classList.remove('gc-modal-lock');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+    }
+
+    priorityTriggers.forEach(function (trigger) {
+      trigger.addEventListener('click', openPriorityModal);
+    });
+
+    root.querySelectorAll('[data-gc-priority-close]').forEach(function (button) {
+      button.addEventListener('click', closePriorityModal);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && priorityModal && !priorityModal.hidden) closePriorityModal();
+    });
+
+    if (priorityForm) {
+      var phoneInput = priorityForm.querySelector('input[name="phone"]');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+          var digits = phoneInput.value.replace(/\D/g, '').slice(0, 11);
+          if (digits.length > 10) phoneInput.value = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+          else if (digits.length > 6) phoneInput.value = digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+          else if (digits.length > 2) phoneInput.value = digits.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+          else phoneInput.value = digits;
+        });
+      }
+
+      priorityForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!priorityForm.checkValidity()) {
+          priorityForm.reportValidity();
+          return;
+        }
+
+        var submitButton = priorityForm.querySelector('button[type="submit"]');
+        var formData = new FormData(priorityForm);
+        var ajaxUrl = window.ajaxurl || (window.location.origin + '/wp-admin/admin-ajax.php');
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Cadastrando...';
+        }
+        if (priorityStatus) {
+          priorityStatus.textContent = 'Enviando seus dados com segurança...';
+          priorityStatus.removeAttribute('data-state');
+        }
+
+        fetch(ajaxUrl, {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+          .then(function (response) {
+            return response.json().then(function (data) {
+              if (!response.ok || !data.success) throw new Error(data && data.data && data.data.message ? data.data.message : 'Não foi possível cadastrar seus dados.');
+              return data;
+            });
+          })
+          .then(function () {
+            if (priorityStatus) priorityStatus.textContent = 'Cadastro concluído. Abrindo o WhatsApp...';
+            window.location.href = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(whatsappMessage);
+          })
+          .catch(function (error) {
+            if (priorityStatus) {
+              priorityStatus.textContent = error.message || 'Ocorreu um erro. Revise os dados e tente novamente.';
+              priorityStatus.setAttribute('data-state', 'error');
+            }
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = 'Cadastrar e ir para o WhatsApp';
+            }
+          });
+      });
+    }
+
+    var reveals = root.querySelectorAll('.gc-reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gc-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -45px 0px' });
+      reveals.forEach(function (element) { observer.observe(element); });
+    } else {
+      reveals.forEach(function (element) { element.classList.add('gc-visible'); });
+    }
+  })();
+</script>

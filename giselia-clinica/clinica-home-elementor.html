@@ -1,0 +1,2522 @@
+<!--
+  HOME - CLÍNICA MULTIPROFISSIONAL | GISÉLIA BATISTA
+  Widget HTML completo para Elementor.
+  Cole todo este arquivo em um único widget HTML, em uma página com layout
+  "Elementor Canvas" ou "Largura total".
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+  .gb-home,
+  .gb-home * {
+    box-sizing: border-box;
+  }
+
+  .gb-home {
+    --gb-green-950: #174e66;
+    --gb-green-900: #286f8d;
+    --gb-green-800: #347f9f;
+    --gb-green-700: #73b9d1;
+    --gb-green-200: #cbeef5;
+    --gb-green-100: #e3f6fa;
+    --gb-cream: #fbfdfe;
+    --gb-cream-deep: #eef8fb;
+    --gb-white: #ffffff;
+    --gb-terra: #ee9db5;
+    --gb-terra-dark: #cb6686;
+    --gb-peach: #fbe1e9;
+    --gb-lilac: #dff2f7;
+    --gb-yellow: #fff0a0;
+    --gb-text: #347f9f;
+    --gb-muted: #648796;
+    --gb-line: rgba(79, 152, 186, .18);
+    --gb-shadow: 0 24px 70px rgba(33, 95, 121, .13);
+    width: 100%;
+    overflow: clip;
+    background: var(--gb-cream);
+    color: var(--gb-text);
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .gb-home a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gb-home img,
+  .gb-home video,
+  .gb-home svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  .gb-home button {
+    font: inherit;
+  }
+
+  /* Proteção contra as cores e fontes globais do Elementor/tema */
+  .gb-home h1,
+  .gb-home h2,
+  .gb-home h3,
+  .gb-home h4,
+  .gb-home h5,
+  .gb-home h6 {
+    color: var(--gb-text) !important;
+    font-family: "Playfair Display", serif !important;
+  }
+
+  .gb-home .gb-hero h1,
+  .gb-home .gb-hero h2,
+  .gb-home .gb-hero h3,
+  .gb-home .gb-team h1,
+  .gb-home .gb-team h2,
+  .gb-home .gb-final h1,
+  .gb-home .gb-final h2,
+  .gb-home .gb-adult-card h3,
+  .gb-home .gb-footer h4 {
+    color: var(--gb-white) !important;
+  }
+
+  .gb-home .gb-italic {
+    color: var(--gb-terra) !important;
+  }
+
+  .gb-container {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .gb-section {
+    position: relative;
+    padding: 112px 0;
+    scroll-margin-top: 92px;
+  }
+
+  .gb-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    color: var(--gb-terra-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .19em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .gb-kicker::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .gb-kicker--light {
+    color: var(--gb-terra);
+  }
+
+  .gb-display,
+  .gb-title,
+  .gb-card-title,
+  .gb-person-name,
+  .gb-step-title,
+  .gb-faq summary {
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: .98;
+  }
+
+  .gb-display {
+    max-width: 790px;
+    font-size: clamp(3.15rem, 6.5vw, 6.5rem);
+    color: var(--gb-white);
+  }
+
+  .gb-title {
+    max-width: 780px;
+    font-size: clamp(2.55rem, 4.3vw, 4.8rem);
+  }
+
+  .gb-italic {
+    color: var(--gb-terra);
+    font-style: italic;
+  }
+
+  .gb-copy {
+    color: var(--gb-muted);
+    font-size: 1rem;
+  }
+
+  .gb-copy p {
+    margin: 0 0 18px;
+  }
+
+  .gb-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gb-btn {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 21px;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .015em;
+    line-height: 1.2;
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+
+  .gb-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .gb-btn svg {
+    width: 17px;
+    height: 17px;
+    transition: transform .25s ease;
+  }
+
+  .gb-btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .gb-btn--terra {
+    background: var(--gb-green-900);
+    color: var(--gb-white) !important;
+  }
+
+  .gb-btn--terra:hover {
+    background: var(--gb-green-950);
+  }
+
+  .gb-btn--outline-light {
+    border-color: rgba(255, 253, 249, .38);
+    color: var(--gb-white) !important;
+  }
+
+  .gb-btn--outline-light:hover {
+    border-color: var(--gb-white);
+    background: rgba(255, 255, 255, .07);
+  }
+
+  .gb-btn--cream {
+    background: var(--gb-cream);
+    color: var(--gb-green-950) !important;
+  }
+
+  .gb-btn--cream:hover {
+    background: #fff;
+  }
+
+  /* Header */
+  .gb-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(251, 253, 254, .96);
+    border-bottom: 1px solid var(--gb-line);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .gb-header-inner {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .gb-logo {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+
+  .gb-logo img {
+    width: 206px;
+    height: 58px;
+    object-fit: contain;
+  }
+
+  .gb-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.5vw, 28px);
+  }
+
+  .gb-nav > a:not(.gb-btn) {
+    position: relative;
+    color: var(--gb-green-800);
+    font-size: .79rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .gb-nav .gb-btn {
+    white-space: nowrap;
+  }
+
+  .gb-nav .gb-btn svg {
+    flex: 0 0 auto;
+  }
+
+  .gb-nav > a:not(.gb-btn)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+    height: 1px;
+    background: var(--gb-terra-dark);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .25s ease;
+  }
+
+  .gb-nav > a:not(.gb-btn):hover::after,
+  .gb-nav > a.gb-current::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .gb-menu-toggle {
+    display: none;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--gb-line);
+    background: transparent;
+    color: var(--gb-green-900);
+    cursor: pointer;
+  }
+
+  .gb-menu-toggle span,
+  .gb-menu-toggle span::before,
+  .gb-menu-toggle span::after {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: currentColor;
+    transition: .25s ease;
+  }
+
+  .gb-menu-toggle span {
+    position: relative;
+  }
+
+  .gb-menu-toggle span::before,
+  .gb-menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .gb-menu-toggle span::before { top: -6px; }
+  .gb-menu-toggle span::after { top: 6px; }
+
+  .gb-header.gb-menu-open .gb-menu-toggle span {
+    background: transparent;
+  }
+
+  .gb-header.gb-menu-open .gb-menu-toggle span::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .gb-header.gb-menu-open .gb-menu-toggle span::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* Navegação compacta antes que o menu completo perca espaço */
+  @media (max-width: 1200px) {
+    .gb-menu-toggle { display: grid; }
+
+    .gb-nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0;
+      padding: 18px 24px 25px;
+      border-top: 1px solid var(--gb-line);
+      border-bottom: 1px solid var(--gb-line);
+      background: var(--gb-cream);
+      box-shadow: 0 24px 40px rgba(33, 95, 121, .14);
+    }
+
+    .gb-header.gb-menu-open .gb-nav { display: flex; }
+
+    .gb-nav > a:not(.gb-btn) {
+      padding: 14px 5px;
+      border-bottom: 1px solid var(--gb-line);
+      font-size: .9rem;
+    }
+
+    .gb-nav > a:not(.gb-btn)::after { display: none; }
+    .gb-nav .gb-btn { margin-top: 16px; }
+  }
+
+  /* Hero */
+  .gb-hero {
+    position: relative;
+    min-height: min(780px, calc(100vh - 86px));
+    background: var(--gb-green-800);
+    color: var(--gb-white);
+    isolation: isolate;
+  }
+
+  .gb-hero::before,
+  .gb-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 999px;
+  }
+
+  .gb-hero::before {
+    top: -260px;
+    left: -240px;
+    width: 610px;
+    height: 610px;
+  }
+
+  .gb-hero::after {
+    right: 31%;
+    bottom: -230px;
+    width: 500px;
+    height: 500px;
+  }
+
+  .gb-hero-grid {
+    display: grid;
+    min-height: inherit;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .72fr);
+    gap: 58px;
+    align-items: stretch;
+  }
+
+  .gb-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 88px 0 76px;
+  }
+
+  .gb-hero .gb-kicker {
+    margin-bottom: 25px;
+  }
+
+  .gb-hero-copy {
+    max-width: 655px;
+    margin: 30px 0 0;
+    color: rgba(255, 255, 255, .9);
+    font-size: 1.02rem;
+    line-height: 1.78;
+  }
+
+  .gb-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .gb-hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 34px;
+    color: rgba(255, 255, 255, .82);
+    font-size: .76rem;
+  }
+
+  .gb-hero-proof svg {
+    width: 18px;
+    height: 18px;
+    color: #ffd0dc;
+  }
+
+  .gb-hero-media {
+    position: relative;
+    min-height: 620px;
+    overflow: hidden;
+  }
+
+  .gb-hero-media::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(90deg, var(--gb-green-800) 0%, rgba(79,152,186,.18) 28%, rgba(33,95,121,.08) 100%), linear-gradient(0deg, rgba(33,95,121,.38), transparent 55%);
+    pointer-events: none;
+  }
+
+  .gb-hero-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gb-hero-media-card {
+    position: absolute;
+    z-index: 3;
+    right: 25px;
+    bottom: 30px;
+    width: min(275px, calc(100% - 50px));
+    padding: 23px;
+    border: 1px solid rgba(255, 255, 255, .28);
+    background: rgba(33, 95, 121, .72);
+    backdrop-filter: blur(13px);
+  }
+
+  .gb-hero-media-card strong {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--gb-white);
+    font-family: "Playfair Display", serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1.05;
+  }
+
+  .gb-hero-media-card span {
+    color: rgba(255, 255, 255, .7);
+    font-size: .76rem;
+  }
+
+  /* Intro */
+  .gb-intro {
+    background: var(--gb-white);
+  }
+
+  .gb-intro::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -110px;
+    width: 310px;
+    height: 310px;
+    border-radius: 0 0 0 100%;
+    background: var(--gb-green-200);
+    opacity: .5;
+  }
+
+  .gb-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  .gb-intro-title-wrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gb-intro-title-wrap .gb-title {
+    max-width: none;
+    font-size: clamp(2.6rem, 3.6vw, 3.5rem);
+    letter-spacing: -.05em;
+    line-height: 1.02;
+  }
+
+  .gb-intro-line {
+    display: block;
+  }
+
+  .gb-intro-line--keep {
+    white-space: nowrap;
+  }
+
+  .gb-intro-note {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    align-items: start;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gb-line);
+  }
+
+  .gb-intro-note-icon {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid rgba(238, 157, 181, .55);
+    border-radius: 50%;
+    color: var(--gb-terra-dark);
+  }
+
+  .gb-intro-note strong {
+    display: block;
+    margin-bottom: 3px;
+    font-size: .84rem;
+  }
+
+  .gb-intro-note span {
+    color: var(--gb-muted);
+    font-size: .78rem;
+  }
+
+  /* Specialties */
+  .gb-specialties {
+    background: var(--gb-cream-deep);
+  }
+
+  .gb-section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+    gap: 70px;
+    align-items: end;
+    margin-bottom: 55px;
+  }
+
+  .gb-section-head .gb-copy {
+    padding-bottom: 7px;
+  }
+
+  .gb-specialty-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 15px;
+  }
+
+  .gb-specialty-card {
+    position: relative;
+    display: flex;
+    min-height: 330px;
+    flex-direction: column;
+    grid-column: span 4;
+    justify-content: space-between;
+    padding: 30px;
+    border: 1px solid rgba(79, 152, 186, .1);
+    transition: transform .28s ease, box-shadow .28s ease;
+  }
+
+  .gb-specialty-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--gb-shadow);
+  }
+
+  .gb-specialty-card:nth-child(1) { background: var(--gb-green-100); }
+  .gb-specialty-card:nth-child(2) { background: var(--gb-peach); }
+  .gb-specialty-card:nth-child(3) { background: var(--gb-lilac); }
+  .gb-specialty-card:nth-child(4) {
+    min-height: 280px;
+    grid-column: span 4;
+    border-style: dashed;
+    background: var(--gb-yellow);
+  }
+  .gb-specialty-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--gb-terra-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+  }
+
+  .gb-specialty-number span:last-child {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    color: var(--gb-green-800);
+    letter-spacing: 0;
+  }
+
+  .gb-specialty-number svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .gb-specialty-card h3 {
+    margin: 45px 0 13px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.6rem, 2.2vw, 2.15rem);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.04;
+  }
+
+  .gb-specialty-card p {
+    margin: 0;
+    color: rgba(52, 127, 159, .78);
+    font-size: .83rem;
+    line-height: 1.65;
+  }
+
+  .gb-specialty-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: end;
+  }
+
+  .gb-specialty-arrow {
+    display: grid;
+    width: 29px;
+    height: 29px;
+    flex: 0 0 29px;
+    place-items: center;
+    border: 1px solid rgba(52, 127, 159, .45);
+    border-radius: 50%;
+    color: var(--gb-green-800);
+  }
+
+  .gb-specialty-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gb-service-label {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: var(--gb-terra-dark);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .gb-service-label + h3 {
+    margin-top: 16px;
+  }
+
+  .gb-specialties-note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 22px;
+    color: var(--gb-muted);
+    font-size: .72rem;
+  }
+
+  .gb-specialties-note svg {
+    width: 16px;
+    flex: 0 0 16px;
+    margin-top: 2px;
+    color: var(--gb-terra);
+  }
+
+  /* Integrated care */
+  .gb-integrated {
+    background: var(--gb-white);
+  }
+
+  .gb-integrated-grid {
+    display: grid;
+    grid-template-columns: minmax(340px, .9fr) minmax(0, 1fr);
+    gap: 100px;
+    align-items: center;
+  }
+
+  .gb-photo-composition {
+    position: relative;
+    padding: 0 45px 48px 0;
+  }
+
+  .gb-photo-composition::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 70%;
+    height: 78%;
+    border: 1px solid var(--gb-terra);
+  }
+
+  .gb-photo-composition img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 560px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: var(--gb-shadow);
+  }
+
+  .gb-photo-caption {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 19px;
+    max-width: 260px;
+    padding: 12px 17px;
+    background: var(--gb-white);
+    color: var(--gb-green-800);
+    font-family: "Playfair Display", serif;
+    font-size: .9rem;
+    font-style: italic;
+  }
+
+  .gb-integrated .gb-copy {
+    max-width: 570px;
+    margin-top: 27px;
+  }
+
+  .gb-quote {
+    margin: 29px 0 30px;
+    padding: 2px 0 2px 24px;
+    border-left: 2px solid var(--gb-terra);
+    color: var(--gb-green-800);
+    font-family: "Playfair Display", serif;
+    font-size: 1.13rem;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  /* Process */
+  .gb-process {
+    background: var(--gb-green-100);
+  }
+
+  .gb-process-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr);
+    gap: 96px;
+    align-items: start;
+  }
+
+  .gb-process-intro {
+    position: sticky;
+    top: 130px;
+  }
+
+  .gb-process-intro .gb-copy {
+    margin-top: 25px;
+  }
+
+  .gb-process-note {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 32px;
+    color: var(--gb-terra-dark);
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  .gb-steps {
+    position: relative;
+    display: grid;
+    gap: 0;
+  }
+
+  .gb-steps::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    left: 23px;
+    width: 1px;
+    background: rgba(79, 152, 186, .25);
+  }
+
+  .gb-step {
+    position: relative;
+    display: grid;
+    min-height: 98px;
+    grid-template-columns: 48px 1fr;
+    gap: 22px;
+    padding-bottom: 23px;
+  }
+
+  .gb-step-number {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(79, 152, 186, .28);
+    border-radius: 50%;
+    background: var(--gb-green-100);
+    color: var(--gb-green-800);
+    font-size: .7rem;
+    font-weight: 700;
+  }
+
+  .gb-step-title {
+    margin-bottom: 8px;
+    font-size: 1.45rem;
+    line-height: 1.1;
+  }
+
+  .gb-step p {
+    max-width: 630px;
+    margin: 0;
+    color: var(--gb-muted);
+    font-size: .84rem;
+  }
+
+  /* Audience */
+  .gb-audience {
+    background: var(--gb-cream);
+  }
+
+  .gb-audience-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+    gap: 85px;
+    align-items: center;
+  }
+
+  .gb-audience .gb-copy {
+    max-width: 490px;
+    margin-top: 25px;
+  }
+
+  .gb-topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 11px;
+  }
+
+  .gb-topic {
+    display: flex;
+    min-height: 68px;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 19px;
+    border: 1px solid rgba(79, 152, 186, .12);
+    background: var(--gb-white);
+    transition: border-color .25s ease, transform .25s ease;
+  }
+
+  .gb-topic:hover {
+    border-color: rgba(238, 157, 181, .72);
+    transform: translateX(4px);
+  }
+
+  .gb-topic-number {
+    color: var(--gb-terra-dark);
+    font-size: .67rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+
+  .gb-topic span:last-child {
+    font-size: .84rem;
+    font-weight: 600;
+  }
+
+  /* Gisélia */
+  .gb-lead {
+    background: var(--gb-white);
+  }
+
+  .gb-lead-grid {
+    display: grid;
+    grid-template-columns: minmax(340px, .88fr) minmax(0, 1.12fr);
+    gap: 94px;
+    align-items: center;
+  }
+
+  .gb-lead-media {
+    position: relative;
+  }
+
+  .gb-lead-media::before {
+    content: "";
+    position: absolute;
+    top: -28px;
+    right: -28px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--gb-peach);
+  }
+
+  .gb-lead-media img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 590px;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .gb-lead-badge {
+    position: absolute;
+    z-index: 2;
+    right: -25px;
+    bottom: 35px;
+    max-width: 255px;
+    padding: 20px 22px;
+    background: var(--gb-green-800);
+    color: var(--gb-white);
+    box-shadow: var(--gb-shadow);
+  }
+
+  .gb-lead-badge strong {
+    display: block;
+    margin-bottom: 4px;
+    font-family: "Playfair Display", serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .gb-lead-badge span {
+    color: rgba(255, 255, 255, .67);
+    font-size: .74rem;
+  }
+
+  .gb-lead .gb-copy {
+    max-width: 620px;
+    margin-top: 27px;
+  }
+
+  .gb-lead-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin: 31px 0 0;
+  }
+
+  .gb-lead-point {
+    padding: 16px 17px;
+    border-left: 2px solid var(--gb-terra);
+    background: var(--gb-cream);
+    color: var(--gb-green-800);
+    font-size: .8rem;
+    font-weight: 600;
+  }
+
+  /* Team */
+  .gb-team {
+    background: var(--gb-green-800);
+    color: var(--gb-white);
+  }
+
+  .gb-team .gb-section-head .gb-copy {
+    color: rgba(255, 255, 255, .68);
+  }
+
+  .gb-team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .gb-person {
+    overflow: hidden;
+    background: var(--gb-cream);
+    color: var(--gb-text);
+  }
+
+  .gb-person-photo {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 4.5;
+  }
+
+  .gb-person-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(33, 95, 121, .24), transparent 44%);
+    pointer-events: none;
+  }
+
+  .gb-person-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .55s ease;
+  }
+
+  .gb-person:hover .gb-person-photo img {
+    transform: scale(1.035);
+  }
+
+  .gb-person--caroline img { object-position: center 18%; }
+  .gb-person--camila img { object-position: center 20%; }
+  .gb-person--graziela img { object-position: center 18%; }
+  .gb-person--erenita img { object-position: center 15%; }
+
+  .gb-person-body {
+    min-height: 255px;
+    padding: 24px 23px 27px;
+  }
+
+  .gb-person-role {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--gb-terra-dark);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .gb-person-name {
+    margin-bottom: 13px;
+    font-size: 1.55rem;
+    line-height: 1.06;
+  }
+
+  .gb-person-body p {
+    margin: 0;
+    color: var(--gb-muted);
+    font-size: .78rem;
+    line-height: 1.62;
+  }
+
+  .gb-team-note {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    margin-top: 24px;
+    color: rgba(255, 255, 255, .55);
+    font-size: .72rem;
+  }
+
+  .gb-team-note svg {
+    width: 16px;
+    flex: 0 0 16px;
+    color: #ffd0dc;
+  }
+
+  /* Future adult care */
+  .gb-adult {
+    background: var(--gb-cream-deep);
+  }
+
+  .gb-adult-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(350px, .9fr);
+    gap: 86px;
+    align-items: center;
+  }
+
+  .gb-adult .gb-copy {
+    max-width: 620px;
+    margin-top: 24px;
+  }
+
+  .gb-adult-card {
+    position: relative;
+    min-height: 325px;
+    overflow: hidden;
+    padding: 42px;
+    background: var(--gb-green-800);
+    color: var(--gb-white);
+  }
+
+  .gb-adult-card::before,
+  .gb-adult-card::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: 50%;
+  }
+
+  .gb-adult-card::before {
+    right: -70px;
+    bottom: -125px;
+    width: 290px;
+    height: 290px;
+  }
+
+  .gb-adult-card::after {
+    right: -13px;
+    bottom: -76px;
+    width: 190px;
+    height: 190px;
+  }
+
+  .gb-adult-card-label {
+    display: block;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 34px;
+    color: #ffd0dc;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+  }
+
+  .gb-adult-card h3 {
+    position: relative;
+    z-index: 1;
+    max-width: 470px;
+    margin: 0 0 22px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 3vw, 3.1rem);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.03;
+  }
+
+  .gb-adult-card p {
+    position: relative;
+    z-index: 1;
+    max-width: 390px;
+    margin: 0 0 28px;
+    color: rgba(255, 255, 255, .66);
+    font-size: .8rem;
+  }
+
+  .gb-adult-card .gb-btn {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Content */
+  .gb-content {
+    background: var(--gb-white);
+  }
+
+  .gb-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr);
+    gap: 88px;
+    align-items: center;
+  }
+
+  .gb-content .gb-copy {
+    max-width: 600px;
+    margin-top: 24px;
+  }
+
+  .gb-content-card {
+    display: grid;
+    grid-template-columns: .72fr 1.28fr;
+    min-height: 280px;
+    background: var(--gb-peach);
+  }
+
+  .gb-content-card-art {
+    position: relative;
+    overflow: hidden;
+    border-right: 1px solid rgba(203, 102, 134, .22);
+  }
+
+  .gb-content-card-art::before,
+  .gb-content-card-art::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(203, 102, 134, .42);
+    border-radius: 50%;
+  }
+
+  .gb-content-card-art::before {
+    top: 59px;
+    left: 43px;
+    width: 130px;
+    height: 130px;
+  }
+
+  .gb-content-card-art::after {
+    top: 82px;
+    left: 85px;
+    width: 130px;
+    height: 130px;
+  }
+
+  .gb-content-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 34px;
+  }
+
+  .gb-content-card-body small {
+    color: var(--gb-terra-dark);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .gb-content-card-body h3 {
+    margin: 19px 0 15px;
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.08;
+  }
+
+  .gb-content-card-body p {
+    margin: 0;
+    color: rgba(52, 127, 159, .76);
+    font-size: .77rem;
+  }
+
+  /* Testimonials */
+  .gb-testimonials {
+    overflow: hidden;
+    background: var(--gb-cream);
+  }
+
+  .gb-testimonials::before {
+    content: "";
+    position: absolute;
+    top: -170px;
+    right: -120px;
+    width: 380px;
+    height: 380px;
+    border: 1px solid rgba(79, 152, 186, .12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 55px rgba(79, 152, 186, .035);
+  }
+
+  .gb-testimonials-head {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+    gap: 72px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+
+  .gb-testimonials-head .gb-copy {
+    max-width: 480px;
+    padding-bottom: 8px;
+  }
+
+  .gb-testimonials-widget {
+    position: relative;
+    z-index: 1;
+    min-height: 280px;
+    padding: 22px;
+    border: 1px solid var(--gb-line);
+    background: var(--gb-white);
+    box-shadow: var(--gb-shadow);
+  }
+
+  .gb-testimonials-widget iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0 !important;
+  }
+
+  /* FAQ */
+  .gb-faq-section {
+    background: var(--gb-cream-deep);
+  }
+
+  .gb-faq-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, .7fr) minmax(0, 1.3fr);
+    gap: 100px;
+    align-items: start;
+  }
+
+  .gb-faq-intro .gb-copy {
+    margin: 25px 0 30px;
+  }
+
+  .gb-faq-list {
+    border-top: 1px solid var(--gb-line);
+  }
+
+  .gb-faq {
+    border-bottom: 1px solid var(--gb-line);
+  }
+
+  .gb-faq summary {
+    position: relative;
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 45px 18px 0;
+    font-size: 1.23rem;
+    line-height: 1.22;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gb-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gb-faq summary::before,
+  .gb-faq summary::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    width: 15px;
+    height: 1px;
+    background: var(--gb-terra-dark);
+    transition: transform .25s ease;
+  }
+
+  .gb-faq summary::after {
+    transform: rotate(90deg);
+  }
+
+  .gb-faq[open] summary::after {
+    transform: rotate(0);
+  }
+
+  .gb-faq-answer {
+    max-width: 720px;
+    padding: 0 45px 25px 0;
+    color: var(--gb-muted);
+    font-size: .9rem;
+  }
+
+  .gb-faq-answer p {
+    margin: 0;
+  }
+
+  /* CTA */
+  .gb-final {
+    overflow: hidden;
+    background: var(--gb-green-800);
+    color: var(--gb-white);
+  }
+
+  .gb-final::before,
+  .gb-final::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 50%;
+  }
+
+  .gb-final::before {
+    top: -170px;
+    left: -110px;
+    width: 390px;
+    height: 390px;
+  }
+
+  .gb-final::after {
+    right: -95px;
+    bottom: -175px;
+    width: 420px;
+    height: 420px;
+  }
+
+  .gb-final-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, .75fr);
+    gap: 90px;
+    align-items: center;
+  }
+
+  .gb-final .gb-title {
+    color: var(--gb-white);
+  }
+
+  .gb-final-copy {
+    max-width: 630px;
+    margin: 27px 0 0;
+    color: rgba(255, 255, 255, .69);
+  }
+
+  .gb-contact-card {
+    padding: 38px;
+    background: var(--gb-cream);
+    color: var(--gb-text);
+  }
+
+  .gb-contact-card small {
+    display: block;
+    color: var(--gb-terra-dark);
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .gb-contact-card h3 {
+    margin: 18px 0 15px;
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.06;
+  }
+
+  .gb-contact-card p {
+    margin: 0 0 25px;
+    color: var(--gb-muted);
+    font-size: .82rem;
+  }
+
+  .gb-contact-actions {
+    display: grid;
+    gap: 10px;
+  }
+
+  .gb-contact-actions .gb-btn {
+    width: 100%;
+  }
+
+  .gb-contact-actions .gb-btn--instagram {
+    border-color: var(--gb-line);
+    background: transparent;
+    color: var(--gb-green-800) !important;
+  }
+
+  /* Footer */
+  .gb-footer {
+    padding: 54px 0 25px;
+    background: var(--gb-green-950);
+    color: rgba(255, 255, 255, .68);
+  }
+
+  .gb-footer-top {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr 1fr;
+    gap: 55px;
+    align-items: start;
+    padding-bottom: 40px;
+  }
+
+  .gb-footer-logo img {
+    width: 218px;
+    height: 68px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: .9;
+  }
+
+  .gb-footer-about {
+    margin: 16px 0 0;
+    font-size: .76rem;
+    line-height: 1.65;
+  }
+
+  .gb-footer h4 {
+    margin: 0 0 16px;
+    color: var(--gb-white);
+    font-size: .71rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .gb-footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px 22px;
+  }
+
+  .gb-footer-links a {
+    font-size: .76rem;
+  }
+
+  .gb-footer-links a:hover {
+    color: #ffd0dc;
+  }
+
+  .gb-footer-note {
+    margin: 0;
+    font-size: .73rem;
+    line-height: 1.65;
+  }
+
+  .gb-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    font-size: .66rem;
+  }
+
+  /* Motion */
+  .gb-js .gb-reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+
+  .gb-js .gb-reveal.gb-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gb-home *,
+    .gb-home *::before,
+    .gb-home *::after {
+      scroll-behavior: auto !important;
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+
+    .gb-js .gb-reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Tablet */
+  @media (max-width: 1080px) {
+    .gb-section { padding: 90px 0; }
+    .gb-container { width: min(100% - 38px, 980px); }
+
+    .gb-menu-toggle { display: grid; }
+
+    .gb-nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0;
+      padding: 18px 19px 25px;
+      border-top: 1px solid var(--gb-line);
+      border-bottom: 1px solid var(--gb-line);
+      background: var(--gb-cream);
+      box-shadow: 0 24px 40px rgba(33, 95, 121, .14);
+    }
+
+    .gb-header.gb-menu-open .gb-nav { display: flex; }
+
+    .gb-nav > a:not(.gb-btn) {
+      padding: 14px 5px;
+      border-bottom: 1px solid var(--gb-line);
+      font-size: .9rem;
+    }
+
+    .gb-nav > a:not(.gb-btn)::after { display: none; }
+    .gb-nav .gb-btn { margin-top: 16px; }
+
+    .gb-hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .75fr);
+      gap: 32px;
+    }
+
+    .gb-display { font-size: clamp(3.5rem, 7vw, 5.6rem); }
+    .gb-hero-media { min-height: 590px; }
+
+    .gb-intro-grid,
+    .gb-integrated-grid,
+    .gb-lead-grid {
+      gap: 55px;
+    }
+
+    .gb-intro-grid {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .gb-intro-grid .gb-copy {
+      max-width: 760px;
+    }
+
+    .gb-section-head { gap: 45px; }
+    .gb-specialty-card { grid-column: span 6; }
+    .gb-specialty-card:nth-child(3),
+    .gb-specialty-card:nth-child(4) { grid-column: span 6; }
+    .gb-process-grid { gap: 55px; }
+    .gb-team-grid { grid-template-columns: repeat(2, 1fr); }
+    .gb-person-photo { aspect-ratio: 4 / 3.7; }
+    .gb-faq-grid { gap: 55px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .gb-container { width: min(100% - 30px, 640px); }
+    .gb-section { padding: 76px 0; }
+    .gb-header-inner { min-height: 74px; }
+    .gb-logo img { width: 172px; height: 49px; }
+
+    .gb-hero { min-height: 0; }
+    .gb-hero-grid { grid-template-columns: 1fr; gap: 0; }
+    .gb-hero-content { padding: 70px 0 52px; }
+    .gb-display { font-size: clamp(3.1rem, 15vw, 4.8rem); }
+    .gb-hero-copy { font-size: .94rem; line-height: 1.72; }
+    .gb-hero-actions { display: grid; grid-template-columns: 1fr; }
+    .gb-hero-actions .gb-btn { width: 100%; }
+    .gb-hero-proof { align-items: flex-start; }
+    .gb-hero-media { min-height: 460px; margin-inline: -15px; }
+    .gb-hero-media::before { background: linear-gradient(0deg, rgba(33,95,121,.52), transparent 58%); }
+    .gb-hero-media-card { right: 20px; bottom: 20px; }
+
+    .gb-title { font-size: clamp(2.55rem, 12vw, 3.7rem); }
+    .gb-intro-title-wrap .gb-title { font-size: clamp(2rem, 10.5vw, 3rem); }
+    .gb-intro::after { width: 160px; height: 160px; right: -70px; }
+
+    .gb-intro-grid,
+    .gb-section-head,
+    .gb-integrated-grid,
+    .gb-process-grid,
+    .gb-audience-grid,
+    .gb-lead-grid,
+    .gb-adult-grid,
+    .gb-content-grid,
+    .gb-testimonials-head,
+    .gb-faq-grid,
+    .gb-final-grid,
+    .gb-footer-top {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .gb-section-head { margin-bottom: 38px; }
+    .gb-specialty-grid { grid-template-columns: 1fr; }
+    .gb-specialty-card,
+    .gb-specialty-card:nth-child(3),
+    .gb-specialty-card:nth-child(4) {
+      min-height: 0;
+      grid-column: auto;
+    }
+
+    .gb-specialty-card { padding: 26px; }
+    .gb-specialty-card h3 { margin-top: 34px; }
+
+    .gb-photo-composition { padding: 0 20px 30px 0; }
+    .gb-photo-composition img { height: 480px; }
+    .gb-photo-caption { right: 0; bottom: 9px; }
+
+    .gb-process-intro { position: static; }
+    .gb-step { gap: 17px; }
+
+    .gb-topic-grid { grid-template-columns: 1fr; }
+    .gb-lead-media { margin-right: 18px; }
+    .gb-lead-media img { height: 520px; }
+    .gb-lead-badge { right: -18px; bottom: 24px; }
+    .gb-lead-points { grid-template-columns: 1fr; }
+
+    .gb-team-grid { grid-template-columns: 1fr; }
+    .gb-person-photo { aspect-ratio: 4 / 4.25; }
+    .gb-person-body { min-height: 0; }
+
+    .gb-adult-card { min-height: 300px; padding: 32px 27px; }
+    .gb-adult-card small { margin-bottom: 45px; }
+
+    .gb-content-card { grid-template-columns: 1fr; }
+    .gb-content-card-art { min-height: 190px; border-right: 0; border-bottom: 1px solid rgba(203,102,134,.22); }
+
+    .gb-faq summary { min-height: 72px; font-size: 1.12rem; }
+    .gb-contact-card { padding: 30px 24px; }
+
+    .gb-footer-links { grid-template-columns: 1fr; }
+    .gb-footer-bottom { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (max-width: 430px) {
+    .gb-kicker { font-size: .64rem; letter-spacing: .14em; }
+    .gb-display { font-size: 3rem; }
+    .gb-title { font-size: 2.65rem; }
+    .gb-btn { width: 100%; }
+    .gb-photo-composition img { height: 410px; }
+    .gb-lead-media img { height: 460px; }
+  }
+
+  /* Formulário de prioridade */
+  .gb-modal-lock {
+    overflow: hidden !important;
+  }
+
+  .gb-priority-modal[hidden] {
+    display: none !important;
+  }
+
+  .gb-priority-modal {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+
+  .gb-priority-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(23, 78, 102, .72) !important;
+    cursor: pointer;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+
+  .gb-priority-panel {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 560px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 44px;
+    border: 1px solid rgba(79, 152, 186, .22);
+    background: var(--gb-white);
+    box-shadow: 0 32px 90px rgba(23, 78, 102, .28);
+  }
+
+  .gb-priority-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--gb-line) !important;
+    border-radius: 50%;
+    background: var(--gb-cream) !important;
+    color: var(--gb-green-950) !important;
+    cursor: pointer;
+  }
+
+  .gb-priority-close svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .gb-priority-eyebrow {
+    display: block;
+    margin: 0 48px 12px 0;
+    color: var(--gb-terra-dark);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+  }
+
+  .gb-home .gb-priority-title {
+    max-width: 430px;
+    margin: 0 0 12px;
+    color: var(--gb-green-900) !important;
+    font-family: "Playfair Display", serif !important;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+  }
+
+  .gb-priority-intro {
+    margin: 0 0 28px;
+    color: var(--gb-muted);
+    font-size: .94rem;
+    line-height: 1.65;
+  }
+
+  .gb-priority-form {
+    display: grid;
+    gap: 17px;
+  }
+
+  .gb-priority-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .gb-priority-field label {
+    color: var(--gb-green-950);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .035em;
+  }
+
+  .gb-priority-field input {
+    width: 100% !important;
+    min-height: 52px;
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    border: 1px solid rgba(79, 152, 186, .3) !important;
+    border-radius: 0 !important;
+    outline: 0;
+    background: var(--gb-cream) !important;
+    color: var(--gb-green-950) !important;
+    font: 500 .94rem/1.35 "DM Sans", sans-serif !important;
+    box-shadow: none !important;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .gb-priority-field input::placeholder {
+    color: #89a4af;
+    opacity: 1;
+  }
+
+  .gb-priority-field input:focus {
+    border-color: var(--gb-green-700) !important;
+    box-shadow: 0 0 0 3px rgba(115, 185, 209, .18) !important;
+  }
+
+  .gb-priority-submit {
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid var(--gb-terra-dark) !important;
+    background: var(--gb-terra-dark) !important;
+    color: var(--gb-white) !important;
+    cursor: pointer;
+  }
+
+  .gb-priority-submit:hover,
+  .gb-priority-submit:focus-visible {
+    border-color: var(--gb-green-900) !important;
+    background: var(--gb-green-900) !important;
+    color: var(--gb-white) !important;
+  }
+
+  .gb-priority-submit[disabled] {
+    cursor: wait;
+    opacity: .7;
+  }
+
+  .gb-priority-privacy {
+    margin: -2px 0 0;
+    color: var(--gb-muted);
+    font-size: .73rem;
+    line-height: 1.5;
+  }
+
+  .gb-priority-status {
+    min-height: 22px;
+    margin: 0;
+    color: var(--gb-green-950);
+    font-size: .82rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .gb-priority-status[data-state="error"] {
+    color: #a33d5d;
+  }
+
+  .gb-priority-honeypot {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  @media (max-width: 600px) {
+    .gb-priority-modal { padding: 12px; }
+    .gb-priority-panel {
+      max-height: calc(100vh - 24px);
+      padding: 38px 22px 26px;
+    }
+    .gb-priority-close { top: 12px; right: 12px; }
+  }
+</style>
+
+<div class="gb-home" id="gb-inicio">
+  <header class="gb-header" data-gb-header>
+    <div class="gb-container gb-header-inner">
+      <a class="gb-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial">
+        <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional">
+      </a>
+
+      <button class="gb-menu-toggle" type="button" aria-expanded="false" aria-controls="gb-nav" aria-label="Abrir menu" data-gb-menu>
+        <span></span>
+      </button>
+
+      <nav class="gb-nav" id="gb-nav" aria-label="Navegação principal">
+        <a class="gb-current" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-current="page">Início</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a>
+        <a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a>
+        <a href="https://giseliabatista.com.br/supervisao/">Supervisão</a>
+        <a href="https://giseliabatista.com.br/estimulacao-cognitiva/">Estimulação cognitiva</a>
+        <a class="gb-btn gb-btn--terra" href="#formulario-prioridade" data-gb-priority-open>
+          Falar com a equipe
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="gb-hero" aria-labelledby="gb-hero-title">
+      <div class="gb-container gb-hero-grid">
+        <div class="gb-hero-content gb-reveal">
+          <span class="gb-kicker gb-kicker--light">Clínica Multiprofissional · Gisélia Batista</span>
+          <h1 class="gb-display" id="gb-hero-title">Cuidado especializado para <span class="gb-italic">crianças e adolescentes.</span></h1>
+          <p class="gb-hero-copy">A Clínica Multiprofissional | Gisélia Batista reúne profissionais de diferentes áreas para acompanhar o desenvolvimento, a aprendizagem, a comunicação e o desenvolvimento motor de crianças e adolescentes. Com uma atuação integrada e individualizada, a equipe orienta as famílias de acordo com as necessidades identificadas ao longo do acompanhamento.</p>
+          <div class="gb-hero-actions">
+            <a class="gb-btn gb-btn--terra" href="#gb-clinica">Conheça a clínica <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="gb-btn gb-btn--outline-light" href="#gb-equipe">Conheça a equipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="gb-hero-proof">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.7 8.4 7 10 4.3-1.6 7-5.6 7-10V6l-7-3Z"/><path d="m9.3 12 1.7 1.7 3.8-4"/></svg>
+            <span>Atuação integrada e individualizada, conforme as necessidades identificadas.</span>
+          </div>
+        </div>
+
+        <div class="gb-hero-media">
+          <video autoplay muted loop playsinline preload="metadata" poster="https://giseliabatista.com.br/wp-content/uploads/2026/09/unnamed-2.webp" aria-label="Conheça a Clínica Multiprofissional Gisélia Batista">
+            <source src="https://giseliabatista.com.br/wp-content/uploads/2026/09/snapinsta-1789564051451.mp4" type="video/mp4">
+          </video>
+          <div class="gb-hero-media-card">
+            <strong>Escuta, planejamento e cuidado.</strong>
+            <span>Um ambiente pensado para acolher cada família com atenção e responsabilidade.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-intro" id="gb-clinica">
+      <div class="gb-container gb-intro-grid">
+        <div class="gb-intro-title-wrap gb-reveal">
+          <span class="gb-kicker">A clínica</span>
+          <h2 class="gb-title">
+            <span class="gb-intro-line">Um espaço</span>
+            <span class="gb-intro-line gb-intro-line--keep">para desenvolvimento,</span>
+            <span class="gb-intro-line gb-italic">aprendizagem e cuidado.</span>
+          </h2>
+        </div>
+
+        <div class="gb-copy gb-reveal">
+          <p>A Clínica Multiprofissional | Gisélia Batista reúne profissionais que atuam em diferentes áreas relacionadas ao desenvolvimento e à aprendizagem.</p>
+          <p>A equipe trabalha com escuta, planejamento e acompanhamento especializado, respeitando as características, os objetivos e o momento de crianças, adolescentes e suas famílias.</p>
+          <p>A atuação pode envolver uma ou mais especialidades, conforme a necessidade identificada pelos profissionais responsáveis.</p>
+          <div class="gb-intro-note">
+            <span class="gb-intro-note-icon" aria-hidden="true">◌</span>
+            <div><strong>Individualidade em primeiro lugar</strong><span>As necessidades são compreendidas caso a caso.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-specialties" id="gb-especialidades">
+      <div class="gb-container">
+        <div class="gb-section-head gb-reveal">
+          <div>
+            <span class="gb-kicker">Especialidades em destaque</span>
+            <h2 class="gb-title">Diferentes áreas para apoiar <span class="gb-italic">diferentes necessidades.</span></h2>
+          </div>
+          <div class="gb-copy"><p>A clínica reúne profissionais com formações complementares para acompanhar demandas relacionadas à aprendizagem, à comunicação, ao desenvolvimento motor e a outros aspectos do desenvolvimento infantojuvenil.</p></div>
+        </div>
+
+        <div class="gb-specialty-grid">
+          <article class="gb-specialty-card gb-reveal">
+            <div class="gb-specialty-number"><span>01</span><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4.5A3 3 0 0 0 4 6v.6A3.5 3.5 0 0 0 4.8 13 3.5 3.5 0 0 0 9.5 18.5V4.5Z"/><path d="M14.5 4.5A3 3 0 0 1 20 6v.6a3.5 3.5 0 0 1-.8 6.4 3.5 3.5 0 0 1-4.7 5.5V4.5Z"/><path d="M9.5 8.5H7.8M14.5 8.5h1.7M9.5 14H7.7M14.5 14h1.8M12 2v20"/></svg></span></div>
+            <div>
+              <h3>Psicopedagogia</h3>
+              <div class="gb-specialty-body">
+                <p>Avaliação psicopedagógica, intervenção, estimulação do desenvolvimento, aprendizagem, dificuldades e transtornos de aprendizagem, funções cognitivas e executivas, habilidades acadêmicas, orientação familiar e escolar.</p>
+                <span class="gb-specialty-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="gb-specialty-card gb-reveal">
+            <div class="gb-specialty-number"><span>02</span><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.5A8 8 0 1 1 20.5 11.5Z"/></svg></span></div>
+            <div>
+              <h3>Fonoaudiologia</h3>
+              <div class="gb-specialty-body">
+                <p>Avaliação e intervenção em fala, linguagem, comunicação, comunicação alternativa e aumentativa, motricidade orofacial, voz, fluência, alimentação e deglutição.</p>
+                <span class="gb-specialty-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="gb-specialty-card gb-reveal">
+            <div class="gb-specialty-number"><span>03</span><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.4 13.2 16.6 16l1.4 1.4a2.1 2.1 0 1 1-3 3L13.6 19l-2.8 2.8-3.1-3.1 1.2-1.2a2.1 2.1 0 1 0-3-3l-1.2 1.2-3.1-3.1 2.8-2.8L3 8.4a2.1 2.1 0 1 1 3-3l1.4 1.4L10.2 4l3.1 3.1-1.2 1.2a2.1 2.1 0 1 0 3 3l1.2-1.2 3.1 3.1Z"/></svg></span></div>
+            <div>
+              <h3>Fisioterapia Neuropediátrica e Respiratória</h3>
+              <div class="gb-specialty-body">
+                <p>Avaliação e intervenção no desenvolvimento motor, equilíbrio, coordenação, mobilidade, postura, funcionalidade, estimulação motora, prevenção de alterações musculoesqueléticas e atuação respiratória.</p>
+                <span class="gb-specialty-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="gb-specialty-card gb-reveal">
+            <div class="gb-specialty-number"><span>04</span><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span></div>
+            <div>
+              <span class="gb-service-label">Serviço de apoio</span>
+              <h3>Orientação Parental e Familiar</h3>
+              <div class="gb-specialty-body">
+                <p>Apoio a pais, responsáveis e cuidadores na rotina, no comportamento e no desenvolvimento de crianças e adolescentes.</p>
+                <span class="gb-specialty-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="gb-specialties-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3c.7 4.2 2.8 6.3 7 7-4.2.7-6.3 2.8-7 7-.7-4.2-2.8-6.3-7-7 4.2-.7 6.3-2.8 7-7Z"/><path d="M19 16c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3Z"/></svg>
+          <span>Orientação Parental e Familiar é apresentada como serviço de apoio; especialidades, serviços e descrições profissionais devem ser confirmados antes da publicação.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-integrated">
+      <div class="gb-container gb-integrated-grid">
+        <div class="gb-photo-composition gb-reveal">
+          <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/unnamed-2.webp" alt="Fachada da Clínica Multiprofissional Gisélia Batista" loading="lazy">
+          <span class="gb-photo-caption">Um espaço preparado para acolher.</span>
+        </div>
+
+        <div class="gb-reveal">
+          <span class="gb-kicker">Atuação multiprofissional</span>
+          <h2 class="gb-title">Diferentes especialidades, uma atuação <span class="gb-italic">integrada.</span></h2>
+          <div class="gb-copy">
+            <p>Desenvolvimento, aprendizagem, comunicação, comportamento, autonomia e habilidades motoras podem estar relacionados e exigir diferentes perspectivas profissionais.</p>
+            <p>Quando indicado, os profissionais podem trabalhar de maneira articulada, compartilhando informações relevantes e alinhando estratégias com autorização da família.</p>
+          </div>
+          <blockquote class="gb-quote">“Cada profissional mantém sua autonomia técnica e conduz sua atuação de acordo com sua formação e responsabilidade profissional.”</blockquote>
+          <a class="gb-btn gb-btn--terra" href="#gb-equipe">Conheça a equipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-process" id="gb-como-funciona">
+      <div class="gb-container gb-process-grid">
+        <div class="gb-process-intro gb-reveal">
+          <span class="gb-kicker">Como funciona</span>
+          <h2 class="gb-title">O acompanhamento começa pela <span class="gb-italic">compreensão.</span></h2>
+          <div class="gb-copy"><p>O primeiro contato permite entender a demanda apresentada pela família e orientar os próximos passos.</p></div>
+          <div class="gb-process-note"><span aria-hidden="true">◷</span><span>O ritmo é individual.<br>O próximo passo também.</span></div>
+        </div>
+
+        <div class="gb-steps gb-reveal">
+          <article class="gb-step"><span class="gb-step-number">01</span><div><h3 class="gb-step-title">Conversa inicial</h3><p>Os responsáveis compartilham a demanda apresentada e as principais dúvidas da família.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">02</span><div><h3 class="gb-step-title">Avaliação especializada</h3><p>Quando indicada, a avaliação ajuda a compreender necessidades e possibilidades de acompanhamento.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">03</span><div><h3 class="gb-step-title">Definição das prioridades</h3><p>As prioridades são definidas pelo profissional responsável, conforme critérios técnicos.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">04</span><div><h3 class="gb-step-title">Atendimento individualizado</h3><p>Cada acompanhamento considera as características, os objetivos e o momento da criança ou do adolescente.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">05</span><div><h3 class="gb-step-title">Orientação para a família</h3><p>A família recebe informações para compreender o processo e participar dos próximos passos.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">06</span><div><h3 class="gb-step-title">Alinhamento quando necessário</h3><p>Com autorização, pode haver diálogo com a escola ou outros profissionais envolvidos.</p></div></article>
+          <article class="gb-step"><span class="gb-step-number">07</span><div><h3 class="gb-step-title">Acompanhamento da evolução</h3><p>O percurso é observado e ajustado de acordo com as necessidades identificadas.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-audience">
+      <div class="gb-container gb-audience-grid">
+        <div class="gb-reveal">
+          <span class="gb-kicker">Para quem é</span>
+          <h2 class="gb-title">Orientação para as perguntas que aparecem <span class="gb-italic">no caminho.</span></h2>
+          <div class="gb-copy"><p>A clínica pode acolher famílias que buscam compreender melhor necessidades relacionadas ao desenvolvimento e à aprendizagem.</p></div>
+        </div>
+
+        <div class="gb-topic-grid gb-reveal" aria-label="Demandas acompanhadas pela clínica">
+          <div class="gb-topic"><span class="gb-topic-number">01</span><span>Desenvolvimento infantil</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">02</span><span>Aprendizagem</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">03</span><span>Comunicação e linguagem</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">04</span><span>Desenvolvimento motor</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">05</span><span>Autonomia</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">06</span><span>Rotina escolar</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">07</span><span>Atenção e organização</span></div>
+          <div class="gb-topic"><span class="gb-topic-number">08</span><span>Interação social</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-lead">
+      <div class="gb-container gb-lead-grid">
+        <div class="gb-lead-media gb-reveal">
+          <img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/IMG_5948-scaled.jpg" alt="Gisélia Batista, psicopedagoga e coordenadora clínica" loading="lazy">
+          <div class="gb-lead-badge"><strong>Gisélia Batista</strong><span>Psicopedagoga e coordenadora clínica</span></div>
+        </div>
+
+        <div class="gb-reveal">
+          <span class="gb-kicker">Coordenação clínica</span>
+          <h2 class="gb-title">Organização, integração e <span class="gb-italic">supervisão do cuidado.</span></h2>
+          <div class="gb-copy">
+            <p>Gisélia Batista atua na psicopedagogia e na coordenação da Clínica Multiprofissional | Gisélia Batista. Seu trabalho envolve a coordenação, a integração e a supervisão da equipe multiprofissional, contribuindo para uma atuação organizada e alinhada às necessidades das famílias.</p>
+            <p>Além da coordenação clínica, Gisélia participa da produção de conteúdos sobre desenvolvimento, aprendizagem e orientação às famílias.</p>
+          </div>
+          <div class="gb-lead-points">
+            <div class="gb-lead-point">Psicopedagogia e aprendizagem</div>
+            <div class="gb-lead-point">Desenvolvimento infantojuvenil</div>
+            <div class="gb-lead-point">Coordenação e integração da equipe</div>
+            <div class="gb-lead-point">Orientação às famílias</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-team" id="gb-equipe">
+      <div class="gb-container">
+        <div class="gb-section-head gb-reveal">
+          <div>
+            <span class="gb-kicker gb-kicker--light">Equipe</span>
+            <h2 class="gb-title">Profissionais que atuam em suas <span class="gb-italic">áreas.</span></h2>
+          </div>
+          <div class="gb-copy"><p>A clínica reúne profissionais de diferentes áreas, que conduzem seus atendimentos com autonomia técnica, responsabilidade profissional e diálogo com as famílias.</p></div>
+        </div>
+
+        <div class="gb-team-grid">
+          <article class="gb-person gb-person--camila gb-reveal">
+            <div class="gb-person-photo"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/Captura-de-tela-2026-09-16-101855.png" alt="Camila Pavéglio" loading="lazy"></div>
+            <div class="gb-person-body"><span class="gb-person-role">Psicopedagogia</span><h3 class="gb-person-name">Camila Pavéglio</h3><p>Psicopedagoga clínica e institucional. Atua com crianças e adolescentes em avaliações e intervenções psicopedagógicas, com foco em aprendizagem e desenvolvimento cognitivo e acadêmico.</p></div>
+          </article>
+
+          <article class="gb-person gb-person--erenita gb-reveal">
+            <div class="gb-person-photo"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/Captura-de-tela-2026-09-16-102345.png" alt="Erenita Trindade dos Santos" loading="lazy"></div>
+            <div class="gb-person-body"><span class="gb-person-role">Psicopedagogia</span><h3 class="gb-person-name">Erenita Trindade dos Santos</h3><p>Pedagoga e psicopedagoga clínica. Atua em processos relacionados ao desenvolvimento, à aprendizagem e à autonomia de crianças e adolescentes.</p></div>
+          </article>
+
+          <article class="gb-person gb-person--graziela gb-reveal">
+            <div class="gb-person-photo"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/5609c2e0-09a0-48d7-a3cb-b6942f60ef00.jpg" alt="Graziela Azevedo" loading="lazy"></div>
+            <div class="gb-person-body"><span class="gb-person-role">Fonoaudiologia infantil</span><h3 class="gb-person-name">Graziela Azevedo</h3><p>Atua com crianças desde o nascimento até a adolescência, contemplando comunicação, linguagem, funções orais e estratégias terapêuticas compatíveis com sua formação.</p></div>
+          </article>
+
+          <article class="gb-person gb-person--caroline gb-reveal">
+            <div class="gb-person-photo"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/f29191d0-f6a6-4c89-a3e0-d7e64ca53b11.jpg" alt="Caroline Fagundes Caetano" loading="lazy"></div>
+            <div class="gb-person-body"><span class="gb-person-role">Fisioterapia</span><h3 class="gb-person-name">Caroline Fagundes Caetano</h3><p>Atua na fisioterapia neurofuncional adulta e pediátrica, com foco em desenvolvimento motor, autonomia, qualidade de vida e trabalho interdisciplinar.</p></div>
+          </article>
+        </div>
+
+        <div class="gb-team-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.7 8.4 7 10 4.3-1.6 7-5.6 7-10V6l-7-3Z"/><path d="m9.3 12 1.7 1.7 3.8-4"/></svg>
+          <span>As profissionais conduzem seus atendimentos de acordo com suas formações e responsabilidades técnicas.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-adult" id="gb-estimulacao">
+      <div class="gb-container gb-adult-grid">
+        <div class="gb-reveal">
+          <span class="gb-kicker">Novas possibilidades</span>
+          <h2 class="gb-title">Uma frente de cuidado para <span class="gb-italic">adultos.</span></h2>
+          <div class="gb-copy"><p>A clínica oferece atendimento específico de estimulação cognitiva para o público adulto, com uma abordagem individualizada e orientada às necessidades de cada pessoa.</p></div>
+        </div>
+
+        <article class="gb-adult-card gb-reveal">
+          <span class="gb-adult-card-label">Cuidado para adultos</span>
+          <h3>Atendimento específico de estimulação cognitiva.</h3>
+          <p>Conheça a proposta, as habilidades trabalhadas e os princípios que orientam esse atendimento para adultos.</p>
+          <a class="gb-btn gb-btn--cream" href="https://giseliabatista.com.br/estimulacao-cognitiva/">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="gb-section gb-content" id="gb-conteudos">
+      <div class="gb-container gb-content-grid">
+        <div class="gb-reveal">
+          <span class="gb-kicker">Conteúdos e recursos</span>
+          <h2 class="gb-title">Informação para apoiar <span class="gb-italic">famílias e cuidadores.</span></h2>
+          <div class="gb-copy"><p>A clínica e Gisélia Batista produzem conteúdos educativos sobre desenvolvimento, aprendizagem, comunicação, orientação às famílias e outras temáticas relacionadas ao cuidado.</p></div>
+          <a class="gb-btn gb-btn--terra" href="https://www.instagram.com/clinicagiseliabatista/" target="_blank" rel="noopener noreferrer">Acompanhe no Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+
+        <article class="gb-content-card gb-reveal">
+          <div class="gb-content-card-art" aria-hidden="true"></div>
+          <div class="gb-content-card-body"><small>Importante</small><h3>Informação é apoio. <span class="gb-italic">Avaliação é cuidado.</span></h3><p>Os conteúdos têm caráter informativo e complementar. Não substituem avaliação, diagnóstico, orientação ou acompanhamento individualizado.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="gb-section gb-testimonials" id="gb-depoimentos" aria-labelledby="gb-testimonials-title">
+      <div class="gb-container">
+        <div class="gb-testimonials-head gb-reveal">
+          <div>
+            <span class="gb-kicker">Depoimentos</span>
+            <h2 class="gb-title" id="gb-testimonials-title">Experiências compartilhadas por <span class="gb-italic">famílias.</span></h2>
+          </div>
+          <div class="gb-copy">
+            <p>Relatos de quem já conheceu de perto o cuidado, a escuta e o acompanhamento da Clínica Multiprofissional | Gisélia Batista.</p>
+          </div>
+        </div>
+
+        <div class="gb-testimonials-widget gb-reveal">
+          <div id="JFWebsiteWidget-01a0aa81271070008a711264d0450ce8e794"></div>
+          <script src="https://www.jotform.com/website-widgets/embed/01a0aa81271070008a711264d0450ce8e794"></script>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-faq-section">
+      <div class="gb-container gb-faq-grid">
+        <div class="gb-faq-intro gb-reveal">
+          <span class="gb-kicker">Perguntas frequentes</span>
+          <h2 class="gb-title">Clareza para o <span class="gb-italic">primeiro passo.</span></h2>
+          <div class="gb-copy"><p>Se a sua pergunta não estiver aqui, a equipe pode orientar você na conversa inicial.</p></div>
+          <a class="gb-btn gb-btn--terra" href="#formulario-prioridade" data-gb-priority-open>Falar com a equipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+
+        <div class="gb-faq-list gb-reveal">
+          <details class="gb-faq" open><summary>A clínica atende quais públicos?</summary><div class="gb-faq-answer"><p>O foco principal é o atendimento de crianças e adolescentes. A clínica também oferece atendimento específico de estimulação cognitiva para adultos.</p></div></details>
+          <details class="gb-faq"><summary>Quais especialidades estão disponíveis?</summary><div class="gb-faq-answer"><p>A clínica reúne profissionais de psicopedagogia, fonoaudiologia e fisioterapia. A disponibilidade de cada atendimento pode ser confirmada diretamente com a equipe.</p></div></details>
+          <details class="gb-faq"><summary>O que é orientação parental e familiar?</summary><div class="gb-faq-answer"><p>É um atendimento de orientação voltado a pais, responsáveis e cuidadores, com o objetivo de apoiar a rotina, o comportamento e o desenvolvimento de crianças e adolescentes no ambiente familiar.</p></div></details>
+          <details class="gb-faq"><summary>Gisélia realiza todos os atendimentos?</summary><div class="gb-faq-answer"><p>Não. Gisélia atua como psicopedagoga e coordenadora clínica. As demais profissionais conduzem seus atendimentos de acordo com suas próprias formações e responsabilidades técnicas.</p></div></details>
+          <details class="gb-faq"><summary>A criança precisa passar por todas as especialidades?</summary><div class="gb-faq-answer"><p>Não. A indicação depende das necessidades apresentadas e da orientação dos profissionais responsáveis.</p></div></details>
+          <details class="gb-faq"><summary>Como saber qual profissional procurar?</summary><div class="gb-faq-answer"><p>A família pode entrar em contato com a clínica, apresentar brevemente sua necessidade e receber orientação sobre os próximos passos.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="gb-section gb-final" id="gb-contato">
+      <div class="gb-container gb-final-grid">
+        <div class="gb-reveal">
+          <span class="gb-kicker gb-kicker--light">Próximo passo</span>
+          <h2 class="gb-title">Vamos conversar sobre o <span class="gb-italic">próximo passo?</span></h2>
+          <p class="gb-final-copy">Se você busca orientação para compreender melhor as necessidades de uma criança ou adolescente, entre em contato com a Clínica Multiprofissional | Gisélia Batista. A equipe poderá explicar as especialidades disponíveis e orientar sobre os próximos passos.</p>
+        </div>
+
+        <aside class="gb-contact-card gb-reveal">
+          <small>Comece por aqui</small>
+          <h3>Fale diretamente com a equipe.</h3>
+          <p>Envie uma mensagem pelo WhatsApp para receber uma orientação inicial e conhecer as possibilidades de acompanhamento.</p>
+          <div class="gb-contact-actions">
+            <a class="gb-btn gb-btn--terra" href="#formulario-prioridade" data-gb-priority-open>Preencher dados e conversar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="gb-btn gb-btn--instagram" href="https://www.instagram.com/clinicagiseliabatista/" target="_blank" rel="noopener noreferrer">Visitar o Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gb-footer">
+    <div class="gb-container">
+      <div class="gb-footer-top">
+        <div>
+          <a class="gb-footer-logo" href="https://giseliabatista.com.br/clinica-multiprofissional/" aria-label="Clínica Gisélia Batista - página inicial"><img src="https://giseliabatista.com.br/wp-content/uploads/2026/09/ChatGPT-Image-Sep-16-2026-10_30_53-AM.png" alt="Gisélia Batista - Clínica Multiprofissional"></a>
+          <p class="gb-footer-about">Cuidado especializado para crianças e adolescentes, com atuação multiprofissional e atendimento específico de estimulação cognitiva para adultos.</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <nav class="gb-footer-links" aria-label="Navegação do rodapé"><a href="https://giseliabatista.com.br/clinica-multiprofissional/">Início</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-clinica">A clínica</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-especialidades">Especialidades</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-equipe">Equipe</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-como-funciona">Como funciona</a><a href="https://giseliabatista.com.br/clinica-multiprofissional/#gb-conteudos">Conteúdos</a><a href="https://giseliabatista.com.br/supervisao/">Supervisão</a><a href="https://giseliabatista.com.br/estimulacao-cognitiva/">Estimulação cognitiva</a><a href="https://www.instagram.com/clinicagiseliabatista/" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+        </div>
+        <div>
+          <h4>Aviso institucional</h4>
+          <p class="gb-footer-note">As informações apresentadas têm caráter informativo. A indicação de avaliação ou acompanhamento deve considerar as necessidades individuais e ser orientada pelo profissional responsável.</p>
+        </div>
+      </div>
+      <div class="gb-footer-bottom"><span>© <span data-gb-year>2026</span> Clínica Multiprofissional | Gisélia Batista.</span><span>Informação, cuidado e responsabilidade.</span></div>
+    </div>
+  </footer>
+
+  <div class="gb-priority-modal" id="formulario-prioridade" role="dialog" aria-modal="true" aria-labelledby="gb-priority-title" aria-describedby="gb-priority-description" data-gb-priority-modal hidden>
+    <button class="gb-priority-backdrop" type="button" aria-label="Fechar formulário" data-gb-priority-close></button>
+    <div class="gb-priority-panel" tabindex="-1" data-gb-priority-panel>
+      <button class="gb-priority-close" type="button" aria-label="Fechar formulário" data-gb-priority-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+      <span class="gb-priority-eyebrow">Atendimento prioritário</span>
+      <h2 class="gb-priority-title" id="gb-priority-title">Antes de falar com a equipe</h2>
+      <p class="gb-priority-intro" id="gb-priority-description">Preencha seus dados. Após o cadastro, você será direcionado ao WhatsApp da clínica com a mensagem pronta.</p>
+
+      <form class="gb-priority-form" action="/wp-admin/admin-ajax.php" method="post" data-gb-priority-form novalidate>
+        <input type="hidden" name="action" value="gb_priority_lead">
+        <input type="hidden" name="source_page" value="Página inicial — Clínica Multiprofissional">
+
+        <div class="gb-priority-field">
+          <label for="gb-priority-name">Nome completo</label>
+          <input id="gb-priority-name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Como podemos chamar você?" required>
+        </div>
+
+        <div class="gb-priority-field">
+          <label for="gb-priority-phone">Telefone</label>
+          <input id="gb-priority-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="gb-priority-field">
+          <label for="gb-priority-email">E-mail</label>
+          <input id="gb-priority-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="voce@exemplo.com" required>
+        </div>
+
+        <div class="gb-priority-honeypot" aria-hidden="true">
+          <label for="gb-priority-company">Não preencha este campo</label>
+          <input id="gb-priority-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="gb-btn gb-priority-submit" type="submit">Cadastrar e ir para o WhatsApp</button>
+        <p class="gb-priority-privacy">Ao continuar, você autoriza o uso dos dados informados para que a clínica entre em contato sobre o atendimento solicitado.</p>
+        <p class="gb-priority-status" role="status" aria-live="polite" data-gb-priority-status></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('.gb-home');
+    if (!root || root.dataset.gbReady === 'true') return;
+    root.dataset.gbReady = 'true';
+    root.classList.add('gb-js');
+
+    var header = root.querySelector('[data-gb-header]');
+    var menuButton = root.querySelector('[data-gb-menu]');
+    var menuLinks = root.querySelectorAll('.gb-nav a');
+
+    function closeMenu() {
+      if (!header || !menuButton) return;
+      header.classList.remove('gb-menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Abrir menu');
+    }
+
+    if (header && menuButton) {
+      menuButton.addEventListener('click', function () {
+        var isOpen = header.classList.toggle('gb-menu-open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1200) closeMenu();
+      });
+    }
+
+    root.querySelectorAll('a[href^="#gb-"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (event) {
+        var target = root.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        event.preventDefault();
+        var offset = header ? header.offsetHeight : 0;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset + 1, behavior: 'smooth' });
+      });
+    });
+
+    var year = root.querySelector('[data-gb-year]');
+    if (year) year.textContent = new Date().getFullYear();
+
+    var priorityModal = root.querySelector('[data-gb-priority-modal]');
+    var priorityPanel = root.querySelector('[data-gb-priority-panel]');
+    var priorityForm = root.querySelector('[data-gb-priority-form]');
+    var priorityStatus = root.querySelector('[data-gb-priority-status]');
+    var priorityTriggers = root.querySelectorAll('[data-gb-priority-open], a[href="https://tr.ee/RCJ6c9N2lI"]');
+    var lastFocusedElement = null;
+    var whatsappNumber = '5555999574934';
+    var whatsappMessage = 'Olá. Gostaria de prioridade no meu atendimento. Acabei de cadastrar os meus dados no site. Fico no aguardo';
+
+    function openPriorityModal(event) {
+      if (!priorityModal) return;
+      if (event) event.preventDefault();
+      closeMenu();
+      lastFocusedElement = document.activeElement;
+      priorityModal.hidden = false;
+      document.documentElement.classList.add('gb-modal-lock');
+      window.requestAnimationFrame(function () {
+        var firstInput = priorityModal.querySelector('input[name="name"]');
+        if (firstInput) firstInput.focus();
+        else if (priorityPanel) priorityPanel.focus();
+      });
+    }
+
+    function closePriorityModal() {
+      if (!priorityModal || priorityModal.hidden) return;
+      priorityModal.hidden = true;
+      document.documentElement.classList.remove('gb-modal-lock');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+    }
+
+    priorityTriggers.forEach(function (trigger) {
+      trigger.addEventListener('click', openPriorityModal);
+    });
+
+    root.querySelectorAll('[data-gb-priority-close]').forEach(function (button) {
+      button.addEventListener('click', closePriorityModal);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && priorityModal && !priorityModal.hidden) closePriorityModal();
+    });
+
+    if (priorityForm) {
+      var phoneInput = priorityForm.querySelector('input[name="phone"]');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+          var digits = phoneInput.value.replace(/\D/g, '').slice(0, 11);
+          if (digits.length > 10) phoneInput.value = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+          else if (digits.length > 6) phoneInput.value = digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+          else if (digits.length > 2) phoneInput.value = digits.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+          else phoneInput.value = digits;
+        });
+      }
+
+      priorityForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!priorityForm.checkValidity()) {
+          priorityForm.reportValidity();
+          return;
+        }
+
+        var submitButton = priorityForm.querySelector('button[type="submit"]');
+        var formData = new FormData(priorityForm);
+        var ajaxUrl = window.ajaxurl || (window.location.origin + '/wp-admin/admin-ajax.php');
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Cadastrando...';
+        }
+        if (priorityStatus) {
+          priorityStatus.textContent = 'Enviando seus dados com segurança...';
+          priorityStatus.removeAttribute('data-state');
+        }
+
+        fetch(ajaxUrl, {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+          .then(function (response) {
+            return response.json().then(function (data) {
+              if (!response.ok || !data.success) throw new Error(data && data.data && data.data.message ? data.data.message : 'Não foi possível cadastrar seus dados.');
+              return data;
+            });
+          })
+          .then(function () {
+            if (priorityStatus) priorityStatus.textContent = 'Cadastro concluído. Abrindo o WhatsApp...';
+            window.location.href = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(whatsappMessage);
+          })
+          .catch(function (error) {
+            if (priorityStatus) {
+              priorityStatus.textContent = error.message || 'Ocorreu um erro. Revise os dados e tente novamente.';
+              priorityStatus.setAttribute('data-state', 'error');
+            }
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = 'Cadastrar e ir para o WhatsApp';
+            }
+          });
+      });
+    }
+
+    var reveals = root.querySelectorAll('.gb-reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gb-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -45px 0px' });
+      reveals.forEach(function (element) { observer.observe(element); });
+    } else {
+      reveals.forEach(function (element) { element.classList.add('gb-visible'); });
+    }
+  })();
+</script>
