@@ -15,8 +15,12 @@ rio-cleaning/
 │   ├── send.php           ← recebe o formulário e envia o e-mail
 │   ├── includes/config.php ← destinatário, caixa de envio/SMTP, backup (edite aqui)
 │   └── data/              ← backup dos pedidos (leads.csv), bloqueado para a web
-└── rio-cleaning-hostinger.zip ← o conteúdo de site/ pronto para enviar
+├── vercel/            ← cópia estática só para visualizar na Vercel (gerada)
+├── rio-cleaning-hostinger.zip ← o conteúdo de site/ pronto para enviar à Hostinger
+└── rio-cleaning-vercel.zip    ← o conteúdo de vercel/ (prévia)
 ```
+
+`python3 build/build.py` gera as duas versões e os dois ZIPs de uma vez.
 
 Para alterar textos, FAQ, horários, avaliações ou cidades: edite `build/content.py` e rode
 
@@ -61,6 +65,14 @@ Cada página tem title e description únicos, H1 único, canonical, Open Graph/T
 
 O `.htaccess` força HTTPS, remove `www`, aplica os redirects 301 do site antigo, o cache e bloqueia
 o acesso às pastas `includes/` e `data/`.
+
+## Prévia na Vercel
+
+`rio-cleaning-vercel.zip` (pasta `vercel/`) é o mesmo site para visualizar antes de publicar.
+Diferenças: não tem PHP, então o formulário valida os campos mas **não envia** (mostra
+"Preview only"); tem `noindex` e `robots.txt` bloqueando o Google para não competir com o domínio
+real. Para publicar: extraia o ZIP numa pasta e rode `vercel` nela (ou importe a pasta como
+projeto, Framework = Other, sem build). O `vercel.json` já vai dentro.
 
 ## Formulário de orçamento (PHP, no próprio servidor)
 
