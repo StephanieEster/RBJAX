@@ -25,7 +25,7 @@ SIZES = json.loads((Path(__file__).resolve().parent / 'image_sizes.json').read_t
 e = html.escape
 BIZ_ID = C.SITE_URL + '/#business'
 SITE_ID = C.SITE_URL + '/#website'
-ASSET_V = '4'
+ASSET_V = '5'
 CUR = ' aria-current="page"'
 HL = ' class="is-hl"'
 POP = ' <span class="pill">Most popular</span>'  # bump when CSS/JS change so returning visitors skip the cached copy

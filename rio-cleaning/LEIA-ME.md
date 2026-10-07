@@ -172,9 +172,10 @@ ilustrativas. Nenhuma foto de pessoa é apresentada como sendo a Marcia ou a equ
 
 Cores: azul Rio, verde e laranja-sol do brandbook como cores de seção (topo azul, faixa verde do
 biweekly, faixa laranja de área atendida, bloco azul do orçamento), botões de ligação em laranja e
-faixa tricolor no cabeçalho e rodapé. Padrões: ondas no estilo calçadão de Copacabana (animadas
-lentamente; param para quem desativa animações) e estrelinhas do brandbook; divisórias onduladas
-entre seções. Arquivos em `assets/img/pattern-*.svg` e `wave-edge.svg`.
+faixa tricolor no cabeçalho e rodapé. Padrão: um só, as ondas no estilo calçadão de Copacabana,
+usado apenas nas seções de destaque (topo de cada página, faixa do biweekly e bloco de orçamento),
+com divisórias onduladas na entrada e saída dessas seções. As ondas se movem devagar e param para
+quem desativa animações. Arquivos: `assets/img/pattern-waves.svg` e `wave-edge.svg`.
 
 Tipografia: Fraunces (títulos) e Montserrat (texto, do brandbook), hospedadas no próprio site.
 Ícones: SVG em sprite único (`/assets/icons.svg`), estilo Lucide.

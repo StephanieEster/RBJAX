@@ -553,28 +553,22 @@ strong { color: var(--ink); font-weight: 650; }
 .mobile-bar { display: none; }
 
 /* ------------------------------------------------------------ Brazil color layer & patterns */
-/* Patterns are masks, so one SVG tile can be painted in any brand color. */
+/* The wave pattern is a mask, so one SVG tile can be painted in any brand color. */
 .hero, .phero, .services, .biweekly, .included, .story, .areas-band, .estimate, .bw-split, .zip-band,
 .criteria, .values, .about-services, .owner, .related, .why, .faq-sec, .steps-sec { position: relative; isolation: isolate; overflow: hidden; }
-.hero::before, .phero::before, .services::before, .biweekly::before, .estimate::before, .bw-split::before,
-.zip-band::before, .areas-band::before, .criteria::before, .values::before {
+/* One pattern, used only on the highlight sections: page tops, the biweekly band and the estimate block. */
+.hero::before, .phero::before, .biweekly::before, .estimate::before {
   content: ''; position: absolute; top: 0; bottom: 0; left: -240px; right: 0; z-index: -1; pointer-events: none;
   background: var(--pat, rgba(255, 255, 255, .08));
   -webkit-mask: url(/assets/img/pattern-waves.svg) 0 0 / 240px 36px repeat;
   mask: url(/assets/img/pattern-waves.svg) 0 0 / 240px 36px repeat;
   animation: wave-drift 38s linear infinite;
 }
-.why::before, .included::before, .story::before, .faq-sec::before, .about-services::before, .owner::before, .related::before, .steps-sec::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: var(--pat, rgba(3, 134, 202, .09));
-  -webkit-mask: url(/assets/img/pattern-stars.svg) 0 0 / 180px 180px repeat;
-  mask: url(/assets/img/pattern-stars.svg) 0 0 / 180px 180px repeat;
-}
 @keyframes wave-drift { to { transform: translateX(240px); } }
 
 /* wavy edge into the next section (color = next section) */
 .hero::after, .phero::after, .services:has(+ .biweekly)::after, .biweekly:has(+ .included)::after,
-.section:has(+ .estimate)::after, .areas-band:has(+ .faq-sec)::after, .story:has(+ .areas-band)::after {
+.section:has(+ .estimate)::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: clamp(26px, 4vw, 60px); z-index: 1; pointer-events: none;
   background: var(--wave, #fff);
   -webkit-mask: url(/assets/img/wave-edge.svg) 0 100% / 100% 100% no-repeat;
@@ -583,10 +577,8 @@ strong { color: var(--ink); font-weight: 650; }
 .services:has(+ .biweekly) { --wave: var(--green-700); }
 .biweekly:has(+ .included) { --wave: var(--gold-soft); }
 .section:has(+ .estimate) { --wave: var(--navy); }
-.story:has(+ .areas-band) { --wave: var(--gold); }
-.areas-band:has(+ .faq-sec) { --wave: #fff; }
 .hero, .phero { padding-bottom: calc(clamp(48px, 6vw, 84px) + 30px); }
-.services, .biweekly, .story, .areas-band, .section:has(+ .estimate) { padding-bottom: calc(var(--sec) + 30px); }
+.services:has(+ .biweekly), .biweekly:has(+ .included), .section:has(+ .estimate) { padding-bottom: calc(var(--sec) + 30px); }
 
 /* header: tricolor ribbon */
 .topbar { background: var(--blue-800); }
@@ -659,7 +651,7 @@ h1 em, h2 em { color: var(--blue); }
 .definition-inline, .definition p { border-left-color: var(--green); }
 
 /* services */
-.services { background: var(--sand); --pat: rgba(3, 134, 202, .055); }
+.services { background: var(--sand); }
 .svc-feature { border-top: 5px solid var(--blue); }
 .badge { background: var(--gold); color: var(--ink); }
 .badge .ic { color: var(--ink); }
@@ -671,13 +663,13 @@ h1 em, h2 em { color: var(--blue); }
 .svc-row a:hover .svc-go { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
 /* biweekly: green band */
-.biweekly { background: var(--green-700); --pat: rgba(42, 168, 73, .55); }
+.biweekly { background: var(--green-700); --pat: rgba(42, 168, 73, .38); }
 .biweekly h2 em { color: var(--gold-text); }
 .bw-list li { border-top-color: rgba(255, 255, 255, .22); }
 .bw-media { outline: 6px solid rgba(255, 255, 255, .95); outline-offset: -1px; }
 
 /* what's included: sun tint */
-.included { background: var(--gold-soft); --pat: rgba(246, 164, 27, .22); }
+.included { background: var(--gold-soft); }
 .inc-group { border: 0; border-top: 5px solid var(--blue); box-shadow: var(--sh-1); }
 .inc-group:nth-child(2) { border-top-color: var(--green); }
 .inc-group:nth-child(3) { border-top-color: var(--gold); }
@@ -696,11 +688,11 @@ h1 em, h2 em { color: var(--blue); }
 .steps::before { background: repeating-linear-gradient(90deg, var(--blue) 0 6px, transparent 6px 12px); opacity: .5; }
 
 /* story & areas */
-.story { background: #fff; --pat: rgba(42, 168, 73, .1); }
+.story { background: #fff; }
 .story-media::after { border: 0; background: var(--green); border-radius: 50%; width: 38%; height: auto; aspect-ratio: 1; left: -26px; bottom: -26px; }
 .facts div:nth-child(2) dt { color: var(--green-700); }
 .facts div:nth-child(3) dt { color: var(--gold-ink); }
-.areas-band { background: var(--gold); border: 0; color: var(--ink); --pat: rgba(255, 255, 255, .22); }
+.areas-band { background: var(--gold); border: 0; color: var(--ink); }
 .areas-band p { color: var(--ink); }
 .areas-band .eyebrow { color: var(--ink); }
 .areas-band .mark3 .s { color: var(--ink); }
@@ -725,7 +717,7 @@ h1 em, h2 em { color: var(--blue); }
 .table thead th { color: var(--blue-700); border-bottom: 2px solid var(--blue); }
 .table tr.is-hl th, .table tr.is-hl td { background: var(--gold-soft); }
 .pill { background: var(--green-700); }
-.bw-split { background: var(--green-50); --pat: rgba(42, 168, 73, .14); }
+.bw-split { background: var(--green-50); }
 .bw2-grid img { outline: 6px solid #fff; outline-offset: -1px; }
 .icon-grid li { border-top: 4px solid var(--blue); }
 .icon-grid li:nth-child(3n+2) { border-top-color: var(--green); }
@@ -740,20 +732,20 @@ h1 em, h2 em { color: var(--blue); }
 .rel-list a { border-width: 1px 1px 4px; border-bottom-color: var(--blue); }
 .rel-list li:nth-child(2) a { border-bottom-color: var(--green); }
 .rel-list li:nth-child(3) a { border-bottom-color: var(--gold); }
-.criteria { background: var(--sand); --pat: rgba(3, 134, 202, .07); }
+.criteria { background: var(--sand); }
 .tables { background: #fff; }
 .hub-k { color: var(--green-700); }
 .hub-row img { outline: 6px solid #fff; outline-offset: -1px; box-shadow: var(--sh-2); }
 .hub-row:nth-child(even) img { border-radius: 999px 999px var(--r-sm) var(--r-sm); }
-.values { background: var(--sand); --pat: rgba(3, 134, 202, .07); }
+.values { background: var(--sand); }
 .about-facts { background: var(--sand); border-top: 5px solid var(--blue); }
 .about-facts .facts-col div:nth-child(2) dt { color: var(--green-700); }
 .about-facts .facts-col div:nth-child(3) dt { color: var(--gold-ink); }
-.about-services { background: var(--gold-soft); --pat: rgba(246, 164, 27, .22); }
+.about-services { background: var(--gold-soft); }
 .state-list { border-top: 4px solid var(--blue); }
 .state-list li:nth-child(2) h3 .ic { color: var(--green-700); }
 .state-list li:nth-child(3) h3 .ic { color: var(--gold-ink); }
-.zip-band { background: var(--gold); color: var(--ink); --pat: rgba(255, 255, 255, .22); }
+.zip-band { background: var(--gold); color: var(--ink); }
 .zip-band h2 { color: var(--ink); }
 .zip-band .btn-light { --bg: var(--navy); --fg: #fff; --bd: var(--navy); }
 .zip-band .btn-light:hover { --bg: var(--blue-800); --bd: var(--blue-800); --fg: #fff; }
@@ -777,8 +769,7 @@ h1 em, h2 em { color: var(--blue); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .js .reveal { opacity: 1; transform: none; }
-  .hero::before, .phero::before, .services::before, .biweekly::before, .estimate::before, .bw-split::before,
-  .zip-band::before, .areas-band::before, .criteria::before, .values::before { animation: none; }
+  .hero::before, .phero::before, .biweekly::before, .estimate::before { animation: none; }
 }
 
 /* ------------------------------------------------------------ responsive */
