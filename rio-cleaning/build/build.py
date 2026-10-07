@@ -25,7 +25,7 @@ SIZES = json.loads((Path(__file__).resolve().parent / 'image_sizes.json').read_t
 e = html.escape
 BIZ_ID = C.SITE_URL + '/#business'
 SITE_ID = C.SITE_URL + '/#website'
-ASSET_V = '3'
+ASSET_V = '4'
 CUR = ' aria-current="page"'
 HL = ' class="is-hl"'
 POP = ' <span class="pill">Most popular</span>'  # bump when CSS/JS change so returning visitors skip the cached copy
@@ -675,7 +675,7 @@ def page_home():
 <h2 id="bw-h">Why so many families choose <em>every two weeks</em></h2>
 <p class="lead">For a busy household in a 3-bedroom, 2–3 bathroom home, biweekly cleaning hits the sweet spot: the house stays clean, the routine stays simple, and your weekends stay yours.</p>
 <ul class="bw-list">{bw_html}</ul>
-<div class="cta-row">{call_btn('Ask About Biweekly Cleaning', 'btn btn-light', 'biweekly')}
+<div class="cta-row">{call_btn('Ask About Biweekly Cleaning', 'btn btn-primary', 'biweekly')}
 <a class="arrow-link on-dark" href="/recurring-cleaning/">How recurring cleaning works{icon("arrow")}</a></div>
 </div>
 </div>

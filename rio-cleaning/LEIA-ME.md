@@ -170,5 +170,11 @@ Fotos de banco do **Pexels** (licença gratuita para uso comercial, sem atribui�
 15580493 (`https://www.pexels.com/photo/<id>/`). Os Termos informam que algumas fotos são
 ilustrativas. Nenhuma foto de pessoa é apresentada como sendo a Marcia ou a equipe.
 
+Cores: azul Rio, verde e laranja-sol do brandbook como cores de seção (topo azul, faixa verde do
+biweekly, faixa laranja de área atendida, bloco azul do orçamento), botões de ligação em laranja e
+faixa tricolor no cabeçalho e rodapé. Padrões: ondas no estilo calçadão de Copacabana (animadas
+lentamente; param para quem desativa animações) e estrelinhas do brandbook; divisórias onduladas
+entre seções. Arquivos em `assets/img/pattern-*.svg` e `wave-edge.svg`.
+
 Tipografia: Fraunces (títulos) e Montserrat (texto, do brandbook), hospedadas no próprio site.
 Ícones: SVG em sprite único (`/assets/icons.svg`), estilo Lucide.
