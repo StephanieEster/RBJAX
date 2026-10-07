@@ -557,7 +557,7 @@ strong { color: var(--ink); font-weight: 650; }
 .hero, .phero, .services, .biweekly, .included, .story, .areas-band, .estimate, .bw-split, .zip-band,
 .criteria, .values, .about-services, .owner, .related, .why, .faq-sec, .steps-sec { position: relative; isolation: isolate; overflow: hidden; }
 /* One pattern, used only on the highlight sections: page tops, the biweekly band and the estimate block. */
-.hero::before, .phero::before, .biweekly::before, .estimate::before {
+.hero::before, .phero::before, .estimate::before {
   content: ''; position: absolute; top: 0; bottom: 0; left: -240px; right: 0; z-index: -1; pointer-events: none;
   background: var(--pat, rgba(255, 255, 255, .08));
   -webkit-mask: url(/assets/img/pattern-waves.svg) 0 0 / 240px 36px repeat;
@@ -574,9 +574,9 @@ strong { color: var(--ink); font-weight: 650; }
   -webkit-mask: url(/assets/img/wave-edge.svg) 0 100% / 100% 100% no-repeat;
   mask: url(/assets/img/wave-edge.svg) 0 100% / 100% 100% no-repeat;
 }
-.services:has(+ .biweekly) { --wave: var(--green-700); }
+.services:has(+ .biweekly) { --wave: #14652e; }
 .biweekly:has(+ .included) { --wave: var(--gold-soft); }
-.section:has(+ .estimate) { --wave: var(--navy); }
+.section:has(+ .estimate) { --wave: var(--navy); position: relative; isolation: isolate; overflow: hidden; }
 .hero, .phero { padding-bottom: calc(clamp(48px, 6vw, 84px) + 30px); }
 .services:has(+ .biweekly), .biweekly:has(+ .included), .section:has(+ .estimate) { padding-bottom: calc(var(--sec) + 30px); }
 
@@ -663,7 +663,9 @@ h1 em, h2 em { color: var(--blue); }
 .svc-row a:hover .svc-go { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
 /* biweekly: green band */
-.biweekly { background: var(--green-700); --pat: rgba(42, 168, 73, .38); }
+.biweekly { background: #14652e; }
+.biweekly .lead, .bw-list p { color: rgba(255, 255, 255, .92); }
+.biweekly .eyebrow { color: #fff; }
 .biweekly h2 em { color: var(--gold-text); }
 .bw-list li { border-top-color: rgba(255, 255, 255, .22); }
 .bw-media { outline: 6px solid rgba(255, 255, 255, .95); outline-offset: -1px; }
@@ -769,7 +771,7 @@ h1 em, h2 em { color: var(--blue); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .js .reveal { opacity: 1; transform: none; }
-  .hero::before, .phero::before, .biweekly::before, .estimate::before { animation: none; }
+  .hero::before, .phero::before, .estimate::before { animation: none; }
 }
 
 /* ------------------------------------------------------------ responsive */
