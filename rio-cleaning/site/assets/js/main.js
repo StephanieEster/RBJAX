@@ -208,7 +208,7 @@
         return;
       }
       // Spam protection: honeypot filled or submitted faster than a person could type.
-      if (form.elements._honey.value || Date.now() - loadedAt < 2500) {
+      if (form.elements.website.value || Date.now() - loadedAt < 2500) {
         status.className = 'form-status is-ok';
         status.textContent = 'Thank you! Your request was sent.';
         return;
@@ -219,36 +219,41 @@
       label.textContent = 'Sending…';
       status.className = 'form-status';
       status.textContent = '';
+      form.elements.started.value = String(loadedAt);
+      form.elements.page_url.value = location.href.split('#')[0];
+      var body = new FormData(form);
+      var info = { page: body.get('page'), name: String(body.get('name') || '').trim(), service: body.get('service'), frequency: body.get('frequency') || '' };
 
-      var data = {};
-      new FormData(form).forEach(function (v, k) { if (k !== '_next') data[k] = typeof v === 'string' ? v.trim() : v; });
-      if (data.email) data._replyto = data.email;
-      data.page_url = location.href;
-
-      fetch(form.dataset.endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(data)
-      }).then(function (res) {
-        return res.json().catch(function () { return {}; }).then(function (json) {
-          if (!res.ok || json.success === false || json.success === 'false') throw new Error(json.message || 'Request failed');
-        });
-      }).then(function () {
-        track('quote_form_submit', { form_location: data.page, service: data.service, frequency: data.frequency || '' });
-        form.classList.add('is-sent');
-        status.className = 'form-status is-ok';
-        status.innerHTML = '<strong>Thank you, ' + escapeHtml(data.name.split(' ')[0]) + '!</strong> Your estimate request was sent. ' +
-          'We\'ll get back to you soon. For anything urgent, call <a href="tel:+12676944609">(267) 694-4609</a>.';
-        status.focus();
-      }).catch(function () {
+      function fail(message) {
         sending = false;
         btn.disabled = false;
         btn.classList.remove('is-loading');
         label.textContent = 'Request My Free Estimate';
         status.className = 'form-status is-error';
-        status.innerHTML = 'Sorry, your request could not be sent right now. Please try again, or call us at ' +
+        status.innerHTML = message || 'Sorry, your request could not be sent right now. Please try again, or call us at ' +
           '<a href="tel:+12676944609">(267) 694-4609</a>.';
-      });
+      }
+
+      fetch(form.getAttribute('action'), { method: 'POST', headers: { Accept: 'application/json' }, body: body })
+        .then(function (res) {
+          return res.json().catch(function () { return { ok: false }; });
+        })
+        .then(function (json) {
+          if (!json.ok) {
+            var fields = Object.keys(json.errors || {});
+            fields.forEach(function (k) { setError(form, k, json.errors[k]); });
+            if (fields.length && form.elements[fields[0]]) form.elements[fields[0]].focus();
+            fail(json.message);
+            return;
+          }
+          track('quote_form_submit', { form_location: info.page, service: info.service, frequency: info.frequency });
+          form.classList.add('is-sent');
+          status.className = 'form-status is-ok';
+          status.innerHTML = '<strong>Thank you, ' + escapeHtml(info.name.split(' ')[0]) + '!</strong> Your estimate request was sent. ' +
+            'We\'ll get back to you soon. For anything urgent, call <a href="tel:+12676944609">(267) 694-4609</a>.';
+          status.focus();
+        })
+        .catch(function () { fail(); });
     });
   });
 
@@ -256,10 +261,16 @@
     return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
 
-  /* No-JS fallback lands on /contact/?sent=1 */
+  /* Without JavaScript the form posts normally: /contact/?sent=1 on success, ?form_error=1 otherwise. */
   if (/[?&]sent=1/.test(location.search)) {
     var sent = doc.getElementById('sent-msg');
     if (sent) sent.hidden = false;
+  }
+  if (/[?&]form_error=1/.test(location.search)) {
+    doc.querySelectorAll('.qform .form-status').forEach(function (s) {
+      s.className = 'form-status is-error';
+      s.innerHTML = 'Please check your details and try again, or call us at <a href="tel:+12676944609">(267) 694-4609</a>.';
+    });
   }
   root.classList.add('js-ready');
 })();

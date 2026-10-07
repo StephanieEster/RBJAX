@@ -44,10 +44,9 @@ CONFIRMED_CITIES = []
 # OFFER = {'title': 'Refer a friend, get $50', 'text': '...', 'terms': '...'}
 OFFER = None
 
-# Form processing (FormSubmit sends each request to the inbox below; the first
-# submission triggers a one-time activation email that must be confirmed).
-FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + EMAIL
-FORM_ACTION = 'https://formsubmit.co/' + EMAIL
+# The estimate form posts to /send.php (PHP on Hostinger). Delivery settings
+# (recipient, SMTP mailbox, backups) live in site/includes/config.php.
+FORM_ACTION = '/send.php'
 
 # Tracking IDs. Leave empty until the real IDs exist; nothing is loaded while empty.
 TRACKING = {

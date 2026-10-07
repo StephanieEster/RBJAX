@@ -20,7 +20,7 @@ SIZES = json.loads((Path(__file__).resolve().parent / 'image_sizes.json').read_t
 e = html.escape
 BIZ_ID = C.SITE_URL + '/#business'
 SITE_ID = C.SITE_URL + '/#website'
-ASSET_V = '1'
+ASSET_V = '2'
 CUR = ' aria-current="page"'
 HL = ' class="is-hl"'
 POP = ' <span class="pill">Most popular</span>'  # bump when CSS/JS change so returning visitors skip the cached copy
@@ -480,7 +480,7 @@ def quote_form(page_name: str, preset: str = '') -> str:
                 'Not Sure Yet']
     svc_opts = '<option value="">Select one</option>' + ''.join(
         f'<option{" selected" if o == preset else ""}>{o}</option>' for o in services)
-    return f'''<form class="qform" id="quote-form" action="{C.FORM_ACTION}" method="POST" novalidate data-endpoint="{C.FORM_ENDPOINT}">
+    return f'''<form class="qform" id="quote-form" action="{C.FORM_ACTION}" method="POST" novalidate>
 <div class="form-grid">
 {field('name', 'Full name', 'text', True, 'autocomplete="name" autocapitalize="words" maxlength="80"')}
 {field('phone', 'Phone number', 'tel', True, 'autocomplete="tel" inputmode="tel" maxlength="20"')}
@@ -498,11 +498,9 @@ def quote_form(page_name: str, preset: str = '') -> str:
 <div class="field full"><label for="f-message">Anything we should know? <span class="opt">(optional)</span></label>
 <textarea id="f-message" name="message" rows="3" maxlength="1500" placeholder="Pets, priority areas, preferred days, move date..."></textarea></div>
 </div>
-<div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
-<input type="hidden" name="_subject" value="New estimate request - riocleanings.com">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="{C.SITE_URL}/contact/?sent=1">
+<div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="started" value="">
+<input type="hidden" name="page_url" value="">
 <input type="hidden" name="page" value="{e(page_name)}">
 <p class="consent">By submitting this form, you agree to be contacted by Rio Cleaning Services regarding your cleaning request. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
 <button class="btn btn-primary btn-submit" type="submit">{icon("arrow")}<span class="btn-label">Request My Free Estimate</span></button>
@@ -1184,7 +1182,7 @@ def page_privacy():
 <ul><li>To respond to your request and prepare your cleaning estimate.</li><li>To schedule, provide and follow up on cleaning services.</li><li>To communicate with you about your request or appointments.</li><li>To maintain records and improve our website and services.</li></ul>
 <p>We do not sell your personal information. We do not send marketing text messages through this website.</p>
 <h2>How your form submission is processed</h2>
-<p>Our estimate form is delivered to our business email inbox through FormSubmit (formsubmit.co), a third-party form-processing service. Your submission is transmitted to that service only to deliver it to us.</p>
+<p>Our estimate form is processed by our own website server, which emails your request to our business inbox and keeps a backup copy on our hosting account so no request is lost. If you include an email address, we send you a short confirmation that we received your request.</p>
 <h2>Sharing</h2>
 <p>We share information only with service providers that help us operate our business (such as email, website hosting and form delivery), when required by law, or to protect our rights and safety.</p>
 <h2>Data retention and security</h2>
@@ -1268,25 +1266,11 @@ def site_files():
                 'icons': [{'src': '/assets/img/icon-192.png', 'sizes': '192x192', 'type': 'image/png'},
                           {'src': '/assets/img/icon-512.png', 'sizes': '512x512', 'type': 'image/png'}]}
     (OUT / 'site.webmanifest').write_text(json.dumps(manifest, indent=1), encoding='utf-8')
-    # Vercel (project root = rio-cleaning/)
-    vercel = {
-        'outputDirectory': 'site', 'trailingSlash': True, 'cleanUrls': False,
-        'redirects': [{'source': src, 'destination': b, 'permanent': True}
-                      for a, b in REDIRECTS for src in ([a] if a.endswith('.html') else [a.rstrip('/'), a])],
-        'headers': [
-            {'source': '/assets/(.*)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=31536000, immutable'}]},
-            {'source': '/(.*)', 'headers': [
-                {'key': 'X-Content-Type-Options', 'value': 'nosniff'},
-                {'key': 'Referrer-Policy', 'value': 'strict-origin-when-cross-origin'},
-                {'key': 'X-Frame-Options', 'value': 'SAMEORIGIN'},
-                {'key': 'Permissions-Policy', 'value': 'camera=(), microphone=(), geolocation=()'}]},
-        ],
-    }
-    (ROOT / 'vercel.json').write_text(json.dumps(vercel, indent=2) + '\n', encoding='utf-8')
     # Apache / Hostinger
     rules = '\n'.join(f'RewriteRule ^{re.escape(a.strip("/"))}/?$ {b} [R=301,L]' for a, b in REDIRECTS if a != '/index.html')
     htaccess = f'''# Rio Cleaning Services - Apache / Hostinger configuration (generated by build/build.py)
 Options -MultiViews -Indexes
+DirectoryIndex index.html index.php
 DirectorySlash On
 ErrorDocument 404 /404.html
 

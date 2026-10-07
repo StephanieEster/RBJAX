@@ -11,8 +11,11 @@ rio-cleaning/
 ├── build/content.py   ← dados da empresa, textos, serviços, FAQs, IDs de tracking (edite aqui)
 ├── build/build.py     ← componentes e templates das páginas, JSON-LD, sitemap, redirects
 ├── build/images.py    ← pipeline das fotos (WebP responsivo, imagens OG, logo, favicons)
-├── site/              ← site pronto para publicar (gerado)
-└── vercel.json        ← configuração da Vercel (gerado)
+├── site/              ← conteúdo do public_html da Hostinger
+│   ├── send.php           ← recebe o formulário e envia o e-mail
+│   ├── includes/config.php ← destinatário, caixa de envio/SMTP, backup (edite aqui)
+│   └── data/              ← backup dos pedidos (leads.csv), bloqueado para a web
+└── rio-cleaning-hostinger.zip ← o conteúdo de site/ pronto para enviar
 ```
 
 Para alterar textos, FAQ, horários, avaliações ou cidades: edite `build/content.py` e rode
@@ -21,7 +24,8 @@ Para alterar textos, FAQ, horários, avaliações ou cidades: edite `build/conte
 cd rio-cleaning && python3 build/build.py
 ```
 
-Os `.html`, `sitemap.xml`, `robots.txt`, `.htaccess` e `vercel.json` são gerados; não edite à mão.
+Os `.html`, `sitemap.xml`, `robots.txt` e `.htaccess` são gerados; não edite à mão.
+Os arquivos PHP (`send.php`, `includes/`) são editados diretamente.
 CSS e JS ficam em `site/assets/css/style.css` e `site/assets/js/main.js` (edição direta).
 
 ## Páginas
@@ -45,35 +49,44 @@ Cada página tem title e description únicos, H1 único, canonical, Open Graph/T
 (visível + `BreadcrumbList`), `LocalBusiness` com `@id` estável, `Service` nas páginas de serviço e
 `FAQPage` idêntico às perguntas visíveis. Não há `AggregateRating`/`Review` no schema.
 
-## Publicação
+## Publicação na Hostinger (Custom PHP/HTML)
 
-### Vercel
-1. Novo projeto apontando para este repositório, **Root Directory = `rio-cleaning`**,
-   Framework Preset = *Other*, sem comando de build.
-2. O `vercel.json` já define a pasta `site`, URLs com barra final, cache de `/assets/`,
-   cabeçalhos de segurança e os redirects 301 do site antigo.
-3. Conectar o domínio `riocleanings.com`.
+1. hPanel → **Websites** → o site → **File Manager** → abra `public_html`.
+2. Envie `rio-cleaning-hostinger.zip` e extraia **dentro** de `public_html` (sem pasta intermediária:
+   o `index.html` precisa ficar em `public_html/index.html`). Ative "mostrar arquivos ocultos" e
+   confirme que o `.htaccess` está lá.
+3. Ative o **SSL** do domínio e abra o site em `https://`.
+4. Configure o envio de e-mail (seção abaixo) e faça um pedido de teste.
+5. Envie `https://riocleanings.com/sitemap.xml` no Google Search Console.
 
-### Hostinger (ou qualquer hospedagem Apache)
-Envie o **conteúdo** de `site/` para `public_html` (ative "mostrar arquivos ocultos" para incluir o
-`.htaccess`). O `.htaccess` força HTTPS, remove `www`, aplica os redirects 301 e o cache.
+O `.htaccess` força HTTPS, remove `www`, aplica os redirects 301 do site antigo, o cache e bloqueia
+o acesso às pastas `includes/` e `data/`.
 
-### Depois de publicar
-- Envie `https://riocleanings.com/sitemap.xml` no Google Search Console.
-- **Ative o formulário** (abaixo) com um envio de teste.
-- Teste o botão de ligação no celular.
+## Formulário de orçamento (PHP, no próprio servidor)
 
-## Formulário de orçamento
+O formulário envia para `/send.php`, que valida tudo de novo no servidor e manda o pedido para
+**riocleaningservices.m@gmail.com**. Nenhum serviço externo.
 
-Envio real via **FormSubmit** (formsubmit.co) para `riocleaningservices.m@gmail.com`, sem backend.
-- Validação no navegador (nome, telefone dos EUA com 10 dígitos, ZIP de 5 dígitos, tipo de limpeza;
-  e-mail obrigatório só se "Email" for o contato preferido), mensagens de erro acessíveis,
-  estado de carregamento, bloqueio de envio duplicado, honeypot + tempo mínimo anti-spam e
-  mensagem de sucesso. Sem JavaScript, o formulário envia normalmente e volta para `/contact/?sent=1`.
-- **Ativação obrigatória:** no primeiro envio o FormSubmit manda um e-mail de confirmação para
-  `riocleaningservices.m@gmail.com`. Clique em "Activate Form". Só depois disso os pedidos chegam.
-- Se a empresa passar a usar um CRM/webhook, troque `FORM_ENDPOINT` em `content.py`.
-- Não há consentimento de SMS (o fluxo de SMS marketing não existe).
+**Configuração (uma vez), em `includes/config.php`:**
+1. No hPanel → **Emails**, crie a caixa `no-reply@riocleanings.com` (ou outra do domínio) e anote a senha.
+2. Em `config.php`, preencha `SMTP_PASS` com essa senha. Se usar outra caixa, troque também
+   `MAIL_FROM` e `SMTP_USER`. (Servidor `smtp.hostinger.com`, porta 465, SSL — já preenchidos.)
+3. Envie um pedido de teste pelo site e confira a caixa de entrada (e o spam) do Gmail.
+
+Sem a senha, o site usa o `mail()` do PHP, que funciona na Hostinger mas cai no spam com mais
+frequência. Para mais de um destinatário, separe por vírgula em `LEAD_TO`.
+
+**O que o envio faz:**
+- E-mail para a empresa com todos os campos e o telefone clicável; "Responder" vai direto para o cliente.
+- Se o cliente deixou e-mail, ele recebe uma confirmação curta (`SEND_AUTOREPLY`).
+- Cópia de cada pedido em `data/leads.csv` (protegido da web), caso algum e-mail se perca.
+- Anti-spam: campo isca (honeypot), tempo mínimo de preenchimento e limite de 5 envios por IP a cada 10 minutos.
+- Validação no navegador e no servidor (nome, telefone dos EUA, ZIP de 5 dígitos, tipo de limpeza;
+  e-mail obrigatório só se "Email" for o contato preferido), com mensagens nos campos.
+- Sem JavaScript, o formulário também funciona: volta para `/contact/?sent=1` (sucesso) ou para a
+  página de origem com aviso de erro.
+- Se o e-mail falhar, o visitante vê uma mensagem pedindo para ligar para (267) 694-4609.
+- Opcional: `LEAD_WEBHOOK_URL` encaminha cada pedido para um CRM/Zapier/Make.
 
 ## Tracking (GA4, GTM, Google Ads, Meta Pixel)
 
@@ -109,7 +122,7 @@ Google Ads; no Meta Pixel, `phone_click` → `Contact` e `quote_form_submit` →
 | Fotos e imagem do carro | REMOVE (banco de imagens antigo / montagem) |
 | Crédito "ROI Digital Marketing" no rodapé | REMOVE |
 
-### Redirects 301 (já configurados no `vercel.json` e no `.htaccess`)
+### Redirects 301 (já configurados no `.htaccess`)
 
 | Antiga | Nova |
 |---|---|
