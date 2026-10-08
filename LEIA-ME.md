@@ -12,10 +12,11 @@ Projeto estático pronto para importação na Vercel.
 
 Abra `dist/script.js` e preencha, no início do arquivo:
 
-- `calendly`: link da agenda da Cleide no Calendly.
 - `ebook`: link de compra do E-book Raízes.
 
 O valor do e-book não foi exibido porque a copy informa que o investimento ainda será confirmado pela equipe comercial.
+
+O agendamento já está resolvido: a seção final (`#agendar`) tem o widget inline do Calendly (`https://calendly.com/psicleideoliveira/30min`) embutido direto na página.
 
 ## Arquivos
 

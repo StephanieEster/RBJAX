@@ -1,9 +1,9 @@
 /*
- * Links de conversão: preencha as duas URLs abaixo antes da publicação final.
- * A página permanece navegável enquanto os links ainda não forem informados.
+ * Link de conversão: preencha a URL abaixo antes da publicação final.
+ * A página permanece navegável enquanto o link ainda não for informado.
+ * O agendamento (Calendly) já está embutido diretamente na seção #agendar.
  */
 const CLEIDE_LINKS = {
-  calendly: "",
   ebook: ""
 };
 
@@ -88,8 +88,6 @@ document.querySelectorAll(".js-external").forEach((link) => {
       return;
     }
     event.preventDefault();
-    showToast(key === "ebook"
-      ? "O link de compra do E-book Raízes será disponibilizado em breve."
-      : "A agenda online será disponibilizada em breve.");
+    showToast("O link de compra do E-book Raízes será disponibilizado em breve.");
   });
 });
