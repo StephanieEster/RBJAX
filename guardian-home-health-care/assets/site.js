@@ -44,5 +44,7 @@
       message.classList.add('error');
     }finally{window.clearTimeout(timer);form.dataset.sending='false';button.disabled=false;button.innerHTML=original;}
   });});
+  /* Hero "Find Care" box: carry the city/ZIP into the contact form. */
+  try{const city=new URLSearchParams(window.location.search).get('city');const cityField=document.getElementById('contact-care-city');if(city&&cityField){cityField.value=city.trim().slice(0,80);document.getElementById('contact-care-name')?.focus({preventScroll:true});}}catch{}
   if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js-motion');const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}
 })();

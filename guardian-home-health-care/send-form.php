@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /*
- * Guardian Home Health Care — inquiry endpoint. PHP 7.4+ (8.1+ recommended).
+ * Guardians Home Health Care — inquiry endpoint. PHP 7.4+ (8.1+ recommended).
  * Recipient, subject and company name are fixed on the server.
  *
  * Delivery: if guardian-mail-config.php exists (preferably ONE LEVEL ABOVE
@@ -10,12 +10,12 @@ declare(strict_types=1);
  * Hostinger). Otherwise PHP mail() is used. See INSTALLATION.md.
  */
 const RECIPIENT = 'guardianshomehealthllc@gmail.com';
-const COMPANY = 'Guardian Home Health Care';
+const COMPANY = 'Guardians Home Health Care';
 const PHONE = '(321) 977-3169';
 const MAX_BODY_BYTES = 32768;
 const MIN_INTERVAL_SECONDS = 60;
 const MIN_FILL_SECONDS = 2;
-const CONSENT_VERSION = '2026-10-02';
+const CONSENT_VERSION = '2026-10-08';
 /* Published hostname, without https://, www or a path. Set to '' to accept any host (e.g. a temporary preview domain). */
 const SITE_DOMAIN = 'guardianshomehelphllc.com';
 
@@ -49,10 +49,10 @@ function reply(int $status, bool $success, string $message): void
     $class = $success ? 'success' : 'error';
     $text = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
     echo '<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        . '<meta name="robots" content="noindex"><title>' . $title . ' | Guardian Homes</title>'
+        . '<meta name="robots" content="noindex"><title>' . $title . ' | Guardians Home Health Care</title>'
         . '<link rel="icon" type="image/png" href="' . $base . 'assets/images/favicon.png">'
-        . '<link rel="stylesheet" href="' . $base . 'assets/styles.css?v=20261002b"></head><body>'
-        . '<main id="main" class="section"><div class="container"><span class="eyebrow">Guardian Home Health Care</span>'
+        . '<link rel="stylesheet" href="' . $base . 'assets/styles.css?v=20261008"></head><body>'
+        . '<main id="main" class="section"><div class="container"><span class="eyebrow">Guardians Home Health Care</span>'
         . '<h1>' . $title . '</h1><p class="form-message ' . $class . ' mt-24">' . $text . '</p>'
         . '<div class="actions mt-24"><a class="btn" href="' . $base . '">Return to the website</a>'
         . '<a class="btn outline" href="tel:+13219773169">Call ' . PHONE . '</a></div></div></main></body></html>';
@@ -236,7 +236,7 @@ $body = "New non-medical home care inquiry\n\n"
     . "Form: {$sourceForm}\nSubmitted at: {$timestamp}\n"
     . "Communication consent: YES (explicit checkbox)\n"
     . "Consent text version: " . CONSENT_VERSION . "\n"
-    . "Consent text: By submitting, you agree to receive calls, text messages and emails from Guardian Home Health Care about your request. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. See our Terms and Privacy Policy.\n\n"
+    . "Consent text: By submitting, you agree to receive calls, text messages and emails from Guardians Home Health Care about your request. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. See our Terms and Privacy Policy.\n\n"
     . "The visitor requested a conversation; no care arrangement has been booked.\n";
 
 function encode_header(string $value): string
@@ -365,4 +365,4 @@ if (!$sent) {
 if ($rateFile !== null) {
     @file_put_contents($rateFile, json_encode(['last' => time()]), LOCK_EX);
 }
-reply(200, true, 'Thank you! Your request has been sent successfully. Ana can follow up with you about your care interests.');
+reply(200, true, 'Thank you! Your request has been sent successfully. Our team will follow up with you about your care interests.');

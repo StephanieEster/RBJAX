@@ -1,4 +1,4 @@
-# Guardian Home Health Care — Hostinger
+# Guardians Home Health Care — Hostinger
 
 ## Resumo rápido (PT-BR)
 
@@ -8,7 +8,7 @@
 4. O site já está configurado para **guardianshomehelphllc.com** (sem www; o www redireciona). Por segurança, o formulário só aceita envios vindos desse domínio: se quiser testar no domínio temporário da Hostinger, deixe `SITE_DOMAIN = ''` no topo de `send-form.php` e volte depois.
 5. Teste os 3 formulários (topo da home, página de contato e popup) e confira a caixa de entrada **e o spam** de `guardianshomehealthllc@gmail.com`. Espere 1 minuto entre testes (anti-spam).
 6. Abra `/robots.txt` e `/sitemap.xml` e envie o sitemap no Google Search Console.
-7. Se editar `assets/styles.css` ou `assets/site.js`, troque `?v=20261002b` nas páginas HTML por um novo valor (ex.: a data), senão os visitantes continuam com a versão em cache.
+7. Se editar `assets/styles.css` ou `assets/site.js`, troque `?v=20261008` nas páginas HTML por um novo valor (ex.: a data), senão os visitantes continuam com a versão em cache.
 
 ---
 
@@ -23,7 +23,7 @@
 7. **SMTP (recommended).** Create a mailbox for the domain in hPanel → Emails (e.g. `website@YOUR_REAL_DOMAIN`). Copy `guardian-mail-config.sample.php` to the folder **above** `public_html` (e.g. `domains/YOUR_REAL_DOMAIN/guardian-mail-config.php`) and fill in `smtp_user`/`smtp_pass` (Hostinger: `smtp.hostinger.com`, port 465 + `ssl`, or 587 + `tls`). `send-form.php` then sends through authenticated SMTP with TLS certificate verification, and automatically falls back to PHP `mail()` if SMTP is unreachable. A copy placed inside `public_html` also works and is blocked by `.htaccess`, but outside is safer. No library (PHPMailer/Composer) is needed. In hPanel → Emails → DNS, make sure SPF, DKIM and DMARC are active for the domain. A success response means the mail server accepted the message, not that Gmail delivered it to the inbox.
 8. Verify `/robots.txt` and `/sitemap.xml` open after upload. Both are generated using the published domain by the included PHP files and rewrite rules. Relative canonical links resolve to the published host. Submit `/sitemap.xml` in Google Search Console. Canonical links, `og:url`, the social preview image (`assets/images/og-image.jpg`, 1200×630) and the structured data use `https://guardianshomehelphllc.com`; robots.txt and sitemap.xml use the same fixed URL. Test the preview at https://developers.facebook.com/tools/debug/ and the structured data at https://search.google.com/test/rich-results.
 9. Verify menu and service dropdown on mobile, image proportions, footer logo and popup closing by button, backdrop and Esc. The scroll popup appears once per browser session and is suppressed after a form field is focused. To repeat a test, use a new private window/session.
-10. Review the published privacy/terms copy against the company's actual processes. Confirm final non-medical service tasks and licensing/authorization status before advertising or starting any care arrangements. The supplied briefing says the company is newly opened and is preparing its licensing application; no active US license, insurance, staffing, 24/7 coverage or integrative medical service is claimed.
+10. Review the published privacy/terms copy against the company's actual processes. Confirm final non-medical service tasks and licensing/authorization status before advertising or starting any care arrangements. The supplied briefing says the company is newly opened and is preparing its licensing application; no active US license, insurance or integrative medical service is claimed. Per the client (Oct 2026), daytime, overnight and round-the-clock care can be arranged, and the services list on the home and Services pages (24 Hour, Alzheimer’s, Companion, Dementia, End-of-Life, Live-In, Palliative, Parkinson’s, Personal, Respite, Transition to Home and Veterans In-Home Care) was added at the client’s request; confirm each service is authorized before advertising it.
 11. Social profiles, testimonials, prices and clinical services were not added without confirmed information. The website includes service-interest pages based on the briefing and brandbook; scope is discussed individually.
 
 ## Content and assets
@@ -36,6 +36,8 @@
 - Pages: Home, care services, four care-interest pages, founder story, service areas, contact, privacy, terms and 404.
 
 ## Hardening included in this package
+
+- **Client revision (Oct 2026)**: company name corrected to Guardians Home Health Care (pages, e-mails, consent text version 2026-10-08); the founder’s name kept only in the founder story; new hero with a “Where is care needed?” finder that pre-fills the city on the contact form; services grid near the top of the home page; bold Poppins headings with high-contrast text; footer brand rebuilt as a PNG icon plus text (the SVG logo rendered with a black box on some phones); name tag blurred in the family photo.
 
 - **Visual refresh** (CSS "Design layer" in `assets/styles.css`): pill buttons and eyebrows, arch-framed portraits echoing the logo roof, card-based stats, services, steps, FAQ and contact blocks with soft shadows, overlapping highlights strip under the hero, decorative leaf motifs, a navy closing call-to-action card and a brand-gradient footer accent. Brand colors and fonts unchanged.
 
