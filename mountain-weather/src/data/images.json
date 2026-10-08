@@ -1,0 +1,132 @@
+{
+  "ac-service-gauges": {
+    "width": 2400,
+    "height": 1705,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "american-flag-home": {
+    "width": 2400,
+    "height": 3600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "boiler-pump-detail": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "hand-tools": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "heating-system-service": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "hvac-technician-condenser": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "outdoor-ac-unit": {
+    "width": 2400,
+    "height": 1350,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "pipe-fitting-detail": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "refrigerant-line-service": {
+    "width": 2400,
+    "height": 3600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "smart-thermostat": {
+    "width": 2400,
+    "height": 1601,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "snowy-neighborhood": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "technician-manifold-gauge": {
+    "width": 2400,
+    "height": 3648,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "victorian-home": {
+    "width": 2400,
+    "height": 1607,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ]
+  }
+}
