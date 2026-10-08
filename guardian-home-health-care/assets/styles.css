@@ -261,6 +261,13 @@ main h1,main h2,main h3{color:var(--navy)}
 }
 
 
+/* Header brand: icon + company name as text */
+.brand{gap:12px}
+.brand img.brand-mark{width:60px;height:auto;max-height:none}
+.brand-name{display:flex;flex-direction:column;font-weight:700;font-size:22px;line-height:1.05;letter-spacing:-.02em;color:var(--navy)}
+.header-cta{white-space:nowrap}
+.brand-name small{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-deep);margin-top:4px}
+
 /* ===== Revision 2026-10-08: responsive ===== */
 @media(min-width:1500px){.hero-copy h1{font-size:58px}
 }
@@ -281,6 +288,24 @@ main h1,main h2,main h3{color:var(--navy)}
 .service-tile .service-icon{width:40px;height:40px;border-radius:12px}
 }
 @media(max-width:380px){.hero-copy h1{font-size:32px}
+}
+
+
+@media(max-width:950px){.brand img.brand-mark{width:52px}
+}
+@media(max-width:700px){.brand{gap:9px}
+.brand img.brand-mark{width:42px}
+.brand-name{font-size:17px}
+.brand-name small{font-size:10px;letter-spacing:.04em;margin-top:3px}
+}
+@media(max-width:480px){.header-cta{display:none}
+.brand img.brand-mark{width:46px}
+.brand-name{font-size:19px}
+.brand-name small{font-size:11px}
+}
+@media(max-width:380px){.brand img.brand-mark{width:36px}
+.brand-name{font-size:15px}
+.brand-name small{font-size:9px}
 }
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.js-motion .reveal{opacity:1;transform:none}}
