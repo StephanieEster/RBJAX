@@ -198,19 +198,12 @@ main h1,main h2,main h3{color:var(--navy)}
 .lead{color:var(--muted)}
 .form-card h2,.modal-panel h2{font-size:26px}
 .side-box h2{font-size:24px}
-/* Hero finder ("Where is care needed?") */
-.care-finder{margin-top:30px;max-width:560px;padding:18px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.care-finder label{display:block;color:#fff;font-weight:600;margin-bottom:10px}
-.finder-row{display:flex;gap:10px}
-.finder-row input{flex:1;width:100%;min-width:0;min-height:54px;border:0;border-radius:999px;padding:0 22px;font-size:16px;color:var(--ink);background:#fff}
-.finder-row input:focus{outline:3px solid var(--sand);outline-offset:2px}
-.btn.sand{background:#e6cfa5;border-color:#e6cfa5;color:var(--navy);font-weight:600;flex-shrink:0}
-.btn.sand:hover{background:#fff;border-color:#fff;color:var(--navy)}
 .hero-note a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .hero-copy .lead{margin-top:20px}
 .nowrap{white-space:nowrap}
 .hero-copy,.form-card{min-width:0}
-.hero-note{flex-wrap:wrap}
+.hero-note{align-items:flex-start}
+.hero-note .icon{margin-top:3px}
 /* Services overview grid */
 .services-overview{background:#fff}
 .service-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -279,9 +272,6 @@ main h1,main h2,main h3{color:var(--navy)}
 }
 @media(max-width:700px){.hero-copy h1{font-size:36px}
 .page-hero h1{font-size:34px}
-.finder-row{flex-direction:column}
-.finder-row .btn{width:100%}
-.care-finder{padding:16px}
 .service-grid{gap:10px}
 .service-tile{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
 .service-tile>.icon{display:none}

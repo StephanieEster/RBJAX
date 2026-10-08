@@ -51,7 +51,7 @@ function reply(int $status, bool $success, string $message): void
     echo '<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         . '<meta name="robots" content="noindex"><title>' . $title . ' | Guardians Home Health Care</title>'
         . '<link rel="icon" type="image/png" href="' . $base . 'assets/images/favicon.png">'
-        . '<link rel="stylesheet" href="' . $base . 'assets/styles.css?v=20261008b"></head><body>'
+        . '<link rel="stylesheet" href="' . $base . 'assets/styles.css?v=20261008c"></head><body>'
         . '<main id="main" class="section"><div class="container"><span class="eyebrow">Guardians Home Health Care</span>'
         . '<h1>' . $title . '</h1><p class="form-message ' . $class . ' mt-24">' . $text . '</p>'
         . '<div class="actions mt-24"><a class="btn" href="' . $base . '">Return to the website</a>'
