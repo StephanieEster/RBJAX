@@ -14,19 +14,34 @@ todas em HTML estático gerado por um build em Node, sem framework e sem depend�
 | `/privacy-policy` | Privacy Policy | Institucional |
 | `/404` | Página não encontrada (`noindex`) | — |
 
-## Publicar na Vercel
+## Publicar na Hostinger (domínio oficial: https://mountainweather63.com)
 
-1. Importe o repositório na Vercel e defina **Root Directory = `mountain-weather`**.
-2. Não é preciso escolher framework. O `vercel.json` desta pasta já define o build
-   (`node scripts/build.mjs && node scripts/check.mjs`), a saída (`dist/`), URLs limpas, cache
-   longo em `/assets/` e cabeçalhos de segurança (CSP incluída).
-3. Conecte o domínio definitivo em *Settings → Domains*. As URLs canônicas, o `sitemap.xml`, o
-   `robots.txt` e os dados estruturados usam automaticamente o domínio de produção (variável
-   `VERCEL_PROJECT_PRODUCTION_URL`). Para forçar outro domínio, crie a variável `SITE_URL`
-   (ex.: `https://www.exemplo.com`) e faça um novo deploy.
+1. Gere o pacote: `node scripts/build.mjs && node scripts/check.mjs && cd dist && zip -r ../mountain-weather-hostinger.zip . && cd ..`
+   (ou use o ZIP já entregue).
+2. No hPanel → *Arquivos → Gerenciador de Arquivos*, abra `public_html`, apague o conteúdo
+   padrão (ex.: `default.php`) e envie o ZIP.
+3. Extraia o ZIP **dentro de `public_html`**. `index.html`, `.htaccess`, `assets/` etc. precisam
+   ficar direto em `public_html`, não numa subpasta. O `.htaccess` é um arquivo oculto; confira se
+   foi extraído.
+4. No hPanel, ative o SSL do domínio (Let's Encrypt gratuito) antes de testar.
 
-A pasta `dist/` também vai versionada. Ela foi gerada com o domínio provisório
-`https://mountain-weather.vercel.app`, e a Vercel a recria a cada deploy com o domínio correto.
+O `.htaccess` gerado faz o seguinte:
+- força HTTPS e o domínio sem `www` (`https://mountainweather63.com`);
+- serve URLs limpas (`/about` → `about.html`) e redireciona `/about.html` para `/about`;
+- usa a página 404 própria;
+- aplica compressão e os mesmos cabeçalhos de segurança do `vercel.json`;
+- `assets/.htaccess` define cache de 1 ano para CSS, JS, fontes e imagens.
+
+Como o `.htaccess` redireciona para o domínio oficial, a URL temporária da Hostinger
+(`*.hostingersite.com`) também redireciona para `mountainweather63.com`. O domínio precisa estar
+apontado para a Hostinger.
+
+Para usar outro domínio, rode o build com `SITE_URL=https://outro-dominio.com node scripts/build.mjs`.
+
+### Alternativa: Vercel
+
+Importe o repositório com **Root Directory = `mountain-weather`**. O `vercel.json` já define
+build, saída (`dist/`), URLs limpas, cache e cabeçalhos.
 
 ## Comandos locais (Node 18+)
 
@@ -97,7 +112,6 @@ Para trocar fotos, coloque os JPGs originais numa pasta com os mesmos nomes de a
    `src/config.mjs`; o rodapé passa a exibir os dados automaticamente. Até lá, o build mostra um
    aviso.
 2. **WhatsApp:** confirmar que o +1 (862) 270-8862 está ativo no WhatsApp.
-3. **Domínio definitivo** (ver "Publicar na Vercel").
 4. **Nome e foto do fundador.** A página About fala de "our founder" porque o nome não foi
    informado. Um nome e uma foto reais reforçam muito a confiança (E-E-A-T).
 5. **Fotos reais** da equipe e de serviços, para substituir o banco de imagens. Duas fotos do

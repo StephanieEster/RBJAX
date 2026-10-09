@@ -1,11 +1,9 @@
 // Single source of truth for business facts used across every page and in structured data.
 // Only facts confirmed in the client brief belong here.
 
+// Official domain. Override with the SITE_URL environment variable (e.g. for a staging copy).
 function resolveSiteUrl() {
-  if (process.env.SITE_URL) return process.env.SITE_URL;
-  // Set automatically by Vercel at build time (custom domain if configured, else *.vercel.app).
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
-  return 'https://mountain-weather.vercel.app';
+  return process.env.SITE_URL || 'https://mountainweather63.com';
 }
 
 export const SITE = {
