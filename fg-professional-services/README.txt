@@ -36,3 +36,13 @@ links to the Our Work page and shows four recent projects.
 Left out on purpose: IMG_2435 (blue sports court; not confirmed as FG work) and IMG_0510
 (a finger covers part of the photo). Illustrative images remain only in the home hero,
 the home intro and "preparation" sections, the About page, and the service page banners.
+
+SMS CONSENT (UPDATE 3, 2026-10-13): All three forms (home hero, contact page, popup) now
+say "Send your details and we will text you about your painting estimate." and have two
+optional, unchecked checkboxes: customer care texts (name="consent_care") and marketing
+texts (name="consent_marketing"). Privacy Policy and Terms of Service links sit under the
+submit button. send-form.php no longer requires consent and records "Yes"/"No" for each
+checkbox in the email. The Terms page is now titled "Terms of Service" and has an "SMS
+Terms" section (#sms-terms); the Privacy Policy has an "SMS / Text Messaging" section (#sms).
+If FG is registered as an LLC, add the legal name (e.g. "FG Professional Services LLC")
+to the consent text, SMS Terms and Privacy Policy so it matches the SMS registration.

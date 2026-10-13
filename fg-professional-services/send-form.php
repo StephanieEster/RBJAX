@@ -59,6 +59,9 @@ $phone = field('phone', 30);
 $email = field('email', 180);
 $service = field('service', 100);
 $message = field('message', 1500);
+// Both SMS consent checkboxes are optional; record exactly what the visitor checked.
+$careConsent = ($_POST['consent_care'] ?? '') === 'yes' ? 'Yes' : 'No';
+$marketingConsent = ($_POST['consent_marketing'] ?? '') === 'yes' ? 'Yes' : 'No';
 $allowedServices = ['Interior Painting', 'Cabinet Painting', 'Drywall Repair', 'Exterior Painting', 'Other Painting Project'];
 
 if (strlen($name) < 2 || strlen($name) > 100 || preg_match('/[\r\n]/', $name)
@@ -69,8 +72,7 @@ if (strlen($name) < 2 || strlen($name) > 100 || preg_match('/[\r\n]/', $name)
     || strlen(preg_replace('/\D/', '', $phone)) < 7
     || strlen(preg_replace('/\D/', '', $phone)) > 18
     || !in_array($service, $allowedServices, true)
-    || strlen($message) > 1500
-    || ($_POST['consent'] ?? '') !== 'yes') {
+    || strlen($message) > 1500) {
     respond(422, false, 'Please check the form fields and try again.');
 }
 
@@ -99,7 +101,8 @@ $subject = 'FG Professional Services | New project request';
 $body = "New project inquiry from the website\n\n"
     . "Name: {$name}\nPhone: {$phone}\nEmail: {$email}\nService: {$service}\n\n"
     . "Project details:\n" . ($message === '' ? 'Not provided' : $message) . "\n\n"
-    . "Calls and SMS consent: Yes, submitted through the required checkbox.\n"
+    . "Customer care text messages consent: {$careConsent}\n"
+    . "Marketing text messages consent: {$marketingConsent}\n"
     . "Received (UTC): " . gmdate('Y-m-d H:i:s') . "\n";
 $headers = [
     'From: FG Professional Services Website <website@fgproservices.com>',
