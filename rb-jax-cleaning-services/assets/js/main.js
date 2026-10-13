@@ -49,6 +49,16 @@
     document.querySelectorAll('[data-reveal]').forEach(function (item) { item.classList.add('is-visible'); });
   }
 
+  const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/M92h0lByqihxprvDgV2e/webhook-trigger/N7sRyPNDJsHWCTqqyQIe';
+
+  function sendToGhlWebhook(formData) {
+    try {
+      fetch(GHL_WEBHOOK_URL, { method: 'POST', body: formData }).catch(function () {});
+    } catch (error) {
+      /* ignore webhook errors so the main form submission is never blocked */
+    }
+  }
+
   function bindForm(form) {
     if (!form || form.dataset.bound === 'true') return;
     form.dataset.bound = 'true';
@@ -64,6 +74,7 @@
       try {
         const formData = new FormData(form);
         formData.append('action', 'cw_form_submit');
+        sendToGhlWebhook(new FormData(form));
         const response = await fetch('/send-form.php', { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
         const result = await response.json();
         if (!response.ok || !result.success) throw new Error(result.data && result.data.message ? result.data.message : 'Form submission failed.');
