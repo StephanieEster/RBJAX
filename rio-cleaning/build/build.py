@@ -25,7 +25,7 @@ SIZES = json.loads((Path(__file__).resolve().parent / 'image_sizes.json').read_t
 e = html.escape
 BIZ_ID = C.SITE_URL + '/#business'
 SITE_ID = C.SITE_URL + '/#website'
-ASSET_V = '8'
+ASSET_V = '9'
 CUR = ' aria-current="page"'
 HL = ' class="is-hl"'
 POP = ' <span class="pill">Most popular</span>'  # bump when CSS/JS change so returning visitors skip the cached copy
@@ -581,6 +581,25 @@ def region_line() -> str:
     return f'<p class="region-line">{icon("pin")}<span>Serving <strong>{REGION}</strong> from our Philadelphia base</span></p>'
 
 
+def reviews_section(heading_level: int = 2, more_link: bool = True) -> str:
+    """Real Google reviews through the client's Jotform widget. The widget script is loaded by
+    main.js only when the section gets close to the viewport, so it never slows the first paint."""
+    if not C.REVIEWS_WIDGET_ID:
+        return ''
+    wid = C.REVIEWS_WIDGET_ID
+    more = f'<a class="arrow-link" href="/reviews/">More about our clients{icon("arrow")}</a>' if more_link else ''
+    return f'''<section class="section reviews-sec" aria-labelledby="rv-h">
+<div class="wrap">
+<div class="sec-head split">{eyebrow('Google reviews')}<h{heading_level} id="rv-h">See what local homeowners are saying</h{heading_level}>
+<div class="rv-actions">{tracked_link(C.GOOGLE_PROFILE, f'{icon("google")}<span>Read our reviews on Google</span>', 'google_profile_click', 'btn btn-ghost')}
+{tracked_link(C.GOOGLE_REVIEW_URL, f'{icon("message")}<span>Leave a review</span>', 'google_review_click', 'arrow-link')}</div></div>
+<div class="reviews-widget" id="JFWebsiteWidget-{wid}" data-widget-src="https://www.jotform.com/website-widgets/embed/{wid}"></div>
+<noscript><p><a href="{C.GOOGLE_PROFILE}">Read our reviews on Google</a></p></noscript>
+{more}
+</div>
+</section>'''
+
+
 def definition(text: str) -> str:
     return f'<div class="definition wrap"><p><strong>{text}</strong></p></div>'
 
@@ -711,6 +730,8 @@ def page_home():
 </div>
 </div>
 </section>
+
+{reviews_section()}
 
 <section class="section areas-band" aria-labelledby="area-h">
 <div class="wrap area-grid">
@@ -1065,14 +1086,15 @@ def page_reviews():
                         f'{icon("arrow-up-right")}</a></figcaption></figure>' for r in C.REVIEWS)
         reviews_block = f'<section class="section" aria-labelledby="rv-h"><div class="wrap"><div class="sec-head">{eyebrow("Client reviews")}<h2 id="rv-h">See what local homeowners are saying</h2></div><div class="reviews">{cards}</div></div></section>'
     else:
-        reviews_block = ''
+        reviews_block = reviews_section(more_link=False)
     links = [tracked_link(C.FACEBOOK, f'{icon("facebook")}<span>Facebook</span>', 'facebook_click', 'btn btn-ghost'),
              tracked_link(C.INSTAGRAM, f'{icon("instagram")}<span>Instagram</span>', 'instagram_click', 'btn btn-ghost')]
     if C.GOOGLE_PROFILE:
         links.insert(0, tracked_link(C.GOOGLE_PROFILE, f'{icon("google")}<span>Google</span>', 'google_profile_click', 'btn btn-ghost'))
+        links.insert(1, tracked_link(C.GOOGLE_REVIEW_URL, f'{icon("message")}<span>Leave a Google review</span>', 'google_review_click', 'btn btn-ghost'))
     body = f'''
 {page_hero(p, 'Reviews', 'Rio Cleaning Services reviews and client relationships',
-           'We only share real feedback from real clients. Here\'s what working with us looks like, and where to find and leave reviews.',
+           'Real Google reviews from the families we clean for, plus what working with us looks like and where to leave a review.',
            'living-room-2', 'Tidy American living room with a gray sectional, patterned rug and ceiling fan', crumbs=trail)}
 {reviews_block}
 <section class="section rel-facts" aria-labelledby="rf-h">

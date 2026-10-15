@@ -772,6 +772,16 @@ h1 em, h2 em { color: var(--blue); }
 .state-chips li { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px 7px 11px; border-radius: 999px; background: rgba(255, 255, 255, .55); color: var(--ink); font-size: .88rem; font-weight: 650; }
 .state-chips .ic { width: 16px; height: 16px; color: var(--blue-700); }
 
+/* google reviews */
+.reviews-sec { background: #fff; border-top: 1px solid var(--line); }
+.reviews-sec .sec-head.split { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+.reviews-sec .sec-head.split .eyebrow { grid-column: 1 / -1; }
+.rv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-bottom: .5em; }
+.rv-actions .ic { width: 18px; height: 18px; }
+.reviews-widget { min-height: 340px; }
+.reviews-sec .arrow-link + .arrow-link, .reviews-widget + noscript + .arrow-link { margin-top: 28px; }
+@media (max-width: 900px) { .reviews-sec .sec-head.split { grid-template-columns: 1fr; } }
+
 /* ------------------------------------------------------------ motion */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }

@@ -105,6 +105,26 @@
     });
   });
 
+  /* ---------------------------------------------------------- reviews widget (lazy) */
+  doc.querySelectorAll('[data-widget-src]').forEach(function (el) {
+    function load() {
+      if (el.dataset.loaded) return;
+      el.dataset.loaded = '1';
+      var s = doc.createElement('script');
+      s.src = el.dataset.widgetSrc;
+      s.async = true;
+      doc.body.appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+      var o = new IntersectionObserver(function (entries) {
+        if (entries.some(function (en) { return en.isIntersecting; })) { o.disconnect(); load(); }
+      }, { rootMargin: '700px 0px' });
+      o.observe(el);
+    } else {
+      load();
+    }
+  });
+
   /* ---------------------------------------------------------- reveal on scroll */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce && 'IntersectionObserver' in window) {

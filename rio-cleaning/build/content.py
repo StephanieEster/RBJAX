@@ -28,7 +28,13 @@ HOURS = {'label': 'Monday–Friday, 7 AM – 5 PM', 'short': 'Mon–Fri, 7 AM �
 
 INSTAGRAM = 'https://www.instagram.com/riocleaningservices_'
 FACEBOOK = 'https://www.facebook.com/riodejaneirocleaningservices'   # linked from the previous official site
-GOOGLE_PROFILE = ''   # paste the official Google Business Profile link once confirmed
+# Official Google Business Profile (place id from the client's Google Reviews widget)
+GOOGLE_PLACE_ID = 'ChIJyVFvXzzef0QRwXefTwB65uc'
+GOOGLE_PROFILE = 'https://www.google.com/maps/place/?q=place_id:' + GOOGLE_PLACE_ID
+GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=' + GOOGLE_PLACE_ID
+# Jotform "Google Reviews" widget supplied by the client (shows the real Google reviews).
+# Empty string hides the reviews section.
+REVIEWS_WIDGET_ID = '01a140d5ae20700089979d7a544ee7a26433'
 
 PAYMENTS = ['Zelle', 'Venmo', 'Credit card', 'Check', 'Cash']
 
