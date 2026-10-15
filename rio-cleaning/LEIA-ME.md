@@ -76,7 +76,8 @@ envia por uma função da Vercel (`api/send.js`), com as mesmas regras do `send.
 caixa de e-mail da Hostinger. Tem `noindex` e `robots.txt` bloqueando o Google, para não competir
 com o domínio oficial.
 
-**Para o formulário enviar na Vercel:** no projeto da Vercel → Settings → Environment Variables,
+**Para o formulário enviar na Vercel** (a Vercel não tem `mail()`, por isso só aqui precisa de uma
+caixa de e-mail): no projeto da Vercel → Settings → Environment Variables,
 adicione `SMTP_USER` = `no-reply@riocleaningservice.com` e `SMTP_PASS` = senha dessa caixa e faça um
 novo deploy. Opcionais: `LEAD_TO` (padrão `riocleaningservices.m@gmail.com`), `SMTP_HOST`
 (padrão `smtp.hostinger.com`), `SMTP_PORT` (465), `SMTP_SECURE` (`ssl`). Sem essas variáveis o
@@ -90,14 +91,15 @@ Framework = Other, sem comando de build).
 O formulário envia para `/send.php`, que valida tudo de novo no servidor e manda o pedido para
 **riocleaningservices.m@gmail.com**. Nenhum serviço externo.
 
-**Configuração (uma vez), em `includes/config.php`:**
-1. No hPanel → **Emails**, crie a caixa `no-reply@riocleaningservice.com` (ou outra do domínio) e anote a senha.
-2. Em `config.php`, preencha `SMTP_PASS` com essa senha. Se usar outra caixa, troque também
-   `MAIL_FROM` e `SMTP_USER`. (Servidor `smtp.hostinger.com`, porta 465, SSL — já preenchidos.)
-3. Envie um pedido de teste pelo site e confira a caixa de entrada (e o spam) do Gmail.
+**Não precisa configurar nada.** Na Hostinger o envio usa o `mail()` do PHP: é só subir os arquivos
+e o formulário já manda os pedidos. Faça um envio de teste e confira a caixa de entrada **e o spam**
+do Gmail (na primeira vez, marque "Não é spam" para os próximos caírem na caixa de entrada).
 
-Sem a senha, o site usa o `mail()` do PHP, que funciona na Hostinger mas cai no spam com mais
-frequência. Para mais de um destinatário, separe por vírgula em `LEAD_TO`.
+**Opcional (melhor entrega):** se os e-mails caírem no spam, crie a caixa `no-reply@riocleaningservice.com`
+no hPanel → Emails e, em `includes/config.php`, mude `SMTP_ENABLED` para `true` e cole a senha em
+`SMTP_PASS`. Se o SMTP falhar, o site volta automaticamente para o `mail()`.
+
+Para mais de um destinatário, separe por vírgula em `LEAD_TO`.
 
 **O que o envio faz:**
 - E-mail para a empresa com todos os campos e o telefone clicável; "Responder" vai direto para o cliente.

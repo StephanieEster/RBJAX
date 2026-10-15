@@ -16,16 +16,16 @@ define('PHONE_TEL', 'tel:+12676944609');
 // Where estimate requests are delivered (comma separated for more than one address)
 define('LEAD_TO', 'riocleaningservices.m@gmail.com');
 
-// Sender address. On Hostinger it MUST be a mailbox on your own domain:
-// create it in hPanel > Emails (e.g. no-reply@riocleaningservice.com) before going live.
+// How e-mail is sent: out of the box the site uses PHP mail() on Hostinger, nothing to configure.
+// The sender shown is an address on the site's own domain (it does not need to exist as a mailbox);
+// replies go straight to the customer.
 define('MAIL_FROM', 'no-reply@riocleaningservice.com');
 define('MAIL_FROM_NAME', 'Rio Cleaning Website');
 
-// Recommended: authenticated SMTP (better inbox delivery than PHP mail()).
-// Hostinger: host smtp.hostinger.com, port 465, secure ssl,
-// user = the full mailbox above, pass = that mailbox's password.
-// While SMTP_PASS is empty the site uses PHP mail().
-define('SMTP_ENABLED', true);
+// OPTIONAL upgrade: authenticated SMTP lands in the inbox more reliably than mail().
+// To use it, create the mailbox above in hPanel > Emails, set SMTP_ENABLED to true and
+// paste the mailbox password in SMTP_PASS. If SMTP ever fails, the site falls back to mail().
+define('SMTP_ENABLED', false);
 define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 465);
 define('SMTP_SECURE', 'ssl');                         // 'ssl' (465) or 'tls' (587)
