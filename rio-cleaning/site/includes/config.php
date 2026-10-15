@@ -8,7 +8,7 @@ if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === 'config.php') {
     exit;
 }
 
-define('SITE_URL', 'https://riocleanings.com');      // no trailing slash
+define('SITE_URL', 'https://riocleaningservice.com');      // no trailing slash
 define('SITE_NAME', 'Rio Cleaning Services');
 define('PHONE_DISPLAY', '(267) 694-4609');
 define('PHONE_TEL', 'tel:+12676944609');
@@ -17,8 +17,8 @@ define('PHONE_TEL', 'tel:+12676944609');
 define('LEAD_TO', 'riocleaningservices.m@gmail.com');
 
 // Sender address. On Hostinger it MUST be a mailbox on your own domain:
-// create it in hPanel > Emails (e.g. no-reply@riocleanings.com) before going live.
-define('MAIL_FROM', 'no-reply@riocleanings.com');
+// create it in hPanel > Emails (e.g. no-reply@riocleaningservice.com) before going live.
+define('MAIL_FROM', 'no-reply@riocleaningservice.com');
 define('MAIL_FROM_NAME', 'Rio Cleaning Website');
 
 // Recommended: authenticated SMTP (better inbox delivery than PHP mail()).
@@ -29,7 +29,7 @@ define('SMTP_ENABLED', true);
 define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 465);
 define('SMTP_SECURE', 'ssl');                         // 'ssl' (465) or 'tls' (587)
-define('SMTP_USER', 'no-reply@riocleanings.com');
+define('SMTP_USER', 'no-reply@riocleaningservice.com');
 define('SMTP_PASS', '');
 
 // Send a short confirmation e-mail to the visitor when they leave an e-mail address

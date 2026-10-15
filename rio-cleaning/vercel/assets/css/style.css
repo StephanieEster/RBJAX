@@ -764,6 +764,14 @@ h1 em, h2 em { color: var(--blue); }
 .footer-h { color: var(--gold-text); }
 .social:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
+/* region */
+.region-line { display: flex; align-items: center; gap: 8px; margin: 18px 0 0; font-size: .9rem; color: rgba(255, 255, 255, .9); }
+.region-line .ic { width: 18px; height: 18px; color: var(--gold-text); flex: none; }
+.region-line strong { color: #fff; }
+.state-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+.state-chips li { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px 7px 11px; border-radius: 999px; background: rgba(255, 255, 255, .55); color: var(--ink); font-size: .88rem; font-weight: 650; }
+.state-chips .ic { width: 16px; height: 16px; color: var(--blue-700); }
+
 /* ------------------------------------------------------------ motion */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }

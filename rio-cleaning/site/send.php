@@ -168,7 +168,7 @@ foreach ($rows as $label => $value) {
     $text .= $label . ': ' . $value . "\n";
 }
 $html .= '</table><p style="color:#66707a;font-size:12px;margin-top:16px">Sent ' . e(date('M j, Y g:i A'))
-    . ' from riocleanings.com</p></div>';
+    . ' from riocleaningservice.com</p></div>';
 
 $subject = 'New estimate request: ' . $data['service'] . ' - ' . $data['name'];
 $sent = send_mail(LEAD_TO, $subject, $html, $text, $data['email'], $data['name']);

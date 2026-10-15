@@ -18,14 +18,14 @@ import content as C
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'        # Hostinger package (PHP form handler)
-PREVIEW_DIR = ROOT / 'vercel'  # static preview for Vercel (form does not send)
+PREVIEW_DIR = ROOT / 'vercel'  # Vercel copy (form sent by api/send.js)
 OUT = SITE
 PREVIEW = False
 SIZES = json.loads((Path(__file__).resolve().parent / 'image_sizes.json').read_text())
 e = html.escape
 BIZ_ID = C.SITE_URL + '/#business'
 SITE_ID = C.SITE_URL + '/#website'
-ASSET_V = '6'
+ASSET_V = '8'
 CUR = ' aria-current="page"'
 HL = ' class="is-hl"'
 POP = ' <span class="pill">Most popular</span>'  # bump when CSS/JS change so returning visitors skip the cached copy
@@ -232,7 +232,7 @@ def header(active: str) -> str:
     return f'''<body>
 {gtm_ns}<a class="skip" href="#main">Skip to content</a>
 <div class="topbar"><div class="wrap topbar-in">
-<span>{icon("pin")}Based in Philadelphia, serving nearby PA, NJ &amp; DE communities</span>
+<span>{icon("pin")}Serving Pennsylvania, New Jersey &amp; Delaware · Based in Philadelphia</span>
 {hours}<span>{icon("shield")}Insured</span>
 </div></div>
 <header class="site-header" id="top">
@@ -272,7 +272,7 @@ def footer(has_estimate: bool = True) -> str:
 <div class="wrap footer-grid">
 <div class="footer-brand">
 <img src="/assets/img/logo-240.webp" srcset="/assets/img/logo-240.webp 1x, /assets/img/logo-480.webp 2x" width="200" height="107" alt="{C.NAME}" loading="lazy">
-<p>Residential house cleaning for Philadelphia-area families. Backed by nearly 25 years of hands-on experience. Proudly serving local homeowners since {C.FOUNDED}.</p>
+<p>Residential house cleaning for families in Pennsylvania, New Jersey and Delaware. Backed by nearly 25 years of hands-on experience. Proudly serving local homeowners since {C.FOUNDED}.</p>
 <div class="socials">{''.join(social)}</div>
 </div>
 <div>
@@ -289,7 +289,7 @@ def footer(has_estimate: bool = True) -> str:
 <ul class="footer-contact">
 <li><a href="{C.TEL}" data-track="phone_click" data-where="footer">{icon("phone")}<span>{C.PHONE}</span></a></li>
 <li><a href="mailto:{C.EMAIL}">{icon("mail")}<span>{C.EMAIL}</span></a></li>
-<li>{icon("pin")}<span>Based in Philadelphia, PA. Serving nearby communities in Pennsylvania, New Jersey and Delaware.</span></li>
+<li>{icon("pin")}<span>Serving Pennsylvania, New Jersey and Delaware. Based in Philadelphia, PA.</span></li>
 {hours}
 </ul>
 </div>
@@ -321,7 +321,9 @@ def breadcrumb(trail) -> str:
 # ---------------------------------------------------------------- schema
 def area_served():
     areas = [{'@type': 'City', 'name': 'Philadelphia',
-              'containedInPlace': {'@type': 'State', 'name': 'Pennsylvania'}}]
+              'containedInPlace': {'@type': 'State', 'name': 'Pennsylvania'}},
+             {'@type': 'State', 'name': 'Pennsylvania'}, {'@type': 'State', 'name': 'New Jersey'},
+             {'@type': 'State', 'name': 'Delaware'}]
     for c in C.CONFIRMED_CITIES:
         areas.append({'@type': 'City', 'name': c['name'], 'containedInPlace': {'@type': 'State', 'name': c['state']}})
     return areas
@@ -485,7 +487,7 @@ def quote_form(page_name: str, preset: str = '') -> str:
                 'Not Sure Yet']
     svc_opts = '<option value="">Select one</option>' + ''.join(
         f'<option{" selected" if o == preset else ""}>{o}</option>' for o in services)
-    form_attrs = 'action="/contact/" method="GET" data-preview="1"' if PREVIEW else f'action="{C.FORM_ACTION}" method="POST"'
+    form_attrs = f'action="{"/api/send" if PREVIEW else C.FORM_ACTION}" method="POST"'
     return f'''<form class="qform" id="quote-form" {form_attrs} novalidate>
 <div class="form-grid">
 {field('name', 'Full name', 'text', True, 'autocomplete="name" autocapitalize="words" maxlength="80"')}
@@ -526,7 +528,7 @@ def estimate_section(page_name: str, heading: str = 'Get your personalized clean
 <ul class="est-list">
 <li>{icon("mail")}<a href="mailto:{C.EMAIL}">{C.EMAIL}</a></li>
 {hours}
-<li>{icon("pin")}<span>Philadelphia-based, serving nearby PA, NJ &amp; DE communities</span></li>
+<li>{icon("pin")}<span>Serving Pennsylvania, New Jersey &amp; Delaware</span></li>
 </ul>
 </div>
 <div class="est-form">{quote_form(page_name, preset)}</div>
@@ -565,10 +567,18 @@ def page_hero(p, eyebrow_text, h1, lede, img, alt, cta_secondary=None, crumbs=No
 <p class="lede">{lede}</p>
 <div class="cta-row">{call_btn()}{sec}</div>
 {note}
+{region_line()}
 </div>
 <figure class="phero-media">{pic(img, alt, '(max-width: 900px) 100vw, 46vw', eager=True)}</figure>
 </div>
 </section>'''
+
+
+REGION = 'Pennsylvania, New Jersey &amp; Delaware'
+
+
+def region_line() -> str:
+    return f'<p class="region-line">{icon("pin")}<span>Serving <strong>{REGION}</strong> from our Philadelphia base</span></p>'
 
 
 def definition(text: str) -> str:
@@ -592,7 +602,7 @@ PAGES: list = []
 def page_home():
     p = {'slug': '', 'active': '', 'og': 'hero-kitchen', 'lcp': 'hero-kitchen',
          'title': 'House Cleaning Services in Philadelphia, PA | Rio Cleaning',
-         'desc': 'Recurring, deep, move-in/move-out and carpet cleaning for Philadelphia-area homes. Insured, flexible '
+         'desc': 'Recurring, deep, move-in/move-out and carpet cleaning for homes in PA, NJ and DE. Insured, flexible '
                  'scheduling, nearly 25 years of experience. Free estimates.'}
     home_faq = ['cost', 'frequencies', 'regular-vs-deep', 'areas', 'insured']
     p['schema'] = [business_node(),
@@ -618,9 +628,9 @@ def page_home():
 <section class="hero">
 <div class="wrap hero-grid">
 <div class="hero-copy">
-{eyebrow('Residential cleaning · Since 2019')}
+{eyebrow('Pennsylvania · New Jersey · Delaware')}
 <h1>Philadelphia-area <em>house cleaning</em> for a home you'll love coming back to.</h1>
-<p class="lede">Recurring and one-time cleaning from a local, insured team backed by nearly 25 years of hands-on experience, with flexible scheduling built around your week.</p>
+<p class="lede">Recurring and one-time cleaning for homes in Pennsylvania, New Jersey and Delaware, from a local, insured team backed by nearly 25 years of hands-on experience.</p>
 <div class="cta-row">{call_btn('Call for a Free Estimate', 'btn btn-primary btn-lg', 'hero')}
 <a class="arrow-link" href="#services">Explore Our Cleaning Services{icon("arrow")}</a></div>
 <p class="hero-phone">Talk to us directly: <a href="{C.TEL}" data-track="phone_click" data-where="hero_text">{C.PHONE}</a></p>
@@ -706,8 +716,9 @@ def page_home():
 <div class="wrap area-grid">
 <div class="area-copy">
 {eyebrow('Where we work')}
-<h2 id="area-h">Based in Philadelphia. Serving nearby communities.</h2>
-<p>We clean homes in Philadelphia and nearby communities in Pennsylvania, New Jersey and Delaware. Availability depends on where you live and how our teams' routes fall that week, so the quickest way to check is to ask.</p>
+<h2 id="area-h">Serving Pennsylvania, New Jersey and Delaware</h2>
+<ul class="state-chips"><li>{icon("map")}Pennsylvania</li><li>{icon("map")}New Jersey</li><li>{icon("map")}Delaware</li></ul>
+<p>Our teams work out of Philadelphia and clean homes across the region in Pennsylvania, New Jersey and Delaware. Availability depends on where you live and how our teams' routes fall that week, so the quickest way to check is to ask.</p>
 <div class="cta-row">{call_btn('Check Your ZIP Code', 'btn btn-primary', 'areas')}<a class="arrow-link" href="/service-areas/">About our service area{icon("arrow")}</a></div>
 </div>
 <figure class="area-media">{pic('townhomes', 'Row of two-story townhomes with vinyl siding on a residential street', '(max-width: 900px) 100vw, 40vw')}</figure>
@@ -996,9 +1007,9 @@ def page_about():
 def page_areas():
     slug = 'service-areas'
     p = {'slug': slug, 'active': slug, 'og': 'townhomes', 'lcp': 'townhomes', 'lcp_sizes': '(max-width: 900px) 100vw, 46vw',
-         'title': 'Service Areas: Philadelphia & Nearby | Rio Cleaning Services',
-         'desc': 'Rio Cleaning Services is based in Philadelphia and cleans homes in nearby Pennsylvania, New Jersey and '
-                 'Delaware communities. Call to check your ZIP code.'}
+         'title': 'Service Areas: PA, NJ & DE | Rio Cleaning Services',
+         'desc': 'Rio Cleaning Services cleans homes in Pennsylvania, New Jersey and Delaware from its base in '
+                 'Philadelphia. Call or send your ZIP code to check availability.'}
     trail = [('Service Areas', slug)]
     faq_keys = ['areas', 'reschedule', 'home-during', 'cost']
     p['schema'] = [business_node(), webpage_node(p), crumbs_node(slug, trail), faq_node(slug, faq_keys)]
@@ -1006,23 +1017,23 @@ def page_areas():
     if C.CONFIRMED_CITIES:
         li = ''.join(f'<li>{icon("pin")}<span>{c["name"]}, {c["state_abbr"]}</span></li>' for c in C.CONFIRMED_CITIES)
         cities = f'<div class="city-list"><h2 class="h3">Communities we serve</h2><ul>{li}</ul></div>'
-    states = [('Pennsylvania', 'Philadelphia, where we\'re based, and nearby communities.'),
-              ('New Jersey', 'Communities within reach of the Philadelphia area.'),
-              ('Delaware', 'Communities within reach of the Philadelphia area.')]
+    states = [('Pennsylvania', 'Philadelphia, where we\'re based, and communities across the region.'),
+              ('New Jersey', 'Homes across the river from Philadelphia and throughout our New Jersey service area.'),
+              ('Delaware', 'Homes in our Delaware service area, scheduled on our regular routes.')]
     st = ''.join(f'<li><h3>{icon("map")}{a}</h3><p>{b}</p></li>' for a, b in states)
     body = f'''
-{page_hero(p, 'Service areas', 'House cleaning in Philadelphia and nearby communities',
-           'We\'re a Philadelphia-based team cleaning homes in the city and nearby communities in Pennsylvania, New Jersey and Delaware.',
+{page_hero(p, 'Pennsylvania · New Jersey · Delaware', 'House cleaning in Pennsylvania, New Jersey and Delaware',
+           'Rio Cleaning Services is a Philadelphia-based team cleaning homes across Pennsylvania, New Jersey and Delaware.',
            'townhomes', 'Row of two-story townhomes with vinyl siding on a residential street', crumbs=trail,
            cta_secondary=estimate_btn('Send Your ZIP Code'))}
-{definition('Rio Cleaning Services is a service-area business: we come to you. Our teams work out of Philadelphia, PA, and clean homes in nearby communities across the region.')}
+{definition('Rio Cleaning Services is a service-area business: we come to you. Our teams work out of Philadelphia, PA, and clean homes in Pennsylvania, New Jersey and Delaware.')}
 <section class="section areas-main" aria-labelledby="am-h">
 <div class="wrap areas-grid">
 <div>
 {eyebrow('Where we work')}
-<h2 id="am-h">Focused on the Philadelphia area</h2>
-<p>Our recurring clients are scheduled on regular routes, which is how we keep visits consistent and on time. That also means we stay close to home: we serve Philadelphia and communities near it rather than entire states.</p>
-<p>If you live nearby in Pennsylvania, New Jersey or Delaware, there's a good chance we can help. Availability depends on your exact location and our teams' schedules, so the fastest way to know is to call <a href="{C.TEL}" data-track="phone_click" data-where="areas_text">{C.PHONE}</a> or include your ZIP code in an <a href="#estimate">estimate request</a>.</p>
+<h2 id="am-h">Three states, one local team</h2>
+<p>We clean homes in Pennsylvania, New Jersey and Delaware. Our recurring clients are scheduled on regular routes from our Philadelphia base, which is how we keep visits consistent and on time.</p>
+<p>If you live in Pennsylvania, New Jersey or Delaware, there's a good chance we can help. Availability depends on your exact location and our teams' schedules, so the fastest way to know is to call <a href="{C.TEL}" data-track="phone_click" data-where="areas_text">{C.PHONE}</a> or include your ZIP code in an <a href="#estimate">estimate request</a>.</p>
 {cities}
 </div>
 <ul class="state-list">{st}</ul>
@@ -1143,7 +1154,7 @@ def page_contact():
 <ul class="info-list">
 <li>{icon("mail")}<div><strong>Email</strong><a href="mailto:{C.EMAIL}">{C.EMAIL}</a></div></li>
 {hours}
-<li>{icon("pin")}<div><strong>Service area</strong><span>Based in Philadelphia, PA. Serving nearby communities in Pennsylvania, New Jersey and Delaware. <a href="/service-areas/">More about our area</a></span></div></li>
+<li>{icon("pin")}<div><strong>Service area</strong><span>Pennsylvania, New Jersey and Delaware. Based in Philadelphia, PA. <a href="/service-areas/">More about our area</a></span></div></li>
 <li>{icon("card")}<div><strong>Payment</strong><span>{', '.join(C.PAYMENTS)}</span></div></li>
 </ul>
 <div class="next-steps">
@@ -1180,7 +1191,7 @@ def legal_page(slug, title_tag, desc, h1, sections_html):
 
 def page_privacy():
     s = f'''
-<p>This Privacy Policy explains how {C.LEGAL_NAME} ("Rio Cleaning Services," "we," "us") collects and uses information when you visit riocleanings.com or contact us about our residential cleaning services.</p>
+<p>This Privacy Policy explains how {C.LEGAL_NAME} ("Rio Cleaning Services," "we," "us") collects and uses information when you visit riocleaningservice.com or contact us about our residential cleaning services.</p>
 <h2>Information we collect</h2>
 <p>When you call us, email us or submit our estimate form, we collect the information you choose to share, such as your name, phone number, email address, ZIP code, the type and frequency of cleaning you're interested in, the number of bedrooms and bathrooms in your home, your preferred contact method and any message you include.</p>
 <p>Like most websites, our hosting provider may automatically record basic technical information such as your IP address, browser type and the pages you visit. If we enable analytics or advertising measurement tools (for example, Google Analytics, Google Ads or Meta Pixel), those tools may use cookies or similar technologies to understand how visitors use the site and how our advertising performs.</p>
@@ -1208,7 +1219,7 @@ def page_privacy():
 
 def page_terms():
     s = f'''
-<p>These Terms &amp; Conditions apply to the use of riocleanings.com and to residential cleaning services provided by {C.LEGAL_NAME} ("Rio Cleaning Services," "we," "us"). By using this website or booking a service, you agree to these terms.</p>
+<p>These Terms &amp; Conditions apply to the use of riocleaningservice.com and to residential cleaning services provided by {C.LEGAL_NAME} ("Rio Cleaning Services," "we," "us"). By using this website or booking a service, you agree to these terms.</p>
 <h2>Estimates</h2>
 <p>Estimates are based on the information you provide, such as the size of your home, the type of cleaning, its condition and the frequency of service. If the home's size or condition differs significantly from what was described, or you request additional services, we will discuss any changes with you before proceeding.</p>
 <h2>Scheduling and rescheduling</h2>
@@ -1230,7 +1241,7 @@ def page_terms():
 <h2>Contact</h2>
 <p>{C.LEGAL_NAME}<br>Philadelphia, Pennsylvania<br><a href="{C.TEL}">{C.PHONE}</a> · <a href="mailto:{C.EMAIL}">{C.EMAIL}</a></p>'''
     legal_page('terms-and-conditions', 'Terms & Conditions | Rio Cleaning Services LLC',
-               'Terms for using riocleanings.com and booking residential cleaning with Rio Cleaning Services LLC: estimates, '
+               'Terms for using riocleaningservice.com and booking residential cleaning with Rio Cleaning Services LLC: estimates, '
                'scheduling, payment and satisfaction.', 'Terms & Conditions', s)
 
 
@@ -1275,12 +1286,11 @@ def site_files():
     (OUT / 'site.webmanifest').write_text(json.dumps(manifest, indent=1), encoding='utf-8')
     if PREVIEW:
         vercel = {
-            'trailingSlash': True,
             'redirects': [{'source': src, 'destination': b, 'permanent': True}
                           for a, b in REDIRECTS for src in ([a] if a.endswith('.html') else [a.rstrip('/'), a])],
             'headers': [
                 {'source': '/assets/(.*)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=31536000, immutable'}]},
-                # Preview copy: keep it out of search results so it never competes with riocleanings.com
+                # Vercel copy: keep it out of search results so it never competes with riocleaningservice.com
                 {'source': '/(.*)', 'headers': [{'key': 'X-Robots-Tag', 'value': 'noindex, nofollow'},
                                                 {'key': 'X-Content-Type-Options', 'value': 'nosniff'},
                                                 {'key': 'Referrer-Policy', 'value': 'strict-origin-when-cross-origin'}]},
@@ -1364,6 +1374,8 @@ def prepare_preview_dir():
     PREVIEW_DIR.mkdir()
     shutil.copytree(SITE / 'assets', PREVIEW_DIR / 'assets')
     shutil.copy2(SITE / 'favicon.ico', PREVIEW_DIR / 'favicon.ico')
+    (PREVIEW_DIR / 'api').mkdir()
+    shutil.copy2(Path(__file__).resolve().parent / 'vercel-api' / 'send.js', PREVIEW_DIR / 'api' / 'send.js')
 
 
 def make_zip(src: Path, dest: Path, skip=()):

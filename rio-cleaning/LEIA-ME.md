@@ -1,4 +1,4 @@
-# Rio Cleaning Services — novo site (riocleanings.com)
+# Rio Cleaning Services — novo site (riocleaningservice.com)
 
 Site estático completo, em inglês americano, para a Rio Cleaning Services LLC (Philadelphia, PA).
 Foco: limpeza residencial recorrente (prioridade **biweekly**), ligação telefônica como conversão
@@ -61,18 +61,29 @@ Cada página tem title e description únicos, H1 único, canonical, Open Graph/T
    confirme que o `.htaccess` está lá.
 3. Ative o **SSL** do domínio e abra o site em `https://`.
 4. Configure o envio de e-mail (seção abaixo) e faça um pedido de teste.
-5. Envie `https://riocleanings.com/sitemap.xml` no Google Search Console.
+5. Envie `https://riocleaningservice.com/sitemap.xml` no Google Search Console.
+6. Domínio antigo: se `riocleanings.com` continuar ativo, aponte-o com redirect 301 para
+   `https://riocleaningservice.com` (hPanel → Domínios → Redirecionamentos), para não perder o
+   histórico do Google.
 
 O `.htaccess` força HTTPS, remove `www`, aplica os redirects 301 do site antigo, o cache e bloqueia
 o acesso às pastas `includes/` e `data/`.
 
-## Prévia na Vercel
+## Versão Vercel
 
-`rio-cleaning-vercel.zip` (pasta `vercel/`) é o mesmo site para visualizar antes de publicar.
-Diferenças: não tem PHP, então o formulário valida os campos mas **não envia** (mostra
-"Preview only"); tem `noindex` e `robots.txt` bloqueando o Google para não competir com o domínio
-real. Para publicar: extraia o ZIP numa pasta e rode `vercel` nela (ou importe a pasta como
-projeto, Framework = Other, sem build). O `vercel.json` já vai dentro.
+`rio-cleaning-vercel.zip` (pasta `vercel/`) é o mesmo site. Como a Vercel não roda PHP, o formulário
+envia por uma função da Vercel (`api/send.js`), com as mesmas regras do `send.php` e usando a mesma
+caixa de e-mail da Hostinger. Tem `noindex` e `robots.txt` bloqueando o Google, para não competir
+com o domínio oficial.
+
+**Para o formulário enviar na Vercel:** no projeto da Vercel → Settings → Environment Variables,
+adicione `SMTP_USER` = `no-reply@riocleaningservice.com` e `SMTP_PASS` = senha dessa caixa e faça um
+novo deploy. Opcionais: `LEAD_TO` (padrão `riocleaningservices.m@gmail.com`), `SMTP_HOST`
+(padrão `smtp.hostinger.com`), `SMTP_PORT` (465), `SMTP_SECURE` (`ssl`). Sem essas variáveis o
+formulário mostra uma mensagem pedindo para ligar.
+
+Publicar: extraia o ZIP numa pasta e rode `vercel` nela (ou importe a pasta como projeto,
+Framework = Other, sem comando de build).
 
 ## Formulário de orçamento (PHP, no próprio servidor)
 
@@ -80,7 +91,7 @@ O formulário envia para `/send.php`, que valida tudo de novo no servidor e mand
 **riocleaningservices.m@gmail.com**. Nenhum serviço externo.
 
 **Configuração (uma vez), em `includes/config.php`:**
-1. No hPanel → **Emails**, crie a caixa `no-reply@riocleanings.com` (ou outra do domínio) e anote a senha.
+1. No hPanel → **Emails**, crie a caixa `no-reply@riocleaningservice.com` (ou outra do domínio) e anote a senha.
 2. Em `config.php`, preencha `SMTP_PASS` com essa senha. Se usar outra caixa, troque também
    `MAIL_FROM` e `SMTP_USER`. (Servidor `smtp.hostinger.com`, porta 465, SSL — já preenchidos.)
 3. Envie um pedido de teste pelo site e confira a caixa de entrada (e o spam) do Gmail.

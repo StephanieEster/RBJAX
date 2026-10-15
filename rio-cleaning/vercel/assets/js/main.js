@@ -213,12 +213,6 @@
         status.textContent = 'Thank you! Your request was sent.';
         return;
       }
-      // Vercel preview: there is no PHP to send the e-mail, so only show what would happen.
-      if (form.dataset.preview) {
-        status.className = 'form-status is-ok';
-        status.innerHTML = '<strong>Preview only.</strong> On the live site, this request is emailed to Rio Cleaning Services.';
-        return;
-      }
       sending = true;
       btn.disabled = true;
       btn.classList.add('is-loading');
@@ -240,7 +234,11 @@
           '<a href="tel:+12676944609">(267) 694-4609</a>.';
       }
 
-      fetch(form.getAttribute('action'), { method: 'POST', headers: { Accept: 'application/json' }, body: body })
+      fetch(form.getAttribute('action'), {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: new URLSearchParams(body).toString()
+      })
         .then(function (res) {
           return res.json().catch(function () { return { ok: false }; });
         })

@@ -9,7 +9,7 @@ city names unless the business has confirmed them in writing.
 """
 
 # ------------------------------------------------------------------ business
-SITE_URL = 'https://riocleanings.com'          # final domain, no trailing slash
+SITE_URL = 'https://riocleaningservice.com'          # final domain, no trailing slash
 NAME = 'Rio Cleaning Services'
 LEGAL_NAME = 'Rio Cleaning Services LLC'
 PHONE = '(267) 694-4609'
@@ -59,13 +59,13 @@ TRACKING = {
 }
 
 UPDATED = 'October 2026'
-UPDATED_ISO = '2026-10-07'
+UPDATED_ISO = '2026-10-15'
 
 # ------------------------------------------------------------------ shared facts
 TRUST = [
     ('award', 'Nearly 25 years', 'of hands-on cleaning experience'),
     ('shield', 'Insured', 'for your peace of mind'),
-    ('home', 'Locally owned', 'and operated in Philadelphia'),
+    ('home', 'Locally owned', 'serving PA, NJ & DE'),
     ('calendar', 'Flexible scheduling', 'designed around real life'),
 ]
 
@@ -173,8 +173,8 @@ FAQ = {
                         'weekends stay free. Monthly is a good fit for smaller or lightly used homes. You can always '
                         'adjust later.'),
     'areas': ('What areas do you serve?',
-              'Rio Cleaning Services is based in Philadelphia and serves nearby communities in Pennsylvania, '
-              'New Jersey and Delaware. Availability depends on your location and our teams\' schedules, so the '
+              'Rio Cleaning Services serves homes in Pennsylvania, New Jersey and Delaware from our base in '
+              'Philadelphia. Availability depends on your location and our teams\' schedules, so the '
               f'quickest way to confirm is to call {PHONE} or include your ZIP code in your estimate request.'),
     'insured': ('Are you insured?',
                 'Yes. Rio Cleaning Services LLC is insured. If you need details for your building or homeowners '
